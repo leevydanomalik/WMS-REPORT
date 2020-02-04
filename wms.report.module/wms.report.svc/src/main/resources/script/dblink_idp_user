@@ -1,0 +1,13 @@
+SELECT
+    result.id,
+    result.password,
+    result.createdby,
+    result.createddate,
+    result.modifiedby,
+    result.modifieddate,
+    result.userdesc,
+    result.userid,
+    result.username,
+    result.userstatus,
+    result.employeeid
+FROM dblink('dbname=hcis-idp host=128.199.186.186 port=5432 user=hcis password=snGCcNt0w2JGHQBrP2kaTlQVk7HlxVjy'::text, 'SELECT * FROM mst_user'::text) result(id bigint, password character varying(255), createdby character varying(255), createddate timestamp without time zone, modifiedby character varying(255), modifieddate timestamp without time zone, userdesc character varying(255), userid character varying(255), username character varying(255), userstatus character varying(255), employeeid character varying(255));

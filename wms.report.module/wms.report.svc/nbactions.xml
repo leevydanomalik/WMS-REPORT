@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<actions>
+        <action>
+            <actionName>CUSTOM-run</actionName>
+            <displayName>run</displayName>
+            <goals>
+                <goal>spring-boot:run</goal>
+                <goal>-Dspring.profiles.active=local</goal>
+            </goals>
+            <properties>
+                <skipTests>true</skipTests>
+                <jpda.listen>maven</jpda.listen>
+            </properties>
+        </action>
+    </actions>

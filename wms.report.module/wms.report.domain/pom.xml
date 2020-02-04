@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+    <parent>
+        <groupId>com.bitozen.wms</groupId>
+        <artifactId>wms.report.module</artifactId>
+        <version>1.0-SNAPSHOT</version>
+    </parent>
+    <artifactId>wms.report.domain</artifactId>
+    <packaging>jar</packaging>
+    <properties>
+        <maven.compiler.source>1.8</maven.compiler.source>
+        <maven.compiler.target>1.8</maven.compiler.target>
+    </properties>
+    <dependencies>
+        <dependency>
+            <groupId>${project.groupId}</groupId>
+            <artifactId>wms.sb.pom</artifactId>
+            <version>${project.version}</version>
+            <type>pom</type>
+        </dependency>
+        <dependency>
+            <groupId>${project.groupId}</groupId>
+            <artifactId>wms.db.pom</artifactId>
+            <version>${project.version}</version>
+            <type>pom</type>
+        </dependency>
+        <dependency>
+            <groupId>${project.groupId}</groupId>
+            <artifactId>wms.cache.pom</artifactId>
+            <version>${project.version}</version>
+            <type>pom</type>
+        </dependency>
+        <!-- MODULE DEPENDENCIES-->
+        <dependency>
+            <groupId>${project.groupId}</groupId>
+            <artifactId>wms.report.common</artifactId>
+            <version>${project.version}</version>
+            <type>jar</type>
+        </dependency>
+        <!--COMMON DEPENDENCIES-->
+        <dependency>
+            <groupId>${project.groupId}</groupId>
+            <artifactId>wms.common</artifactId>
+            <version>${project.version}</version>
+        </dependency>
+    </dependencies>
+    <name>wms.report.domain</name>
+</project>

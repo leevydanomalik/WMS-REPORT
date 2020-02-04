@@ -1,0 +1,13 @@
+CREATE OR REPLACE VIEW public.trx_trainingentryprojection
+AS SELECT result.training_obj_disc,
+    result.id,
+    result.createdby,
+    result.createddate,
+    result.recordid,
+    result.updatedby,
+    result.updateddate,
+    result.employeeid,
+    result.trainingid,
+    result.trainingname,
+    result.trainingstatus
+   FROM dblink('dbname=hcis-training host=128.199.186.186 port=5432 user=hcis password=snGCcNt0w2JGHQBrP2kaTlQVk7HlxVjy'::text, 'SELECT * FROM trx_trainingentryprojection'::text) result(training_obj_disc character varying(255), id bigint, createdby character varying(255), createddate timestamp without time zone, recordid character varying(255), updatedby character varying(255), updateddate timestamp without time zone, employeeid character varying(255), trainingid character varying(255), trainingname character varying(255), trainingstatus character varying(255));

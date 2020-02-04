@@ -1,0 +1,11 @@
+SELECT
+    result.id,
+    result.coacategory,
+    result.coacategoryid,
+    result.createdby,
+    result.createddate,
+    result.modifiedby,
+    result.modifieddate,
+    result.coalist,
+    result.coastatus
+FROM dblink('dbname=hcis-configuration host=128.199.186.186 port=5432 user=hcis password=snGCcNt0w2JGHQBrP2kaTlQVk7HlxVjy'::text, 'SELECT * FROM mst_coacategory'::text) result(id bigint, coacategory text, coacategoryid character varying(255), createdby character varying(255), createddate timestamp without time zone, modifiedby character varying(255), modifieddate timestamp without time zone, coalist character varying(255), coastatus character varying(255));

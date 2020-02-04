@@ -1,0 +1,460 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="report name" pageWidth="595" pageHeight="842" columnWidth="535" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="be9f8443-64fd-4dbd-9988-fb52d5a2830f">
+	<property name="ireport.zoom" value="1.4641000000000028"/>
+	<property name="ireport.x" value="0"/>
+	<property name="ireport.y" value="0"/>
+	<parameter name="sonumber" class="java.lang.String">
+		<defaultValueExpression><![CDATA[]]></defaultValueExpression>
+	</parameter>
+	<queryString>
+		<![CDATA[SELECT
+     a."shipto", a."shiptodesc", a."dspplantdesc",
+     b."materialnumber", b."materialdesc", b."confirmedqty", b."uom" , b."sonumber", b."deliverystatus" ,
+	 c."losalesnumber", c."eventdate"
+FROM trx_so_sales a left JOIN trx_so_sales_item b ON a."sonumber" = b."sonumber"
+left join trx_lo_sales c on a."sonumber" = c."sonumber"
+where a.sonumber=$P{sonumber}]]>
+	</queryString>
+	<field name="shipto" class="java.lang.String"/>
+	<field name="shiptodesc" class="java.lang.String"/>
+	<field name="dspplantdesc" class="java.lang.String"/>
+	<field name="materialnumber" class="java.lang.String"/>
+	<field name="materialdesc" class="java.lang.String"/>
+	<field name="confirmedqty" class="java.lang.String"/>
+	<field name="uom" class="java.lang.String"/>
+	<field name="sonumber" class="java.lang.String"/>
+	<field name="deliverystatus" class="java.lang.String"/>
+	<field name="losalesnumber" class="java.lang.String"/>
+	<field name="eventdate" class="java.sql.Timestamp"/>
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<title>
+		<band height="312" splitType="Stretch">
+			<staticText>
+				<reportElement x="67" y="10" width="285" height="20" isPrintInFirstWholeBand="true" uuid="22f0d09f-433d-4600-9f3a-15e4829b6132"/>
+				<textElement textAlignment="Center">
+					<font size="14" isBold="true"/>
+				</textElement>
+				<text><![CDATA[LOADING ORDER]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="1" y="57" width="67" height="20" uuid="e32229c6-54ed-4d92-923b-05d1f3c55b9e"/>
+				<textElement>
+					<font size="10"/>
+				</textElement>
+				<text><![CDATA[Company]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="3" y="76" width="100" height="20" uuid="287b4285-a86f-4b53-93de-46808cf425cc"/>
+				<textElement>
+					<font size="10"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{shipto}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="68" y="57" width="14" height="20" uuid="988e971b-020f-407a-b402-78be5b3f95f3"/>
+				<textElement>
+					<font size="10"/>
+				</textElement>
+				<text><![CDATA[:]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="2" y="97" width="199" height="23" uuid="807cea4a-36a0-4222-aa5e-b84544b0aabc"/>
+				<textElement>
+					<font size="10"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{shiptodesc}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="481" y="116" width="74" height="20" uuid="2d91e718-e761-4fc2-bf5c-1ff593e55741"/>
+				<textElement>
+					<font size="10"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{eventdate}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="397" y="116" width="14" height="20" uuid="4a871203-bac6-4e9a-bde9-be24aed74250"/>
+				<textElement>
+					<font size="10"/>
+				</textElement>
+				<text><![CDATA[:]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="256" y="116" width="141" height="20" uuid="e393fb90-a091-480f-96cf-9270edb48254"/>
+				<textElement>
+					<font size="10"/>
+				</textElement>
+				<text><![CDATA[Customer's PO Number/Date]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="256" y="96" width="140" height="20" uuid="e8032a8d-0fe8-436b-880f-4b18f954a67c"/>
+				<textElement>
+					<font size="10"/>
+				</textElement>
+				<text><![CDATA[Delivery Note number/Date]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="1" y="229" width="100" height="20" uuid="f8a2ba8b-dc3a-4d47-b333-a1a6736af6e9"/>
+				<textElement>
+					<font size="8"/>
+				</textElement>
+				<text><![CDATA[Condition Delivery]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="101" y="209" width="14" height="20" uuid="b02e8cd9-543a-48e4-a2db-f7d4f8b7a408"/>
+				<textElement>
+					<font size="10"/>
+				</textElement>
+				<text><![CDATA[:]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="397" y="97" width="14" height="20" uuid="c740559b-cf66-4a80-a79c-3484090b662c"/>
+				<textElement>
+					<font size="10"/>
+				</textElement>
+				<text><![CDATA[:]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="115" y="229" width="100" height="20" uuid="96d82e37-a28f-4ba2-ad08-899908002259"/>
+				<textElement>
+					<font size="10"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{deliverystatus}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="481" y="96" width="74" height="20" uuid="a4831203-455f-4971-9658-9f20b1bd67ea"/>
+				<textElement>
+					<font size="10"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{eventdate}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="1" y="209" width="100" height="20" uuid="d1015a34-5368-4dd0-8b2a-85057cca95d6"/>
+				<textElement>
+					<font size="8"/>
+				</textElement>
+				<text><![CDATA[Condition Shipping]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="101" y="229" width="14" height="20" uuid="874ebe2b-24b1-4635-a3ad-8868ce61bbad"/>
+				<textElement>
+					<font size="10"/>
+				</textElement>
+				<text><![CDATA[:]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="2" y="249" width="100" height="20" uuid="03351321-195d-4d9d-bc3b-34569ec2c542"/>
+				<textElement>
+					<font size="8"/>
+				</textElement>
+				<text><![CDATA[Ship From]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="101" y="249" width="14" height="20" uuid="42ea2138-2100-4186-b041-902e19ac05b6"/>
+				<textElement>
+					<font size="10"/>
+				</textElement>
+				<text><![CDATA[:]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="114" y="249" width="100" height="20" uuid="583834a3-f1a2-4dc1-b00b-a602b43c088a"/>
+				<textElement>
+					<font size="10"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{dspplantdesc}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="256" y="137" width="142" height="20" uuid="5d6d99bb-a58d-43f2-877c-b03425500485"/>
+				<textElement>
+					<font size="10"/>
+				</textElement>
+				<text><![CDATA[Order Number]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="410" y="96" width="60" height="20" uuid="55ddb22a-699c-4b73-9270-d8042f27f205"/>
+				<textElement>
+					<font size="10"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{losalesnumber}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="397" y="137" width="14" height="20" uuid="25c81fc5-e3c9-4469-a171-9c33158a2d18"/>
+				<textElement>
+					<font size="10"/>
+				</textElement>
+				<text><![CDATA[:]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="409" y="137" width="88" height="20" uuid="f50517a7-380e-41b3-b7cd-a0e0881eed7e"/>
+				<textElement>
+					<font size="10"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{sonumber}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="256" y="156" width="142" height="20" uuid="747f8e38-a186-4fa7-8cf6-c2cb17afd1b7"/>
+				<textElement>
+					<font size="10"/>
+				</textElement>
+				<text><![CDATA[Customer Number]]></text>
+			</staticText>
+			<staticText>
+				<reportElement mode="Opaque" x="0" y="294" width="555" height="14" backcolor="#CCCCCC" uuid="b9f47ee1-781a-4c1c-8d48-9b2a46d6c65c"/>
+				<textElement>
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[Shipping Detail]]></text>
+			</staticText>
+			<staticText>
+				<reportElement mode="Opaque" x="1" y="194" width="282" height="14" backcolor="#CCCCCC" uuid="7957dcb3-a571-4df5-aa15-359cb6e84453"/>
+				<textElement>
+					<font size="10" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Condition]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="397" y="157" width="14" height="20" uuid="3efa1955-d705-440b-9d36-d1be970f0bce"/>
+				<textElement>
+					<font size="10"/>
+				</textElement>
+				<text><![CDATA[:]]></text>
+			</staticText>
+			<staticText>
+				<reportElement mode="Opaque" x="282" y="194" width="273" height="14" backcolor="#CCCCCC" uuid="a09e05ad-9c79-477f-835d-f838c3868b1e"/>
+				<textElement textAlignment="Center">
+					<font size="10" isBold="true"/>
+				</textElement>
+				<text><![CDATA[  Vehicle - Driver]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="257" y="209" width="152" height="20" uuid="fc1b0363-8b7a-4a6a-8549-526f27e50154"/>
+				<textElement>
+					<font size="10"/>
+				</textElement>
+				<text><![CDATA[Vehicle Number		:]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="257" y="229" width="152" height="20" uuid="13621e5f-5097-46b3-a231-6218cea708ba"/>
+				<textElement>
+					<font size="10"/>
+				</textElement>
+				<text><![CDATA[Driver Name		:]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="257" y="249" width="154" height="20" uuid="487dcc8d-3379-4a23-b058-079e431d3c38"/>
+				<textElement>
+					<font size="10"/>
+				</textElement>
+				<text><![CDATA[Filling Point		:]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="257" y="269" width="154" height="20" uuid="e2fdac98-1186-41a6-86fc-84352b622dde"/>
+				<textElement>
+					<font size="10"/>
+				</textElement>
+				<text><![CDATA[Seal Number		:]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="409" y="210" width="101" height="20" uuid="eb5b1653-30f0-4de6-a55c-f1ec396efa34"/>
+				<textElement>
+					<font size="10"/>
+				</textElement>
+				<text><![CDATA[1234]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="410" y="229" width="100" height="20" uuid="6f2a808b-3410-4864-958b-5fc43cc0bbb4"/>
+				<textElement>
+					<font size="10"/>
+				</textElement>
+				<text><![CDATA[UMAR]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="411" y="249" width="99" height="20" uuid="cab616f2-7b7b-41f9-b426-287b9049f1cb"/>
+				<textElement>
+					<font size="10"/>
+				</textElement>
+				<text><![CDATA[1234]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="411" y="269" width="105" height="20" uuid="e50e7e51-3783-496d-9883-894cd8427c64"/>
+				<textElement>
+					<font size="10"/>
+				</textElement>
+				<text><![CDATA[1234]]></text>
+			</staticText>
+			<staticText>
+				<reportElement mode="Opaque" x="256" y="81" width="299" height="14" forecolor="#000000" backcolor="#CCCCCC" uuid="30582e21-e553-40e6-92a6-02faf315e505"/>
+				<textElement>
+					<font size="10" isBold="true"/>
+				</textElement>
+				<text><![CDATA[  Shipping Information]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="256" y="57" width="166" height="20" uuid="8cd418d6-626e-4193-a319-b029bd2f2b7c"/>
+				<textElement>
+					<font size="10"/>
+				</textElement>
+				<text><![CDATA[Plan GI Date			:]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="422" y="55" width="74" height="20" uuid="5a465a6a-baa5-41ae-9e8a-0d28758dc170"/>
+				<textElement>
+					<font size="10"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{eventdate}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="472" y="96" width="13" height="20" uuid="9c3ee28c-71e6-468e-b980-b86e0b069cb2"/>
+				<textElement>
+					<font size="10"/>
+				</textElement>
+				<text><![CDATA[/]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="472" y="116" width="13" height="20" uuid="63650802-5d2f-4738-9daa-00327677ed84"/>
+				<textElement>
+					<font size="10"/>
+				</textElement>
+				<text><![CDATA[/]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="410" y="116" width="59" height="20" uuid="d1d0373c-ea9b-43a4-baa8-1da41c994712"/>
+				<textElement>
+					<font size="10"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{losalesnumber}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="410" y="157" width="71" height="20" uuid="9f57f2ab-6bdd-4f49-9915-d9a023b3d586"/>
+				<textElement>
+					<font size="10"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{shipto}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="115" y="210" width="100" height="20" uuid="da3e9ee8-a5e8-41c6-9b2a-cf4d2423d134"/>
+				<text><![CDATA[Standart]]></text>
+			</staticText>
+			<image>
+				<reportElement x="421" y="-13" width="146" height="43" uuid="9103813b-1261-4bdf-88d0-06de363ad96e"/>
+				<imageExpression><![CDATA["E:\\H1\\WMS\\WMS-REPORT\\WMS-REPORT\\wms.report.module\\wms.report.svc\\src\\main\\resources\\report\\logolubrican.jpg"]]></imageExpression>
+			</image>
+			<frame>
+				<reportElement x="-15" y="-17" width="587" height="65" uuid="37467ae4-1d12-42c8-bde8-20d9a0b83912"/>
+			</frame>
+		</band>
+	</title>
+	<columnHeader>
+		<band height="25" splitType="Stretch">
+			<staticText>
+				<reportElement x="12" y="5" width="90" height="20" uuid="e4fad2ab-4aaa-47c2-aad1-e7d2f92cd361"/>
+				<textElement>
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[Item Number]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="102" y="5" width="100" height="20" uuid="13f7ec3b-1c25-4a72-a8bf-660c903f12e3"/>
+				<textElement>
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[KIMAP]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="494" y="5" width="46" height="19" uuid="7c0dfc5e-408d-489e-86d1-c1a840ea32df"/>
+				<textElement>
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[Uom]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="448" y="5" width="46" height="20" uuid="1dfbcd11-e105-42ec-88f7-1e4fd8cf993e"/>
+				<textElement>
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[Qty]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="202" y="5" width="246" height="20" uuid="16d90672-9d63-42aa-8c89-fe2e3605729a"/>
+				<textElement>
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[Material Name]]></text>
+			</staticText>
+			<frame>
+				<reportElement x="-5" y="4" width="554" height="19" uuid="78d27686-2ca7-48e1-9b98-411129c9d6e2"/>
+			</frame>
+		</band>
+	</columnHeader>
+	<detail>
+		<band height="24" splitType="Stretch">
+			<frame>
+				<reportElement x="-5" y="4" width="556" height="20" uuid="b7e22426-2c0c-4030-9f80-d91726755c21"/>
+			</frame>
+			<line>
+				<reportElement x="2" y="-5" width="553" height="1" uuid="616415e9-9ca0-4623-8fe2-f1aeca02c801"/>
+			</line>
+			<textField>
+				<reportElement x="12" y="0" width="90" height="20" uuid="ef579c9a-fb40-424b-b20d-d2b07c594ec0"/>
+				<textFieldExpression><![CDATA[$F{materialnumber}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="202" y="4" width="246" height="20" uuid="903439a5-0071-481c-a5c5-aaf151f6a6c8"/>
+				<textFieldExpression><![CDATA[$F{materialdesc}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="448" y="4" width="46" height="20" uuid="6acdce16-d45c-478e-b9b2-0100840b2eff"/>
+				<textFieldExpression><![CDATA[$F{confirmedqty}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="494" y="4" width="46" height="20" uuid="ecd47fdc-8a9a-46d4-83b5-94c8c728bd8d"/>
+				<textFieldExpression><![CDATA[$F{uom}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="101" y="2" width="100" height="20" uuid="cdeb5025-c164-46ad-9c32-bdd4ad1b5950"/>
+				<textFieldExpression><![CDATA[$F{materialnumber}]]></textFieldExpression>
+			</textField>
+		</band>
+	</detail>
+	<summary>
+		<band height="262" splitType="Stretch">
+			<staticText>
+				<reportElement x="-280" y="204" width="100" height="20" uuid="a562e8fe-b734-484d-b507-9635551633ad"/>
+				<text><![CDATA[Condition Delivery]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="-280" y="184" width="100" height="20" uuid="5597fcf9-a8fe-4344-8ab5-042649fa3d1f"/>
+				<text><![CDATA[Condition Shipping]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="-279" y="224" width="100" height="20" uuid="58820ff4-c7a7-4264-b3b4-0d8714da3665"/>
+				<text><![CDATA[Ship From]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="-280" y="204" width="100" height="20" uuid="f4a18a40-a646-47c9-a7d3-8f5b39238f1b"/>
+				<text><![CDATA[Condition Delivery]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="-280" y="184" width="100" height="20" uuid="6889e06e-6618-4486-bf44-d35049751f86"/>
+				<text><![CDATA[Condition Shipping]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="-279" y="224" width="100" height="20" uuid="a5fd51fa-fee4-4ec5-8abe-dfcba454bfba"/>
+				<text><![CDATA[Ship From]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="0" y="164" width="132" height="20" uuid="4e8a4ed1-0054-4eba-8b81-06a16b9aaf5e"/>
+				<text><![CDATA[Jumlah Print		:]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="0" y="184" width="132" height="20" uuid="2ff8054f-0bd5-4efa-b411-31e5a85a77e6"/>
+				<text><![CDATA[Date			:]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="0" y="204" width="132" height="20" uuid="5a6f0832-b418-4877-bf11-2fc59d404834"/>
+				<text><![CDATA[Print By			:]]></text>
+			</staticText>
+		</band>
+	</summary>
+</jasperReport>

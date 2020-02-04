@@ -1,0 +1,20 @@
+2019-08-14 15:57:40,204 DEBUG [http-nio-60003-exec-2] pdfaconvert.PdfaConvert (PdfaConvert.java:218) - PdfaConvert version: 0.6.0
+2019-08-14 15:57:40,209 INFO  [http-nio-60003-exec-2] pdfaconvert.PdfaConvert (PdfaConvert.java:232) - Have pdfa-converter.properties from environment: null
+2019-08-14 15:57:40,211 INFO  [http-nio-60003-exec-2] pdfaconvert.PdfaConvert (PdfaConvert.java:280) - loaded default applicationProps: 
+2019-08-14 15:57:40,214 INFO  [http-nio-60003-exec-2] pdfaconvert.PdfaConvert (PdfaConvert.java:304) - Have the following application properties:
+2019-08-14 15:57:40,215 INFO  [http-nio-60003-exec-2] pdfaconvert.PdfaConvert (PdfaConvert.java:308) - Key: output_dir -- value: /home/vmrey/upload/
+2019-08-14 15:57:40,215 INFO  [http-nio-60003-exec-2] pdfaconvert.PdfaConvert (PdfaConvert.java:308) - Key: isPdfaPilotRemote -- value: true
+2019-08-14 15:57:40,216 INFO  [http-nio-60003-exec-2] pdfaconvert.PdfaConvert (PdfaConvert.java:308) - Key: unoconv_home -- value: /usr/bin
+2019-08-14 15:57:40,216 DEBUG [http-nio-60003-exec-2] pdfaconvert.PdfaConvert (PdfaConvert.java:317) - Converter homes:
+ unconvHome: /usr/bin, pdfaPilotHome: null, calibreHome: null
+2019-08-14 15:57:40,216 DEBUG [http-nio-60003-exec-2] pdfaconvert.PdfaConvert (PdfaConvert.java:321) - Output directory for PDF files and external application log files: /home/vmrey/upload/  -- exists: true
+2019-08-14 15:57:40,217 DEBUG [http-nio-60003-exec-2] pdfaconvert.PdfaConvert (PdfaConvert.java:338) - Output directory: /home/vmrey/upload
+2019-08-14 15:57:40,220 DEBUG [http-nio-60003-exec-2] unoconv.UnoconvTool (UnoconvTool.java:40) - Entering C-tor for: UnoconvTool
+2019-08-14 15:57:40,221 INFO  [http-nio-60003-exec-2] unoconv.UnoconvTool (UnoconvTool.java:43) - Unoconv home: /usr/bin -- isDirectory: 
+2019-08-14 15:57:40,221 INFO  [http-nio-60003-exec-2] unoconv.UnoconvTool (UnoconvTool.java:46) - Have command: /usr/bin/unoconv
+2019-08-14 15:57:40,221 DEBUG [http-nio-60003-exec-2] unoconv.UnoconvTool (UnoconvTool.java:68) - UnoconvTool.convert() starting on file: [/home/vmrey/upload/template-2_result.rtf]
+2019-08-14 15:57:40,222 DEBUG [http-nio-60003-exec-2] unoconv.UnoconvTool (UnoconvTool.java:69) - file exists: true
+2019-08-14 15:57:40,222 DEBUG [http-nio-60003-exec-2] unoconv.UnoconvTool (UnoconvTool.java:70) - file absolute path: /home/vmrey/upload/template-2_result.rtf
+2019-08-14 15:57:40,222 DEBUG [http-nio-60003-exec-2] tools.AbstractPdfaConverterTool (AbstractPdfaConverterTool.java:145) - outputFilename: template-2_result.pdf
+2019-08-14 15:57:40,223 DEBUG [http-nio-60003-exec-2] unoconv.UnoconvTool (UnoconvTool.java:83) - About to launch UnoconvTool, command: [/usr/bin/unoconv, -vv, -f, pdf, -eSelectPdfVersion=1, -o, /home/vmrey/upload/template-2_result.pdf, /home/vmrey/upload/template-2_result.rtf]
+2019-08-14 15:57:40,465 DEBUG [http-nio-60003-exec-2] unoconv.UnoconvTool (UnoconvTool.java:91) - Finished running UnoconvTool

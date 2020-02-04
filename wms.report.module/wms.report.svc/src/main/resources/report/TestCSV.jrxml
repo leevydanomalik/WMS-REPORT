@@ -1,0 +1,211 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="report1" language="groovy" pageWidth="3600" pageHeight="792" columnWidth="3560" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="14d625b1-ce14-4c92-9199-4cd7d3fd5389">
+	<property name="ireport.zoom" value="1.9487171000000083"/>
+	<property name="ireport.x" value="0"/>
+	<property name="ireport.y" value="0"/>
+	<queryString>
+		<![CDATA[select *
+from t_riwayat_karyawan_dummy]]>
+	</queryString>
+	<field name="nomer" class="java.lang.Integer"/>
+	<field name="nip" class="java.lang.String"/>
+	<field name="nama_karyawan" class="java.lang.String"/>
+	<field name="jenis_kelamin" class="java.lang.String"/>
+	<field name="status_pernikahan" class="java.lang.String"/>
+	<field name="status_pajak" class="java.lang.String"/>
+	<field name="tanggal_bergabung" class="java.sql.Date"/>
+	<field name="status_kerja_tipe" class="java.lang.String"/>
+	<field name="status_kerja_kategori" class="java.lang.String"/>
+	<field name="struktur_organisasi_posisi" class="java.lang.String"/>
+	<field name="struktur_organisasi_cabang" class="java.lang.String"/>
+	<field name="struktur_organisasi_tanggal_mulai_efektif" class="java.sql.Date"/>
+	<field name="struktur_organisasi_tanggal_selesai_efektif" class="java.sql.Date"/>
+	<field name="status_aktif" class="java.lang.String"/>
+	<field name="tanggal_keluar" class="java.sql.Date"/>
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<columnHeader>
+		<band height="42" splitType="Stretch">
+			<staticText>
+				<reportElement x="0" y="0" width="19" height="42" uuid="950d0d75-da80-46b0-87a1-94057d03b591"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle"/>
+				<text><![CDATA[No.]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="107" y="0" width="180" height="42" uuid="e0917d71-3454-48f0-916f-d877348a1118"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle"/>
+				<text><![CDATA[Nama Karyawan]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="19" y="0" width="88" height="42" uuid="ec33b7a2-7323-48b6-a5dc-26b025d6c178"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle"/>
+				<text><![CDATA[NIP]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="287" y="0" width="88" height="20" uuid="5713d354-1137-4e7b-8fd8-62de3f0e52c4"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle"/>
+				<text><![CDATA[Jenis]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="287" y="20" width="88" height="22" uuid="6903a2a4-cec6-490d-bb34-6f754735263c"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle"/>
+				<text><![CDATA[Kelamin]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="375" y="0" width="88" height="20" uuid="b71a1252-4a8e-4d34-a379-9a998f887e9e"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle"/>
+				<text><![CDATA[Status]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="375" y="20" width="88" height="22" uuid="91f93160-9ad0-414f-be51-aeaef3504e2a"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle"/>
+				<text><![CDATA[Pernikahan]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="463" y="0" width="88" height="20" uuid="f41eece4-e4be-4d6b-8ecb-96a48144da6e"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle"/>
+				<text><![CDATA[Status]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="463" y="20" width="88" height="22" uuid="3d2439f5-1ffd-4255-9aea-c12be2374bf5"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle"/>
+				<text><![CDATA[Pajak]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="551" y="0" width="146" height="20" uuid="653e5b9e-7768-4bf1-825e-ea184052bf22"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle"/>
+				<text><![CDATA[Tanggal]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="551" y="20" width="146" height="22" uuid="c925a607-9633-42bc-808f-36f859e9db3e"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle"/>
+				<text><![CDATA[Bergabung]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="697" y="0" width="176" height="20" uuid="5e4557a9-b4fa-45e5-9122-3ce3e6b074c2"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle"/>
+				<text><![CDATA[Status Kerja]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="697" y="20" width="88" height="22" uuid="95a099f0-1576-475a-bc4d-2a20bca7df5c"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle"/>
+				<text><![CDATA[Tipe]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="785" y="20" width="88" height="22" uuid="3cd85bef-a366-4bc3-8615-e8762bbdcfff"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle"/>
+				<text><![CDATA[Kategori]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="873" y="0" width="722" height="20" uuid="51af9e3b-4925-43b1-837a-ba0aaa3566b1"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle"/>
+				<text><![CDATA[Struktur Organisasi]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="873" y="20" width="288" height="22" uuid="04efc845-ff85-45ac-9149-0772fff6cc36"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle"/>
+				<text><![CDATA[Posisi]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="1161" y="20" width="148" height="22" uuid="15da4a36-4d8b-4e54-97cf-afdaac166c19"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle"/>
+				<text><![CDATA[Cabang]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="1309" y="20" width="143" height="22" uuid="83d88fab-2689-4ad9-a991-9216cffb0617"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle"/>
+				<text><![CDATA[Tanggal Mulai Efektif]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="1595" y="20" width="88" height="22" uuid="434190e1-bfcd-41a0-9132-ca1be5130b95"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle"/>
+				<text><![CDATA[Aktif]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="1683" y="20" width="126" height="22" uuid="0770de79-d0b3-4198-acd7-848034ec6ec6"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle"/>
+				<text><![CDATA[Keluar]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="1595" y="0" width="88" height="20" uuid="1e11b811-0051-41fb-b47b-4b2e74410c96"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle"/>
+				<text><![CDATA[Status]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="1683" y="0" width="126" height="20" uuid="1244f337-aff4-4f38-879b-3b2860e8d656"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle"/>
+				<text><![CDATA[Tanggal]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="1452" y="20" width="143" height="22" uuid="19dadd41-d0cf-4ac2-b415-c0f7ca8e40f2"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle"/>
+				<text><![CDATA[Tanggal Selesai Efektif]]></text>
+			</staticText>
+		</band>
+	</columnHeader>
+	<detail>
+		<band height="22" splitType="Stretch">
+			<textField>
+				<reportElement x="0" y="0" width="19" height="22" uuid="1a46217e-df95-4cf4-ba9d-2b0d3c4ee3b8"/>
+				<textFieldExpression><![CDATA[$F{nomer}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="19" y="0" width="88" height="22" uuid="c8373c28-c73f-42a9-b04d-4bdea1bd78a8"/>
+				<textFieldExpression><![CDATA[$F{nip}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="107" y="0" width="180" height="22" uuid="f2521cd2-80c4-4495-bf4d-57791f581049"/>
+				<textFieldExpression><![CDATA[$F{nama_karyawan}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="287" y="0" width="88" height="22" uuid="87ceb990-a03d-475b-b974-93a3df4f8942"/>
+				<textFieldExpression><![CDATA[$F{jenis_kelamin}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="375" y="0" width="88" height="22" uuid="cc7deacd-56d5-4761-bdc6-b1bcb9e5e8bd"/>
+				<textFieldExpression><![CDATA[$F{status_pernikahan}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="463" y="0" width="88" height="22" uuid="65356e7f-75bd-4929-8357-7d7688cce492"/>
+				<textFieldExpression><![CDATA[$F{status_pajak}]]></textFieldExpression>
+			</textField>
+			<textField pattern="dd/MM/yyyy">
+				<reportElement x="551" y="0" width="146" height="22" uuid="e2fe5792-715c-4585-a643-c8a579198770"/>
+				<textFieldExpression><![CDATA[$F{tanggal_bergabung}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="697" y="0" width="88" height="22" uuid="b1b9b47c-6d14-4562-99e0-b582618f3664"/>
+				<textFieldExpression><![CDATA[$F{status_kerja_tipe}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="785" y="0" width="88" height="22" uuid="159dd4a8-6261-441a-8a36-b01dc5bf7a2b"/>
+				<textFieldExpression><![CDATA[$F{status_kerja_kategori}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="873" y="0" width="288" height="22" uuid="2bf106fe-a951-4b46-9d35-4f96f97348e7"/>
+				<textFieldExpression><![CDATA[$F{struktur_organisasi_posisi}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="1161" y="0" width="148" height="22" uuid="5126ea3a-79d3-4fc8-aca7-c6939a422153"/>
+				<textFieldExpression><![CDATA[$F{struktur_organisasi_cabang}]]></textFieldExpression>
+			</textField>
+			<textField pattern="dd/MM/yyyy">
+				<reportElement x="1309" y="0" width="143" height="22" uuid="2902f3e0-3fe6-479a-8191-33e692e056e8"/>
+				<textFieldExpression><![CDATA[$F{struktur_organisasi_tanggal_mulai_efektif}]]></textFieldExpression>
+			</textField>
+			<textField pattern="dd/MM/yyyy">
+				<reportElement x="1452" y="0" width="143" height="22" uuid="ea9fa7c6-5b68-4706-b078-8b2274f3bd1c"/>
+				<textFieldExpression><![CDATA[$F{struktur_organisasi_tanggal_selesai_efektif}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="1595" y="0" width="88" height="22" uuid="dd656921-c6aa-458c-8887-86f49c046f2b"/>
+				<textFieldExpression><![CDATA[$F{status_aktif}]]></textFieldExpression>
+			</textField>
+			<textField pattern="dd/MM/yyyy">
+				<reportElement x="1683" y="0" width="126" height="22" uuid="330eb68f-69b5-4080-b3cb-0acdd3528498"/>
+				<textFieldExpression><![CDATA[$F{tanggal_keluar}]]></textFieldExpression>
+			</textField>
+		</band>
+	</detail>
+</jasperReport>

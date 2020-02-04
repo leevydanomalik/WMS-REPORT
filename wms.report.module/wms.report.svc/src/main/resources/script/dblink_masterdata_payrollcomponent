@@ -1,0 +1,16 @@
+CREATE OR REPLACE VIEW public.mst_payrollcomponent
+AS SELECT result.id,
+    result.ispayrollcomponentfix,
+    result.ispayrollcomponentreguler,
+    result.payrollcomponentid,
+    result.payrollcomponentname,
+    result.payrollcomponentnotes,
+    result.payrollcomponentsequence,
+    result.payrollcomponenttype,
+    result.createdby,
+    result.createddate,
+    result.modifiedby,
+    result.modifieddate,
+    result.payrollstatus
+   FROM dblink('dbname=hcis-masterdata host=128.199.186.186 port=5432 user=hcis password=snGCcNt0w2JGHQBrP2kaTlQVk7HlxVjy'::text, 'SELECT * FROM mst_payrollcomponent'::text) result(id bigint, ispayrollcomponentfix boolean, ispayrollcomponentreguler boolean, payrollcomponentid character varying(255), payrollcomponentname character varying(255), payrollcomponentnotes character varying(255), payrollcomponentsequence integer, payrollcomponenttype text, createdby character varying(255), createddate timestamp without time zone, modifiedby character varying(255), modifieddate timestamp without time zone, payrollstatus character varying(255));
+

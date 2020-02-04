@@ -1,0 +1,12 @@
+SELECT
+    result.id,
+    result.createdby,
+    result.createddate,
+    result.modifiedby,
+    result.modifieddate,
+    result.kecamatanid,
+    result.kecamatanname,
+    result.kecamatanstatus,
+    result.zipcode,
+    result.kabkotid
+FROM dblink('dbname=hcis-masterdata host=128.199.186.186 port=5432 user=hcis password=snGCcNt0w2JGHQBrP2kaTlQVk7HlxVjy'::text, 'SELECT * FROM mst_kecamatan'::text) result(id bigint, createdby character varying(255), createddate timestamp without time zone, modifiedby character varying(255), modifieddate timestamp without time zone, kecamatanid character varying(255), kecamatanname character varying(255), kecamatanstatus character varying(255), zipcode character varying(255), kabkotid character varying(255));

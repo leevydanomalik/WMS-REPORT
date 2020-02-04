@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ProjectModuleManager">
+    <modules>
+      <module fileurl="file://$PROJECT_DIR$/hcis.report.common/hcis.report.common.iml" filepath="$PROJECT_DIR$/hcis.report.common/hcis.report.common.iml" />
+      <module fileurl="file://$PROJECT_DIR$/hcis.report.domain/hcis.report.domain.iml" filepath="$PROJECT_DIR$/hcis.report.domain/hcis.report.domain.iml" />
+      <module fileurl="file://$PROJECT_DIR$/hcis.report.dto/hcis.report.dto.iml" filepath="$PROJECT_DIR$/hcis.report.dto/hcis.report.dto.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/hcis.report.module.iml" filepath="$PROJECT_DIR$/.idea/hcis.report.module.iml" />
+      <module fileurl="file://$PROJECT_DIR$/hcis.report.svc/hcis.report.svc.iml" filepath="$PROJECT_DIR$/hcis.report.svc/hcis.report.svc.iml" />
+    </modules>
+  </component>
+</project>

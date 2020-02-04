@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="CompilerConfiguration">
+    <annotationProcessing>
+      <profile name="Maven default annotation processors profile" enabled="true">
+        <sourceOutputDir name="target/generated-sources/annotations" />
+        <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
+        <outputRelativeToContentRoot value="true" />
+        <module name="hcis.report.svc" />
+        <module name="hcis.report.dto" />
+        <module name="hcis.report.common" />
+        <module name="hcis.report.domain" />
+      </profile>
+    </annotationProcessing>
+    <bytecodeTargetLevel>
+      <module name="hcis.report.common" target="1.10" />
+      <module name="hcis.report.domain" target="1.10" />
+      <module name="hcis.report.dto" target="1.10" />
+      <module name="hcis.report.module" target="1.5" />
+      <module name="hcis.report.svc" target="10" />
+    </bytecodeTargetLevel>
+  </component>
+</project>
