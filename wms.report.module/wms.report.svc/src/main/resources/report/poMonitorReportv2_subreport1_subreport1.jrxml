@@ -1,0 +1,142 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="poMonitorReportv2_subreport1_subreport1" language="groovy" pageWidth="802" pageHeight="555" orientation="Landscape" columnWidth="802" leftMargin="0" rightMargin="0" topMargin="0" bottomMargin="0" uuid="400f7d0e-8ef2-48ef-8305-0dfb8e1c3279">
+	<property name="ireport.zoom" value="2.5937424601000085"/>
+	<property name="ireport.x" value="427"/>
+	<property name="ireport.y" value="0"/>
+	<parameter name="ponumber" class="java.lang.String">
+		<defaultValueExpression><![CDATA[]]></defaultValueExpression>
+	</parameter>
+	<parameter name="itemnumber" class="java.lang.String">
+		<defaultValueExpression><![CDATA[]]></defaultValueExpression>
+	</parameter>
+	<queryString>
+		<![CDATA[select * from trx_log_po where postonumber=$P{ponumber} and itemnumber=$P{itemnumber}
+order by eventdate asc]]>
+	</queryString>
+	<field name="id" class="java.lang.Integer"/>
+	<field name="activitytype" class="java.lang.String"/>
+	<field name="deliverystatus" class="java.lang.String"/>
+	<field name="eventby" class="java.lang.String"/>
+	<field name="eventdate" class="java.sql.Timestamp"/>
+	<field name="itemnumber" class="java.lang.String"/>
+	<field name="lostonumber" class="java.lang.String"/>
+	<field name="location" class="java.lang.String"/>
+	<field name="lognumber" class="java.lang.String"/>
+	<field name="logtype" class="java.lang.String"/>
+	<field name="materialdesc" class="java.lang.String"/>
+	<field name="materialnumber" class="java.lang.String"/>
+	<field name="postonumber" class="java.lang.String"/>
+	<field name="ptnumber" class="java.lang.String"/>
+	<field name="qtyvolume" class="java.lang.Double"/>
+	<field name="receiveplant" class="java.lang.String"/>
+	<field name="supplyplant" class="java.lang.String"/>
+	<field name="realqtyvolume" class="java.lang.Double"/>
+	<field name="realuom" class="java.lang.String"/>
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<title>
+		<band splitType="Stretch"/>
+	</title>
+	<pageHeader>
+		<band splitType="Stretch"/>
+	</pageHeader>
+	<columnHeader>
+		<band height="20" splitType="Stretch">
+			<staticText>
+				<reportElement uuid="bf0c553c-33f5-435a-a3c9-f34e5158e0e0" mode="Opaque" x="0" y="0" width="58" height="20" forecolor="#FFFFFF" backcolor="#999999"/>
+				<textElement verticalAlignment="Middle">
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[Log Type]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="0beee6bd-e4b8-4159-af56-a48e1e5ca4ab" mode="Opaque" x="58" y="0" width="73" height="20" forecolor="#FFFFFF" backcolor="#999999"/>
+				<textElement verticalAlignment="Middle">
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[Log Number]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="cde5b23d-1b96-4cf7-adc1-62d5e46af443" mode="Opaque" x="131" y="0" width="100" height="20" forecolor="#FFFFFF" backcolor="#999999"/>
+				<textElement verticalAlignment="Middle">
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[PO STO Number]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="f6c55b6c-8b1f-43d3-8458-2ea4c8691a1b" mode="Opaque" x="231" y="0" width="100" height="20" forecolor="#FFFFFF" backcolor="#999999"/>
+				<textElement verticalAlignment="Middle">
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[LO STO Number]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="84f352cc-a720-49e0-8d14-5a864c0a98ca" mode="Opaque" x="331" y="0" width="100" height="20" forecolor="#FFFFFF" backcolor="#999999"/>
+				<textElement verticalAlignment="Middle">
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[PT Number]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="2d8af0cd-8142-4f9c-ab38-eb846ac7c3fd" mode="Opaque" x="431" y="0" width="100" height="20" forecolor="#FFFFFF" backcolor="#999999"/>
+				<textElement verticalAlignment="Middle">
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[Event By]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="341cb67a-be27-4908-95eb-463114b445fc" mode="Opaque" x="531" y="0" width="215" height="20" forecolor="#FFFFFF" backcolor="#999999"/>
+				<textElement verticalAlignment="Middle">
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[Event Date]]></text>
+			</staticText>
+		</band>
+	</columnHeader>
+	<detail>
+		<band height="22" splitType="Stretch">
+			<textField pattern="dd/MM/yyyy h.mm a">
+				<reportElement uuid="46c32259-c035-41d4-b02e-15c4d98dfc63" x="531" y="0" width="215" height="20"/>
+				<textElement/>
+				<textFieldExpression><![CDATA[$F{eventdate}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement uuid="28496b67-a140-4dc6-9b0e-09fcd184a829" x="431" y="0" width="100" height="20"/>
+				<textElement/>
+				<textFieldExpression><![CDATA[$F{eventby}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement uuid="a374cbd5-1507-4d9d-82e7-98fe60e66c12" x="0" y="0" width="58" height="20"/>
+				<textElement/>
+				<textFieldExpression><![CDATA[$F{logtype}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement uuid="f5fa5896-b37a-460d-95ea-8f90aea1a488" x="331" y="0" width="100" height="20"/>
+				<textElement/>
+				<textFieldExpression><![CDATA[$F{ptnumber} == null ? "NULL_NONE" : $F{ptnumber}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement uuid="a26f94d5-d328-4f14-8650-eeacd3536310" x="131" y="0" width="100" height="20"/>
+				<textElement/>
+				<textFieldExpression><![CDATA[$F{postonumber} == null ? "NULL_NONE" : $F{postonumber}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement uuid="e9ccc3cb-7adb-4ada-8c24-efd8be423a69" x="231" y="0" width="100" height="20"/>
+				<textElement/>
+				<textFieldExpression><![CDATA[$F{lostonumber} == null ? "NULL_NONE" : $F{lostonumber}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement uuid="57860a1a-5bc2-43fe-bb31-47dda585abb0" x="58" y="0" width="73" height="20"/>
+				<textElement/>
+				<textFieldExpression><![CDATA[$F{lognumber}]]></textFieldExpression>
+			</textField>
+		</band>
+	</detail>
+	<columnFooter>
+		<band splitType="Stretch"/>
+	</columnFooter>
+	<pageFooter>
+		<band splitType="Stretch"/>
+	</pageFooter>
+</jasperReport>

@@ -338,7 +338,7 @@ where a.sonumber=$P{sonumber}]]>
 			</staticText>
 			<image>
 				<reportElement x="421" y="-13" width="146" height="43" uuid="9103813b-1261-4bdf-88d0-06de363ad96e"/>
-				<imageExpression><![CDATA["E:\\H1\\WMS\\WMS-REPORT\\WMS-REPORT\\wms.report.module\\wms.report.svc\\src\\main\\resources\\report\\logolubrican.jpg"]]></imageExpression>
+				<imageExpression><![CDATA[this.getClass().getResourceAsStream("/report/logolubrican.jpg")]]></imageExpression>
 			</image>
 			<frame>
 				<reportElement x="-15" y="-17" width="587" height="65" uuid="37467ae4-1d12-42c8-bde8-20d9a0b83912"/>

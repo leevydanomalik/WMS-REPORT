@@ -1,0 +1,126 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="sapIFScv" language="groovy" pageWidth="842" pageHeight="595" orientation="Landscape" whenNoDataType="AllSectionsNoDetail" columnWidth="802" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" isIgnorePagination="true" uuid="22e30ffd-214c-4c7b-8465-dd31bbcee281">
+	<property name="ireport.zoom" value="1.4641000000000006"/>
+	<property name="ireport.x" value="0"/>
+	<property name="ireport.y" value="0"/>
+	<parameter name="startDate" class="java.lang.String">
+		<defaultValueExpression><![CDATA[]]></defaultValueExpression>
+	</parameter>
+	<parameter name="endDate" class="java.lang.String">
+		<defaultValueExpression><![CDATA[]]></defaultValueExpression>
+	</parameter>
+	<parameter name="period" class="java.lang.String">
+		<defaultValueExpression><![CDATA[]]></defaultValueExpression>
+	</parameter>
+	<queryString>
+		<![CDATA[SELECT
+$P{period} AS reportYear,
+activitytype,activitydocnumber,"location",eventdate,errorcode,errormessage
+FROM public.trx_log_sap
+WHERE to_date(to_char(eventdate, 'ddMMyyyy'),'ddMMyyyy') >= to_date($P{startDate}, 'ddMMyyyy') AND
+ to_date(to_char(eventdate, 'ddMMyyyy'),'ddMMyyyy') <= to_date($P{endDate}, 'ddMMyyyy')]]>
+	</queryString>
+	<field name="reportyear" class="java.lang.String"/>
+	<field name="activitytype" class="java.lang.String"/>
+	<field name="activitydocnumber" class="java.lang.String"/>
+	<field name="location" class="java.lang.String"/>
+	<field name="eventdate" class="java.sql.Timestamp"/>
+	<field name="errorcode" class="java.lang.String"/>
+	<field name="errormessage" class="java.lang.String"/>
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<title>
+		<band height="79" splitType="Stretch"/>
+	</title>
+	<pageHeader>
+		<band height="35" splitType="Stretch"/>
+	</pageHeader>
+	<columnHeader>
+		<band height="27" splitType="Stretch">
+			<staticText>
+				<reportElement uuid="a9f020c9-9770-4e67-a503-35ad968d0562" x="32" y="1" width="100" height="20"/>
+				<textElement/>
+				<text><![CDATA[Activity Type]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="1b29888c-e62d-4dee-ae55-376d97a5ebb3" x="132" y="1" width="100" height="20"/>
+				<textElement/>
+				<text><![CDATA[Doc.Number]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="74b7511d-7b2c-4b04-ac31-b7676b04ca1d" x="232" y="1" width="100" height="20"/>
+				<textElement/>
+				<text><![CDATA[Plant]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="0ae479af-999a-4de9-9d3b-3478e85dfe9b" x="332" y="1" width="100" height="20"/>
+				<textElement/>
+				<text><![CDATA[Event Date]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="d6f10182-9f47-45c1-9e87-40c5a3d285ab" x="432" y="1" width="100" height="20"/>
+				<textElement/>
+				<text><![CDATA[Return Code]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="f823110c-9bc6-4069-87e9-4cae581c261a" x="532" y="1" width="270" height="20"/>
+				<textElement/>
+				<text><![CDATA[Return Message]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="2287cab1-7fcf-4304-9d3c-1df60513f7a7" x="0" y="1" width="32" height="20"/>
+				<textElement/>
+				<text><![CDATA[No.]]></text>
+			</staticText>
+		</band>
+	</columnHeader>
+	<detail>
+		<band height="29" splitType="Stretch">
+			<textField>
+				<reportElement uuid="579e555f-3579-4697-94f2-d14f7ca056c4" x="0" y="0" width="32" height="20"/>
+				<textElement/>
+				<textFieldExpression><![CDATA[$V{REPORT_COUNT}]]></textFieldExpression>
+			</textField>
+			<textField isStretchWithOverflow="true">
+				<reportElement uuid="2ef99365-1fc4-419b-9936-84500347d3cf" x="32" y="0" width="100" height="20"/>
+				<textElement/>
+				<textFieldExpression><![CDATA[$F{activitytype} == null ? "NULL_NONE" : $F{activitytype}]]></textFieldExpression>
+			</textField>
+			<textField isStretchWithOverflow="true">
+				<reportElement uuid="1e013015-68d7-443a-ac2b-9fa6a12ea325" x="132" y="0" width="100" height="20"/>
+				<textElement/>
+				<textFieldExpression><![CDATA[$F{activitydocnumber} == null ? "NULL_NONE" : $F{activitydocnumber}]]></textFieldExpression>
+			</textField>
+			<textField isStretchWithOverflow="true">
+				<reportElement uuid="025e7f0b-9d0e-4ff9-a403-5b6402e65161" x="232" y="0" width="100" height="20"/>
+				<textElement/>
+				<textFieldExpression><![CDATA[$F{location} == null ? "NULL_NONE" : $F{location}]]></textFieldExpression>
+			</textField>
+			<textField pattern="dd-MMM-yy">
+				<reportElement uuid="d99cb4f1-f0aa-4578-86c1-bd1a6e29e532" x="332" y="0" width="100" height="20"/>
+				<textElement/>
+				<textFieldExpression><![CDATA[$F{eventdate} == null ? "NULL_NONE" : $F{eventdate}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement uuid="ce010751-e8c8-485d-8df4-0dcaf5df30f1" x="432" y="0" width="100" height="20"/>
+				<textElement/>
+				<textFieldExpression><![CDATA[$F{errorcode} == null ? "NULL_NONE" : $F{errorcode}]]></textFieldExpression>
+			</textField>
+			<textField isStretchWithOverflow="true">
+				<reportElement uuid="567ad2eb-a185-4029-b1d1-7350c74315e4" x="532" y="0" width="270" height="20"/>
+				<textElement/>
+				<textFieldExpression><![CDATA[$F{errormessage} == null ? "NULL_NONE" : $F{errormessage}]]></textFieldExpression>
+			</textField>
+		</band>
+	</detail>
+	<columnFooter>
+		<band height="45" splitType="Stretch"/>
+	</columnFooter>
+	<pageFooter>
+		<band height="54" splitType="Stretch"/>
+	</pageFooter>
+	<summary>
+		<band height="42" splitType="Stretch"/>
+	</summary>
+</jasperReport>

@@ -1,0 +1,204 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="loSalesReport" language="groovy" pageWidth="842" pageHeight="595" orientation="Landscape" whenNoDataType="AllSectionsNoDetail" columnWidth="802" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="36e81bb8-7f5b-4f00-804c-04886e728b37">
+	<property name="ireport.zoom" value="1.4641000000000148"/>
+	<property name="ireport.x" value="0"/>
+	<property name="ireport.y" value="0"/>
+	<property name="net.sf.jasperreports.awt.ignore.missing.font" value="true"/>
+	<parameter name="so_number" class="java.lang.String">
+		<defaultValueExpression><![CDATA[]]></defaultValueExpression>
+	</parameter>
+	<parameter name="period" class="java.lang.String">
+		<defaultValueExpression><![CDATA[]]></defaultValueExpression>
+	</parameter>
+	<queryString>
+		<![CDATA[SELECT
+$P{period} AS reportYear,
+lo.sonumber, lo.losalesnumber, lo.shippingpoint, lo.dspplant,
+SUM(item.qty) AS qty,
+(SELECT CASE WHEN COUNT(*) = 0 THEN 'WIP' ELSE 'DONE' END FROM trx_gi_lo_sales WHERE losalesnumber=lo.losalesnumber) AS STATUS
+FROM trx_lo_sales lo
+LEFT JOIN trx_lo_sales_item item ON item.losalesnumber=lo.losalesnumber
+WHERE lo.sonumber=$P{so_number}
+GROUP BY lo.sonumber, lo.losalesnumber, lo.shippingpoint, lo.dspplant]]>
+	</queryString>
+	<field name="reportyear" class="java.lang.String"/>
+	<field name="sonumber" class="java.lang.String"/>
+	<field name="losalesnumber" class="java.lang.String"/>
+	<field name="shippingpoint" class="java.lang.String"/>
+	<field name="dspplant" class="java.lang.String"/>
+	<field name="qty" class="java.lang.Double"/>
+	<field name="status" class="java.lang.String"/>
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<title>
+		<band height="44" splitType="Stretch">
+			<staticText>
+				<reportElement x="71" y="0" width="207" height="42" uuid="be8cde5e-ce8d-4ec6-9413-4ac2589c1ec5"/>
+				<textElement>
+					<font fontName="Arial" isItalic="false"/>
+				</textElement>
+				<text><![CDATA[Jl. Otista Raya No.66, RT.9/RW.4, Kp. Melayu, Jatinegara, Kota Jakarta Timur, Daerah Khusus Ibukota Jakarta 13330]]></text>
+			</staticText>
+			<image>
+				<reportElement x="0" y="0" width="100" height="42" uuid="12810f3b-a3dc-4d0d-a289-9ccecd1bb331"/>
+				<imageExpression><![CDATA[this.getClass().getResourceAsStream("/report/patlog-logo.png")]]></imageExpression>
+			</image>
+			<staticText>
+				<reportElement x="578" y="22" width="224" height="20" uuid="23591467-c5b5-4b19-8754-89da8aa9becf"/>
+				<textElement>
+					<font fontName="Ebrima" size="14" isBold="true"/>
+				</textElement>
+				<text><![CDATA[LO SALES ALLOCATION REPORT]]></text>
+			</staticText>
+		</band>
+	</title>
+	<pageHeader>
+		<band height="23" splitType="Stretch">
+			<staticText>
+				<reportElement x="0" y="1" width="140" height="20" uuid="2a4b5600-532b-42ae-a3a7-01f0c91532d4"/>
+				<textElement verticalAlignment="Middle">
+					<font fontName="Calibri" size="10" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Historical Data/Trend Analysis :]]></text>
+			</staticText>
+			<textField pattern="###0">
+				<reportElement x="140" y="1" width="211" height="20" uuid="fb59faba-f55f-488a-b56b-1dd0d6047c5f"/>
+				<textElement verticalAlignment="Middle"/>
+				<textFieldExpression><![CDATA[$F{reportyear} == null ? "" : $F{reportyear}]]></textFieldExpression>
+			</textField>
+			<line>
+				<reportElement x="0" y="0" width="802" height="1" forecolor="#000099" uuid="535688f8-acf8-4e55-9684-69ca6f67c899"/>
+			</line>
+		</band>
+	</pageHeader>
+	<columnHeader>
+		<band height="23" splitType="Stretch">
+			<staticText>
+				<reportElement x="29" y="0" width="129" height="22" uuid="3fa5e752-1bca-4d4a-bc54-5667d88631db"/>
+				<textElement verticalAlignment="Middle">
+					<font fontName="Calibri" size="10" isBold="true"/>
+				</textElement>
+				<text><![CDATA[SO Number]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="278" y="1" width="153" height="22" uuid="5e679c4f-c8a5-45be-b402-c5327f976876"/>
+				<textElement verticalAlignment="Middle">
+					<font fontName="Calibri" size="10" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Shipping Point]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="431" y="1" width="126" height="22" uuid="5b10d707-a2fa-4b6b-9ee2-a29f9833e145"/>
+				<textElement verticalAlignment="Middle">
+					<font fontName="Calibri" size="10" isBold="true"/>
+				</textElement>
+				<text><![CDATA[DSP]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="557" y="0" width="119" height="22" uuid="a29edc29-de6f-43cf-afe1-ff3e5bd2d071"/>
+				<textElement verticalAlignment="Middle">
+					<font fontName="Calibri" size="10" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Quantity Eq. KL]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="158" y="0" width="120" height="22" uuid="a36addf2-6a2c-4081-b3c2-a9bb2c4b4a88"/>
+				<textElement verticalAlignment="Middle">
+					<font fontName="Calibri" size="10" isBold="true"/>
+				</textElement>
+				<text><![CDATA[LO Number]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="0" y="0" width="29" height="22" uuid="e8666e03-14bd-42ca-9a22-69bf53cf20f9"/>
+				<textElement verticalAlignment="Middle">
+					<font fontName="Calibri" size="10" isBold="true"/>
+				</textElement>
+				<text><![CDATA[No.]]></text>
+			</staticText>
+			<line>
+				<reportElement x="0" y="21" width="802" height="1" uuid="2772438a-c898-4c06-a4ee-1c43c7d90ff8"/>
+			</line>
+			<staticText>
+				<reportElement x="676" y="1" width="126" height="22" uuid="b8a4dff2-4980-490f-96b9-31492502c849"/>
+				<textElement verticalAlignment="Middle">
+					<font fontName="Calibri" size="10" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Status]]></text>
+			</staticText>
+			<line>
+				<reportElement x="0" y="1" width="802" height="1" uuid="2f534abf-40a9-481e-815e-9b0d04e887b8"/>
+			</line>
+		</band>
+	</columnHeader>
+	<detail>
+		<band height="20" splitType="Stretch">
+			<textField>
+				<reportElement x="0" y="0" width="29" height="19" uuid="4dda4da7-ab97-4aa5-be67-303121f931da"/>
+				<textElement verticalAlignment="Middle">
+					<font fontName="Calibri" isBold="false"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$V{REPORT_COUNT}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="158" y="0" width="120" height="19" uuid="65535cc7-3b8c-4ba5-b9db-ad677a0de544"/>
+				<textElement verticalAlignment="Middle">
+					<font fontName="Calibri"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{losalesnumber} == null ? "NULL_NONE" : $F{losalesnumber}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="29" y="0" width="129" height="19" uuid="19f13929-1243-486d-b8cb-30ac880bfa37"/>
+				<textElement verticalAlignment="Middle">
+					<font fontName="Calibri"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{sonumber} == null ? "NULL_NONE" : $F{sonumber}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="278" y="0" width="153" height="19" uuid="a4b618a1-c0e4-43ba-900e-cb055ece0e6e"/>
+				<textElement verticalAlignment="Middle">
+					<font fontName="Calibri"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{shippingpoint} == null ? "NULL_NONE" : $F{shippingpoint}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="431" y="0" width="126" height="20" uuid="eab1d37a-2491-4247-b9b6-4a9f15cfe14b"/>
+				<textElement verticalAlignment="Middle">
+					<font fontName="Calibri"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{dspplant} == null ? "NULL_NONE" : $F{dspplant}]]></textFieldExpression>
+			</textField>
+			<textField pattern="#,##0">
+				<reportElement x="557" y="0" width="119" height="20" uuid="e5bbce14-570e-4807-ac70-fc31b1da2d54"/>
+				<textElement verticalAlignment="Middle">
+					<font fontName="Calibri"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{qty} == null ? "NULL_NONE" : $F{qty}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="676" y="0" width="126" height="20" uuid="0a46765f-fdd6-4bdb-a177-ec196d925527"/>
+				<textElement verticalAlignment="Middle">
+					<font fontName="Calibri"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{status} == null ? "NULL_NONE" : $F{status}]]></textFieldExpression>
+			</textField>
+		</band>
+	</detail>
+	<columnFooter>
+		<band height="23" splitType="Stretch"/>
+	</columnFooter>
+	<pageFooter>
+		<band height="24" splitType="Stretch">
+			<line>
+				<reportElement x="0" y="0" width="802" height="1" forecolor="#000099" uuid="42185c6c-8e34-4dc4-946b-29d3267dc9c7"/>
+			</line>
+			<textField>
+				<reportElement x="775" y="1" width="27" height="22" uuid="087f90f1-9165-4bad-8a8b-34cba6ed9caa"/>
+				<textFieldExpression><![CDATA[$V{PAGE_NUMBER}]]></textFieldExpression>
+			</textField>
+		</band>
+	</pageFooter>
+	<summary>
+		<band splitType="Stretch"/>
+	</summary>
+</jasperReport>

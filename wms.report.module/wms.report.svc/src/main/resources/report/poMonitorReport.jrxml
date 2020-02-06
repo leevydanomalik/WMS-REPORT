@@ -1,0 +1,236 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="poMonitorReport" language="groovy" pageWidth="842" pageHeight="595" orientation="Landscape" whenNoDataType="AllSectionsNoDetail" columnWidth="802" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="41895a4a-96d0-4eb1-9260-1d9a13dd3fcb">
+	<property name="ireport.zoom" value="1.9487171000000187"/>
+	<property name="ireport.x" value="0"/>
+	<property name="ireport.y" value="0"/>
+	<property name="net.sf.jasperreports.awt.ignore.missing.font" value="true"/>
+	<parameter name="startDate" class="java.lang.String"/>
+	<parameter name="endDate" class="java.lang.String"/>
+	<parameter name="period" class="java.lang.String">
+		<defaultValueExpression><![CDATA[]]></defaultValueExpression>
+	</parameter>
+	<queryString>
+		<![CDATA[select
+$P{period} AS reportYear, logtype,deliverystatus,postonumber,itemnumber,materialnumber,qtyvolume,supplyplant,receiveplant
+FROM public.trx_log_po
+WHERE to_date(to_char(eventdate, 'ddMMyyyy'),'ddMMyyyy') >= to_date($P{startDate}, 'ddMMyyyy') AND
+ to_date(to_char(eventdate, 'ddMMyyyy'),'ddMMyyyy') <= to_date($P{endDate}, 'ddMMyyyy')]]>
+	</queryString>
+	<field name="reportyear" class="java.lang.String"/>
+	<field name="logtype" class="java.lang.String"/>
+	<field name="deliverystatus" class="java.lang.String"/>
+	<field name="postonumber" class="java.lang.String"/>
+	<field name="itemnumber" class="java.lang.String"/>
+	<field name="materialnumber" class="java.lang.String"/>
+	<field name="qtyvolume" class="java.lang.Double"/>
+	<field name="supplyplant" class="java.lang.String"/>
+	<field name="receiveplant" class="java.lang.String"/>
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<title>
+		<band height="45" splitType="Stretch">
+			<image>
+				<reportElement x="2" y="0" width="103" height="42" uuid="5e80352e-0529-4edc-9c82-4c98d6fe26e9"/>
+				<imageExpression><![CDATA[this.getClass().getResourceAsStream("/report/patlog-logo.png")]]></imageExpression>
+			</image>
+			<staticText>
+				<reportElement x="73" y="0" width="197" height="42" uuid="72098031-3ee4-4a93-b08e-f957ac7d8fec"/>
+				<textElement>
+					<font fontName="Arial" isItalic="false"/>
+				</textElement>
+				<text><![CDATA[Jl. Otista Raya No.66, RT.9/RW.4, Kp. Melayu, Jatinegara, Kota Jakarta Timur, Daerah Khusus Ibukota Jakarta 13330]]></text>
+			</staticText>
+		</band>
+	</title>
+	<pageHeader>
+		<band height="90" splitType="Stretch">
+			<staticText>
+				<reportElement x="0" y="69" width="141" height="20" uuid="a557a7c7-04fb-47ca-80f6-94bf5a78f6ce"/>
+				<textElement verticalAlignment="Middle">
+					<font fontName="Calibri" size="10" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Historical Data/Trend Analysis :]]></text>
+			</staticText>
+			<line>
+				<reportElement x="0" y="0" width="802" height="1" forecolor="#000099" uuid="1dab6755-9ca8-49a1-b221-0287db0c00f1"/>
+			</line>
+			<staticText>
+				<reportElement x="324" y="30" width="165" height="20" uuid="a2c4b3d9-1698-41bd-9fec-e250da4ec209"/>
+				<textElement>
+					<font fontName="Ebrima" size="14" isBold="true"/>
+				</textElement>
+				<text><![CDATA[PO MONITOR REPORT]]></text>
+			</staticText>
+			<textField pattern="###0">
+				<reportElement x="141" y="69" width="183" height="20" uuid="24052be5-0dfb-4280-a7d5-70ce5d17b788"/>
+				<textElement verticalAlignment="Middle">
+					<font fontName="Calibri" isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{reportyear} == null ? "" : $F{reportyear}]]></textFieldExpression>
+			</textField>
+			<line>
+				<reportElement x="0" y="89" width="802" height="1" uuid="72e77843-7554-407f-a4fd-ee2aeaebb80e"/>
+			</line>
+		</band>
+	</pageHeader>
+	<columnHeader>
+		<band height="20" splitType="Stretch">
+			<line>
+				<reportElement x="0" y="19" width="802" height="1" uuid="ea37b752-4df4-45b8-b00f-b9f0a138aefc"/>
+			</line>
+			<staticText>
+				<reportElement x="29" y="0" width="99" height="19" uuid="76d7f28e-e8f9-4f0e-824d-7a3bc0672fad"/>
+				<textElement>
+					<font fontName="Calibri" size="10" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Log.Type]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="128" y="0" width="92" height="19" uuid="1946ba08-15d3-451c-ad08-538cee784b56"/>
+				<textElement>
+					<font fontName="Calibri" size="10" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Del.Status]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="220" y="1" width="104" height="18" uuid="6a9270cf-b925-46aa-9762-8a550897fac9"/>
+				<textElement>
+					<font fontName="Calibri" size="10" isBold="true"/>
+				</textElement>
+				<text><![CDATA[PO.Number]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="324" y="0" width="97" height="20" uuid="3739bbfe-55a4-41b3-a0aa-34f029039ec7"/>
+				<textElement>
+					<font fontName="Calibri" size="10" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Item Number]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="421" y="-1" width="113" height="21" uuid="6bab55ae-c725-46e5-8396-c972d5ae091d"/>
+				<textElement>
+					<font fontName="Calibri" size="10" isBold="true"/>
+				</textElement>
+				<text><![CDATA[KIMAP]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="534" y="-1" width="81" height="20" uuid="ad5fee30-d74e-44e3-90bd-3b2a3e4a3f18"/>
+				<textElement>
+					<font fontName="Calibri" size="10" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Qty]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="615" y="-1" width="87" height="20" uuid="30b16c46-cbdf-47ca-a816-1cd91f9e0d45"/>
+				<textElement>
+					<font fontName="Calibri" size="10" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Supply Plant]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="0" y="0" width="29" height="19" uuid="0e2c6a99-bc66-473b-acba-0c9f1126188f"/>
+				<textElement>
+					<font fontName="Calibri" size="10" isBold="true"/>
+				</textElement>
+				<text><![CDATA[No.]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="702" y="0" width="100" height="19" uuid="f200ba02-127f-47ba-a965-c9602c6d63bc"/>
+				<textElement>
+					<font fontName="Calibri" size="10" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Receive Plant]]></text>
+			</staticText>
+		</band>
+	</columnHeader>
+	<detail>
+		<band height="20" splitType="Stretch">
+			<textField>
+				<reportElement x="29" y="0" width="99" height="20" uuid="a9001526-98f2-451a-9533-0cfec4e4991f"/>
+				<textElement>
+					<font fontName="Calibri" size="10"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{logtype} == null ? "NULL_NONE" : $F{logtype}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="128" y="0" width="92" height="20" uuid="24f5dc28-003e-471c-9fdc-81da30c439e5"/>
+				<textElement>
+					<font fontName="Calibri" size="10"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{deliverystatus} == null ? "NULL_NONE" : $F{deliverystatus}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="421" y="0" width="113" height="19" uuid="c11b6974-1938-485e-aa3f-aa4b2f92fbf1"/>
+				<textElement>
+					<font fontName="Calibri" size="10"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{materialnumber} == null ? "NULL_NONE" : $F{materialnumber}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="615" y="0" width="87" height="20" uuid="8391e972-e116-45de-98e9-8e31b34eacfb"/>
+				<textElement>
+					<font fontName="Calibri" size="10"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{supplyplant} == null ? "NULL_NONE" : $F{supplyplant}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="702" y="0" width="100" height="20" uuid="def4ba89-dbc7-435b-9661-f2033e9423d3"/>
+				<textFieldExpression><![CDATA[$F{receiveplant}]]></textFieldExpression>
+			</textField>
+			<textField pattern="#,##0">
+				<reportElement x="534" y="0" width="81" height="20" uuid="ca9599ba-d667-46f7-b0a6-7313709ace4a"/>
+				<textElement>
+					<font fontName="Calibri" size="10"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{qtyvolume} == null ? "NULL_NONE" : $F{qtyvolume}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="324" y="0" width="97" height="20" uuid="2b0e92c0-e49e-4fd1-bbeb-c2f897ccea4a"/>
+				<textElement>
+					<font fontName="Calibri" size="10"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{itemnumber} == null ? "NULL_NONE" : $F{itemnumber}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="220" y="0" width="104" height="20" uuid="bbf0771a-0587-4772-aa5b-be5b47fd19c9"/>
+				<textElement>
+					<font fontName="Calibri" size="10"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{postonumber} == null ? "NULL_NONE" : $F{postonumber}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="0" y="0" width="29" height="20" uuid="26e4b21d-a268-4b8e-b3da-593d690548a0"/>
+				<textElement>
+					<font fontName="Calibri"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$V{REPORT_COUNT}]]></textFieldExpression>
+			</textField>
+		</band>
+	</detail>
+	<columnFooter>
+		<band height="24" splitType="Stretch">
+			<staticText>
+				<reportElement x="0" y="0" width="158" height="22" uuid="6576e574-b30e-46ef-b955-c366d1cb467c"/>
+				<textElement verticalAlignment="Middle">
+					<font fontName="Calibri" isBold="false" isItalic="true"/>
+				</textElement>
+				<text><![CDATA[Catatan : Kuantiti dalam satuan kL]]></text>
+			</staticText>
+			<line>
+				<reportElement x="0" y="23" width="802" height="1" forecolor="#000099" uuid="7b6a752f-34f5-47b0-b057-ab8458c547c1"/>
+			</line>
+		</band>
+	</columnFooter>
+	<pageFooter>
+		<band height="21" splitType="Stretch">
+			<textField>
+				<reportElement x="779" y="1" width="23" height="20" uuid="f7991f4d-44f3-4f77-b769-fcb982e75a91"/>
+				<textFieldExpression><![CDATA[$V{PAGE_NUMBER}]]></textFieldExpression>
+			</textField>
+		</band>
+	</pageFooter>
+	<summary>
+		<band height="14" splitType="Stretch"/>
+	</summary>
+</jasperReport>

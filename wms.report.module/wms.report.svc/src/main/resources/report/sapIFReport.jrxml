@@ -1,0 +1,205 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="sapIFReport" language="groovy" pageWidth="842" pageHeight="595" orientation="Landscape" whenNoDataType="AllSectionsNoDetail" columnWidth="802" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="8ebd2786-fee8-463b-8bfc-c9557b8cd811">
+	<property name="ireport.zoom" value="1.3310000000000064"/>
+	<property name="ireport.x" value="0"/>
+	<property name="ireport.y" value="0"/>
+	<property name="net.sf.jasperreports.awt.ignore.missing.font" value="true"/>
+	<parameter name="startDate" class="java.lang.String"/>
+	<parameter name="endDate" class="java.lang.String"/>
+	<parameter name="period" class="java.lang.String">
+		<defaultValueExpression><![CDATA[]]></defaultValueExpression>
+	</parameter>
+	<queryString>
+		<![CDATA[SELECT
+$P{period} AS reportYear,
+activitytype,activitydocnumber,"location",eventdate,errorcode,errormessage
+FROM public.trx_log_sap
+WHERE to_date(to_char(eventdate, 'ddMMyyyy'),'ddMMyyyy') >= to_date($P{startDate}, 'ddMMyyyy') AND
+ to_date(to_char(eventdate, 'ddMMyyyy'),'ddMMyyyy') <= to_date($P{endDate}, 'ddMMyyyy') order by eventdate asc]]>
+	</queryString>
+	<field name="reportyear" class="java.lang.String"/>
+	<field name="activitytype" class="java.lang.String"/>
+	<field name="activitydocnumber" class="java.lang.String"/>
+	<field name="location" class="java.lang.String"/>
+	<field name="eventdate" class="java.sql.Timestamp"/>
+	<field name="errorcode" class="java.lang.String"/>
+	<field name="errormessage" class="java.lang.String"/>
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<title>
+		<band height="46" splitType="Stretch">
+			<image>
+				<reportElement uuid="36a38128-3f20-416a-8e16-089bd7762a5f" x="0" y="0" width="103" height="42"/>
+				<imageExpression><![CDATA[this.getClass().getResourceAsStream("/report/patlog-logo.png")]]></imageExpression>
+			</image>
+			<staticText>
+				<reportElement uuid="c21d3615-f1f8-41dc-8d08-c8b90f1d7d6e" x="71" y="0" width="197" height="42"/>
+				<textElement>
+					<font fontName="SansSerif" isItalic="false"/>
+				</textElement>
+				<text><![CDATA[Jl. Otista Raya No.66, RT.9/RW.4, Kp. Melayu, Jatinegara, Kota Jakarta Timur, Daerah Khusus Ibukota Jakarta 13330]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="73e27f0f-d7ec-4df3-8cae-a9d3eca5805d" x="602" y="22" width="200" height="20"/>
+				<textElement>
+					<font fontName="SansSerif" size="14" isBold="true"/>
+				</textElement>
+				<text><![CDATA[SAP INTERFACING REPORT]]></text>
+			</staticText>
+		</band>
+	</title>
+	<pageHeader>
+		<band height="25" splitType="Stretch">
+			<line>
+				<reportElement uuid="d29e21f8-afbc-44e0-946b-ecd921602c8d" x="0" y="0" width="802" height="1" forecolor="#000099"/>
+			</line>
+			<staticText>
+				<reportElement uuid="6df0326e-0250-427d-a75e-84a18b806bad" x="4" y="1" width="141" height="20"/>
+				<textElement verticalAlignment="Middle">
+					<font fontName="SansSerif" size="10" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Historical Data/Trend Analysis :]]></text>
+			</staticText>
+			<textField pattern="###0">
+				<reportElement uuid="51d4f03f-232b-4d67-acf3-47689cb275f5" x="145" y="1" width="183" height="20"/>
+				<textElement verticalAlignment="Middle">
+					<font fontName="SansSerif" isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{reportyear} == null ? "" : $F{reportyear}]]></textFieldExpression>
+			</textField>
+		</band>
+	</pageHeader>
+	<columnHeader>
+		<band height="23" splitType="Stretch">
+			<staticText>
+				<reportElement uuid="a91f3ae1-e2d1-4c4d-9e44-313286a04ae8" x="0" y="1" width="37" height="22"/>
+				<textElement verticalAlignment="Middle">
+					<font fontName="SansSerif" size="10" isBold="true"/>
+				</textElement>
+				<text><![CDATA[No.]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="528adb67-318f-4517-b320-5dc1a0ccf13c" x="37" y="1" width="138" height="22"/>
+				<textElement verticalAlignment="Middle">
+					<font fontName="SansSerif" size="10" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Activity Type]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="b29a9333-40b8-4759-8560-32f3cf5628c9" x="175" y="1" width="83" height="22"/>
+				<textElement verticalAlignment="Middle">
+					<font fontName="SansSerif" size="10" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Doc.Number]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="7e438e90-e6cb-4c4c-93eb-4c7543759b0c" x="258" y="1" width="70" height="22"/>
+				<textElement verticalAlignment="Middle">
+					<font fontName="SansSerif" size="10" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Plant]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="7f0d0a7e-0c7c-4501-9362-020fba97a1c7" x="328" y="1" width="105" height="22"/>
+				<textElement verticalAlignment="Middle">
+					<font fontName="SansSerif" size="10" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Event Date]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="e8702717-1c75-4145-9153-350b0de8c7a4" x="433" y="1" width="72" height="22"/>
+				<textElement verticalAlignment="Middle">
+					<font fontName="SansSerif" size="10" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Return Code]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="bb9eb777-0821-458f-8b1d-41001994eb19" x="505" y="1" width="297" height="22"/>
+				<textElement verticalAlignment="Middle">
+					<font fontName="SansSerif" size="10" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Return.Msg]]></text>
+			</staticText>
+			<line>
+				<reportElement uuid="0a3c80dd-97a6-436f-a70d-8cb76195de5f" x="0" y="22" width="802" height="1"/>
+			</line>
+			<line>
+				<reportElement uuid="3151b3e7-a4fd-4693-a4d3-dc10ece44bff" x="0" y="0" width="802" height="1"/>
+			</line>
+		</band>
+	</columnHeader>
+	<detail>
+		<band height="20" splitType="Stretch">
+			<textField isStretchWithOverflow="true">
+				<reportElement uuid="56ea014d-a519-49e1-962e-998dedf77cf9" x="37" y="0" width="138" height="20"/>
+				<textElement verticalAlignment="Middle">
+					<font fontName="SansSerif"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{activitytype} == null ? "NULL_NONE" : $F{activitytype}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement uuid="f7522156-35da-4ae2-b367-e2630b7677bd" x="258" y="0" width="70" height="20"/>
+				<textElement verticalAlignment="Middle">
+					<font fontName="SansSerif"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{location} == null ? "NULL_NONE" : $F{location}]]></textFieldExpression>
+			</textField>
+			<textField pattern="dd/MM/yyyy h.mm a">
+				<reportElement uuid="b3689909-f568-4593-9324-216191f567d9" x="328" y="0" width="105" height="20"/>
+				<textElement verticalAlignment="Middle">
+					<font fontName="SansSerif"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{eventdate} == null ? "NULL_NONE" : $F{eventdate}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement uuid="2ec2ddc2-8b82-4374-8275-a94807957dce" x="433" y="0" width="72" height="20"/>
+				<textElement verticalAlignment="Middle">
+					<font fontName="SansSerif"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{errorcode} == null ? "NULL_NONE" : $F{errorcode}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement uuid="b0d48c35-6c23-4294-a3c7-89ffe9051a5d" x="0" y="0" width="37" height="20"/>
+				<textElement verticalAlignment="Middle">
+					<font fontName="SansSerif"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$V{REPORT_COUNT}]]></textFieldExpression>
+			</textField>
+			<textField isStretchWithOverflow="true">
+				<reportElement uuid="786302c5-9aaf-423f-913a-921a5103734b" x="505" y="0" width="297" height="20"/>
+				<textElement verticalAlignment="Middle">
+					<font fontName="SansSerif"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{errormessage} == null ? "NULL_NONE" : $F{errormessage}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement uuid="a147ba3b-e9e1-4a29-b91b-2ac4a17faab4" x="175" y="0" width="83" height="20"/>
+				<textElement verticalAlignment="Middle">
+					<font fontName="SansSerif"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{activitydocnumber} == null ? "NULL_NONE" : $F{activitydocnumber}]]></textFieldExpression>
+			</textField>
+		</band>
+	</detail>
+	<columnFooter>
+		<band height="22" splitType="Stretch"/>
+	</columnFooter>
+	<pageFooter>
+		<band height="20" splitType="Stretch">
+			<textField>
+				<reportElement uuid="fb3ce606-718a-4f05-8fa5-4bbcdeb830ac" x="777" y="0" width="25" height="20"/>
+				<textElement>
+					<font fontName="SansSerif"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$V{PAGE_NUMBER}]]></textFieldExpression>
+			</textField>
+			<line>
+				<reportElement uuid="478cad65-1da1-446c-b644-9c246f158279" x="0" y="0" width="802" height="1" forecolor="#000099"/>
+			</line>
+		</band>
+	</pageFooter>
+	<summary>
+		<band height="23" splitType="Stretch"/>
+	</summary>
+</jasperReport>

@@ -161,7 +161,7 @@ where a.sonumber = $P{sonumber}]]>
 				<reportElement x="-17" y="-18" width="587" height="65" uuid="f8acd7a3-946d-4e1a-b207-020fbba1a348"/>
 				<image>
 					<reportElement x="438" y="4" width="146" height="43" uuid="4b2f3f20-d65e-439a-ba0d-2ce32207c6d7"/>
-					<imageExpression><![CDATA["E:\\H1\\WMS\\WMS-REPORT\\WMS-REPORT\\wms.report.module\\wms.report.svc\\src\\main\\resources\\report\\logolubrican.jpg"]]></imageExpression>
+					<imageExpression><![CDATA[this.getClass().getResourceAsStream("/report/logolubrican.jpg")]]></imageExpression>
 				</image>
 			</frame>
 			<staticText>

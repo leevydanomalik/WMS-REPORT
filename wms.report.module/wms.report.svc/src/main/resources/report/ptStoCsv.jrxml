@@ -1,0 +1,138 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="ptStoCsv" language="groovy" pageWidth="802" pageHeight="555" orientation="Landscape" whenNoDataType="AllSectionsNoDetail" columnWidth="802" leftMargin="0" rightMargin="0" topMargin="0" bottomMargin="0" isIgnorePagination="true" uuid="0e5f781a-5911-4c40-b1c4-9830c58a5ba7">
+	<property name="ireport.zoom" value="1.9487171000000014"/>
+	<property name="ireport.x" value="40"/>
+	<property name="ireport.y" value="0"/>
+	<parameter name="startDate" class="java.lang.String">
+		<defaultValueExpression><![CDATA[]]></defaultValueExpression>
+	</parameter>
+	<parameter name="endDate" class="java.lang.String">
+		<defaultValueExpression><![CDATA[]]></defaultValueExpression>
+	</parameter>
+	<parameter name="period" class="java.lang.String">
+		<defaultValueExpression><![CDATA[]]></defaultValueExpression>
+	</parameter>
+	<queryString>
+		<![CDATA[SELECT
+$P{period} AS reportYear,
+a.ptnumber, a.docdate, a.supplyplant, a.vendor, a.notes, sum(b.qty) as qty, b.deliverystatus
+FROM public.trx_product_transfer a join public.trx_product_transfer_item b on a.ptnumber=b.ptnumber
+WHERE to_date(to_char(a.eventdate, 'ddMMyyyy'),'ddMMyyyy') >= to_date($P{startDate}, 'ddMMyyyy') AND
+ to_date(to_char(a.eventdate, 'ddMMyyyy'),'ddMMyyyy') <= to_date($P{endDate}, 'ddMMyyyy')
+group by a.ptnumber, a.docdate, a.supplyplant, a.vendor, a.notes, b.deliverystatus]]>
+	</queryString>
+	<field name="reportyear" class="java.lang.String"/>
+	<field name="ptnumber" class="java.lang.String"/>
+	<field name="docdate" class="java.sql.Date"/>
+	<field name="supplyplant" class="java.lang.String"/>
+	<field name="vendor" class="java.lang.String"/>
+	<field name="notes" class="java.lang.String"/>
+	<field name="qty" class="java.lang.Double"/>
+	<field name="deliverystatus" class="java.lang.String"/>
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<title>
+		<band height="79" splitType="Stretch"/>
+	</title>
+	<pageHeader>
+		<band height="35" splitType="Stretch"/>
+	</pageHeader>
+	<columnHeader>
+		<band height="22" splitType="Stretch">
+			<staticText>
+				<reportElement uuid="7538313a-3ea9-4376-b1b1-e06a545191d2" x="25" y="1" width="100" height="20"/>
+				<textElement/>
+				<text><![CDATA[PT Number]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="89f44a31-6498-45c7-bb12-ded3286f0c40" x="125" y="1" width="100" height="20"/>
+				<textElement/>
+				<text><![CDATA[Doc.Date]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="e2f195d3-1122-4845-9768-27b75de3bb6c" x="225" y="1" width="100" height="20"/>
+				<textElement/>
+				<text><![CDATA[Supply Plant]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="8150f2c3-5765-465f-9da2-c7fae0107301" x="325" y="1" width="100" height="20"/>
+				<textElement/>
+				<text><![CDATA[Vendor Code]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="229c67c4-62f5-42c3-9201-d4d1426cc28f" x="425" y="1" width="100" height="20"/>
+				<textElement/>
+				<text><![CDATA[Notes]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="d2a53cf2-c464-4f48-b15b-3b02d5624c37" x="525" y="1" width="100" height="20"/>
+				<textElement/>
+				<text><![CDATA[Quantity Eq KL]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="38b764dd-77f8-4762-b49f-7e1a6e9b20e0" x="625" y="1" width="100" height="20"/>
+				<textElement/>
+				<text><![CDATA[Status]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="14b05806-5d00-477e-940d-9cc360a0713b" x="0" y="1" width="25" height="20"/>
+				<textElement/>
+				<text><![CDATA[No.]]></text>
+			</staticText>
+		</band>
+	</columnHeader>
+	<detail>
+		<band height="21" splitType="Stretch">
+			<textField>
+				<reportElement uuid="5cab00a9-6e5d-4ddd-94aa-6f098282a8c0" x="25" y="0" width="100" height="20"/>
+				<textElement/>
+				<textFieldExpression><![CDATA[$F{ptnumber}]]></textFieldExpression>
+			</textField>
+			<textField pattern="dd-MMM-yy">
+				<reportElement uuid="7301b668-136d-452a-9905-2bcc9b0af014" x="125" y="0" width="100" height="20"/>
+				<textElement/>
+				<textFieldExpression><![CDATA[$F{docdate}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement uuid="3dc4d15c-afa4-4f03-b1b0-968ce19e698c" x="225" y="0" width="100" height="20"/>
+				<textElement/>
+				<textFieldExpression><![CDATA[$F{supplyplant}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement uuid="8f8e073d-999e-4b8e-989e-ad25e22987df" x="325" y="0" width="100" height="20"/>
+				<textElement/>
+				<textFieldExpression><![CDATA[$F{vendor}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement uuid="e4822268-5a43-418d-aa11-3fe8b090c207" x="425" y="0" width="100" height="20"/>
+				<textElement/>
+				<textFieldExpression><![CDATA[$F{notes}]]></textFieldExpression>
+			</textField>
+			<textField pattern="###0">
+				<reportElement uuid="a1882e1f-18e3-4259-99b0-ca5a3ba15fcb" x="525" y="0" width="100" height="20"/>
+				<textElement/>
+				<textFieldExpression><![CDATA[$F{qty}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement uuid="9097c99b-638a-4702-a66b-935fd48e06da" x="625" y="0" width="100" height="20"/>
+				<textElement/>
+				<textFieldExpression><![CDATA[$F{deliverystatus}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement uuid="8e0e9d09-117c-45d8-89d0-49a613d01ed8" x="0" y="0" width="25" height="20"/>
+				<textElement/>
+				<textFieldExpression><![CDATA[$V{REPORT_COUNT}]]></textFieldExpression>
+			</textField>
+		</band>
+	</detail>
+	<columnFooter>
+		<band height="45" splitType="Stretch"/>
+	</columnFooter>
+	<pageFooter>
+		<band height="54" splitType="Stretch"/>
+	</pageFooter>
+	<summary>
+		<band height="42" splitType="Stretch"/>
+	</summary>
+</jasperReport>

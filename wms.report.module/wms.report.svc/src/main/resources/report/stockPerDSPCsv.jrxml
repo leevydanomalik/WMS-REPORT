@@ -1,0 +1,235 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="stockPerDSPCsv" language="groovy" pageWidth="842" pageHeight="595" orientation="Landscape" whenNoDataType="AllSectionsNoDetail" columnWidth="802" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" isIgnorePagination="true" uuid="62e07281-874e-4f6e-bf93-7e15a87f7afb">
+	<property name="ireport.zoom" value="1.610510000000003"/>
+	<property name="ireport.x" value="0"/>
+	<property name="ireport.y" value="0"/>
+	<parameter name="reportyear" class="java.lang.String">
+		<defaultValueExpression><![CDATA[]]></defaultValueExpression>
+	</parameter>
+	<parameter name="plant" class="java.lang.String">
+		<defaultValueExpression><![CDATA[]]></defaultValueExpression>
+	</parameter>
+	<parameter name="startdate" class="java.lang.String">
+		<defaultValueExpression><![CDATA[]]></defaultValueExpression>
+	</parameter>
+	<parameter name="enddate" class="java.lang.String">
+		<defaultValueExpression><![CDATA[]]></defaultValueExpression>
+	</parameter>
+	<queryString>
+		<![CDATA[SELECT DISTINCT ON (materialnumber) *, $P{reportyear} as reportyear FROM trx_stock
+WHERE plant = $P{plant} AND securityday <= 5 AND to_date(to_char(eventdate, 'ddMMyyyy'),'ddMMyyyy') >= to_date($P{startdate}, 'ddMMyyyy') AND to_date(to_char(eventdate, 'ddMMyyyy'),'ddMMyyyy') <= to_date($P{enddate}, 'ddMMyyyy') ORDER BY materialnumber, eventdate DESC]]>
+	</queryString>
+	<field name="id" class="java.lang.Integer"/>
+	<field name="blocked" class="java.lang.Double"/>
+	<field name="docnumber" class="java.lang.String"/>
+	<field name="eventdate" class="java.sql.Timestamp"/>
+	<field name="intransfer" class="java.lang.Double"/>
+	<field name="materialdesc" class="java.lang.String"/>
+	<field name="materialnumber" class="java.lang.String"/>
+	<field name="plant" class="java.lang.String"/>
+	<field name="qty" class="java.lang.Double"/>
+	<field name="securityday" class="java.lang.Integer"/>
+	<field name="securitystatus" class="java.lang.String"/>
+	<field name="unrestricted" class="java.lang.Double"/>
+	<field name="uom" class="java.lang.String"/>
+	<field name="realblocked" class="java.lang.Double"/>
+	<field name="realintransfer" class="java.lang.Double"/>
+	<field name="realqty" class="java.lang.Double"/>
+	<field name="realunrestricted" class="java.lang.Double"/>
+	<field name="realuom" class="java.lang.String"/>
+	<field name="reportyear" class="java.lang.String"/>
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<title>
+		<band splitType="Stretch"/>
+	</title>
+	<pageHeader>
+		<band splitType="Stretch"/>
+	</pageHeader>
+	<columnHeader>
+		<band height="21" splitType="Stretch">
+			<staticText>
+				<reportElement uuid="02bc9f88-bee5-42b3-a582-d62c5ef6ba7a" x="21" y="0" width="67" height="20"/>
+				<textElement verticalAlignment="Middle">
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[KIMAP]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="1ce6735e-e5a4-4dc3-83db-dfb701f05c7b" x="221" y="0" width="31" height="20"/>
+				<textElement verticalAlignment="Middle">
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[UoM]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="d4b90122-f244-44c2-8825-c7d6baafd5e9" x="685" y="0" width="45" height="20"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[Intrf. KL]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="61e59ad3-ab7f-4a84-a910-89229ddc60cc" x="401" y="0" width="68" height="20"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[Unrest. UoM]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="8e6ecc73-5d62-4d52-b7a7-f962f91e72b0" x="528" y="0" width="55" height="20"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[Block. UoM]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="c049069c-aa2e-4687-aedb-6c757de37875" x="0" y="0" width="21" height="20"/>
+				<textElement verticalAlignment="Middle">
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[No.]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="9ec8c9f1-f1bb-41c9-b3ef-2b5ea144a720" x="636" y="0" width="49" height="20"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[Intrf. UoM]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="2155f0b1-dab6-4c8a-b8da-6651e007a4e1" x="252" y="0" width="37" height="20"/>
+				<textElement verticalAlignment="Middle">
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[Plant]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="00366b56-d211-4d73-acb2-8a0e088f3825" x="289" y="0" width="52" height="20"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[Qty UoM]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="678b1775-ef12-4447-865a-bc1099b4d194" x="341" y="0" width="60" height="20"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[Qty KL]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="37d65d0f-5a95-498e-816c-946978d0146b" x="730" y="0" width="72" height="20"/>
+				<textElement verticalAlignment="Middle">
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[Inventory Day]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="485fce3e-ad44-4683-8673-702ff5c9519b" x="583" y="0" width="53" height="20"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[Block. KL]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="dbc96fcb-7050-47b2-8a99-b0707d6ee4bb" x="88" y="0" width="133" height="20"/>
+				<textElement verticalAlignment="Middle">
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[Material Name]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="a11fd682-6897-46fa-85f8-c1331ae40938" x="469" y="0" width="59" height="20"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[Unrest. KL]]></text>
+			</staticText>
+		</band>
+	</columnHeader>
+	<detail>
+		<band height="28" splitType="Stretch">
+			<textField>
+				<reportElement uuid="17a10305-48e7-4825-9f62-6161c4b7be8e" x="21" y="0" width="67" height="20"/>
+				<textElement/>
+				<textFieldExpression><![CDATA[$F{materialnumber}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement uuid="9307cdc0-b71f-4468-9e72-11a3153a44de" x="0" y="0" width="21" height="20"/>
+				<textElement/>
+				<textFieldExpression><![CDATA[$V{REPORT_COUNT}]]></textFieldExpression>
+			</textField>
+			<textField isStretchWithOverflow="true">
+				<reportElement uuid="59dcd7b5-a26e-4727-b393-7eb800c207c4" x="88" y="0" width="133" height="20"/>
+				<textElement/>
+				<textFieldExpression><![CDATA[$F{materialdesc}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement uuid="cb888303-8f3c-4495-849b-ae10cabef2e9" x="221" y="0" width="31" height="20"/>
+				<textElement/>
+				<textFieldExpression><![CDATA[$F{realuom}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement uuid="87a36d8c-0898-4aa6-84f3-e0072e87de6e" x="252" y="0" width="37" height="20"/>
+				<textElement/>
+				<textFieldExpression><![CDATA[$F{plant}]]></textFieldExpression>
+			</textField>
+			<textField pattern="#,##0">
+				<reportElement uuid="772b9f6e-5347-4995-85b4-1622c8c7d608" x="289" y="0" width="52" height="20"/>
+				<textElement/>
+				<textFieldExpression><![CDATA[$F{realqty}]]></textFieldExpression>
+			</textField>
+			<textField pattern="#,##0.00">
+				<reportElement uuid="b4f8092e-355c-4fde-b893-515b23e76583" x="341" y="0" width="60" height="20"/>
+				<textElement/>
+				<textFieldExpression><![CDATA[$F{qty}]]></textFieldExpression>
+			</textField>
+			<textField pattern="#,##0">
+				<reportElement uuid="78f242c3-d072-41c1-85ff-8bb4013f1060" x="401" y="0" width="68" height="20"/>
+				<textElement/>
+				<textFieldExpression><![CDATA[$F{realunrestricted}]]></textFieldExpression>
+			</textField>
+			<textField pattern="#,##0.00">
+				<reportElement uuid="06421e5a-7716-4f58-8464-ca51dfaf4962" x="469" y="0" width="59" height="20"/>
+				<textElement/>
+				<textFieldExpression><![CDATA[$F{unrestricted}]]></textFieldExpression>
+			</textField>
+			<textField pattern="#,##0">
+				<reportElement uuid="05b3bd70-dd79-451f-b815-0bc2b462f66c" x="528" y="0" width="55" height="20"/>
+				<textElement/>
+				<textFieldExpression><![CDATA[$F{realblocked}]]></textFieldExpression>
+			</textField>
+			<textField pattern="#,##0.00">
+				<reportElement uuid="db9c9dc2-b469-49db-b775-1c8bcb5368e3" x="583" y="0" width="53" height="20"/>
+				<textElement/>
+				<textFieldExpression><![CDATA[$F{blocked}]]></textFieldExpression>
+			</textField>
+			<textField pattern="#,##0">
+				<reportElement uuid="71140f0b-1935-4545-a80b-286a50203a6d" x="636" y="0" width="49" height="20"/>
+				<textElement/>
+				<textFieldExpression><![CDATA[$F{realintransfer}]]></textFieldExpression>
+			</textField>
+			<textField pattern="#,##0.00">
+				<reportElement uuid="8d095733-0a57-45b7-831c-b3eb7371dd07" x="685" y="0" width="45" height="20"/>
+				<textElement/>
+				<textFieldExpression><![CDATA[$F{intransfer}]]></textFieldExpression>
+			</textField>
+			<textField pattern="#,##0">
+				<reportElement uuid="1e0846e5-1317-4fc0-83a7-80d144efcb6c" x="730" y="0" width="72" height="20"/>
+				<textElement/>
+				<textFieldExpression><![CDATA[$F{securityday}]]></textFieldExpression>
+			</textField>
+		</band>
+	</detail>
+	<columnFooter>
+		<band splitType="Stretch"/>
+	</columnFooter>
+	<pageFooter>
+		<band splitType="Stretch"/>
+	</pageFooter>
+	<summary>
+		<band splitType="Stretch"/>
+	</summary>
+</jasperReport>

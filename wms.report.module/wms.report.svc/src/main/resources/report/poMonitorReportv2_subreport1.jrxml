@@ -1,0 +1,191 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="poMonitorReportv2_subreport1" language="groovy" pageWidth="802" pageHeight="555" orientation="Landscape" columnWidth="802" leftMargin="0" rightMargin="0" topMargin="0" bottomMargin="0" uuid="ec792134-efcd-46fa-889b-b1d525b0ff66">
+	<property name="ireport.zoom" value="1.4641000000000095"/>
+	<property name="ireport.x" value="0"/>
+	<property name="ireport.y" value="0"/>
+	<parameter name="ponumber" class="java.lang.String">
+		<defaultValueExpression><![CDATA[]]></defaultValueExpression>
+	</parameter>
+	<parameter name="SUBREPORT_DIR" class="java.lang.String" isForPrompting="false">
+		<defaultValueExpression><![CDATA["D:\\Project\\NetbeanProjects\\PATLOG-WMS\\dash-patlog\\dashboard\\report\\src\\main\\resources\\report\\"]]></defaultValueExpression>
+	</parameter>
+	<queryString>
+		<![CDATA[select pi.*, m.materialname from trx_posto_item pi
+left join mst_material m on m.materialnumber = pi.materialnumber
+where pi.postonumber=$P{ponumber}]]>
+	</queryString>
+	<field name="id" class="java.lang.Integer"/>
+	<field name="deliverydate" class="java.sql.Timestamp"/>
+	<field name="deliverystatus" class="java.lang.String"/>
+	<field name="itemnumber" class="java.lang.String"/>
+	<field name="materialnumber" class="java.lang.String"/>
+	<field name="openqty" class="java.lang.Double"/>
+	<field name="prnumber" class="java.lang.String"/>
+	<field name="qty" class="java.lang.Double"/>
+	<field name="receivingplant" class="java.lang.String"/>
+	<field name="shorttext" class="java.lang.String"/>
+	<field name="sloc" class="java.lang.String"/>
+	<field name="uom" class="java.lang.String"/>
+	<field name="postonumber" class="java.lang.String"/>
+	<field name="realopenqty" class="java.lang.Double"/>
+	<field name="realqty" class="java.lang.Double"/>
+	<field name="realuom" class="java.lang.String"/>
+	<field name="materialname" class="java.lang.String"/>
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<title>
+		<band splitType="Stretch"/>
+	</title>
+	<pageHeader>
+		<band splitType="Stretch"/>
+	</pageHeader>
+	<columnHeader>
+		<band height="25" splitType="Stretch">
+			<staticText>
+				<reportElement uuid="6566d108-1242-49e7-a53b-88bd0153dc03" mode="Opaque" x="26" y="5" width="92" height="20" forecolor="#FFFFFF" backcolor="#666666"/>
+				<textElement verticalAlignment="Middle">
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[Item Number]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="401ad8c1-a392-45eb-8258-3529ebdd546b" mode="Opaque" x="118" y="5" width="72" height="20" forecolor="#FFFFFF" backcolor="#666666"/>
+				<textElement verticalAlignment="Middle">
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[KIMAP]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="c151c2ef-fe3d-417b-b917-26741d4f76e6" mode="Opaque" x="190" y="5" width="143" height="20" forecolor="#FFFFFF" backcolor="#666666"/>
+				<textElement verticalAlignment="Middle">
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[Material Name]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="5b74ac02-b919-4dd7-8a32-91bd64a6cda7" mode="Opaque" x="450" y="5" width="82" height="20" forecolor="#FFFFFF" backcolor="#666666"/>
+				<textElement verticalAlignment="Middle">
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[Quantity eq KL]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="8c2ca20e-2e3a-4c53-a821-495e7aa5b6b5" mode="Opaque" x="532" y="5" width="79" height="20" forecolor="#FFFFFF" backcolor="#666666"/>
+				<textElement verticalAlignment="Middle">
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[Receiving Plant]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="d6f0c5c4-4566-4942-b942-00af1a6b903c" mode="Opaque" x="611" y="5" width="73" height="20" forecolor="#FFFFFF" backcolor="#666666"/>
+				<textElement verticalAlignment="Middle">
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[Delivery Date]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="a5736318-d8b8-4a32-a71b-f005c145f880" mode="Opaque" x="684" y="5" width="89" height="20" forecolor="#FFFFFF" backcolor="#666666"/>
+				<textElement verticalAlignment="Middle">
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[Delivery Status]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="0d0c888e-0a8f-4394-952f-6748c3d6a74b" mode="Opaque" x="382" y="5" width="68" height="20" forecolor="#FFFFFF" backcolor="#666666"/>
+				<textElement verticalAlignment="Middle">
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[Qty UoM]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="15449f1f-0f59-48d3-92f3-c11e784bb711" mode="Opaque" x="333" y="5" width="49" height="20" forecolor="#FFFFFF" backcolor="#666666"/>
+				<textElement verticalAlignment="Middle">
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[UoM]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="3fc7fa86-6759-4e27-aad4-41a9cc8168d2" mode="Opaque" x="0" y="5" width="26" height="20" forecolor="#FFFFFF" backcolor="#666666"/>
+				<textElement verticalAlignment="Middle">
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[No]]></text>
+			</staticText>
+		</band>
+	</columnHeader>
+	<detail>
+		<band height="71" splitType="Stretch">
+			<textField>
+				<reportElement uuid="0bb2d0e4-ed72-4bca-922f-60f74396365e" mode="Opaque" x="26" y="0" width="92" height="32" backcolor="#CCFFCC"/>
+				<textElement verticalAlignment="Middle"/>
+				<textFieldExpression><![CDATA[$F{itemnumber}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement uuid="1a7a7cd8-2ebb-4f80-a1b2-09730bea2f83" mode="Opaque" x="118" y="0" width="72" height="32" backcolor="#CCFFCC"/>
+				<textElement verticalAlignment="Middle"/>
+				<textFieldExpression><![CDATA[$F{materialnumber}]]></textFieldExpression>
+			</textField>
+			<textField isStretchWithOverflow="true">
+				<reportElement uuid="8497df9b-7218-4ae8-bf00-bad244be28b6" mode="Opaque" x="190" y="0" width="143" height="32" backcolor="#CCFFCC"/>
+				<textElement verticalAlignment="Middle"/>
+				<textFieldExpression><![CDATA[$F{materialname} == null ? 'NULL_NONE' : $F{materialname}]]></textFieldExpression>
+			</textField>
+			<textField pattern="#,##0">
+				<reportElement uuid="b134a295-80a2-4a42-803b-b9ddfe93b88d" mode="Opaque" x="450" y="0" width="82" height="32" backcolor="#CCFFCC"/>
+				<textElement verticalAlignment="Middle"/>
+				<textFieldExpression><![CDATA[$F{qty}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement uuid="c272d3a4-0e97-4a90-b1f6-63574071547a" mode="Opaque" x="532" y="0" width="79" height="32" backcolor="#CCFFCC"/>
+				<textElement verticalAlignment="Middle"/>
+				<textFieldExpression><![CDATA[$F{receivingplant}]]></textFieldExpression>
+			</textField>
+			<textField pattern="dd-MMM-yy">
+				<reportElement uuid="8d03b09d-d83c-48f4-ba8c-66ae60cf3fb0" mode="Opaque" x="611" y="0" width="73" height="32" backcolor="#CCFFCC"/>
+				<textElement verticalAlignment="Middle"/>
+				<textFieldExpression><![CDATA[$F{deliverydate}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement uuid="775b26b0-156c-48a6-a77b-7899ae76308e" mode="Opaque" x="684" y="0" width="89" height="32" backcolor="#CCFFCC"/>
+				<textElement verticalAlignment="Middle"/>
+				<textFieldExpression><![CDATA[$F{deliverystatus}]]></textFieldExpression>
+			</textField>
+			<textField pattern="#,##0">
+				<reportElement uuid="6e74b356-0f4f-4eb8-be00-3859ba1983ce" mode="Opaque" x="382" y="0" width="68" height="32" backcolor="#CCFFCC"/>
+				<textElement verticalAlignment="Middle"/>
+				<textFieldExpression><![CDATA[$F{realqty}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement uuid="d8628a88-62ba-46a2-89ae-c263d16c390d" mode="Opaque" x="333" y="0" width="49" height="32" backcolor="#CCFFCC"/>
+				<textElement verticalAlignment="Middle"/>
+				<textFieldExpression><![CDATA[$F{realuom}]]></textFieldExpression>
+			</textField>
+			<subreport>
+				<reportElement uuid="260c05dd-1444-42d8-aa46-68706da2cf6e" x="26" y="32" width="747" height="39"/>
+				<subreportParameter name="itemnumber">
+					<subreportParameterExpression><![CDATA[$F{itemnumber}]]></subreportParameterExpression>
+				</subreportParameter>
+				<subreportParameter name="ponumber">
+					<subreportParameterExpression><![CDATA[$F{postonumber}]]></subreportParameterExpression>
+				</subreportParameter>
+				<connectionExpression><![CDATA[$P{REPORT_CONNECTION}]]></connectionExpression>
+				<subreportExpression><![CDATA[this.getClass().getResourceAsStream("/report/poMonitorReportv2_subreport1_subreport1.jasper")]]></subreportExpression>
+			</subreport>
+			<textField>
+				<reportElement uuid="23123438-bce5-4ed4-a49f-de37f5b26600" mode="Opaque" x="0" y="0" width="26" height="32" backcolor="#CCFFCC"/>
+				<textElement verticalAlignment="Middle"/>
+				<textFieldExpression><![CDATA[$V{REPORT_COUNT}]]></textFieldExpression>
+			</textField>
+		</band>
+	</detail>
+	<columnFooter>
+		<band splitType="Stretch"/>
+	</columnFooter>
+	<pageFooter>
+		<band splitType="Stretch"/>
+	</pageFooter>
+	<summary>
+		<band splitType="Stretch"/>
+	</summary>
+</jasperReport>

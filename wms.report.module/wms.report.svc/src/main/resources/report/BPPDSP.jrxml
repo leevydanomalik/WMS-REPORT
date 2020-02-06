@@ -105,7 +105,7 @@ where a.postonumber=$P{postonumber} and a.lostonumber=$P{lostonumber}]]>
 				<reportElement x="-17" y="-16" width="587" height="65" uuid="887a32a1-00ef-4ea9-b698-e6598d1c3d0f"/>
 				<image>
 					<reportElement x="436" y="4" width="146" height="43" uuid="3ca286cc-79af-45a1-b037-0ab4ae716803"/>
-					<imageExpression><![CDATA["E:\\H1\\WMS\\WMS-REPORT\\WMS-REPORT\\wms.report.module\\wms.report.svc\\src\\main\\resources\\report\\logolubrican.jpg"]]></imageExpression>
+					<imageExpression><![CDATA[this.getClass().getResourceAsStream("/report/logolubrican.jpg")]]></imageExpression>
 				</image>
 			</frame>
 			<staticText>

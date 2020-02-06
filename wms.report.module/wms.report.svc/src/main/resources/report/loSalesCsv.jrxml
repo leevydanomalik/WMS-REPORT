@@ -1,0 +1,126 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="loSalesCsv" language="groovy" pageWidth="842" pageHeight="595" orientation="Landscape" whenNoDataType="AllSectionsNoDetail" columnWidth="802" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" isIgnorePagination="true" uuid="df8036dd-1357-4b91-9858-eb55a366ebce">
+	<property name="ireport.zoom" value="1.6105100000000008"/>
+	<property name="ireport.x" value="0"/>
+	<property name="ireport.y" value="6"/>
+	<parameter name="so_number" class="java.lang.String">
+		<defaultValueExpression><![CDATA[]]></defaultValueExpression>
+	</parameter>
+	<parameter name="period" class="java.lang.String">
+		<defaultValueExpression><![CDATA[]]></defaultValueExpression>
+	</parameter>
+	<queryString>
+		<![CDATA[SELECT
+$P{period} AS reportYear,
+lo.sonumber, lo.losalesnumber, lo.shippingpoint, lo.dspplant,
+SUM(item.qty) AS qty,
+(SELECT CASE WHEN COUNT(*) = 0 THEN 'WIP' ELSE 'DONE' END FROM trx_gi_lo_sales WHERE losalesnumber=lo.losalesnumber) AS STATUS
+FROM trx_lo_sales lo
+LEFT JOIN trx_lo_sales_item item ON item.losalesnumber=lo.losalesnumber
+WHERE lo.sonumber=$P{so_number}
+GROUP BY lo.sonumber, lo.losalesnumber, lo.shippingpoint, lo.dspplant]]>
+	</queryString>
+	<field name="reportyear" class="java.lang.String"/>
+	<field name="sonumber" class="java.lang.String"/>
+	<field name="losalesnumber" class="java.lang.String"/>
+	<field name="shippingpoint" class="java.lang.String"/>
+	<field name="dspplant" class="java.lang.String"/>
+	<field name="qty" class="java.lang.Double"/>
+	<field name="status" class="java.lang.String"/>
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<title>
+		<band height="79" splitType="Stretch"/>
+	</title>
+	<pageHeader>
+		<band height="35" splitType="Stretch"/>
+	</pageHeader>
+	<columnHeader>
+		<band height="22" splitType="Stretch">
+			<staticText>
+				<reportElement uuid="ae00f346-72a4-4051-a388-060f6537869e" x="25" y="1" width="100" height="20"/>
+				<textElement/>
+				<text><![CDATA[SO Number]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="a6e2a834-6719-4fb3-98e9-4806ffcffc47" x="125" y="1" width="100" height="20"/>
+				<textElement/>
+				<text><![CDATA[LO SO Number]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="bc1ba7ac-f04c-4dc6-bc50-60ca7c003b4f" x="225" y="1" width="100" height="20"/>
+				<textElement/>
+				<text><![CDATA[Shipping Point]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="b9fa726a-e3a2-4c4e-8712-7f4da749e4d4" x="325" y="1" width="100" height="20"/>
+				<textElement/>
+				<text><![CDATA[DSP]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="d52a5fdf-618d-4df3-9ab8-ea8bfe38f396" x="425" y="1" width="100" height="20"/>
+				<textElement/>
+				<text><![CDATA[Qty Eq KL]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="8141e3bd-ec61-4304-8af7-c309e3888be7" x="525" y="1" width="100" height="20"/>
+				<textElement/>
+				<text><![CDATA[Status]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="b3d2c756-43ff-49b0-9204-00c7cf4927b1" x="0" y="1" width="25" height="20"/>
+				<textElement/>
+				<text><![CDATA[No.]]></text>
+			</staticText>
+		</band>
+	</columnHeader>
+	<detail>
+		<band height="21" splitType="Stretch">
+			<textField>
+				<reportElement uuid="a73c6749-4b9b-4737-9e05-da0614667482" x="0" y="0" width="25" height="20"/>
+				<textElement/>
+				<textFieldExpression><![CDATA[$V{REPORT_COUNT}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement uuid="0e93a69e-3316-41ac-9aee-5edcc70b404b" x="25" y="0" width="100" height="20"/>
+				<textElement/>
+				<textFieldExpression><![CDATA[$F{sonumber} == null ? "NULL_NONE" : $F{sonumber}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement uuid="e6bca0ac-22a3-4d77-8fdf-ba14a6c2478a" x="125" y="0" width="100" height="20"/>
+				<textElement/>
+				<textFieldExpression><![CDATA[$F{losalesnumber} == null ? "NULL_NONE" : $F{losalesnumber}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement uuid="06778c4b-fe4a-4be0-bcb5-a8debeb1c24e" x="225" y="0" width="100" height="20"/>
+				<textElement/>
+				<textFieldExpression><![CDATA[$F{shippingpoint} == null ? "NULL_NONE" : $F{shippingpoint}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement uuid="b91e6fdc-30e2-4a94-aff1-f6569538cb8c" x="325" y="0" width="100" height="20"/>
+				<textElement/>
+				<textFieldExpression><![CDATA[$F{dspplant} == null ? "NULL_NONE" : $F{dspplant}]]></textFieldExpression>
+			</textField>
+			<textField pattern="###0">
+				<reportElement uuid="5e6a9c8b-6531-4c28-ac56-77f7ad246d6f" x="425" y="0" width="100" height="20"/>
+				<textElement/>
+				<textFieldExpression><![CDATA[$F{qty} == null ? "NULL_NONE" : $F{qty}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement uuid="5bff5700-52a7-4ede-b243-37b2eac6dd7c" x="525" y="0" width="100" height="20"/>
+				<textElement/>
+				<textFieldExpression><![CDATA[$F{status} == null ? "NULL_NONE" : $F{status}]]></textFieldExpression>
+			</textField>
+		</band>
+	</detail>
+	<columnFooter>
+		<band height="45" splitType="Stretch"/>
+	</columnFooter>
+	<pageFooter>
+		<band height="54" splitType="Stretch"/>
+	</pageFooter>
+	<summary>
+		<band height="42" splitType="Stretch"/>
+	</summary>
+</jasperReport>

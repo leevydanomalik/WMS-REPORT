@@ -128,7 +128,7 @@ where a.lostonumber=$P{lostonumber}]]>
 				<reportElement x="-16" y="-16" width="587" height="65" uuid="ddb3eed8-582f-4458-833f-b24c9d81c054"/>
 				<image>
 					<reportElement x="436" y="4" width="146" height="43" uuid="0a79431b-737a-40c0-a9d8-fcac94f617e2"/>
-					<imageExpression><![CDATA["E:\\H1\\WMS\\WMS-REPORT\\WMS-REPORT\\wms.report.module\\wms.report.svc\\src\\main\\resources\\report\\logolubrican.jpg"]]></imageExpression>
+					<imageExpression><![CDATA[this.getClass().getResourceAsStream("/report/logolubrican.jpg")]]></imageExpression>
 				</image>
 			</frame>
 			<staticText>

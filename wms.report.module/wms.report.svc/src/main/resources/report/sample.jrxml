@@ -1,0 +1,95 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="sample" language="groovy" pageWidth="595" pageHeight="842" columnWidth="555" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="65ee9321-9ddf-4109-9785-9f7f81c0e192">
+	<property name="ireport.zoom" value="1.4641000000000006"/>
+	<property name="ireport.x" value="0"/>
+	<property name="ireport.y" value="0"/>
+	<queryString>
+		<![CDATA[select * from trx_pr]]>
+	</queryString>
+	<field name="id" class="java.lang.Integer"/>
+	<field name="deliverydate" class="java.sql.Date"/>
+	<field name="docdate" class="java.sql.Date"/>
+	<field name="eventdate" class="java.sql.Timestamp"/>
+	<field name="headernote" class="java.lang.String"/>
+	<field name="materialdesc" class="java.lang.String"/>
+	<field name="materialnumber" class="java.lang.String"/>
+	<field name="openquantity" class="java.lang.Double"/>
+	<field name="prnumber" class="java.lang.String"/>
+	<field name="quantity" class="java.lang.Double"/>
+	<field name="receivingplantcode" class="java.lang.String"/>
+	<field name="uom" class="java.lang.String"/>
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<title>
+		<band height="79" splitType="Stretch">
+			<staticText>
+				<reportElement uuid="893b1445-d35c-414b-97ed-f101b6b057b4" x="193" y="16" width="170" height="42"/>
+				<textElement>
+					<font size="24"/>
+				</textElement>
+				<text><![CDATA[Sample Report]]></text>
+			</staticText>
+		</band>
+	</title>
+	<pageHeader>
+		<band height="35" splitType="Stretch"/>
+	</pageHeader>
+	<columnHeader>
+		<band height="24" splitType="Stretch">
+			<staticText>
+				<reportElement uuid="630e6884-a25e-4d62-8fde-9f361b42b33c" x="170" y="1" width="67" height="20"/>
+				<textElement/>
+				<text><![CDATA[Kuantiti]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="f47234ed-839d-43d6-9cb0-cc34c1905faa" x="0" y="1" width="137" height="20"/>
+				<textElement/>
+				<text><![CDATA[Nomor Purchase Requisition]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="4d066d72-c28d-47f2-884f-a9aa2f0f5954" x="276" y="1" width="100" height="20"/>
+				<textElement/>
+				<text><![CDATA[Open Kuantiti]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="03028ace-b8a8-4f40-aecf-7aa80b139adf" x="425" y="1" width="100" height="20"/>
+				<textElement/>
+				<text><![CDATA[UoM]]></text>
+			</staticText>
+		</band>
+	</columnHeader>
+	<detail>
+		<band height="25" splitType="Stretch">
+			<textField>
+				<reportElement uuid="63ace727-cd68-4772-8f8d-b02b1c1ef357" x="170" y="0" width="67" height="20"/>
+				<textElement/>
+				<textFieldExpression><![CDATA[$F{quantity}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement uuid="d376ccfc-7b5f-4396-8381-0e59c23a69bf" x="0" y="0" width="100" height="20"/>
+				<textElement/>
+				<textFieldExpression><![CDATA[$F{prnumber}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement uuid="9b776c7e-1c69-44f8-9f50-2b333659228c" x="276" y="0" width="100" height="20"/>
+				<textElement/>
+				<textFieldExpression><![CDATA[$F{openquantity}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement uuid="59ccf023-7ec7-411b-8823-c871ebe5f78a" x="425" y="0" width="113" height="20"/>
+				<textElement/>
+				<textFieldExpression><![CDATA[$F{uom}]]></textFieldExpression>
+			</textField>
+		</band>
+	</detail>
+	<columnFooter>
+		<band height="45" splitType="Stretch"/>
+	</columnFooter>
+	<pageFooter>
+		<band height="54" splitType="Stretch"/>
+	</pageFooter>
+	<summary>
+		<band height="42" splitType="Stretch"/>
+	</summary>
+</jasperReport>

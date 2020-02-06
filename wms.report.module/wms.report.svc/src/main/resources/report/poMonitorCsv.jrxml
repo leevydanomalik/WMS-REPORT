@@ -1,0 +1,147 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="poMonitorCsv" language="groovy" pageWidth="842" pageHeight="595" orientation="Landscape" whenNoDataType="AllSectionsNoDetail" columnWidth="802" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" isIgnorePagination="true" uuid="3d976112-9aaa-4852-a2b7-0af8a2d5609b">
+	<property name="ireport.zoom" value="1.3310000000000004"/>
+	<property name="ireport.x" value="0"/>
+	<property name="ireport.y" value="0"/>
+	<parameter name="startDate" class="java.lang.String">
+		<defaultValueExpression><![CDATA[]]></defaultValueExpression>
+	</parameter>
+	<parameter name="endDate" class="java.lang.String">
+		<defaultValueExpression><![CDATA[]]></defaultValueExpression>
+	</parameter>
+	<parameter name="period" class="java.lang.String">
+		<defaultValueExpression><![CDATA[]]></defaultValueExpression>
+	</parameter>
+	<queryString>
+		<![CDATA[select
+$P{period} AS reportYear, logtype,deliverystatus,postonumber,itemnumber,materialnumber,qtyvolume,supplyplant,receiveplant
+FROM public.trx_log_po
+WHERE to_date(to_char(eventdate, 'ddMMyyyy'),'ddMMyyyy') >= to_date($P{startDate}, 'ddMMyyyy') AND
+ to_date(to_char(eventdate, 'ddMMyyyy'),'ddMMyyyy') <= to_date($P{endDate}, 'ddMMyyyy')]]>
+	</queryString>
+	<field name="reportyear" class="java.lang.String"/>
+	<field name="logtype" class="java.lang.String"/>
+	<field name="deliverystatus" class="java.lang.String"/>
+	<field name="postonumber" class="java.lang.String"/>
+	<field name="itemnumber" class="java.lang.String"/>
+	<field name="materialnumber" class="java.lang.String"/>
+	<field name="qtyvolume" class="java.lang.Double"/>
+	<field name="supplyplant" class="java.lang.String"/>
+	<field name="receiveplant" class="java.lang.String"/>
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<title>
+		<band height="79" splitType="Stretch"/>
+	</title>
+	<pageHeader>
+		<band height="35" splitType="Stretch"/>
+	</pageHeader>
+	<columnHeader>
+		<band height="28" splitType="Stretch">
+			<staticText>
+				<reportElement uuid="0b19062c-1867-4845-a81a-a52847c6b75f" x="28" y="1" width="100" height="20"/>
+				<textElement/>
+				<text><![CDATA[Log.Type]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="c8f16496-60cf-41f4-ab58-b41129079200" x="128" y="1" width="100" height="20"/>
+				<textElement/>
+				<text><![CDATA[Deliv.Status]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="08e0fca3-7251-4ba6-be81-3fa1013a2710" x="228" y="1" width="100" height="20"/>
+				<textElement/>
+				<text><![CDATA[PO STO Number]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="6570e587-a3b6-4e61-b438-46012f13829d" x="328" y="1" width="100" height="20"/>
+				<textElement/>
+				<text><![CDATA[Item Number]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="7b86547b-193e-4902-8ec3-c7f63d3ef6ae" x="428" y="1" width="100" height="20"/>
+				<textElement/>
+				<text><![CDATA[KIMAP]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="d4493f5b-5244-43e0-ab8e-b48c8879e87a" x="528" y="1" width="100" height="20"/>
+				<textElement/>
+				<text><![CDATA[Qty]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="94c5fb52-1838-4d9d-8f1c-17eb74f3c599" x="628" y="1" width="85" height="20"/>
+				<textElement/>
+				<text><![CDATA[Supply Plant]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="dc38f5c7-0238-490e-9eda-841d27e3b66c" x="713" y="1" width="89" height="20"/>
+				<textElement/>
+				<text><![CDATA[Receive Plant]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="8cf67d81-caf6-4458-bd73-291c9880fcf2" x="0" y="1" width="28" height="20"/>
+				<textElement/>
+				<text><![CDATA[No.]]></text>
+			</staticText>
+		</band>
+	</columnHeader>
+	<detail>
+		<band height="26" splitType="Stretch">
+			<textField>
+				<reportElement uuid="ab71bcef-3622-4d86-91fd-4405e6e5f758" x="0" y="0" width="28" height="20"/>
+				<textElement/>
+				<textFieldExpression><![CDATA[$V{REPORT_COUNT}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement uuid="a91052f6-9f80-4a36-86ac-56b8f01c9db0" x="28" y="0" width="100" height="20"/>
+				<textElement/>
+				<textFieldExpression><![CDATA[$F{logtype} == null ? "NULL_NONE" : $F{logtype}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement uuid="2311f5b6-503c-4836-b70c-1e13cd0625cb" x="128" y="0" width="100" height="20"/>
+				<textElement/>
+				<textFieldExpression><![CDATA[$F{deliverystatus} == null ? "NULL_NONE" : $F{deliverystatus}]]></textFieldExpression>
+			</textField>
+			<textField isStretchWithOverflow="true">
+				<reportElement uuid="51cdc03a-e1f9-44e8-9485-e42296f2a50a" x="228" y="0" width="100" height="20"/>
+				<textElement/>
+				<textFieldExpression><![CDATA[$F{postonumber} == null ? "NULL_NONE" : $F{postonumber}]]></textFieldExpression>
+			</textField>
+			<textField isStretchWithOverflow="true">
+				<reportElement uuid="1e4a7191-0746-4961-aea1-c2781dce1fc2" x="328" y="0" width="100" height="20"/>
+				<textElement/>
+				<textFieldExpression><![CDATA[$F{itemnumber} == null ? "NULL_NONE" : $F{itemnumber}]]></textFieldExpression>
+			</textField>
+			<textField isStretchWithOverflow="true">
+				<reportElement uuid="b4043c1b-8060-4557-8659-a9dba48dfa0c" x="428" y="0" width="100" height="20"/>
+				<textElement/>
+				<textFieldExpression><![CDATA[$F{materialnumber} == null ? "NULL_NONE" : $F{materialnumber}]]></textFieldExpression>
+			</textField>
+			<textField pattern="###0">
+				<reportElement uuid="0f4af5bb-c009-4c42-afa9-543d7f2fb9c2" x="528" y="0" width="100" height="20"/>
+				<textElement/>
+				<textFieldExpression><![CDATA[$F{qtyvolume} == null ? "NULL_NONE" : $F{qtyvolume}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement uuid="71099899-206b-4f13-872e-e740fef7a1ca" x="628" y="0" width="85" height="20"/>
+				<textElement/>
+				<textFieldExpression><![CDATA[$F{supplyplant} == null ? "NULL_NONE" : $F{supplyplant}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement uuid="290be4bd-88ef-4b10-b32d-648f8c78bf31" x="713" y="0" width="89" height="20"/>
+				<textElement/>
+				<textFieldExpression><![CDATA[$F{receiveplant} == null ? "NULL_NONE" : $F{receiveplant}]]></textFieldExpression>
+			</textField>
+		</band>
+	</detail>
+	<columnFooter>
+		<band height="45" splitType="Stretch"/>
+	</columnFooter>
+	<pageFooter>
+		<band height="54" splitType="Stretch"/>
+	</pageFooter>
+	<summary>
+		<band height="42" splitType="Stretch"/>
+	</summary>
+</jasperReport>

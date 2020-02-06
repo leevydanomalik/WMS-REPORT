@@ -1,0 +1,190 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="poMonitorReport" language="groovy" pageWidth="842" pageHeight="595" orientation="Landscape" whenNoDataType="AllSectionsNoDetail" columnWidth="802" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="41895a4a-96d0-4eb1-9260-1d9a13dd3fcb">
+	<property name="ireport.zoom" value="1.3310000000000228"/>
+	<property name="ireport.x" value="0"/>
+	<property name="ireport.y" value="0"/>
+	<property name="net.sf.jasperreports.awt.ignore.missing.font" value="true"/>
+	<parameter name="period" class="java.lang.String">
+		<defaultValueExpression><![CDATA[]]></defaultValueExpression>
+	</parameter>
+	<parameter name="SUBREPORT_DIR" class="java.lang.String" isForPrompting="false">
+		<defaultValueExpression><![CDATA["D:\\Project\\NetbeanProjects\\PATLOG-WMS\\dash-patlog\\dashboard\\report\\src\\main\\resources\\report\\"]]></defaultValueExpression>
+	</parameter>
+	<parameter name="startDate" class="java.lang.String">
+		<defaultValueExpression><![CDATA[]]></defaultValueExpression>
+	</parameter>
+	<parameter name="endDate" class="java.lang.String">
+		<defaultValueExpression><![CDATA[]]></defaultValueExpression>
+	</parameter>
+	<queryString>
+		<![CDATA[select $P{period} AS reportYear, po.postonumber, po.docdate, po.supplyplant,
+(case
+when (select count(DISTINCT(pti.*)) from trx_product_transfer_item pti where pti.ptnumber in (select pt.ptnumber from trx_product_transfer pt where pt.ponumber=po.postonumber) and pti.deliverystatus='DELAY') > 0 then 'DELAY'
+when (select count(DISTINCT(pti.*)) from trx_product_transfer_item pti where pti.ptnumber in (select pt.ptnumber from trx_product_transfer pt where pt.ponumber=po.postonumber) and pti.deliverystatus='WIP') > 0 then 'WIP'
+else 'DONE'
+end) as deliverystatus
+from trx_posto po
+where to_date(to_char(po.docdate, 'ddMMyyyy'),'ddMMyyyy') >= to_date($P{startDate}, 'ddMMyyyy') AND
+      to_date(to_char(po.docdate, 'ddMMyyyy'),'ddMMyyyy') <= to_date($P{endDate}, 'ddMMyyyy')
+order by po.docdate asc]]>
+	</queryString>
+	<field name="reportyear" class="java.lang.String"/>
+	<field name="postonumber" class="java.lang.String"/>
+	<field name="docdate" class="java.sql.Timestamp"/>
+	<field name="supplyplant" class="java.lang.String"/>
+	<field name="deliverystatus" class="java.lang.String"/>
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<title>
+		<band height="45" splitType="Stretch">
+			<image>
+				<reportElement uuid="5e80352e-0529-4edc-9c82-4c98d6fe26e9" x="2" y="0" width="103" height="42"/>
+				<imageExpression><![CDATA[this.getClass().getResourceAsStream("/report/patlog-logo.png")]]></imageExpression>
+			</image>
+			<staticText>
+				<reportElement uuid="72098031-3ee4-4a93-b08e-f957ac7d8fec" x="73" y="0" width="197" height="42"/>
+				<textElement>
+					<font fontName="Arial" isItalic="false"/>
+				</textElement>
+				<text><![CDATA[Jl. Otista Raya No.66, RT.9/RW.4, Kp. Melayu, Jatinegara, Kota Jakarta Timur, Daerah Khusus Ibukota Jakarta 13330]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="a2c4b3d9-1698-41bd-9fec-e250da4ec209" x="637" y="22" width="165" height="20"/>
+				<textElement>
+					<font fontName="Ebrima" size="14" isBold="true"/>
+				</textElement>
+				<text><![CDATA[PO MONITOR REPORT]]></text>
+			</staticText>
+		</band>
+	</title>
+	<pageHeader>
+		<band height="24" splitType="Stretch">
+			<staticText>
+				<reportElement uuid="a557a7c7-04fb-47ca-80f6-94bf5a78f6ce" x="0" y="1" width="168" height="20"/>
+				<textElement verticalAlignment="Middle">
+					<font fontName="San Serif" size="10" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Historical Data/Trend Analysis :]]></text>
+			</staticText>
+			<textField pattern="###0">
+				<reportElement uuid="24052be5-0dfb-4280-a7d5-70ce5d17b788" x="168" y="1" width="183" height="20"/>
+				<textElement verticalAlignment="Middle">
+					<font fontName="San Serif" isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{reportyear} == null ? "" : $F{reportyear}]]></textFieldExpression>
+			</textField>
+			<line>
+				<reportElement uuid="35952607-248f-489a-9fdc-90a6548d374f" x="0" y="0" width="802" height="1" forecolor="#000099"/>
+			</line>
+		</band>
+	</pageHeader>
+	<columnHeader>
+		<band height="20" splitType="Stretch">
+			<line>
+				<reportElement uuid="ea37b752-4df4-45b8-b00f-b9f0a138aefc" x="0" y="19" width="802" height="1"/>
+			</line>
+			<staticText>
+				<reportElement uuid="0e2c6a99-bc66-473b-acba-0c9f1126188f" mode="Opaque" x="0" y="0" width="29" height="19" forecolor="#FFFFFF" backcolor="#000000"/>
+				<textElement verticalAlignment="Middle">
+					<font fontName="San Serif" size="10" isBold="true"/>
+				</textElement>
+				<text><![CDATA[No.]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="6a9270cf-b925-46aa-9762-8a550897fac9" mode="Opaque" x="29" y="0" width="321" height="19" forecolor="#FFFFFF" backcolor="#000000"/>
+				<textElement verticalAlignment="Middle">
+					<font fontName="San Serif" size="10" isBold="true"/>
+				</textElement>
+				<text><![CDATA[PO.Number]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="8bcbf40b-a4e8-46f3-ae60-9ea2562923e8" mode="Opaque" x="350" y="0" width="143" height="19" forecolor="#FFFFFF" backcolor="#000000"/>
+				<textElement verticalAlignment="Middle">
+					<font fontName="San Serif" size="10" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Document Date]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="1946ba08-15d3-451c-ad08-538cee784b56" mode="Opaque" x="493" y="0" width="131" height="19" forecolor="#FFFFFF" backcolor="#000000"/>
+				<textElement verticalAlignment="Middle">
+					<font fontName="San Serif" size="10" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Delivery Status]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="30b16c46-cbdf-47ca-a816-1cd91f9e0d45" mode="Opaque" x="624" y="0" width="178" height="19" forecolor="#FFFFFF" backcolor="#000000"/>
+				<textElement verticalAlignment="Middle">
+					<font fontName="San Serif" size="10" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Supply Plant]]></text>
+			</staticText>
+		</band>
+	</columnHeader>
+	<detail>
+		<band height="73" splitType="Stretch">
+			<textField>
+				<reportElement uuid="24f5dc28-003e-471c-9fdc-81da30c439e5" mode="Opaque" x="494" y="0" width="131" height="20" backcolor="#FFFFCC"/>
+				<textElement verticalAlignment="Middle">
+					<font fontName="San Serif" size="10"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{deliverystatus} == null ? "NULL_NONE" : $F{deliverystatus}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement uuid="26e4b21d-a268-4b8e-b3da-593d690548a0" mode="Opaque" x="0" y="0" width="29" height="20" backcolor="#FFFFCC"/>
+				<textElement verticalAlignment="Middle">
+					<font fontName="San Serif"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$V{REPORT_COUNT}]]></textFieldExpression>
+			</textField>
+			<textField pattern="dd-MMM-yy">
+				<reportElement uuid="839447e5-d4ad-40f4-907e-0f155034f970" mode="Opaque" x="351" y="0" width="144" height="20" backcolor="#FFFFCC"/>
+				<textElement verticalAlignment="Middle">
+					<font fontName="San Serif"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{docdate} == null ? "NULL_NONE" : $F{docdate}]]></textFieldExpression>
+			</textField>
+			<subreport>
+				<reportElement uuid="e3130ea3-9a90-4c7e-9b04-3978c5376fe8" x="29" y="20" width="773" height="53"/>
+				<subreportParameter name="ponumber">
+					<subreportParameterExpression><![CDATA[$F{postonumber}]]></subreportParameterExpression>
+				</subreportParameter>
+				<connectionExpression><![CDATA[$P{REPORT_CONNECTION}]]></connectionExpression>
+				<subreportExpression><![CDATA[this.getClass().getResourceAsStream("/report/poMonitorReportv2_subreport1.jasper")]]></subreportExpression>
+			</subreport>
+			<textField>
+				<reportElement uuid="8391e972-e116-45de-98e9-8e31b34eacfb" mode="Opaque" x="624" y="0" width="178" height="20" backcolor="#FFFFCC"/>
+				<textElement verticalAlignment="Middle">
+					<font fontName="San Serif" size="10"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{supplyplant} == null ? "NULL_NONE" : $F{supplyplant}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement uuid="bbf0771a-0587-4772-aa5b-be5b47fd19c9" mode="Opaque" x="29" y="0" width="321" height="20" backcolor="#FFFFCC"/>
+				<textElement>
+					<font fontName="Calibri" size="10"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{postonumber} == null ? "NULL_NONE" : $F{postonumber}]]></textFieldExpression>
+			</textField>
+		</band>
+	</detail>
+	<columnFooter>
+		<band height="24" splitType="Stretch">
+			<line>
+				<reportElement uuid="7b6a752f-34f5-47b0-b057-ab8458c547c1" x="0" y="23" width="802" height="1" forecolor="#000099"/>
+			</line>
+		</band>
+	</columnFooter>
+	<pageFooter>
+		<band height="21" splitType="Stretch">
+			<textField>
+				<reportElement uuid="f7991f4d-44f3-4f77-b769-fcb982e75a91" x="779" y="1" width="23" height="20"/>
+				<textElement/>
+				<textFieldExpression><![CDATA[$V{PAGE_NUMBER}]]></textFieldExpression>
+			</textField>
+		</band>
+	</pageFooter>
+	<summary>
+		<band splitType="Stretch"/>
+	</summary>
+</jasperReport>

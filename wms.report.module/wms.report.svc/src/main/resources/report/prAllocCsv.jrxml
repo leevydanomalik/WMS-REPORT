@@ -1,0 +1,186 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="prAllocCsv" language="groovy" pageWidth="802" pageHeight="555" orientation="Landscape" whenNoDataType="AllSectionsNoDetail" columnWidth="802" leftMargin="0" rightMargin="0" topMargin="0" bottomMargin="0" isIgnorePagination="true" uuid="471752c3-67e0-49e3-b170-2f08086eddb3">
+	<property name="ireport.zoom" value="1.9487171000000025"/>
+	<property name="ireport.x" value="0"/>
+	<property name="ireport.y" value="2"/>
+	<parameter name="startDate" class="java.lang.String">
+		<defaultValueExpression><![CDATA[]]></defaultValueExpression>
+	</parameter>
+	<parameter name="endDate" class="java.lang.String">
+		<defaultValueExpression><![CDATA[]]></defaultValueExpression>
+	</parameter>
+	<parameter name="period" class="java.lang.String">
+		<defaultValueExpression><![CDATA[]]></defaultValueExpression>
+	</parameter>
+	<queryString>
+		<![CDATA[SELECT
+$P{period} AS reportYear,
+*
+FROM public.trx_pr
+WHERE to_date(to_char(eventdate, 'ddMMyyyy'),'ddMMyyyy') >= to_date($P{startDate}, 'ddMMyyyy') AND
+ to_date(to_char(eventdate, 'ddMMyyyy'),'ddMMyyyy') <= to_date($P{endDate}, 'ddMMyyyy')]]>
+	</queryString>
+	<field name="reportyear" class="java.lang.String"/>
+	<field name="id" class="java.lang.Integer"/>
+	<field name="deliverydate" class="java.sql.Timestamp"/>
+	<field name="docdate" class="java.sql.Timestamp"/>
+	<field name="eventdate" class="java.sql.Timestamp"/>
+	<field name="headernote" class="java.lang.String"/>
+	<field name="materialdesc" class="java.lang.String"/>
+	<field name="materialnumber" class="java.lang.String"/>
+	<field name="openquantity" class="java.lang.Double"/>
+	<field name="prnumber" class="java.lang.String"/>
+	<field name="quantity" class="java.lang.Double"/>
+	<field name="receivingplantcode" class="java.lang.String"/>
+	<field name="uom" class="java.lang.String"/>
+	<field name="prnotes" class="java.lang.String"/>
+	<field name="realopenquantity" class="java.lang.Double"/>
+	<field name="realquantity" class="java.lang.Double"/>
+	<field name="realuom" class="java.lang.String"/>
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<title>
+		<band height="79" splitType="Stretch"/>
+	</title>
+	<pageHeader>
+		<band height="36" splitType="Stretch"/>
+	</pageHeader>
+	<columnHeader>
+		<band height="23" splitType="Stretch">
+			<staticText>
+				<reportElement uuid="d701b877-0b97-4af6-9fad-56d1e14a7825" x="26" y="2" width="100" height="20"/>
+				<textElement/>
+				<text><![CDATA[PR Number]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="b978464b-317e-4d63-b2b3-af8700393cd4" x="126" y="2" width="100" height="20"/>
+				<textElement/>
+				<text><![CDATA[KIMAP]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="dc5d8ac5-fbb7-47e3-89e0-d60156a274fc" x="226" y="2" width="100" height="20"/>
+				<textElement/>
+				<text><![CDATA[Material]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="ca70b3fa-0ef5-4ed9-a78a-97f4d44941f5" x="326" y="2" width="39" height="20"/>
+				<textElement/>
+				<text><![CDATA[UoM]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="554b28c0-caad-4dc0-8148-33942bf2e4fe" x="466" y="2" width="70" height="20"/>
+				<textElement/>
+				<text><![CDATA[Doc.Date]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="d77fde17-ac90-4d52-ac1f-8794f24e687c" x="536" y="2" width="79" height="20"/>
+				<textElement/>
+				<text><![CDATA[Deliv.Date]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="21b7baac-9ba7-44d8-be26-9e30a5b1e08f" x="615" y="2" width="54" height="20"/>
+				<textElement/>
+				<text><![CDATA[Rec. Plant]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="c520f10e-d961-4a3a-a6bb-6edd8cc036e9" x="669" y="2" width="52" height="20"/>
+				<textElement/>
+				<text><![CDATA[Qty Eq KL]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="ee7b5f67-eb11-48f7-a32d-a4fabc912a6a" x="0" y="2" width="26" height="20"/>
+				<textElement/>
+				<text><![CDATA[No.	]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="bd8d3116-9d05-430a-af76-5e8f94c609bb" x="721" y="2" width="81" height="20"/>
+				<textElement/>
+				<text><![CDATA[Open Qty Eq KL]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="47d228b4-fdbb-49bd-99fc-ee6abdf37f64" x="365" y="2" width="43" height="20"/>
+				<textElement/>
+				<text><![CDATA[Qty]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="7cceb32d-8bc3-4588-8e8e-61b625207016" x="408" y="2" width="58" height="20"/>
+				<textElement/>
+				<text><![CDATA[Open Qty]]></text>
+			</staticText>
+		</band>
+	</columnHeader>
+	<detail>
+		<band height="21" splitType="Stretch">
+			<textField>
+				<reportElement uuid="7af0de39-35a1-4d1b-a637-03ad1c5fa2dc" x="26" y="0" width="100" height="20"/>
+				<textElement/>
+				<textFieldExpression><![CDATA[$F{prnumber} == null ? "NULL_NONE" : $F{prnumber}]]></textFieldExpression>
+			</textField>
+			<textField isStretchWithOverflow="true">
+				<reportElement uuid="228d248e-95be-4732-be30-ec3d9e1908db" x="126" y="0" width="100" height="20"/>
+				<textElement/>
+				<textFieldExpression><![CDATA[$F{materialnumber} == null ? "NULL_NONE" : $F{materialnumber}]]></textFieldExpression>
+			</textField>
+			<textField isStretchWithOverflow="true">
+				<reportElement uuid="02ee4035-a455-4f94-aa86-945fb638d0b9" x="226" y="0" width="100" height="20"/>
+				<textElement/>
+				<textFieldExpression><![CDATA[$F{materialdesc} == null ? "NULL_NONE" : $F{materialdesc}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement uuid="c913690c-1c89-4b8b-9ee0-d10b5fbb4712" x="326" y="0" width="39" height="20"/>
+				<textElement/>
+				<textFieldExpression><![CDATA[$F{realuom} == null ? "NULL_NONE" : $F{realuom}]]></textFieldExpression>
+			</textField>
+			<textField pattern="dd-MMM-yyyy">
+				<reportElement uuid="55ba7be0-4033-4d2f-9209-c27a073a9ca8" x="466" y="0" width="70" height="20"/>
+				<textElement/>
+				<textFieldExpression><![CDATA[$F{docdate} == null ? "NULL_NONE" : $F{docdate}]]></textFieldExpression>
+			</textField>
+			<textField pattern="dd-MMM-yy">
+				<reportElement uuid="7d5b05f4-8a1f-405b-8abc-4533e7d5aee5" x="536" y="0" width="79" height="20"/>
+				<textElement/>
+				<textFieldExpression><![CDATA[$F{deliverydate} == null ? "NULL_NONE" : $F{deliverydate}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement uuid="e276e22e-25f1-4335-8837-432eb3d3c1a3" x="615" y="0" width="54" height="20"/>
+				<textElement/>
+				<textFieldExpression><![CDATA[$F{receivingplantcode} == null ? "NULL_NONE" : $F{receivingplantcode}]]></textFieldExpression>
+			</textField>
+			<textField pattern="###0">
+				<reportElement uuid="75931c31-5e3b-4154-8810-86f84a6996d1" x="669" y="0" width="52" height="20"/>
+				<textElement/>
+				<textFieldExpression><![CDATA[$F{quantity} == null ? "NULL_NONE" : $F{quantity}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement uuid="497555b1-141a-44ed-bf22-defd7efa2ea5" x="0" y="0" width="26" height="20"/>
+				<textElement/>
+				<textFieldExpression><![CDATA[$V{REPORT_COUNT}]]></textFieldExpression>
+			</textField>
+			<textField pattern="#,##0">
+				<reportElement uuid="91de67e3-8073-4981-beb0-525d7ddd3051" x="408" y="0" width="58" height="20"/>
+				<textElement/>
+				<textFieldExpression><![CDATA[$F{realopenquantity}]]></textFieldExpression>
+			</textField>
+			<textField pattern="#,##0">
+				<reportElement uuid="38b6090f-b1f3-4934-9b6b-cdb46f736f06" x="365" y="0" width="43" height="20"/>
+				<textElement/>
+				<textFieldExpression><![CDATA[$F{realquantity}]]></textFieldExpression>
+			</textField>
+			<textField pattern="###0">
+				<reportElement uuid="7e0c3b7e-95f1-4d9d-9aa2-5e1d32b1b0e3" x="721" y="0" width="81" height="20"/>
+				<textElement/>
+				<textFieldExpression><![CDATA[$F{openquantity} == null ? "NULL_NONE" : $F{openquantity}]]></textFieldExpression>
+			</textField>
+		</band>
+	</detail>
+	<columnFooter>
+		<band height="45" splitType="Stretch"/>
+	</columnFooter>
+	<pageFooter>
+		<band height="54" splitType="Stretch"/>
+	</pageFooter>
+	<summary>
+		<band height="42" splitType="Stretch"/>
+	</summary>
+</jasperReport>

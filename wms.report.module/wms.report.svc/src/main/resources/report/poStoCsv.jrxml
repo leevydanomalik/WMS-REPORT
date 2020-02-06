@@ -1,0 +1,173 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="poStoCsv" language="groovy" pageWidth="842" pageHeight="595" orientation="Landscape" whenNoDataType="AllSectionsNoDetail" columnWidth="802" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" isIgnorePagination="true" uuid="649f7a3d-0f6a-4d13-a663-8de051a2c108">
+	<property name="ireport.zoom" value="2.3579476910000023"/>
+	<property name="ireport.x" value="418"/>
+	<property name="ireport.y" value="96"/>
+	<parameter name="startDate" class="java.lang.String">
+		<defaultValueExpression><![CDATA[]]></defaultValueExpression>
+	</parameter>
+	<parameter name="endDate" class="java.lang.String">
+		<defaultValueExpression><![CDATA[]]></defaultValueExpression>
+	</parameter>
+	<parameter name="period" class="java.lang.String">
+		<defaultValueExpression><![CDATA[]]></defaultValueExpression>
+	</parameter>
+	<queryString>
+		<![CDATA[select
+$P{period} AS reportYear, a.postonumber,a.docdate,a.companycode,a.purchorgcode,
+a.purchgroupcode,a.doctype,a.vendorcode,sum(b.qty) as qty,
+sum(b.openqty) as openqty,b.deliverystatus
+FROM trx_posto a join trx_posto_item b on a.postonumber = b.postonumber
+WHERE to_date(to_char(a.eventdate, 'ddMMyyyy'),'ddMMyyyy') >= to_date($P{startDate}, 'ddMMyyyy') AND
+ to_date(to_char(a.eventdate, 'ddMMyyyy'),'ddMMyyyy') <= to_date($P{endDate}, 'ddMMyyyy')
+group by a.postonumber,a.docdate,a.companycode,a.purchorgcode,a.purchgroupcode,
+a.doctype,a.vendorcode,b.deliverystatus]]>
+	</queryString>
+	<field name="reportyear" class="java.lang.String"/>
+	<field name="postonumber" class="java.lang.String"/>
+	<field name="docdate" class="java.sql.Timestamp"/>
+	<field name="companycode" class="java.lang.String"/>
+	<field name="purchorgcode" class="java.lang.String"/>
+	<field name="purchgroupcode" class="java.lang.String"/>
+	<field name="doctype" class="java.lang.String"/>
+	<field name="vendorcode" class="java.lang.String"/>
+	<field name="qty" class="java.lang.Double"/>
+	<field name="openqty" class="java.lang.Double"/>
+	<field name="deliverystatus" class="java.lang.String"/>
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<title>
+		<band height="79" splitType="Stretch"/>
+	</title>
+	<pageHeader>
+		<band height="35" splitType="Stretch"/>
+	</pageHeader>
+	<columnHeader>
+		<band height="23" splitType="Stretch">
+			<staticText>
+				<reportElement uuid="5497a30b-f7ad-4606-93bc-0807fdf1321b" x="27" y="2" width="100" height="20"/>
+				<textElement/>
+				<text><![CDATA[PO STO Number]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="820abc8b-b21a-43eb-829a-65f0d7c574e7" x="127" y="2" width="84" height="20"/>
+				<textElement/>
+				<text><![CDATA[Doc Date]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="7bc440c8-7a98-4ebd-96e9-9fe8148c722a" x="211" y="2" width="77" height="20"/>
+				<textElement/>
+				<text><![CDATA[Company Code]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="523d9bde-079d-4b89-8bd7-ac0e6ed97119" x="288" y="2" width="100" height="20"/>
+				<textElement/>
+				<text><![CDATA[Purch.Org Code]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="97e30e1f-1335-4f98-8e9b-9dccac53f75c" x="0" y="2" width="27" height="20"/>
+				<textElement/>
+				<text><![CDATA[No.]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="902e199e-c052-4541-9f17-0c35f78bd8eb" x="388" y="2" width="100" height="20"/>
+				<textElement/>
+				<text><![CDATA[Purch.Group Code]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="fff8eb33-4a3e-4703-be6d-cf69b77e115c" x="488" y="2" width="54" height="20"/>
+				<textElement/>
+				<text><![CDATA[Doc Type]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="b6f368af-3f33-44f2-bc2e-e7f2f0f23fec" x="542" y="2" width="67" height="20"/>
+				<textElement/>
+				<text><![CDATA[Vendor Code]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="16b0e6f9-a6c6-4907-b5c3-b41ee880994f" x="609" y="2" width="50" height="20"/>
+				<textElement/>
+				<text><![CDATA[Qty Eq KL]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="ab42c87e-3087-4a67-a8da-f216042faeda" x="659" y="2" width="83" height="20"/>
+				<textElement/>
+				<text><![CDATA[Open Qty Eq KL]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="b400e93f-5602-4aee-87c0-6253882f5ed6" x="742" y="2" width="60" height="20"/>
+				<textElement/>
+				<text><![CDATA[Deliv.Status]]></text>
+			</staticText>
+		</band>
+	</columnHeader>
+	<detail>
+		<band height="21" splitType="Stretch">
+			<textField>
+				<reportElement uuid="d635d1a0-d056-4bcd-85ce-462b9bc724b9" x="0" y="0" width="27" height="20"/>
+				<textElement/>
+				<textFieldExpression><![CDATA[$V{REPORT_COUNT}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement uuid="81e98f5b-091d-4469-bb2c-703d7a9f9a80" x="27" y="0" width="100" height="20"/>
+				<textElement/>
+				<textFieldExpression><![CDATA[$F{postonumber} == null ? "NULL_NONE" : $F{postonumber}]]></textFieldExpression>
+			</textField>
+			<textField pattern="dd-MMM-yy">
+				<reportElement uuid="9ec6c32b-fb69-4f79-9aeb-d50519b931ad" x="127" y="0" width="84" height="20"/>
+				<textElement/>
+				<textFieldExpression><![CDATA[$F{docdate} == null ? "NULL_NONE" : $F{docdate}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement uuid="d985af2a-71fb-458f-8723-d70f7bb695c5" x="211" y="0" width="77" height="20"/>
+				<textElement/>
+				<textFieldExpression><![CDATA[$F{companycode} == null ? "NULL_NONE" : $F{companycode}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement uuid="63af95e7-abec-4283-ae07-2441720eeb09" x="288" y="0" width="100" height="20"/>
+				<textElement/>
+				<textFieldExpression><![CDATA[$F{purchorgcode} == null ? "NULL_NONE" : $F{purchorgcode}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement uuid="da9af56b-69c2-49b9-8963-2e8b7d8907fc" x="388" y="0" width="100" height="20"/>
+				<textElement/>
+				<textFieldExpression><![CDATA[$F{purchgroupcode} == null ? "NULL_NONE" : $F{purchgroupcode}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement uuid="c2ce1a22-61c7-4759-a335-c82cd45334e9" x="488" y="0" width="54" height="20"/>
+				<textElement/>
+				<textFieldExpression><![CDATA[$F{doctype} == null ? "NULL_NONE" : $F{doctype}]]></textFieldExpression>
+			</textField>
+			<textField pattern="###0">
+				<reportElement uuid="96d88f01-3bbf-4ce7-a40c-9c8c252e0010" x="609" y="0" width="50" height="20"/>
+				<textElement/>
+				<textFieldExpression><![CDATA[$F{qty} == null ? "NULL_NONE" : $F{qty}]]></textFieldExpression>
+			</textField>
+			<textField pattern="###0">
+				<reportElement uuid="dbadbcfb-ee68-4b9d-9bb7-6deabe38926f" x="659" y="0" width="83" height="20"/>
+				<textElement/>
+				<textFieldExpression><![CDATA[$F{openqty} == null ? "NULL_NONE" : $F{openqty}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement uuid="37cec98f-177a-49d2-9f21-bacce6087e64" x="742" y="0" width="60" height="20"/>
+				<textElement/>
+				<textFieldExpression><![CDATA[$F{deliverystatus} == null ? "NULL_NONE" : $F{deliverystatus}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement uuid="8e3a1b06-ff4e-4328-a10b-fe53e6eb6177" x="542" y="0" width="67" height="20"/>
+				<textElement/>
+				<textFieldExpression><![CDATA[$F{vendorcode} == null ? "NULL_NONE" : $F{vendorcode}]]></textFieldExpression>
+			</textField>
+		</band>
+	</detail>
+	<columnFooter>
+		<band height="45" splitType="Stretch"/>
+	</columnFooter>
+	<pageFooter>
+		<band height="54" splitType="Stretch"/>
+	</pageFooter>
+	<summary>
+		<band height="42" splitType="Stretch"/>
+	</summary>
+</jasperReport>
