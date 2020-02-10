@@ -1,0 +1,124 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="RPT_Outsource" language="groovy" pageWidth="3600" pageHeight="792" columnWidth="3560" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="14d625b1-ce14-4c92-9199-4cd7d3fd5389">
+	<property name="ireport.zoom" value="1.0"/>
+	<property name="ireport.x" value="123"/>
+	<property name="ireport.y" value="0"/>
+	<queryString>
+		<![CDATA[select *
+from mst_material]]>
+	</queryString>
+	<field name="id" class="java.lang.String"/>
+	<field name="createdby" class="java.lang.String"/>
+	<field name="createddate" class="java.lang.String"/>
+	<field name="modifiedby" class="java.lang.String"/>
+	<field name="modifieddate" class="java.lang.String"/>
+	<field name="materialdescription" class="java.lang.String"/>
+	<field name="materialid" class="java.lang.String"/>
+	<field name="materialimagepath" class="java.lang.String"/>
+	<field name="materialkimap" class="java.lang.String"/>
+	<field name="materialname" class="java.lang.String"/>
+	<field name="materialstatus" class="java.lang.String"/>
+	<field name="materialtotalliterconst" class="java.lang.String"/>
+	<field name="materialtype" class="java.lang.String"/>
+	<field name="materialuom" class="java.lang.String"/>
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<columnHeader>
+		<band height="42" splitType="Stretch">
+			<staticText>
+				<reportElement x="0" y="0" width="19" height="42" uuid="950d0d75-da80-46b0-87a1-94057d03b591"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle"/>
+				<text><![CDATA[No.]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="164" y="0" width="195" height="42" uuid="e0917d71-3454-48f0-916f-d877348a1118"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle"/>
+				<text><![CDATA[KIMAP]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="19" y="0" width="145" height="42" uuid="ec33b7a2-7323-48b6-a5dc-26b025d6c178"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle"/>
+				<text><![CDATA[Material Desc]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="359" y="0" width="125" height="42" uuid="5713d354-1137-4e7b-8fd8-62de3f0e52c4"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle"/>
+				<text><![CDATA[Material ID]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="484" y="0" width="125" height="42" uuid="c70410f5-c06a-4bd2-beb5-2074df89bfb9"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle"/>
+				<text><![CDATA[Material Name]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="609" y="0" width="125" height="42" uuid="d86a14be-a9a2-44b4-b985-3f4cbd778955"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle"/>
+				<text><![CDATA[Uom Group]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="734" y="0" width="125" height="42" uuid="1f64f678-1d2c-486c-9576-b4089466d499"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle"/>
+				<text><![CDATA[Size]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="859" y="0" width="125" height="42" uuid="40d41b55-0831-4f5e-adcc-95a547f62423"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle"/>
+				<text><![CDATA[Type]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="984" y="0" width="125" height="42" uuid="e6c356c3-c2a7-4e62-ab99-941cdab6334e"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle"/>
+				<text><![CDATA[Status]]></text>
+			</staticText>
+		</band>
+	</columnHeader>
+	<detail>
+		<band height="22" splitType="Stretch">
+			<textField>
+				<reportElement x="0" y="0" width="19" height="22" uuid="1a46217e-df95-4cf4-ba9d-2b0d3c4ee3b8"/>
+				<textFieldExpression><![CDATA[$V{COLUMN_COUNT}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="19" y="0" width="145" height="22" uuid="c8373c28-c73f-42a9-b04d-4bdea1bd78a8"/>
+				<textElement textAlignment="Center"/>
+				<textFieldExpression><![CDATA[$F{materialdescription}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="164" y="0" width="195" height="22" uuid="f2521cd2-80c4-4495-bf4d-57791f581049"/>
+				<textElement textAlignment="Center"/>
+				<textFieldExpression><![CDATA[$F{materialkimap}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="359" y="0" width="125" height="22" uuid="87ceb990-a03d-475b-b974-93a3df4f8942"/>
+				<textElement textAlignment="Center"/>
+				<textFieldExpression><![CDATA[$F{materialid}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="484" y="0" width="125" height="22" uuid="dd3f6cae-9205-477a-90cd-4e0842d90e26"/>
+				<textElement textAlignment="Center"/>
+				<textFieldExpression><![CDATA[$F{materialname}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="609" y="0" width="125" height="22" uuid="d28cc9f1-e174-4a9d-9503-cfd0e6770eb4"/>
+				<textElement textAlignment="Center"/>
+				<textFieldExpression><![CDATA[$F{materialuom}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="734" y="0" width="125" height="22" uuid="f39ffc87-66a4-4c37-bfc9-562734dbf460"/>
+				<textElement textAlignment="Center"/>
+				<textFieldExpression><![CDATA[$F{materialtotalliterconst}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="859" y="0" width="125" height="22" uuid="893df8c7-91d5-4d74-9aef-f8997a2e6056"/>
+				<textElement textAlignment="Center"/>
+				<textFieldExpression><![CDATA[$F{materialtype}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="984" y="0" width="125" height="22" uuid="6ba30868-560c-4b9e-be0e-cd3534ebfcd8"/>
+				<textElement textAlignment="Center"/>
+				<textFieldExpression><![CDATA[$F{materialstatus}]]></textFieldExpression>
+			</textField>
+		</band>
+	</detail>
+</jasperReport>
