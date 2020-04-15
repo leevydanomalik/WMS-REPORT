@@ -1,0 +1,263 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="RPT_Outsource" language="groovy" pageWidth="2908" pageHeight="2794" orientation="Landscape" columnWidth="2868" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="14d625b1-ce14-4c92-9199-4cd7d3fd5389">
+	<property name="ireport.zoom" value="1.1"/>
+	<property name="ireport.x" value="0"/>
+	<property name="ireport.y" value="0"/>
+	<queryString>
+		<![CDATA[select gs.gsid,
+gs.gsname,
+gs.gsnote,
+CAST ( gs.gsobject AS json ) :: json ->> 'gsoDriverID' AS driverid,
+gs.gsstatus,
+gs.gstag,
+CAST ( gs.gstoken AS json ) :: json ->> 'gsoBizValidToken' AS gstoken,
+CAST ( gs.gstype AS json ) :: json ->> 'value' AS gstype
+from trx_gatesecurityentryprojection gs;]]>
+	</queryString>
+	<field name="gsid" class="java.lang.String"/>
+	<field name="gsname" class="java.lang.String"/>
+	<field name="gsnote" class="java.lang.String"/>
+	<field name="driverid" class="java.lang.String"/>
+	<field name="gsstatus" class="java.lang.Integer"/>
+	<field name="gstag" class="java.lang.String"/>
+	<field name="gstoken" class="java.lang.String"/>
+	<field name="gstype" class="java.lang.String"/>
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<columnHeader>
+		<band height="42" splitType="Stretch">
+			<staticText>
+				<reportElement x="0" y="0" width="19" height="42" uuid="950d0d75-da80-46b0-87a1-94057d03b591"/>
+				<box>
+					<pen lineWidth="0.0"/>
+					<topPen lineWidth="0.0"/>
+					<leftPen lineWidth="0.0"/>
+					<bottomPen lineWidth="0.0"/>
+					<rightPen lineWidth="0.0"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle"/>
+				<text><![CDATA[No.]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="320" y="0" width="138" height="42" uuid="ec33b7a2-7323-48b6-a5dc-26b025d6c178"/>
+				<box>
+					<pen lineWidth="0.0"/>
+					<topPen lineWidth="0.0"/>
+					<leftPen lineWidth="0.0"/>
+					<bottomPen lineWidth="0.0"/>
+					<rightPen lineWidth="0.0"/>
+				</box>
+				<textElement verticalAlignment="Middle">
+					<paragraph leftIndent="2"/>
+				</textElement>
+				<text><![CDATA[Gate Security Note]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="144" y="0" width="176" height="42" uuid="c70410f5-c06a-4bd2-beb5-2074df89bfb9"/>
+				<box>
+					<pen lineWidth="0.0"/>
+					<topPen lineWidth="0.0"/>
+					<leftPen lineWidth="0.0"/>
+					<bottomPen lineWidth="0.0"/>
+					<rightPen lineWidth="0.0"/>
+				</box>
+				<textElement verticalAlignment="Middle">
+					<paragraph leftIndent="2"/>
+				</textElement>
+				<text><![CDATA[Gate Security Name]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="458" y="0" width="125" height="42" uuid="d86a14be-a9a2-44b4-b985-3f4cbd778955"/>
+				<box>
+					<pen lineWidth="0.0"/>
+					<topPen lineWidth="0.0"/>
+					<leftPen lineWidth="0.0"/>
+					<bottomPen lineWidth="0.0"/>
+					<rightPen lineWidth="0.0"/>
+				</box>
+				<textElement verticalAlignment="Middle">
+					<paragraph leftIndent="2"/>
+				</textElement>
+				<text><![CDATA[Gate Security Driver ID]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="583" y="0" width="180" height="42" uuid="40d41b55-0831-4f5e-adcc-95a547f62423"/>
+				<box>
+					<pen lineWidth="0.0"/>
+					<topPen lineWidth="0.0"/>
+					<leftPen lineWidth="0.0"/>
+					<bottomPen lineWidth="0.0"/>
+					<rightPen lineWidth="0.0"/>
+				</box>
+				<textElement verticalAlignment="Middle">
+					<paragraph leftIndent="2"/>
+				</textElement>
+				<text><![CDATA[Gate Security Status]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="763" y="0" width="164" height="42" uuid="e6c356c3-c2a7-4e62-ab99-941cdab6334e"/>
+				<textElement verticalAlignment="Middle">
+					<paragraph leftIndent="2"/>
+				</textElement>
+				<text><![CDATA[Gate Security Tag]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="19" y="0" width="125" height="42" uuid="5713d354-1137-4e7b-8fd8-62de3f0e52c4"/>
+				<box>
+					<pen lineWidth="0.0"/>
+					<topPen lineWidth="0.0"/>
+					<leftPen lineWidth="0.0"/>
+					<bottomPen lineWidth="0.0"/>
+					<rightPen lineWidth="0.0"/>
+				</box>
+				<textElement verticalAlignment="Middle">
+					<paragraph leftIndent="2"/>
+				</textElement>
+				<text><![CDATA[Gate Security ID]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="927" y="0" width="164" height="42" uuid="7e2d6b33-1565-4729-91e2-a559cb488d15"/>
+				<textElement verticalAlignment="Middle">
+					<paragraph leftIndent="2"/>
+				</textElement>
+				<text><![CDATA[Gate Security Token]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="1091" y="0" width="164" height="42" uuid="fb967296-e91e-4c28-a408-711c6dd99b5a"/>
+				<textElement verticalAlignment="Middle">
+					<paragraph leftIndent="2"/>
+				</textElement>
+				<text><![CDATA[Gate Security Type]]></text>
+			</staticText>
+		</band>
+	</columnHeader>
+	<detail>
+		<band height="22" splitType="Stretch">
+			<textField>
+				<reportElement x="0" y="0" width="19" height="22" uuid="1a46217e-df95-4cf4-ba9d-2b0d3c4ee3b8"/>
+				<box>
+					<pen lineWidth="0.0"/>
+					<topPen lineWidth="0.0"/>
+					<leftPen lineWidth="0.0"/>
+					<bottomPen lineWidth="0.0"/>
+					<rightPen lineWidth="0.0"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle"/>
+				<textFieldExpression><![CDATA[$V{COLUMN_COUNT}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="19" y="0" width="125" height="22" uuid="91f65e01-e56d-4341-9ca3-2435dbbd5b4a"/>
+				<box>
+					<pen lineWidth="0.0"/>
+					<topPen lineWidth="0.0"/>
+					<leftPen lineWidth="0.0"/>
+					<bottomPen lineWidth="0.0"/>
+					<rightPen lineWidth="0.0"/>
+				</box>
+				<textElement textAlignment="Justified" verticalAlignment="Middle">
+					<paragraph leftIndent="2"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{gsid}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="144" y="0" width="176" height="22" uuid="a2b38061-d5f0-4c44-a2ea-6b4f3bd7b331"/>
+				<box>
+					<pen lineWidth="0.0"/>
+					<topPen lineWidth="0.0"/>
+					<leftPen lineWidth="0.0"/>
+					<bottomPen lineWidth="0.0"/>
+					<rightPen lineWidth="0.0"/>
+				</box>
+				<textElement textAlignment="Justified" verticalAlignment="Middle">
+					<paragraph leftIndent="2"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{gsname}]]></textFieldExpression>
+			</textField>
+			<textField pattern="">
+				<reportElement x="320" y="0" width="138" height="22" uuid="72d0a1f8-6a02-4589-a2ed-1ac1f7e652be"/>
+				<box>
+					<pen lineWidth="0.0"/>
+					<topPen lineWidth="0.0"/>
+					<leftPen lineWidth="0.0"/>
+					<bottomPen lineWidth="0.0"/>
+					<rightPen lineWidth="0.0"/>
+				</box>
+				<textElement textAlignment="Justified" verticalAlignment="Middle">
+					<paragraph leftIndent="2"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{gsnote}]]></textFieldExpression>
+			</textField>
+			<textField pattern="">
+				<reportElement x="458" y="0" width="125" height="22" uuid="9158dd81-0282-44ea-b062-01ef670d08e2"/>
+				<box>
+					<pen lineWidth="0.0"/>
+					<topPen lineWidth="0.0"/>
+					<leftPen lineWidth="0.0"/>
+					<bottomPen lineWidth="0.0"/>
+					<rightPen lineWidth="0.0"/>
+				</box>
+				<textElement textAlignment="Justified" verticalAlignment="Middle">
+					<paragraph leftIndent="2"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{driverid}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="583" y="0" width="180" height="22" uuid="cf221553-11c6-4bcf-9f65-9cab882d99eb"/>
+				<box>
+					<pen lineWidth="0.0"/>
+					<topPen lineWidth="0.0"/>
+					<leftPen lineWidth="0.0"/>
+					<bottomPen lineWidth="0.0"/>
+					<rightPen lineWidth="0.0"/>
+				</box>
+				<textElement textAlignment="Justified" verticalAlignment="Middle">
+					<paragraph leftIndent="2"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{gsstatus}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="763" y="0" width="164" height="22" uuid="ae196a0a-ca3d-46f6-a259-b5bb1cf98a39"/>
+				<box>
+					<pen lineWidth="0.0"/>
+					<topPen lineWidth="0.0"/>
+					<leftPen lineWidth="0.0"/>
+					<bottomPen lineWidth="0.0"/>
+					<rightPen lineWidth="0.0"/>
+				</box>
+				<textElement textAlignment="Justified" verticalAlignment="Middle">
+					<paragraph leftIndent="2"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{gstag}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="927" y="0" width="164" height="22" uuid="dcf68497-1ac9-4ad6-a5b5-79775425ca7a"/>
+				<box>
+					<pen lineWidth="0.0"/>
+					<topPen lineWidth="0.0"/>
+					<leftPen lineWidth="0.0"/>
+					<bottomPen lineWidth="0.0"/>
+					<rightPen lineWidth="0.0"/>
+				</box>
+				<textElement textAlignment="Justified" verticalAlignment="Middle">
+					<paragraph leftIndent="2"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{gstoken}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="1091" y="0" width="164" height="22" uuid="ffd40ec2-2dcd-4622-a361-f57a51717e7b"/>
+				<box>
+					<pen lineWidth="0.0"/>
+					<topPen lineWidth="0.0"/>
+					<leftPen lineWidth="0.0"/>
+					<bottomPen lineWidth="0.0"/>
+					<rightPen lineWidth="0.0"/>
+				</box>
+				<textElement textAlignment="Justified" verticalAlignment="Middle">
+					<paragraph leftIndent="2"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{gstype}]]></textFieldExpression>
+			</textField>
+		</band>
+	</detail>
+</jasperReport>
