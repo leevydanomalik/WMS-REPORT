@@ -1,0 +1,472 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="RPT_Outsource" language="groovy" pageWidth="2908" pageHeight="2794" orientation="Landscape" columnWidth="2868" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="14d625b1-ce14-4c92-9199-4cd7d3fd5389">
+	<property name="ireport.zoom" value="1.1"/>
+	<property name="ireport.x" value="2050"/>
+	<property name="ireport.y" value="0"/>
+	<queryString>
+		<![CDATA[SELECT
+	ind.idid,
+	ind.idname,
+	ind.iddocdate,
+	ind.idesid,
+	ind.iddesc,
+	ind.idnote,
+	CAST ( ind.idpurchaseorder AS json ) :: json ->> 'poID' AS idpurchaseorderonly,
+	ind.idtag,
+	CAST ( ind.materialStoringStatus AS json ) :: json ->> 'value' AS materialstoringstatus,
+	CAST ( ind.materialInspectionStatus AS json ) :: json ->> 'value' AS materialInspectionStatus,
+	CAST ( ind.materialLabellingStatus AS json ) :: json ->> 'value' AS materialLabellingStatus,
+	CAST ( ind.materialPackingStatus AS json ) :: json ->> 'value' AS materialPackingStatus,
+	CAST ( ind.materialPutawayStatus AS json ) :: json ->> 'value' AS materialPutawayStatus,
+	CAST ( ind.materialUnloadingStatus AS json ) :: json ->> 'value' AS materialUnloadingStatus,
+	CAST ( ind.materialGrStatus AS json ) :: json ->> 'value' AS materialGrStatus,
+	CAST ( ind.idStatus AS json ) :: json ->> 'value' AS idStatus,
+	CAST ( ind.idType AS json ) :: json ->> 'value' AS idType
+FROM
+	trx_inbounddeliveryentryprojection ind]]>
+	</queryString>
+	<field name="idid" class="java.lang.String"/>
+	<field name="idname" class="java.lang.String"/>
+	<field name="iddocdate" class="java.sql.Date"/>
+	<field name="idesid" class="java.lang.String"/>
+	<field name="iddesc" class="java.lang.String"/>
+	<field name="idnote" class="java.lang.String"/>
+	<field name="idpurchaseorderonly" class="java.lang.String"/>
+	<field name="idtag" class="java.lang.String"/>
+	<field name="materialstoringstatus" class="java.lang.String"/>
+	<field name="materialinspectionstatus" class="java.lang.String"/>
+	<field name="materiallabellingstatus" class="java.lang.String"/>
+	<field name="materialpackingstatus" class="java.lang.String"/>
+	<field name="materialputawaystatus" class="java.lang.String"/>
+	<field name="materialunloadingstatus" class="java.lang.String"/>
+	<field name="materialgrstatus" class="java.lang.String"/>
+	<field name="idstatus" class="java.lang.String"/>
+	<field name="idtype" class="java.lang.String"/>
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<columnHeader>
+		<band height="42" splitType="Stretch">
+			<staticText>
+				<reportElement uuid="950d0d75-da80-46b0-87a1-94057d03b591" x="0" y="0" width="19" height="42"/>
+				<box>
+					<pen lineWidth="0.0"/>
+					<topPen lineWidth="0.0"/>
+					<leftPen lineWidth="0.0"/>
+					<bottomPen lineWidth="0.0"/>
+					<rightPen lineWidth="0.0"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle"/>
+				<text><![CDATA[No.]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="ec33b7a2-7323-48b6-a5dc-26b025d6c178" x="320" y="0" width="138" height="42"/>
+				<box>
+					<pen lineWidth="0.0"/>
+					<topPen lineWidth="0.0"/>
+					<leftPen lineWidth="0.0"/>
+					<bottomPen lineWidth="0.0"/>
+					<rightPen lineWidth="0.0"/>
+				</box>
+				<textElement verticalAlignment="Middle">
+					<paragraph leftIndent="2"/>
+				</textElement>
+				<text><![CDATA[Inbound Delivery Doc Date]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="c70410f5-c06a-4bd2-beb5-2074df89bfb9" x="144" y="0" width="176" height="42"/>
+				<box>
+					<pen lineWidth="0.0"/>
+					<topPen lineWidth="0.0"/>
+					<leftPen lineWidth="0.0"/>
+					<bottomPen lineWidth="0.0"/>
+					<rightPen lineWidth="0.0"/>
+				</box>
+				<textElement verticalAlignment="Middle">
+					<paragraph leftIndent="2"/>
+				</textElement>
+				<text><![CDATA[Inbound Delivery Name]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="d86a14be-a9a2-44b4-b985-3f4cbd778955" x="458" y="0" width="125" height="42"/>
+				<box>
+					<pen lineWidth="0.0"/>
+					<topPen lineWidth="0.0"/>
+					<leftPen lineWidth="0.0"/>
+					<bottomPen lineWidth="0.0"/>
+					<rightPen lineWidth="0.0"/>
+				</box>
+				<textElement verticalAlignment="Middle">
+					<paragraph leftIndent="2"/>
+				</textElement>
+				<text><![CDATA[Inbound Delivery ESID]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="40d41b55-0831-4f5e-adcc-95a547f62423" x="583" y="0" width="180" height="42"/>
+				<box>
+					<pen lineWidth="0.0"/>
+					<topPen lineWidth="0.0"/>
+					<leftPen lineWidth="0.0"/>
+					<bottomPen lineWidth="0.0"/>
+					<rightPen lineWidth="0.0"/>
+				</box>
+				<textElement verticalAlignment="Middle">
+					<paragraph leftIndent="2"/>
+				</textElement>
+				<text><![CDATA[Inbound Delivery Desc]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="e6c356c3-c2a7-4e62-ab99-941cdab6334e" x="763" y="0" width="164" height="42"/>
+				<textElement verticalAlignment="Middle">
+					<paragraph leftIndent="2"/>
+				</textElement>
+				<text><![CDATA[Inbound Delivery Note]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="5713d354-1137-4e7b-8fd8-62de3f0e52c4" x="19" y="0" width="125" height="42"/>
+				<box>
+					<pen lineWidth="0.0"/>
+					<topPen lineWidth="0.0"/>
+					<leftPen lineWidth="0.0"/>
+					<bottomPen lineWidth="0.0"/>
+					<rightPen lineWidth="0.0"/>
+				</box>
+				<textElement verticalAlignment="Middle">
+					<paragraph leftIndent="2"/>
+				</textElement>
+				<text><![CDATA[Inbound Delivery ID]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="7e2d6b33-1565-4729-91e2-a559cb488d15" x="927" y="0" width="164" height="42"/>
+				<textElement verticalAlignment="Middle">
+					<paragraph leftIndent="2"/>
+				</textElement>
+				<text><![CDATA[Inbound Delivery Purchase Order]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="fb967296-e91e-4c28-a408-711c6dd99b5a" x="1091" y="0" width="164" height="42"/>
+				<textElement verticalAlignment="Middle">
+					<paragraph leftIndent="2"/>
+				</textElement>
+				<text><![CDATA[Inbound Delivery Tag]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="13a5191c-bd6b-4a44-bbdd-2d6fd52a69dd" x="1254" y="0" width="164" height="42"/>
+				<textElement verticalAlignment="Middle">
+					<paragraph leftIndent="2"/>
+				</textElement>
+				<text><![CDATA[Material Storing Status]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="59bc95df-8ef0-42ec-af40-b8dc0f82191f" x="1746" y="0" width="164" height="42"/>
+				<textElement verticalAlignment="Middle">
+					<paragraph leftIndent="2"/>
+				</textElement>
+				<text><![CDATA[Material Packing Status]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="5fee0f19-1a1b-4594-8811-266a784ff0fc" x="2402" y="0" width="164" height="42"/>
+				<textElement verticalAlignment="Middle">
+					<paragraph leftIndent="2"/>
+				</textElement>
+				<text><![CDATA[Inbound Delivery Type]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="970a8618-d0b1-41cf-8574-70f935381d6c" x="2238" y="0" width="164" height="42"/>
+				<textElement verticalAlignment="Middle">
+					<paragraph leftIndent="2"/>
+				</textElement>
+				<text><![CDATA[Material GR Status]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="5ef899b6-4c87-4216-aee4-416b8846b50d" x="1418" y="0" width="164" height="42"/>
+				<textElement verticalAlignment="Middle">
+					<paragraph leftIndent="2"/>
+				</textElement>
+				<text><![CDATA[Material Inspecting Status]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="7a37c919-9976-49d2-bec9-c122c48e2042" x="1582" y="0" width="164" height="42"/>
+				<textElement verticalAlignment="Middle">
+					<paragraph leftIndent="2"/>
+				</textElement>
+				<text><![CDATA[Material Labeling Status]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="4dd9fc6c-eb14-4e0e-abe5-8895720be884" x="2566" y="0" width="164" height="42"/>
+				<textElement verticalAlignment="Middle">
+					<paragraph leftIndent="2"/>
+				</textElement>
+				<text><![CDATA[Inbound Delivery Status]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="030f5e80-a2f6-4701-b6cf-0a3accd2b693" x="1910" y="0" width="164" height="42"/>
+				<textElement verticalAlignment="Middle">
+					<paragraph leftIndent="2"/>
+				</textElement>
+				<text><![CDATA[Material Putaway Status]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="bb0cee1c-9c64-40c7-aff1-f8e1928c17d8" x="2074" y="0" width="164" height="42"/>
+				<textElement verticalAlignment="Middle">
+					<paragraph leftIndent="2"/>
+				</textElement>
+				<text><![CDATA[Material Unloading Status]]></text>
+			</staticText>
+		</band>
+	</columnHeader>
+	<detail>
+		<band height="22" splitType="Stretch">
+			<textField>
+				<reportElement uuid="1a46217e-df95-4cf4-ba9d-2b0d3c4ee3b8" x="0" y="0" width="19" height="22"/>
+				<box>
+					<pen lineWidth="0.0"/>
+					<topPen lineWidth="0.0"/>
+					<leftPen lineWidth="0.0"/>
+					<bottomPen lineWidth="0.0"/>
+					<rightPen lineWidth="0.0"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle"/>
+				<textFieldExpression><![CDATA[$V{COLUMN_COUNT}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement uuid="91f65e01-e56d-4341-9ca3-2435dbbd5b4a" x="19" y="0" width="125" height="22"/>
+				<box>
+					<pen lineWidth="0.0"/>
+					<topPen lineWidth="0.0"/>
+					<leftPen lineWidth="0.0"/>
+					<bottomPen lineWidth="0.0"/>
+					<rightPen lineWidth="0.0"/>
+				</box>
+				<textElement textAlignment="Justified" verticalAlignment="Middle">
+					<paragraph leftIndent="2"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{idid}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement uuid="a2b38061-d5f0-4c44-a2ea-6b4f3bd7b331" x="144" y="0" width="176" height="22"/>
+				<box>
+					<pen lineWidth="0.0"/>
+					<topPen lineWidth="0.0"/>
+					<leftPen lineWidth="0.0"/>
+					<bottomPen lineWidth="0.0"/>
+					<rightPen lineWidth="0.0"/>
+				</box>
+				<textElement textAlignment="Justified" verticalAlignment="Middle">
+					<paragraph leftIndent="2"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{idname}]]></textFieldExpression>
+			</textField>
+			<textField pattern="dd MMMMM yyyy">
+				<reportElement uuid="72d0a1f8-6a02-4589-a2ed-1ac1f7e652be" x="320" y="0" width="138" height="22"/>
+				<box>
+					<pen lineWidth="0.0"/>
+					<topPen lineWidth="0.0"/>
+					<leftPen lineWidth="0.0"/>
+					<bottomPen lineWidth="0.0"/>
+					<rightPen lineWidth="0.0"/>
+				</box>
+				<textElement textAlignment="Justified" verticalAlignment="Middle">
+					<paragraph leftIndent="2"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{iddocdate}]]></textFieldExpression>
+			</textField>
+			<textField pattern="dd MMMMM yyyy">
+				<reportElement uuid="9158dd81-0282-44ea-b062-01ef670d08e2" x="458" y="0" width="125" height="22"/>
+				<box>
+					<pen lineWidth="0.0"/>
+					<topPen lineWidth="0.0"/>
+					<leftPen lineWidth="0.0"/>
+					<bottomPen lineWidth="0.0"/>
+					<rightPen lineWidth="0.0"/>
+				</box>
+				<textElement textAlignment="Justified" verticalAlignment="Middle">
+					<paragraph leftIndent="2"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{idesid}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement uuid="cf221553-11c6-4bcf-9f65-9cab882d99eb" x="583" y="0" width="180" height="22"/>
+				<box>
+					<pen lineWidth="0.0"/>
+					<topPen lineWidth="0.0"/>
+					<leftPen lineWidth="0.0"/>
+					<bottomPen lineWidth="0.0"/>
+					<rightPen lineWidth="0.0"/>
+				</box>
+				<textElement textAlignment="Justified" verticalAlignment="Middle">
+					<paragraph leftIndent="2"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{iddesc}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement uuid="ae196a0a-ca3d-46f6-a259-b5bb1cf98a39" x="763" y="0" width="164" height="22"/>
+				<box>
+					<pen lineWidth="0.0"/>
+					<topPen lineWidth="0.0"/>
+					<leftPen lineWidth="0.0"/>
+					<bottomPen lineWidth="0.0"/>
+					<rightPen lineWidth="0.0"/>
+				</box>
+				<textElement textAlignment="Justified" verticalAlignment="Middle">
+					<paragraph leftIndent="2"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{idnote}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement uuid="dcf68497-1ac9-4ad6-a5b5-79775425ca7a" x="927" y="0" width="164" height="22"/>
+				<box>
+					<pen lineWidth="0.0"/>
+					<topPen lineWidth="0.0"/>
+					<leftPen lineWidth="0.0"/>
+					<bottomPen lineWidth="0.0"/>
+					<rightPen lineWidth="0.0"/>
+				</box>
+				<textElement textAlignment="Justified" verticalAlignment="Middle">
+					<paragraph leftIndent="2"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{idpurchaseorderonly}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement uuid="ffd40ec2-2dcd-4622-a361-f57a51717e7b" x="1091" y="0" width="164" height="22"/>
+				<box>
+					<pen lineWidth="0.0"/>
+					<topPen lineWidth="0.0"/>
+					<leftPen lineWidth="0.0"/>
+					<bottomPen lineWidth="0.0"/>
+					<rightPen lineWidth="0.0"/>
+				</box>
+				<textElement textAlignment="Justified" verticalAlignment="Middle">
+					<paragraph leftIndent="2"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{idtag}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement uuid="1fdb7281-9420-409c-a508-1c87bcf6dfc5" x="1254" y="0" width="164" height="22"/>
+				<box>
+					<pen lineWidth="0.0"/>
+					<topPen lineWidth="0.0"/>
+					<leftPen lineWidth="0.0"/>
+					<bottomPen lineWidth="0.0"/>
+					<rightPen lineWidth="0.0"/>
+				</box>
+				<textElement textAlignment="Justified" verticalAlignment="Middle">
+					<paragraph leftIndent="2"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{materialstoringstatus}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement uuid="bbce78ba-4434-42f6-ae94-9154ffebece0" x="1418" y="0" width="164" height="22"/>
+				<box>
+					<pen lineWidth="0.0"/>
+					<topPen lineWidth="0.0"/>
+					<leftPen lineWidth="0.0"/>
+					<bottomPen lineWidth="0.0"/>
+					<rightPen lineWidth="0.0"/>
+				</box>
+				<textElement textAlignment="Justified" verticalAlignment="Middle">
+					<paragraph leftIndent="2"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{materialinspectionstatus}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement uuid="94e04a45-0486-4431-a9c6-204c20ed676b" x="1582" y="0" width="164" height="22"/>
+				<box>
+					<pen lineWidth="0.0"/>
+					<topPen lineWidth="0.0"/>
+					<leftPen lineWidth="0.0"/>
+					<bottomPen lineWidth="0.0"/>
+					<rightPen lineWidth="0.0"/>
+				</box>
+				<textElement textAlignment="Justified" verticalAlignment="Middle">
+					<paragraph leftIndent="2"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{materiallabellingstatus}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement uuid="df7e7926-56a0-4ac1-898c-084814ed5f0d" x="1746" y="0" width="164" height="22"/>
+				<box>
+					<pen lineWidth="0.0"/>
+					<topPen lineWidth="0.0"/>
+					<leftPen lineWidth="0.0"/>
+					<bottomPen lineWidth="0.0"/>
+					<rightPen lineWidth="0.0"/>
+				</box>
+				<textElement textAlignment="Justified" verticalAlignment="Middle">
+					<paragraph leftIndent="2"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{materialpackingstatus}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement uuid="8002075a-b227-4caf-9a96-a1c5150dd5cb" x="1910" y="0" width="164" height="22"/>
+				<box>
+					<pen lineWidth="0.0"/>
+					<topPen lineWidth="0.0"/>
+					<leftPen lineWidth="0.0"/>
+					<bottomPen lineWidth="0.0"/>
+					<rightPen lineWidth="0.0"/>
+				</box>
+				<textElement textAlignment="Justified" verticalAlignment="Middle">
+					<paragraph leftIndent="2"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{materialputawaystatus}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement uuid="9b84d153-55d7-4cc6-a799-45860ae71a2b" x="2074" y="0" width="164" height="22"/>
+				<box>
+					<pen lineWidth="0.0"/>
+					<topPen lineWidth="0.0"/>
+					<leftPen lineWidth="0.0"/>
+					<bottomPen lineWidth="0.0"/>
+					<rightPen lineWidth="0.0"/>
+				</box>
+				<textElement textAlignment="Justified" verticalAlignment="Middle">
+					<paragraph leftIndent="2"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{materialunloadingstatus}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement uuid="b5d6257f-1dc0-4116-87e4-f749edb1c8da" x="2238" y="0" width="164" height="22"/>
+				<box>
+					<pen lineWidth="0.0"/>
+					<topPen lineWidth="0.0"/>
+					<leftPen lineWidth="0.0"/>
+					<bottomPen lineWidth="0.0"/>
+					<rightPen lineWidth="0.0"/>
+				</box>
+				<textElement textAlignment="Justified" verticalAlignment="Middle">
+					<paragraph leftIndent="2"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{materialgrstatus}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement uuid="d1385625-4992-42bd-902a-80761b51e43c" x="2402" y="0" width="164" height="22"/>
+				<box>
+					<pen lineWidth="0.0"/>
+					<topPen lineWidth="0.0"/>
+					<leftPen lineWidth="0.0"/>
+					<bottomPen lineWidth="0.0"/>
+					<rightPen lineWidth="0.0"/>
+				</box>
+				<textElement textAlignment="Justified" verticalAlignment="Middle">
+					<paragraph leftIndent="2"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{idtype}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement uuid="0af6f005-3699-47fe-8f01-7f0481100893" x="2566" y="0" width="164" height="22"/>
+				<box>
+					<pen lineWidth="0.0"/>
+					<topPen lineWidth="0.0"/>
+					<leftPen lineWidth="0.0"/>
+					<bottomPen lineWidth="0.0"/>
+					<rightPen lineWidth="0.0"/>
+				</box>
+				<textElement textAlignment="Justified" verticalAlignment="Middle">
+					<paragraph leftIndent="2"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{idtype}]]></textFieldExpression>
+			</textField>
+		</band>
+	</detail>
+</jasperReport>
