@@ -1,0 +1,291 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="RPT_Outsource" language="groovy" pageWidth="2908" pageHeight="2794" orientation="Landscape" columnWidth="2868" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="14d625b1-ce14-4c92-9199-4cd7d3fd5389">
+	<property name="ireport.zoom" value="1.1"/>
+	<property name="ireport.x" value="501"/>
+	<property name="ireport.y" value="0"/>
+	<queryString>
+		<![CDATA[SELECT
+	yd.ydid,
+	cast(yd.yddock as json) ->> 'doID' as doID,
+	yd.yddockintime,
+	yd.yddockouttime,
+	cast(yd.ydyard as json) ->> 'yaID' as yaID,
+	yd.ydyardintime,
+	yd.ydyardouttime,
+	cast(yd.yddocktoken as json) ->> 'gsoBizValidToken' as gsoBizValidTokenDock,
+	cast(yd.yddocktoken as json) ->> 'gsoGuestToken' as gsoGuestTokenDock,
+	cast(yd.ydyardtoken as json) ->> 'gsoBizValidToken' as gsoBizValidTokenYard,
+	cast(yd.ydyardtoken as json) ->> 'gsoGuestToken' as gsoGuestTokenYard,
+	cast(yd.ydgatesecurity as json) ->> 'gsoDriverID' as gsoDriverID,
+	cast(yd.ydgatesecurity as json) ->> 'gsoVendorID' as gsoVendorID,
+	cast(yd.ydstatus as json) ->> 'value' as ydstatus,
+	cast(yd.ydtype as json) ->> 'value' as ydtype
+FROM
+	trx_yardanddockentryprojection yd]]>
+	</queryString>
+	<field name="ydid" class="java.lang.String"/>
+	<field name="doid" class="java.lang.String"/>
+	<field name="yddockintime" class="java.sql.Timestamp"/>
+	<field name="yddockouttime" class="java.sql.Timestamp"/>
+	<field name="yaid" class="java.lang.String"/>
+	<field name="ydyardintime" class="java.sql.Timestamp"/>
+	<field name="ydyardouttime" class="java.sql.Timestamp"/>
+	<field name="gsobizvalidtokendock" class="java.lang.String"/>
+	<field name="gsoguesttokendock" class="java.lang.String"/>
+	<field name="gsobizvalidtokenyard" class="java.lang.String"/>
+	<field name="gsoguesttokenyard" class="java.lang.String"/>
+	<field name="gsodriverid" class="java.lang.String"/>
+	<field name="gsovendorid" class="java.lang.String"/>
+	<field name="ydstatus" class="java.lang.String"/>
+	<field name="ydtype" class="java.lang.String"/>
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<columnHeader>
+		<band height="42" splitType="Stretch">
+			<staticText>
+				<reportElement uuid="950d0d75-da80-46b0-87a1-94057d03b591" x="0" y="0" width="19" height="42"/>
+				<box>
+					<pen lineWidth="0.0"/>
+					<topPen lineWidth="0.0"/>
+					<leftPen lineWidth="0.0"/>
+					<bottomPen lineWidth="0.0"/>
+					<rightPen lineWidth="0.0"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle"/>
+				<text><![CDATA[No.]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="ec33b7a2-7323-48b6-a5dc-26b025d6c178" x="294" y="0" width="142" height="42"/>
+				<box>
+					<pen lineWidth="0.0"/>
+					<topPen lineWidth="0.0"/>
+					<leftPen lineWidth="0.0"/>
+					<bottomPen lineWidth="0.0"/>
+					<rightPen lineWidth="0.0"/>
+				</box>
+				<textElement verticalAlignment="Middle">
+					<paragraph leftIndent="2"/>
+				</textElement>
+				<text><![CDATA[YD Dock In TIme]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="c70410f5-c06a-4bd2-beb5-2074df89bfb9" x="144" y="0" width="150" height="42"/>
+				<box>
+					<pen lineWidth="0.0"/>
+					<topPen lineWidth="0.0"/>
+					<leftPen lineWidth="0.0"/>
+					<bottomPen lineWidth="0.0"/>
+					<rightPen lineWidth="0.0"/>
+				</box>
+				<textElement verticalAlignment="Middle">
+					<paragraph leftIndent="2"/>
+				</textElement>
+				<text><![CDATA[Dock ID]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="d86a14be-a9a2-44b4-b985-3f4cbd778955" x="436" y="0" width="142" height="42"/>
+				<box>
+					<pen lineWidth="0.0"/>
+					<topPen lineWidth="0.0"/>
+					<leftPen lineWidth="0.0"/>
+					<bottomPen lineWidth="0.0"/>
+					<rightPen lineWidth="0.0"/>
+				</box>
+				<textElement verticalAlignment="Middle">
+					<paragraph leftIndent="2"/>
+				</textElement>
+				<text><![CDATA[YD Dock Out TIme]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="40d41b55-0831-4f5e-adcc-95a547f62423" x="578" y="0" width="142" height="42"/>
+				<box>
+					<pen lineWidth="0.0"/>
+					<topPen lineWidth="0.0"/>
+					<leftPen lineWidth="0.0"/>
+					<bottomPen lineWidth="0.0"/>
+					<rightPen lineWidth="0.0"/>
+				</box>
+				<textElement verticalAlignment="Middle">
+					<paragraph leftIndent="2"/>
+				</textElement>
+				<text><![CDATA[Yard ID]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="e6c356c3-c2a7-4e62-ab99-941cdab6334e" x="720" y="0" width="142" height="42"/>
+				<textElement verticalAlignment="Middle">
+					<paragraph leftIndent="2"/>
+				</textElement>
+				<text><![CDATA[YD Yard In TIme]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="5713d354-1137-4e7b-8fd8-62de3f0e52c4" x="19" y="0" width="125" height="42"/>
+				<box>
+					<pen lineWidth="0.0"/>
+					<topPen lineWidth="0.0"/>
+					<leftPen lineWidth="0.0"/>
+					<bottomPen lineWidth="0.0"/>
+					<rightPen lineWidth="0.0"/>
+				</box>
+				<textElement verticalAlignment="Middle">
+					<paragraph leftIndent="2"/>
+				</textElement>
+				<text><![CDATA[YD ID]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="b75eb02b-ae1d-4efc-989f-f318118bed52" x="862" y="0" width="142" height="42"/>
+				<textElement verticalAlignment="Middle">
+					<paragraph leftIndent="2"/>
+				</textElement>
+				<text><![CDATA[YD Yard Out TIme]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="95e6d13e-c64c-4f82-ad29-ab594502ad18" x="1004" y="0" width="142" height="42"/>
+				<textElement verticalAlignment="Middle">
+					<paragraph leftIndent="2"/>
+				</textElement>
+				<text><![CDATA[Gso Biz Valid Token Dock]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="180cd3dc-8a68-4fac-bebc-be170310fbfb" x="1146" y="0" width="142" height="42"/>
+				<textElement verticalAlignment="Middle">
+					<paragraph leftIndent="2"/>
+				</textElement>
+				<text><![CDATA[Gso Guest Token Dock]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="f636222d-cf97-4b90-a561-ba05f7741a11" x="1288" y="0" width="142" height="42"/>
+				<textElement verticalAlignment="Middle">
+					<paragraph leftIndent="2"/>
+				</textElement>
+				<text><![CDATA[Gso Biz Valid Token Yard]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="bb3647af-e0b7-4990-8205-f65ffebf4c9c" x="1430" y="0" width="142" height="42"/>
+				<textElement verticalAlignment="Middle">
+					<paragraph leftIndent="2"/>
+				</textElement>
+				<text><![CDATA[Gso Guest Token Yard]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="5bcea32d-ac4b-4175-a5a7-15e25df7c932" x="1572" y="0" width="142" height="42"/>
+				<textElement verticalAlignment="Middle">
+					<paragraph leftIndent="2"/>
+				</textElement>
+				<text><![CDATA[Gso Driver ID]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="3c8ceeef-ce2e-4892-8e16-626870034ad4" x="1714" y="0" width="142" height="42"/>
+				<textElement verticalAlignment="Middle">
+					<paragraph leftIndent="2"/>
+				</textElement>
+				<text><![CDATA[Gso Vendor ID]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="1bdf8b15-9418-4b06-955d-6f85cf035770" x="1856" y="0" width="142" height="42"/>
+				<textElement verticalAlignment="Middle">
+					<paragraph leftIndent="2"/>
+				</textElement>
+				<text><![CDATA[YD Type]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="3b721897-b0c2-4648-b9f8-91b2571d765a" x="1998" y="0" width="142" height="42"/>
+				<textElement verticalAlignment="Middle">
+					<paragraph leftIndent="2"/>
+				</textElement>
+				<text><![CDATA[YD Status]]></text>
+			</staticText>
+		</band>
+	</columnHeader>
+	<detail>
+		<band height="22" splitType="Stretch">
+			<textField>
+				<reportElement uuid="1a46217e-df95-4cf4-ba9d-2b0d3c4ee3b8" x="0" y="0" width="19" height="22"/>
+				<box>
+					<pen lineWidth="0.0"/>
+					<topPen lineWidth="0.0"/>
+					<leftPen lineWidth="0.0"/>
+					<bottomPen lineWidth="0.0"/>
+					<rightPen lineWidth="0.0"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle"/>
+				<textFieldExpression><![CDATA[$V{COLUMN_COUNT}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement uuid="5bbf9095-77c7-4625-9068-c2aa03a4564c" x="19" y="0" width="125" height="22"/>
+				<textElement verticalAlignment="Middle"/>
+				<textFieldExpression><![CDATA[$F{ydid}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement uuid="97859678-b9cc-4b3d-8baa-ffb4a2527b28" x="144" y="0" width="150" height="22"/>
+				<textElement verticalAlignment="Middle"/>
+				<textFieldExpression><![CDATA[$F{doid}]]></textFieldExpression>
+			</textField>
+			<textField pattern="dd/MM/yyyy HH.mm.ss">
+				<reportElement uuid="73830e9e-86c3-44fe-bfe4-004c4af7d46b" x="294" y="0" width="142" height="22"/>
+				<textElement verticalAlignment="Middle"/>
+				<textFieldExpression><![CDATA[$F{yddockintime}]]></textFieldExpression>
+			</textField>
+			<textField pattern="dd/MM/yyyy HH.mm.ss">
+				<reportElement uuid="f0a4ceb4-1e50-4507-b69f-0a03404091f3" x="436" y="0" width="142" height="22"/>
+				<textElement verticalAlignment="Middle"/>
+				<textFieldExpression><![CDATA[$F{yddockouttime}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement uuid="53cc3a49-c5fc-40ea-b68c-4641a494e349" x="578" y="0" width="142" height="22"/>
+				<textElement verticalAlignment="Middle"/>
+				<textFieldExpression><![CDATA[$F{yaid}]]></textFieldExpression>
+			</textField>
+			<textField pattern="dd/MM/yyyy HH.mm.ss">
+				<reportElement uuid="f78f9dfe-3f89-46cf-8f1b-a21c60ea57c6" x="720" y="0" width="142" height="22"/>
+				<textElement verticalAlignment="Middle"/>
+				<textFieldExpression><![CDATA[$F{ydyardintime}]]></textFieldExpression>
+			</textField>
+			<textField pattern="dd/MM/yyyy HH.mm.ss">
+				<reportElement uuid="6c922a98-733c-4a09-b104-d69efed00d95" x="862" y="0" width="142" height="22"/>
+				<textElement verticalAlignment="Middle"/>
+				<textFieldExpression><![CDATA[$F{ydyardouttime}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement uuid="d7665f92-12d2-4dbc-a795-0a201c073185" x="1004" y="0" width="142" height="22"/>
+				<textElement verticalAlignment="Middle"/>
+				<textFieldExpression><![CDATA[$F{gsobizvalidtokendock}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement uuid="b35b2a32-c7ee-4534-ab17-7e65b8ce252a" x="1146" y="0" width="142" height="22"/>
+				<textElement verticalAlignment="Middle"/>
+				<textFieldExpression><![CDATA[$F{gsoguesttokendock}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement uuid="db1861fd-7218-46c5-b106-d51359c04d7d" x="1288" y="0" width="142" height="22"/>
+				<textElement verticalAlignment="Middle"/>
+				<textFieldExpression><![CDATA[$F{gsobizvalidtokenyard}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement uuid="d6606c86-4d66-4d16-95fb-dac5ee13133f" x="1430" y="0" width="142" height="22"/>
+				<textElement verticalAlignment="Middle"/>
+				<textFieldExpression><![CDATA[$F{gsoguesttokenyard}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement uuid="6b7e76b1-0cc5-4575-9d56-55c771a641aa" x="1572" y="0" width="142" height="22"/>
+				<textElement verticalAlignment="Middle"/>
+				<textFieldExpression><![CDATA[$F{gsodriverid}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement uuid="1fbb416b-2e9d-4a67-8330-09b1983e2f5a" x="1714" y="0" width="142" height="22"/>
+				<textElement verticalAlignment="Middle"/>
+				<textFieldExpression><![CDATA[$F{gsovendorid}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement uuid="d187eefb-af95-4712-9bad-0b944f2bacd1" x="1856" y="0" width="142" height="22"/>
+				<textElement verticalAlignment="Middle"/>
+				<textFieldExpression><![CDATA[$F{ydtype}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement uuid="73294806-54d3-4f23-9c94-a1b892543501" x="1998" y="0" width="142" height="22"/>
+				<textElement verticalAlignment="Middle"/>
+				<textFieldExpression><![CDATA[$F{ydstatus}]]></textFieldExpression>
+			</textField>
+		</band>
+	</detail>
+</jasperReport>
