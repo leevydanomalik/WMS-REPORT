@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="RPT_Outsource" language="groovy" pageWidth="2908" pageHeight="2794" orientation="Landscape" columnWidth="2868" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="14d625b1-ce14-4c92-9199-4cd7d3fd5389">
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="RPT_Outsource" language="groovy" pageWidth="4000" pageHeight="2794" orientation="Landscape" columnWidth="3960" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="14d625b1-ce14-4c92-9199-4cd7d3fd5389">
 	<property name="ireport.zoom" value="1.1"/>
-	<property name="ireport.x" value="0"/>
+	<property name="ireport.x" value="2584"/>
 	<property name="ireport.y" value="0"/>
 	<queryString>
 		<![CDATA[select po.objectid,
@@ -18,7 +18,16 @@ json_array_elements(CAST(CAST(po.podata AS json) :: json -> 'orderItems' AS json
 json_array_elements(CAST(CAST(po.podata AS json) :: json -> 'orderItems' AS json) :: json) -> 'material' -> 'materialSegment' ->> 'msID' as msid,
 json_array_elements(CAST(CAST(po.podata AS json) :: json -> 'orderItems' AS json) :: json) -> 'material' -> 'materialSeries' ->> 'msrID' as msrid,
 json_array_elements(CAST(CAST(po.podata AS json) :: json -> 'orderItems' AS json) :: json) -> 'material' -> 'materialType' ->> 'mtID' as mtid,
-json_array_elements(CAST(CAST(po.podata AS json) :: json -> 'orderItems' AS json) :: json) -> 'purchaseRequisition' ->> 'prID' as prid
+json_array_elements(CAST(CAST(po.podata AS json) :: json -> 'orderItems' AS json) :: json) -> 'purchaseRequisition' ->> 'prID' as prid,
+
+
+
+CAST ( po.podata AS json ) :: json ->> 'poDocDate' AS podocdate,
+CAST ( po.podata AS json ) :: json ->> 'poDeliveryDate' AS podlvdate,
+json_array_elements(CAST(CAST(po.podata AS json) :: json -> 'orderItems' AS json) :: json) -> 'poFrom' ->> 'cesClientID' as poformcesclientid,
+json_array_elements(CAST(CAST(po.podata AS json) :: json -> 'orderItems' AS json) :: json) -> 'poTo' ->> 'cesClientID' as potocesclientid,
+json_array_elements(CAST(CAST(po.podata AS json) :: json -> 'orderItems' AS json) :: json) -> 'poVendor' ->> 'vendorID' as vendorid
+
 from trx_poentryprojection po]]>
 	</queryString>
 	<field name="objectid" class="java.lang.String"/>
@@ -36,6 +45,11 @@ from trx_poentryprojection po]]>
 	<field name="msrid" class="java.lang.String"/>
 	<field name="mtid" class="java.lang.String"/>
 	<field name="prid" class="java.lang.String"/>
+	<field name="podocdate" class="java.lang.String"/>
+	<field name="podlvdate" class="java.lang.String"/>
+	<field name="poformcesclientid" class="java.lang.String"/>
+	<field name="potocesclientid" class="java.lang.String"/>
+	<field name="vendorid" class="java.lang.String"/>
 	<background>
 		<band splitType="Stretch"/>
 	</background>
@@ -192,6 +206,41 @@ from trx_poentryprojection po]]>
 					<paragraph leftIndent="2"/>
 				</textElement>
 				<text><![CDATA[Purchase Requisition ID]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="2403" y="0" width="164" height="42" uuid="fe80edf7-6e91-4d42-b5d2-b32142c3d7b8"/>
+				<textElement verticalAlignment="Middle">
+					<paragraph leftIndent="2"/>
+				</textElement>
+				<text><![CDATA[Ces Client ID Po From]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="2567" y="0" width="164" height="42" uuid="05ecde52-dee3-4dda-9541-43b62f7a5051"/>
+				<textElement verticalAlignment="Middle">
+					<paragraph leftIndent="2"/>
+				</textElement>
+				<text><![CDATA[Ces Client ID Po To]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="2731" y="0" width="137" height="42" uuid="4a29ca1e-377e-498c-b759-cbd00eae947f"/>
+				<textElement verticalAlignment="Middle">
+					<paragraph leftIndent="2"/>
+				</textElement>
+				<text><![CDATA[Vendor ID]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="2868" y="0" width="137" height="42" uuid="21da2b3c-b6b1-4901-889d-e5354c626f72"/>
+				<textElement verticalAlignment="Middle">
+					<paragraph leftIndent="2"/>
+				</textElement>
+				<text><![CDATA[Po Doc Date]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="3005" y="0" width="137" height="42" uuid="ff0235a0-f01f-4a01-af44-543c5e6c8528"/>
+				<textElement verticalAlignment="Middle">
+					<paragraph leftIndent="2"/>
+				</textElement>
+				<text><![CDATA[Po Delivery Date]]></text>
 			</staticText>
 		</band>
 	</columnHeader>
@@ -418,6 +467,76 @@ from trx_poentryprojection po]]>
 					<paragraph leftIndent="2"/>
 				</textElement>
 				<textFieldExpression><![CDATA[$F{prid}]]></textFieldExpression>
+			</textField>
+			<textField isBlankWhenNull="true">
+				<reportElement x="2403" y="0" width="164" height="22" uuid="2c056980-f514-473e-bd81-2ee8e5191f08"/>
+				<box>
+					<pen lineWidth="0.0"/>
+					<topPen lineWidth="0.0"/>
+					<leftPen lineWidth="0.0"/>
+					<bottomPen lineWidth="0.0"/>
+					<rightPen lineWidth="0.0"/>
+				</box>
+				<textElement textAlignment="Justified" verticalAlignment="Middle">
+					<paragraph leftIndent="2"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{poformcesclientid}]]></textFieldExpression>
+			</textField>
+			<textField isBlankWhenNull="true">
+				<reportElement x="2567" y="0" width="164" height="22" uuid="b7e4fac5-f166-433e-954a-29815d6121dd"/>
+				<box>
+					<pen lineWidth="0.0"/>
+					<topPen lineWidth="0.0"/>
+					<leftPen lineWidth="0.0"/>
+					<bottomPen lineWidth="0.0"/>
+					<rightPen lineWidth="0.0"/>
+				</box>
+				<textElement textAlignment="Justified" verticalAlignment="Middle">
+					<paragraph leftIndent="2"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{potocesclientid}]]></textFieldExpression>
+			</textField>
+			<textField isBlankWhenNull="true">
+				<reportElement x="2731" y="0" width="137" height="22" uuid="64a6ccc5-b7e8-490c-b2dc-febbce119376"/>
+				<box>
+					<pen lineWidth="0.0"/>
+					<topPen lineWidth="0.0"/>
+					<leftPen lineWidth="0.0"/>
+					<bottomPen lineWidth="0.0"/>
+					<rightPen lineWidth="0.0"/>
+				</box>
+				<textElement textAlignment="Justified" verticalAlignment="Middle">
+					<paragraph leftIndent="2"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{vendorid}]]></textFieldExpression>
+			</textField>
+			<textField pattern="dd/MM/yyyy" isBlankWhenNull="true">
+				<reportElement x="2868" y="0" width="137" height="22" uuid="f6ac6a05-8bef-4b7e-9287-3a0fe3900233"/>
+				<box>
+					<pen lineWidth="0.0"/>
+					<topPen lineWidth="0.0"/>
+					<leftPen lineWidth="0.0"/>
+					<bottomPen lineWidth="0.0"/>
+					<rightPen lineWidth="0.0"/>
+				</box>
+				<textElement textAlignment="Justified" verticalAlignment="Middle">
+					<paragraph leftIndent="2"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{podocdate}]]></textFieldExpression>
+			</textField>
+			<textField pattern="dd/MM/yyyy" isBlankWhenNull="true">
+				<reportElement x="3005" y="0" width="137" height="22" uuid="33b61026-cfd9-4235-a7f3-215429c9b277"/>
+				<box>
+					<pen lineWidth="0.0"/>
+					<topPen lineWidth="0.0"/>
+					<leftPen lineWidth="0.0"/>
+					<bottomPen lineWidth="0.0"/>
+					<rightPen lineWidth="0.0"/>
+				</box>
+				<textElement textAlignment="Justified" verticalAlignment="Middle">
+					<paragraph leftIndent="2"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{podlvdate}]]></textFieldExpression>
 			</textField>
 		</band>
 	</detail>
