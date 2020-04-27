@@ -1,0 +1,472 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="RPT_Outsource" language="groovy" pageWidth="3268" pageHeight="2794" orientation="Landscape" columnWidth="3228" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="14d625b1-ce14-4c92-9199-4cd7d3fd5389">
+	<property name="ireport.zoom" value="1.1"/>
+	<property name="ireport.x" value="1782"/>
+	<property name="ireport.y" value="0"/>
+	<queryString>
+		<![CDATA[SELECT
+	mv.objectid,
+	mv.VERSION,
+	mv.mrdocdate,
+	CAST ( mv.es AS json ) -> 'company' ->> 'compID' AS compID,
+	CAST ( mv.es AS json ) -> 'company' ->> 'clientID' AS clientID,
+	CAST ( mv.mrdata AS json ) ->> 'mrDesc' AS mrDesc,
+	CAST ( mv.mrdata AS json ) ->> 'mrDocDate' AS mrDocDateData,
+--mrFrom
+	CAST ( mv.mrdata AS json ) -> 'mrFrom' ->> 'cesClientID' AS cesClientIDFrom,
+	CAST ( mv.mrdata AS json ) -> 'mrFrom' ->> 'cesCompanyID' AS cesCompanyIDFrom,
+	CAST ( mv.mrdata AS json ) -> 'mrFrom' ->> 'cesPlantID' AS cesPlantIDFrom,
+	CAST ( mv.mrdata AS json ) -> 'mrFrom' ->> 'cesStorageBinID' AS cesStorageBinIDFrom,
+	CAST ( mv.mrdata AS json ) -> 'mrFrom' ->> 'cesStorageBinQuantID' AS cesStorageBinQuantIDFrom,
+	CAST ( mv.mrdata AS json ) -> 'mrFrom' ->> 'cesStorageLocationID' AS cesStorageLocationIDFrom,
+	CAST ( mv.mrdata AS json ) -> 'mrFrom' ->> 'cesStorageSectionID' AS cesStorageSectionIDFrom,
+	CAST ( mv.mrdata AS json ) -> 'mrFrom' ->> 'cesStorageTypeID' AS cesStorageTypeIDFrom,
+	CAST ( mv.mrdata AS json ) -> 'mrFrom' ->> 'cesWarehouseID' AS cesWarehouseIDFrom,
+--MrTo
+	CAST ( mv.mrdata AS json ) -> 'mrTo' ->> 'cesClientID' AS cesClientIDTo,
+	CAST ( mv.mrdata AS json ) -> 'mrTo' ->> 'cesCompanyID' AS cesCompanyIDTo,
+	CAST ( mv.mrdata AS json ) -> 'mrTo' ->> 'cesPlantID' AS cesPlantIDTo,
+	CAST ( mv.mrdata AS json ) -> 'mrTo' ->> 'cesStorageBinID' AS cesStorageBinIDTo,
+	CAST ( mv.mrdata AS json ) -> 'mrTo' ->> 'cesStorageBinQuantID' AS cesStorageBinQuantIDTo,
+	CAST ( mv.mrdata AS json ) -> 'mrTo' ->> 'cesStorageLocationID' AS cesStorageLocationIDTo,
+	CAST ( mv.mrdata AS json ) -> 'mrTo' ->> 'cesStorageSectionID' AS cesStorageSectionIDTo,
+	CAST ( mv.mrdata AS json ) -> 'mrTo' ->> 'cesStorageTypeID' AS cesStorageTypeIDTo,
+	CAST ( mv.mrdata AS json ) -> 'mrTo' ->> 'cesWarehouseID' AS cesWarehouseIDTo,
+	CAST ( mv.mrdata AS json ) ->> 'mrPlannedDate' AS mrPlannedDate,
+	json_array_elements ( CAST ( CAST ( mv.mrdata AS json ) :: json -> 'mrMaterials' AS json ) :: json ) -> 'material' -> 'material' ->> 'materialID' AS materialID,
+	json_array_elements ( CAST ( CAST ( mv.mrdata AS json ) :: json -> 'mrMaterials' AS json ) :: json ) -> 'material' -> 'materialCategory' ->> 'mcID' AS mcID,
+	json_array_elements ( CAST ( CAST ( mv.mrdata AS json ) :: json -> 'mrMaterials' AS json ) :: json ) -> 'material' -> 'materialGroup' ->> 'mgID' AS mgID,
+	json_array_elements ( CAST ( CAST ( mv.mrdata AS json ) :: json -> 'mrMaterials' AS json ) :: json ) -> 'material' -> 'materialSegment' ->> 'msID' AS msID,
+	json_array_elements ( CAST ( CAST ( mv.mrdata AS json ) :: json -> 'mrMaterials' AS json ) :: json ) -> 'material' -> 'materialSeries' ->> 'msrID' AS msrID,
+	json_array_elements ( CAST ( CAST ( mv.mrdata AS json ) :: json -> 'mrMaterials' AS json ) :: json ) -> 'material' -> 'materialType' ->> 'mtID' AS mtID,
+	json_array_elements ( CAST ( CAST ( mv.mrdata AS json ) :: json -> 'mrMaterials' AS json ) :: json ) -> 'purchaseRequisition' ->> 'prID' AS prID,
+	json_array_elements ( CAST ( CAST ( mv.mrdata AS json ) :: json -> 'mrMaterials' AS json ) :: json ) ->> 'qtyEQLiter' AS qtyEQLiter,
+	json_array_elements ( CAST ( CAST ( mv.mrdata AS json ) :: json -> 'mrMaterials' AS json ) :: json ) ->> 'qtyUoM' AS qtyUoM,
+	CAST ( mv.TYPE AS json ) ->> 'value' AS TYPE,
+	CAST ( mv.movementstatus AS json ) ->> 'value' AS Status
+FROM
+	mst_materialmovement mv]]>
+	</queryString>
+	<field name="objectid" class="java.lang.String"/>
+	<field name="version" class="java.lang.String"/>
+	<field name="mrdocdate" class="java.sql.Timestamp"/>
+	<field name="compid" class="java.lang.String"/>
+	<field name="clientid" class="java.lang.String"/>
+	<field name="mrdesc" class="java.lang.String"/>
+	<field name="mrdocdatedata" class="java.lang.String"/>
+	<field name="cesclientidfrom" class="java.lang.String"/>
+	<field name="cescompanyidfrom" class="java.lang.String"/>
+	<field name="cesplantidfrom" class="java.lang.String"/>
+	<field name="cesstoragebinidfrom" class="java.lang.String"/>
+	<field name="cesstoragebinquantidfrom" class="java.lang.String"/>
+	<field name="cesstoragelocationidfrom" class="java.lang.String"/>
+	<field name="cesstoragesectionidfrom" class="java.lang.String"/>
+	<field name="cesstoragetypeidfrom" class="java.lang.String"/>
+	<field name="ceswarehouseidfrom" class="java.lang.String"/>
+	<field name="cesclientidto" class="java.lang.String"/>
+	<field name="cescompanyidto" class="java.lang.String"/>
+	<field name="cesplantidto" class="java.lang.String"/>
+	<field name="cesstoragebinidto" class="java.lang.String"/>
+	<field name="cesstoragebinquantidto" class="java.lang.String"/>
+	<field name="cesstoragelocationidto" class="java.lang.String"/>
+	<field name="cesstoragesectionidto" class="java.lang.String"/>
+	<field name="cesstoragetypeidto" class="java.lang.String"/>
+	<field name="ceswarehouseidto" class="java.lang.String"/>
+	<field name="mrplanneddate" class="java.lang.String"/>
+	<field name="materialid" class="java.lang.String"/>
+	<field name="mcid" class="java.lang.String"/>
+	<field name="mgid" class="java.lang.String"/>
+	<field name="msid" class="java.lang.String"/>
+	<field name="msrid" class="java.lang.String"/>
+	<field name="mtid" class="java.lang.String"/>
+	<field name="prid" class="java.lang.String"/>
+	<field name="qtyeqliter" class="java.lang.String"/>
+	<field name="qtyuom" class="java.lang.String"/>
+	<field name="type" class="java.lang.String"/>
+	<field name="status" class="java.lang.String"/>
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<columnHeader>
+		<band height="42" splitType="Stretch">
+			<staticText>
+				<reportElement uuid="950d0d75-da80-46b0-87a1-94057d03b591" x="0" y="0" width="19" height="42"/>
+				<box>
+					<pen lineWidth="0.0"/>
+					<topPen lineWidth="0.0"/>
+					<leftPen lineWidth="0.0"/>
+					<bottomPen lineWidth="0.0"/>
+					<rightPen lineWidth="0.0"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle"/>
+				<text><![CDATA[No.]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="ec33b7a2-7323-48b6-a5dc-26b025d6c178" x="144" y="0" width="138" height="42"/>
+				<box>
+					<pen lineWidth="0.0"/>
+					<topPen lineWidth="0.0"/>
+					<leftPen lineWidth="0.0"/>
+					<bottomPen lineWidth="0.0"/>
+					<rightPen lineWidth="0.0"/>
+				</box>
+				<textElement verticalAlignment="Middle">
+					<paragraph leftIndent="2"/>
+				</textElement>
+				<text><![CDATA[Material Movement Doc Date]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="d86a14be-a9a2-44b4-b985-3f4cbd778955" x="462" y="0" width="148" height="42"/>
+				<box>
+					<pen lineWidth="0.0"/>
+					<topPen lineWidth="0.0"/>
+					<leftPen lineWidth="0.0"/>
+					<bottomPen lineWidth="0.0"/>
+					<rightPen lineWidth="0.0"/>
+				</box>
+				<textElement verticalAlignment="Middle">
+					<paragraph leftIndent="2"/>
+				</textElement>
+				<text><![CDATA[Material Movement Company ID]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="40d41b55-0831-4f5e-adcc-95a547f62423" x="282" y="0" width="180" height="42"/>
+				<box>
+					<pen lineWidth="0.0"/>
+					<topPen lineWidth="0.0"/>
+					<leftPen lineWidth="0.0"/>
+					<bottomPen lineWidth="0.0"/>
+					<rightPen lineWidth="0.0"/>
+				</box>
+				<textElement verticalAlignment="Middle">
+					<paragraph leftIndent="2"/>
+				</textElement>
+				<text><![CDATA[Material Movement Desc]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="5713d354-1137-4e7b-8fd8-62de3f0e52c4" x="19" y="0" width="125" height="42"/>
+				<box>
+					<pen lineWidth="0.0"/>
+					<topPen lineWidth="0.0"/>
+					<leftPen lineWidth="0.0"/>
+					<bottomPen lineWidth="0.0"/>
+					<rightPen lineWidth="0.0"/>
+				</box>
+				<textElement verticalAlignment="Middle">
+					<paragraph leftIndent="2"/>
+				</textElement>
+				<text><![CDATA[Material ID]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="fb967296-e91e-4c28-a408-711c6dd99b5a" x="758" y="0" width="164" height="42"/>
+				<textElement verticalAlignment="Middle">
+					<paragraph leftIndent="2"/>
+				</textElement>
+				<text><![CDATA[Material Planned Date]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="13a5191c-bd6b-4a44-bbdd-2d6fd52a69dd" x="922" y="0" width="164" height="42"/>
+				<textElement verticalAlignment="Middle">
+					<paragraph leftIndent="2"/>
+				</textElement>
+				<text><![CDATA[Material ID]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="59bc95df-8ef0-42ec-af40-b8dc0f82191f" x="1414" y="0" width="164" height="42"/>
+				<textElement verticalAlignment="Middle">
+					<paragraph leftIndent="2"/>
+				</textElement>
+				<text><![CDATA[Material Segment ID]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="970a8618-d0b1-41cf-8574-70f935381d6c" x="1906" y="0" width="164" height="42"/>
+				<textElement verticalAlignment="Middle">
+					<paragraph leftIndent="2"/>
+				</textElement>
+				<text><![CDATA[Purchase Requisition ID]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="5ef899b6-4c87-4216-aee4-416b8846b50d" x="1086" y="0" width="164" height="42"/>
+				<textElement verticalAlignment="Middle">
+					<paragraph leftIndent="2"/>
+				</textElement>
+				<text><![CDATA[Material Category ID]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="7a37c919-9976-49d2-bec9-c122c48e2042" x="1250" y="0" width="164" height="42"/>
+				<textElement verticalAlignment="Middle">
+					<paragraph leftIndent="2"/>
+				</textElement>
+				<text><![CDATA[Material Group ID]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="030f5e80-a2f6-4701-b6cf-0a3accd2b693" x="1578" y="0" width="164" height="42"/>
+				<textElement verticalAlignment="Middle">
+					<paragraph leftIndent="2"/>
+				</textElement>
+				<text><![CDATA[Material Series ID]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="bb0cee1c-9c64-40c7-aff1-f8e1928c17d8" x="1742" y="0" width="164" height="42"/>
+				<textElement verticalAlignment="Middle">
+					<paragraph leftIndent="2"/>
+				</textElement>
+				<text><![CDATA[Material Type]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="a6e22aa2-f8f6-4f6a-8f11-07f92a274def" x="610" y="0" width="148" height="42"/>
+				<box>
+					<pen lineWidth="0.0"/>
+					<topPen lineWidth="0.0"/>
+					<leftPen lineWidth="0.0"/>
+					<bottomPen lineWidth="0.0"/>
+					<rightPen lineWidth="0.0"/>
+				</box>
+				<textElement verticalAlignment="Middle">
+					<paragraph leftIndent="2"/>
+				</textElement>
+				<text><![CDATA[Material Movement Clien ID]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="3777929d-5e99-489c-9b31-61a7c333e2e1" x="2070" y="0" width="164" height="42"/>
+				<textElement verticalAlignment="Middle">
+					<paragraph leftIndent="2"/>
+				</textElement>
+				<text><![CDATA[Qty EQ Liter]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="53c9475c-89a0-403b-afdb-53ae20d3f2f0" x="2234" y="0" width="164" height="42"/>
+				<textElement verticalAlignment="Middle">
+					<paragraph leftIndent="2"/>
+				</textElement>
+				<text><![CDATA[Qty UoM]]></text>
+			</staticText>
+		</band>
+	</columnHeader>
+	<detail>
+		<band height="22" splitType="Stretch">
+			<textField>
+				<reportElement uuid="1a46217e-df95-4cf4-ba9d-2b0d3c4ee3b8" x="0" y="0" width="19" height="22"/>
+				<box>
+					<pen lineWidth="0.0"/>
+					<topPen lineWidth="0.0"/>
+					<leftPen lineWidth="0.0"/>
+					<bottomPen lineWidth="0.0"/>
+					<rightPen lineWidth="0.0"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle"/>
+				<textFieldExpression><![CDATA[$V{COLUMN_COUNT}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement uuid="91f65e01-e56d-4341-9ca3-2435dbbd5b4a" x="19" y="0" width="125" height="22"/>
+				<box>
+					<pen lineWidth="0.0"/>
+					<topPen lineWidth="0.0"/>
+					<leftPen lineWidth="0.0"/>
+					<bottomPen lineWidth="0.0"/>
+					<rightPen lineWidth="0.0"/>
+				</box>
+				<textElement textAlignment="Justified" verticalAlignment="Middle">
+					<paragraph leftIndent="2"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{objectid}]]></textFieldExpression>
+			</textField>
+			<textField pattern="dd MMMMM yyyy">
+				<reportElement uuid="72d0a1f8-6a02-4589-a2ed-1ac1f7e652be" x="144" y="0" width="138" height="22"/>
+				<box>
+					<pen lineWidth="0.0"/>
+					<topPen lineWidth="0.0"/>
+					<leftPen lineWidth="0.0"/>
+					<bottomPen lineWidth="0.0"/>
+					<rightPen lineWidth="0.0"/>
+				</box>
+				<textElement textAlignment="Justified" verticalAlignment="Middle">
+					<paragraph leftIndent="2"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{mrdocdate}]]></textFieldExpression>
+			</textField>
+			<textField pattern="dd MMMMM yyyy">
+				<reportElement uuid="9158dd81-0282-44ea-b062-01ef670d08e2" x="462" y="0" width="148" height="22"/>
+				<box>
+					<pen lineWidth="0.0"/>
+					<topPen lineWidth="0.0"/>
+					<leftPen lineWidth="0.0"/>
+					<bottomPen lineWidth="0.0"/>
+					<rightPen lineWidth="0.0"/>
+				</box>
+				<textElement textAlignment="Justified" verticalAlignment="Middle">
+					<paragraph leftIndent="2"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{compid}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement uuid="cf221553-11c6-4bcf-9f65-9cab882d99eb" x="282" y="0" width="180" height="22"/>
+				<box>
+					<pen lineWidth="0.0"/>
+					<topPen lineWidth="0.0"/>
+					<leftPen lineWidth="0.0"/>
+					<bottomPen lineWidth="0.0"/>
+					<rightPen lineWidth="0.0"/>
+				</box>
+				<textElement textAlignment="Justified" verticalAlignment="Middle">
+					<paragraph leftIndent="2"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{mrdesc}]]></textFieldExpression>
+			</textField>
+			<textField pattern="dd MMMMM yyyy">
+				<reportElement uuid="ffd40ec2-2dcd-4622-a361-f57a51717e7b" x="758" y="0" width="164" height="22"/>
+				<box>
+					<pen lineWidth="0.0"/>
+					<topPen lineWidth="0.0"/>
+					<leftPen lineWidth="0.0"/>
+					<bottomPen lineWidth="0.0"/>
+					<rightPen lineWidth="0.0"/>
+				</box>
+				<textElement textAlignment="Justified" verticalAlignment="Middle">
+					<paragraph leftIndent="2"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{mrplanneddate}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement uuid="1fdb7281-9420-409c-a508-1c87bcf6dfc5" x="922" y="0" width="164" height="22"/>
+				<box>
+					<pen lineWidth="0.0"/>
+					<topPen lineWidth="0.0"/>
+					<leftPen lineWidth="0.0"/>
+					<bottomPen lineWidth="0.0"/>
+					<rightPen lineWidth="0.0"/>
+				</box>
+				<textElement textAlignment="Justified" verticalAlignment="Middle">
+					<paragraph leftIndent="2"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{materialid}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement uuid="bbce78ba-4434-42f6-ae94-9154ffebece0" x="1086" y="0" width="164" height="22"/>
+				<box>
+					<pen lineWidth="0.0"/>
+					<topPen lineWidth="0.0"/>
+					<leftPen lineWidth="0.0"/>
+					<bottomPen lineWidth="0.0"/>
+					<rightPen lineWidth="0.0"/>
+				</box>
+				<textElement textAlignment="Justified" verticalAlignment="Middle">
+					<paragraph leftIndent="2"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{mcid}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement uuid="94e04a45-0486-4431-a9c6-204c20ed676b" x="1250" y="0" width="164" height="22"/>
+				<box>
+					<pen lineWidth="0.0"/>
+					<topPen lineWidth="0.0"/>
+					<leftPen lineWidth="0.0"/>
+					<bottomPen lineWidth="0.0"/>
+					<rightPen lineWidth="0.0"/>
+				</box>
+				<textElement textAlignment="Justified" verticalAlignment="Middle">
+					<paragraph leftIndent="2"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{mgid}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement uuid="df7e7926-56a0-4ac1-898c-084814ed5f0d" x="1414" y="0" width="164" height="22"/>
+				<box>
+					<pen lineWidth="0.0"/>
+					<topPen lineWidth="0.0"/>
+					<leftPen lineWidth="0.0"/>
+					<bottomPen lineWidth="0.0"/>
+					<rightPen lineWidth="0.0"/>
+				</box>
+				<textElement textAlignment="Justified" verticalAlignment="Middle">
+					<paragraph leftIndent="2"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{msid}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement uuid="8002075a-b227-4caf-9a96-a1c5150dd5cb" x="1578" y="0" width="164" height="22"/>
+				<box>
+					<pen lineWidth="0.0"/>
+					<topPen lineWidth="0.0"/>
+					<leftPen lineWidth="0.0"/>
+					<bottomPen lineWidth="0.0"/>
+					<rightPen lineWidth="0.0"/>
+				</box>
+				<textElement textAlignment="Justified" verticalAlignment="Middle">
+					<paragraph leftIndent="2"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{msrid}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement uuid="9b84d153-55d7-4cc6-a799-45860ae71a2b" x="1742" y="0" width="164" height="22"/>
+				<box>
+					<pen lineWidth="0.0"/>
+					<topPen lineWidth="0.0"/>
+					<leftPen lineWidth="0.0"/>
+					<bottomPen lineWidth="0.0"/>
+					<rightPen lineWidth="0.0"/>
+				</box>
+				<textElement textAlignment="Justified" verticalAlignment="Middle">
+					<paragraph leftIndent="2"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{mtid}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement uuid="b5d6257f-1dc0-4116-87e4-f749edb1c8da" x="1906" y="0" width="164" height="22"/>
+				<box>
+					<pen lineWidth="0.0"/>
+					<topPen lineWidth="0.0"/>
+					<leftPen lineWidth="0.0"/>
+					<bottomPen lineWidth="0.0"/>
+					<rightPen lineWidth="0.0"/>
+				</box>
+				<textElement textAlignment="Justified" verticalAlignment="Middle">
+					<paragraph leftIndent="2"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{prid}]]></textFieldExpression>
+			</textField>
+			<textField pattern="dd MMMMM yyyy">
+				<reportElement uuid="4cbe1f36-927a-4f01-8c44-8ba69034304e" x="610" y="0" width="148" height="22"/>
+				<box>
+					<pen lineWidth="0.0"/>
+					<topPen lineWidth="0.0"/>
+					<leftPen lineWidth="0.0"/>
+					<bottomPen lineWidth="0.0"/>
+					<rightPen lineWidth="0.0"/>
+				</box>
+				<textElement textAlignment="Justified" verticalAlignment="Middle">
+					<paragraph leftIndent="2"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{clientid}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement uuid="c54dd6ab-a5ff-4b91-bb95-c165be0bceac" x="2070" y="0" width="164" height="22"/>
+				<box>
+					<pen lineWidth="0.0"/>
+					<topPen lineWidth="0.0"/>
+					<leftPen lineWidth="0.0"/>
+					<bottomPen lineWidth="0.0"/>
+					<rightPen lineWidth="0.0"/>
+				</box>
+				<textElement textAlignment="Justified" verticalAlignment="Middle">
+					<paragraph leftIndent="2"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{qtyeqliter}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement uuid="9f8458b8-97e5-4a61-ba2b-f93d811e3cf6" x="2234" y="0" width="164" height="22"/>
+				<box>
+					<pen lineWidth="0.0"/>
+					<topPen lineWidth="0.0"/>
+					<leftPen lineWidth="0.0"/>
+					<bottomPen lineWidth="0.0"/>
+					<rightPen lineWidth="0.0"/>
+				</box>
+				<textElement textAlignment="Justified" verticalAlignment="Middle">
+					<paragraph leftIndent="2"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{qtyuom}]]></textFieldExpression>
+			</textField>
+		</band>
+	</detail>
+</jasperReport>
