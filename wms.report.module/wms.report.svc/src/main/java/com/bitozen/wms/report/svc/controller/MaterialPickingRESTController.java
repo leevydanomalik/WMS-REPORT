@@ -12,6 +12,7 @@ import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
 /**
@@ -22,18 +23,19 @@ import org.springframework.web.bind.annotation.RestController;
 @RequestMapping("report")
 public class MaterialPickingRESTController {    
 
-    private final String MATERIAL_PICKING_PDF = "Material_picking.jasper";
-
-    @Autowired
-    ReportService reportService;    
-
-    @RequestMapping(value = "/data.material.picking", method = RequestMethod.GET, produces = MediaType.APPLICATION_PDF_VALUE)
-    public byte[] generateMaterialPickingReportPDF(@RequestParam(value = "reportFormat", required = false) FileExtention reportFormat) throws GenericException {
+     private final String MATERIAL_PICKING_CSV = "Material_picking.jasper";
+     
+    @Autowired 
+    ReportService reportService;
+    
+    @ResponseBody
+    @RequestMapping(value = "data.material.picking.csv/", method = RequestMethod.GET,
+            produces = "text/csv")
+    public byte[] generateMaterialPickingReportCSV(@RequestParam(value = "reportFormat", required = false) FileExtention reportFormat ) throws GenericException {
         Map<String, Object> params = new HashMap<>();
-
         ByteArrayOutputStream os;
         reportService.setRptResourcePrefix("/report/");
-        os = (ByteArrayOutputStream) reportService.showReportJdbcDataSourceExportToPdfTxtCsvXls(reportFormat, MATERIAL_PICKING_PDF, params);
+        os = (ByteArrayOutputStream) reportService.showReportJdbcDataSourceExportToPdfTxtCsvXls(FileExtention.CSV, MATERIAL_PICKING_CSV,params);
 
         /*validate object*/
         Validate.notNull(os);
