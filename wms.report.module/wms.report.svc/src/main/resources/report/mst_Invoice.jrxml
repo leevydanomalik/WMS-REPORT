@@ -1,0 +1,519 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="RPT_Outsource" language="groovy" pageWidth="3000" pageHeight="2794" orientation="Landscape" columnWidth="2960" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="14d625b1-ce14-4c92-9199-4cd7d3fd5389">
+	<property name="ireport.zoom" value="1.1"/>
+	<property name="ireport.x" value="2106"/>
+	<property name="ireport.y" value="0"/>
+	<queryString>
+		<![CDATA[select
+CAST (inv.invclientpo AS json) :: json ->> 'objectID' AS clientpo,
+inv.invdesc,
+inv.invdocdate,
+inv.invnote,
+inv.invnumber,
+inv.invplandate,
+CAST (inv.invquotation AS json) :: json ->> 'objectID' AS quo,
+CAST (inv.invsalesorder AS json) :: json ->> 'objectID' AS so,
+CAST (inv.invshipping AS json) :: json ->> 'objectID' AS shipping,
+CAST (inv.invto AS json) :: json ->> 'custID' AS customer,
+CAST ( inv.es AS json) :: json -> 'client' ->> 'clientID' AS clientid,
+CAST ( inv.es AS json) :: json -> 'company' ->> 'compID' AS compid,
+inv.objectid,
+inv.tag,
+CAST (inv.type AS json) :: json ->> 'value' AS invtype,
+inv.version,
+CAST (inv.wpcustomer AS json) :: json ->> 'value' AS wpcust,
+CAST (inv.wppoclient AS json) :: json ->> 'value' AS wpclientpo,
+CAST (inv.wpsalesorder AS json) :: json ->> 'value' AS wpso,
+CAST (inv.wpshipping AS json) :: json ->> 'value' AS wpshipping
+from mst_invoice inv]]>
+	</queryString>
+	<field name="clientpo" class="java.lang.String"/>
+	<field name="invdesc" class="java.lang.String"/>
+	<field name="invdocdate" class="java.sql.Date"/>
+	<field name="invnote" class="java.lang.String"/>
+	<field name="invnumber" class="java.lang.Integer"/>
+	<field name="invplandate" class="java.sql.Date"/>
+	<field name="quo" class="java.lang.String"/>
+	<field name="so" class="java.lang.String"/>
+	<field name="shipping" class="java.lang.String"/>
+	<field name="customer" class="java.lang.String"/>
+	<field name="clientid" class="java.lang.String"/>
+	<field name="compid" class="java.lang.String"/>
+	<field name="objectid" class="java.lang.String"/>
+	<field name="tag" class="java.lang.String"/>
+	<field name="invtype" class="java.lang.String"/>
+	<field name="version" class="java.lang.String"/>
+	<field name="wpcust" class="java.lang.String"/>
+	<field name="wpclientpo" class="java.lang.String"/>
+	<field name="wpso" class="java.lang.String"/>
+	<field name="wpshipping" class="java.lang.String"/>
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<columnHeader>
+		<band height="42" splitType="Stretch">
+			<staticText>
+				<reportElement x="0" y="0" width="19" height="42" uuid="950d0d75-da80-46b0-87a1-94057d03b591"/>
+				<box>
+					<pen lineWidth="0.0"/>
+					<topPen lineWidth="0.0"/>
+					<leftPen lineWidth="0.0"/>
+					<bottomPen lineWidth="0.0"/>
+					<rightPen lineWidth="0.0"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle"/>
+				<text><![CDATA[No.]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="266" y="0" width="138" height="42" uuid="ec33b7a2-7323-48b6-a5dc-26b025d6c178"/>
+				<box>
+					<pen lineWidth="0.0"/>
+					<topPen lineWidth="0.0"/>
+					<leftPen lineWidth="0.0"/>
+					<bottomPen lineWidth="0.0"/>
+					<rightPen lineWidth="0.0"/>
+				</box>
+				<textElement verticalAlignment="Middle">
+					<paragraph leftIndent="2"/>
+				</textElement>
+				<text><![CDATA[Invoice Type]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="144" y="0" width="122" height="42" uuid="c70410f5-c06a-4bd2-beb5-2074df89bfb9"/>
+				<box>
+					<pen lineWidth="0.0"/>
+					<topPen lineWidth="0.0"/>
+					<leftPen lineWidth="0.0"/>
+					<bottomPen lineWidth="0.0"/>
+					<rightPen lineWidth="0.0"/>
+				</box>
+				<textElement verticalAlignment="Middle">
+					<paragraph leftIndent="2"/>
+				</textElement>
+				<text><![CDATA[Invoice Tag]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="404" y="0" width="125" height="42" uuid="d86a14be-a9a2-44b4-b985-3f4cbd778955"/>
+				<box>
+					<pen lineWidth="0.0"/>
+					<topPen lineWidth="0.0"/>
+					<leftPen lineWidth="0.0"/>
+					<bottomPen lineWidth="0.0"/>
+					<rightPen lineWidth="0.0"/>
+				</box>
+				<textElement verticalAlignment="Middle">
+					<paragraph leftIndent="2"/>
+				</textElement>
+				<text><![CDATA[Invoice Client PO]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="529" y="0" width="123" height="42" uuid="40d41b55-0831-4f5e-adcc-95a547f62423"/>
+				<box>
+					<pen lineWidth="0.0"/>
+					<topPen lineWidth="0.0"/>
+					<leftPen lineWidth="0.0"/>
+					<bottomPen lineWidth="0.0"/>
+					<rightPen lineWidth="0.0"/>
+				</box>
+				<textElement verticalAlignment="Middle">
+					<paragraph leftIndent="2"/>
+				</textElement>
+				<text><![CDATA[Client ID]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="652" y="0" width="136" height="42" uuid="e6c356c3-c2a7-4e62-ab99-941cdab6334e"/>
+				<textElement verticalAlignment="Middle">
+					<paragraph leftIndent="2"/>
+				</textElement>
+				<text><![CDATA[Company ID]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="19" y="0" width="125" height="42" uuid="5713d354-1137-4e7b-8fd8-62de3f0e52c4"/>
+				<box>
+					<pen lineWidth="0.0"/>
+					<topPen lineWidth="0.0"/>
+					<leftPen lineWidth="0.0"/>
+					<bottomPen lineWidth="0.0"/>
+					<rightPen lineWidth="0.0"/>
+				</box>
+				<textElement verticalAlignment="Middle">
+					<paragraph leftIndent="2"/>
+				</textElement>
+				<text><![CDATA[Invoice ID]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="788" y="0" width="129" height="42" uuid="7e2d6b33-1565-4729-91e2-a559cb488d15"/>
+				<textElement verticalAlignment="Middle">
+					<paragraph leftIndent="2"/>
+				</textElement>
+				<text><![CDATA[Invoice Desc]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="917" y="0" width="126" height="42" uuid="fb967296-e91e-4c28-a408-711c6dd99b5a"/>
+				<textElement verticalAlignment="Middle">
+					<paragraph leftIndent="2"/>
+				</textElement>
+				<text><![CDATA[Invoice Doc Date]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="1043" y="0" width="101" height="42" uuid="13a5191c-bd6b-4a44-bbdd-2d6fd52a69dd"/>
+				<textElement verticalAlignment="Middle">
+					<paragraph leftIndent="2"/>
+				</textElement>
+				<text><![CDATA[Invoice Note]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="1392" y="0" width="114" height="42" uuid="59bc95df-8ef0-42ec-af40-b8dc0f82191f"/>
+				<textElement verticalAlignment="Middle">
+					<paragraph leftIndent="2"/>
+				</textElement>
+				<text><![CDATA[Quotation ID]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="1719" y="0" width="109" height="42" uuid="5fee0f19-1a1b-4594-8811-266a784ff0fc"/>
+				<textElement verticalAlignment="Middle">
+					<paragraph leftIndent="2"/>
+				</textElement>
+				<text><![CDATA[Customer ID]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="1144" y="0" width="117" height="42" uuid="5ef899b6-4c87-4216-aee4-416b8846b50d"/>
+				<textElement verticalAlignment="Middle">
+					<paragraph leftIndent="2"/>
+				</textElement>
+				<text><![CDATA[Invoice Number]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="1261" y="0" width="131" height="42" uuid="7a37c919-9976-49d2-bec9-c122c48e2042"/>
+				<textElement verticalAlignment="Middle">
+					<paragraph leftIndent="2"/>
+				</textElement>
+				<text><![CDATA[Invoice Plan Date]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="1828" y="0" width="122" height="42" uuid="4dd9fc6c-eb14-4e0e-abe5-8895720be884"/>
+				<textElement verticalAlignment="Middle">
+					<paragraph leftIndent="2"/>
+				</textElement>
+				<text><![CDATA[WP Customer]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="1506" y="0" width="108" height="42" uuid="030f5e80-a2f6-4701-b6cf-0a3accd2b693"/>
+				<textElement verticalAlignment="Middle">
+					<paragraph leftIndent="2"/>
+				</textElement>
+				<text><![CDATA[Sales Order ID]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="1614" y="0" width="105" height="42" uuid="bb0cee1c-9c64-40c7-aff1-f8e1928c17d8"/>
+				<textElement verticalAlignment="Middle">
+					<paragraph leftIndent="2"/>
+				</textElement>
+				<text><![CDATA[Shipping ID]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="1950" y="0" width="122" height="42" uuid="36043ff1-c2d9-4016-8658-bfd3dfc88dd6"/>
+				<textElement verticalAlignment="Middle">
+					<paragraph leftIndent="2"/>
+				</textElement>
+				<text><![CDATA[WP Client Po]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="2072" y="0" width="122" height="42" uuid="ae5d20b6-d88b-4456-8f3e-95ce7b8a1068"/>
+				<textElement verticalAlignment="Middle">
+					<paragraph leftIndent="2"/>
+				</textElement>
+				<text><![CDATA[WP SO]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="2194" y="0" width="106" height="42" uuid="b0ff2d0f-dd99-47ce-82e9-1a34ffd365eb"/>
+				<textElement verticalAlignment="Middle">
+					<paragraph leftIndent="2"/>
+				</textElement>
+				<text><![CDATA[WP Shipping]]></text>
+			</staticText>
+		</band>
+	</columnHeader>
+	<detail>
+		<band height="22" splitType="Stretch">
+			<textField>
+				<reportElement x="0" y="0" width="19" height="22" uuid="1a46217e-df95-4cf4-ba9d-2b0d3c4ee3b8"/>
+				<box>
+					<pen lineWidth="0.0"/>
+					<topPen lineWidth="0.0"/>
+					<leftPen lineWidth="0.0"/>
+					<bottomPen lineWidth="0.0"/>
+					<rightPen lineWidth="0.0"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle"/>
+				<textFieldExpression><![CDATA[$V{COLUMN_COUNT}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="19" y="0" width="125" height="22" uuid="91f65e01-e56d-4341-9ca3-2435dbbd5b4a"/>
+				<box>
+					<pen lineWidth="0.0"/>
+					<topPen lineWidth="0.0"/>
+					<leftPen lineWidth="0.0"/>
+					<bottomPen lineWidth="0.0"/>
+					<rightPen lineWidth="0.0"/>
+				</box>
+				<textElement textAlignment="Justified" verticalAlignment="Middle">
+					<paragraph leftIndent="2"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{objectid}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="144" y="0" width="122" height="22" uuid="a2b38061-d5f0-4c44-a2ea-6b4f3bd7b331"/>
+				<box>
+					<pen lineWidth="0.0"/>
+					<topPen lineWidth="0.0"/>
+					<leftPen lineWidth="0.0"/>
+					<bottomPen lineWidth="0.0"/>
+					<rightPen lineWidth="0.0"/>
+				</box>
+				<textElement textAlignment="Justified" verticalAlignment="Middle">
+					<paragraph leftIndent="2"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{tag}]]></textFieldExpression>
+			</textField>
+			<textField pattern="">
+				<reportElement x="266" y="0" width="138" height="22" uuid="72d0a1f8-6a02-4589-a2ed-1ac1f7e652be"/>
+				<box>
+					<pen lineWidth="0.0"/>
+					<topPen lineWidth="0.0"/>
+					<leftPen lineWidth="0.0"/>
+					<bottomPen lineWidth="0.0"/>
+					<rightPen lineWidth="0.0"/>
+				</box>
+				<textElement textAlignment="Justified" verticalAlignment="Middle">
+					<paragraph leftIndent="2"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{invtype}]]></textFieldExpression>
+			</textField>
+			<textField pattern="" isBlankWhenNull="true">
+				<reportElement x="404" y="0" width="125" height="22" uuid="9158dd81-0282-44ea-b062-01ef670d08e2"/>
+				<box>
+					<pen lineWidth="0.0"/>
+					<topPen lineWidth="0.0"/>
+					<leftPen lineWidth="0.0"/>
+					<bottomPen lineWidth="0.0"/>
+					<rightPen lineWidth="0.0"/>
+				</box>
+				<textElement textAlignment="Justified" verticalAlignment="Middle">
+					<paragraph leftIndent="2"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{clientpo}]]></textFieldExpression>
+			</textField>
+			<textField isBlankWhenNull="true">
+				<reportElement x="529" y="0" width="123" height="22" uuid="cf221553-11c6-4bcf-9f65-9cab882d99eb"/>
+				<box>
+					<pen lineWidth="0.0"/>
+					<topPen lineWidth="0.0"/>
+					<leftPen lineWidth="0.0"/>
+					<bottomPen lineWidth="0.0"/>
+					<rightPen lineWidth="0.0"/>
+				</box>
+				<textElement textAlignment="Justified" verticalAlignment="Middle">
+					<paragraph leftIndent="2"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{clientid}]]></textFieldExpression>
+			</textField>
+			<textField isBlankWhenNull="true">
+				<reportElement x="652" y="0" width="136" height="22" uuid="ae196a0a-ca3d-46f6-a259-b5bb1cf98a39"/>
+				<box>
+					<pen lineWidth="0.0"/>
+					<topPen lineWidth="0.0"/>
+					<leftPen lineWidth="0.0"/>
+					<bottomPen lineWidth="0.0"/>
+					<rightPen lineWidth="0.0"/>
+				</box>
+				<textElement textAlignment="Justified" verticalAlignment="Middle">
+					<paragraph leftIndent="2"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{compid}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="788" y="0" width="129" height="22" uuid="dcf68497-1ac9-4ad6-a5b5-79775425ca7a"/>
+				<box>
+					<pen lineWidth="0.0"/>
+					<topPen lineWidth="0.0"/>
+					<leftPen lineWidth="0.0"/>
+					<bottomPen lineWidth="0.0"/>
+					<rightPen lineWidth="0.0"/>
+				</box>
+				<textElement textAlignment="Justified" verticalAlignment="Middle">
+					<paragraph leftIndent="2"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{invdesc}]]></textFieldExpression>
+			</textField>
+			<textField pattern="dd/MM/yyyy" isBlankWhenNull="true">
+				<reportElement x="917" y="0" width="126" height="22" uuid="ffd40ec2-2dcd-4622-a361-f57a51717e7b"/>
+				<box>
+					<pen lineWidth="0.0"/>
+					<topPen lineWidth="0.0"/>
+					<leftPen lineWidth="0.0"/>
+					<bottomPen lineWidth="0.0"/>
+					<rightPen lineWidth="0.0"/>
+				</box>
+				<textElement textAlignment="Justified" verticalAlignment="Middle">
+					<paragraph leftIndent="2"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{invdocdate}]]></textFieldExpression>
+			</textField>
+			<textField pattern="">
+				<reportElement x="1043" y="0" width="101" height="22" uuid="1fdb7281-9420-409c-a508-1c87bcf6dfc5"/>
+				<box>
+					<pen lineWidth="0.0"/>
+					<topPen lineWidth="0.0"/>
+					<leftPen lineWidth="0.0"/>
+					<bottomPen lineWidth="0.0"/>
+					<rightPen lineWidth="0.0"/>
+				</box>
+				<textElement textAlignment="Justified" verticalAlignment="Middle">
+					<paragraph leftIndent="2"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{invnote}]]></textFieldExpression>
+			</textField>
+			<textField isBlankWhenNull="true">
+				<reportElement x="1144" y="0" width="117" height="22" uuid="bbce78ba-4434-42f6-ae94-9154ffebece0"/>
+				<box>
+					<pen lineWidth="0.0"/>
+					<topPen lineWidth="0.0"/>
+					<leftPen lineWidth="0.0"/>
+					<bottomPen lineWidth="0.0"/>
+					<rightPen lineWidth="0.0"/>
+				</box>
+				<textElement textAlignment="Justified" verticalAlignment="Middle">
+					<paragraph leftIndent="2"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{invnumber}]]></textFieldExpression>
+			</textField>
+			<textField pattern="dd/MM/yyyy" isBlankWhenNull="true">
+				<reportElement x="1261" y="0" width="131" height="22" uuid="94e04a45-0486-4431-a9c6-204c20ed676b"/>
+				<box>
+					<pen lineWidth="0.0"/>
+					<topPen lineWidth="0.0"/>
+					<leftPen lineWidth="0.0"/>
+					<bottomPen lineWidth="0.0"/>
+					<rightPen lineWidth="0.0"/>
+				</box>
+				<textElement textAlignment="Justified" verticalAlignment="Middle">
+					<paragraph leftIndent="2"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{invplandate}]]></textFieldExpression>
+			</textField>
+			<textField isBlankWhenNull="true">
+				<reportElement x="1392" y="0" width="114" height="22" uuid="df7e7926-56a0-4ac1-898c-084814ed5f0d"/>
+				<box>
+					<pen lineWidth="0.0"/>
+					<topPen lineWidth="0.0"/>
+					<leftPen lineWidth="0.0"/>
+					<bottomPen lineWidth="0.0"/>
+					<rightPen lineWidth="0.0"/>
+				</box>
+				<textElement textAlignment="Justified" verticalAlignment="Middle">
+					<paragraph leftIndent="2"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{quo}]]></textFieldExpression>
+			</textField>
+			<textField isBlankWhenNull="true">
+				<reportElement x="1506" y="0" width="108" height="22" uuid="8002075a-b227-4caf-9a96-a1c5150dd5cb"/>
+				<box>
+					<pen lineWidth="0.0"/>
+					<topPen lineWidth="0.0"/>
+					<leftPen lineWidth="0.0"/>
+					<bottomPen lineWidth="0.0"/>
+					<rightPen lineWidth="0.0"/>
+				</box>
+				<textElement textAlignment="Justified" verticalAlignment="Middle">
+					<paragraph leftIndent="2"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{so}]]></textFieldExpression>
+			</textField>
+			<textField isBlankWhenNull="true">
+				<reportElement x="1614" y="0" width="105" height="22" uuid="9b84d153-55d7-4cc6-a799-45860ae71a2b"/>
+				<box>
+					<pen lineWidth="0.0"/>
+					<topPen lineWidth="0.0"/>
+					<leftPen lineWidth="0.0"/>
+					<bottomPen lineWidth="0.0"/>
+					<rightPen lineWidth="0.0"/>
+				</box>
+				<textElement textAlignment="Justified" verticalAlignment="Middle">
+					<paragraph leftIndent="2"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{shipping}]]></textFieldExpression>
+			</textField>
+			<textField isBlankWhenNull="true">
+				<reportElement x="1719" y="0" width="109" height="22" uuid="d1385625-4992-42bd-902a-80761b51e43c"/>
+				<box>
+					<pen lineWidth="0.0"/>
+					<topPen lineWidth="0.0"/>
+					<leftPen lineWidth="0.0"/>
+					<bottomPen lineWidth="0.0"/>
+					<rightPen lineWidth="0.0"/>
+				</box>
+				<textElement textAlignment="Justified" verticalAlignment="Middle">
+					<paragraph leftIndent="2"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{customer}]]></textFieldExpression>
+			</textField>
+			<textField isBlankWhenNull="true">
+				<reportElement x="1828" y="0" width="122" height="22" uuid="0af6f005-3699-47fe-8f01-7f0481100893"/>
+				<box>
+					<pen lineWidth="0.0"/>
+					<topPen lineWidth="0.0"/>
+					<leftPen lineWidth="0.0"/>
+					<bottomPen lineWidth="0.0"/>
+					<rightPen lineWidth="0.0"/>
+				</box>
+				<textElement textAlignment="Justified" verticalAlignment="Middle">
+					<paragraph leftIndent="2"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{wpcust}]]></textFieldExpression>
+			</textField>
+			<textField isBlankWhenNull="true">
+				<reportElement x="1950" y="0" width="122" height="22" uuid="f931d0f8-8461-4b6c-93d0-a6321751034e"/>
+				<box>
+					<pen lineWidth="0.0"/>
+					<topPen lineWidth="0.0"/>
+					<leftPen lineWidth="0.0"/>
+					<bottomPen lineWidth="0.0"/>
+					<rightPen lineWidth="0.0"/>
+				</box>
+				<textElement textAlignment="Justified" verticalAlignment="Middle">
+					<paragraph leftIndent="2"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{wpclientpo}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="2072" y="0" width="122" height="22" uuid="1e9184a3-a4fe-46dc-a3e8-9f7454c2dc83"/>
+				<box>
+					<pen lineWidth="0.0"/>
+					<topPen lineWidth="0.0"/>
+					<leftPen lineWidth="0.0"/>
+					<bottomPen lineWidth="0.0"/>
+					<rightPen lineWidth="0.0"/>
+				</box>
+				<textElement textAlignment="Justified" verticalAlignment="Middle">
+					<paragraph leftIndent="2"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{wpso}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="2194" y="0" width="106" height="22" uuid="9c7a0b1c-4f9e-4a78-82c6-8a53846f79d8"/>
+				<box>
+					<pen lineWidth="0.0"/>
+					<topPen lineWidth="0.0"/>
+					<leftPen lineWidth="0.0"/>
+					<bottomPen lineWidth="0.0"/>
+					<rightPen lineWidth="0.0"/>
+				</box>
+				<textElement textAlignment="Justified" verticalAlignment="Middle">
+					<paragraph leftIndent="2"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{wpshipping}]]></textFieldExpression>
+			</textField>
+		</band>
+	</detail>
+</jasperReport>
