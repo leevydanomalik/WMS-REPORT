@@ -36,7 +36,7 @@ pipeline {
         }
         
         
-                stage('Push docker ${IMAGENAME}){
+                stage('Push docker ${IMAGENAME}'){
             steps {
                 withDockerRegistry([ credentialsId: "ae1b0e71-0d8a-4bad-9093-7ffcb42595ab", url: "https://index.docker.io/v1/" ]){
                     echo 'Push Docker image..'
