@@ -32,20 +32,20 @@ public class WMSReportApplication {
         SpringApplication.run(WMSReportApplication.class, args);
     }
     
-    @Bean
-    public RestTemplate restTemplate() throws KeyStoreException, NoSuchAlgorithmException, KeyManagementException {
-        TrustStrategy acceptingTrustStrategy = new TrustStrategy() {
-            @Override
-            public boolean isTrusted(X509Certificate[] x509Certificates, String s) throws CertificateException {
-                return true;
-            }
-        };
-        SSLContext sslContext = org.apache.http.ssl.SSLContexts.custom().loadTrustMaterial(null, acceptingTrustStrategy).build();
-        SSLConnectionSocketFactory csf = new SSLConnectionSocketFactory(sslContext, new NoopHostnameVerifier());
-        CloseableHttpClient httpClient = HttpClients.custom().setSSLSocketFactory(csf).build();
-        HttpComponentsClientHttpRequestFactory requestFactory = new HttpComponentsClientHttpRequestFactory();
-        requestFactory.setHttpClient(httpClient);
-        RestTemplate restTemplate = new RestTemplate(requestFactory);
-        return restTemplate;
-    }
+    // @Bean
+    // public RestTemplate restTemplate() throws KeyStoreException, NoSuchAlgorithmException, KeyManagementException {
+    //     TrustStrategy acceptingTrustStrategy = new TrustStrategy() {
+    //         @Override
+    //         public boolean isTrusted(X509Certificate[] x509Certificates, String s) throws CertificateException {
+    //             return true;
+    //         }
+    //     };
+    //     SSLContext sslContext = org.apache.http.ssl.SSLContexts.custom().loadTrustMaterial(null, acceptingTrustStrategy).build();
+    //     SSLConnectionSocketFactory csf = new SSLConnectionSocketFactory(sslContext, new NoopHostnameVerifier());
+    //     CloseableHttpClient httpClient = HttpClients.custom().setSSLSocketFactory(csf).build();
+    //     HttpComponentsClientHttpRequestFactory requestFactory = new HttpComponentsClientHttpRequestFactory();
+    //     requestFactory.setHttpClient(httpClient);
+    //     RestTemplate restTemplate = new RestTemplate(requestFactory);
+    //     return restTemplate;
+    // }
 }
