@@ -29,14 +29,14 @@ pipeline {
         
         stage('Docker Build - ${IMAGENAME}'){
             steps {
-                echo 'Building Command..'
-                sh "cd wms.trx.command.svc && mvn package docker:build -DskipTests"
-                sh "docker tag leevy/${IMAGENAMECMD}:latest leevy/${IMAGENAMECMD}:dev-${IMAGETAG}"
+                echo 'Building ${IMAGENAME} ...'
+                sh "cd wms.report.svc && mvn package docker:build -DskipTests"
+                sh "docker tag leevy/${IMAGENAME}:latest leevy/${IMAGENAME}:dev-${IMAGETAG}"
             }
         }
         
         
-                stage('Push docker ${IMAGENAME}){
+                stage('Push docker ${IMAGENAME}'){
             steps {
                 withDockerRegistry([ credentialsId: "ae1b0e71-0d8a-4bad-9093-7ffcb42595ab", url: "https://index.docker.io/v1/" ]){
                     echo 'Push Docker image..'
