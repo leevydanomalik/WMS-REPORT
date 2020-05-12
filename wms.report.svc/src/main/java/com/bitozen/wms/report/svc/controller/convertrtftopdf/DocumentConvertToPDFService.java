@@ -27,7 +27,6 @@ import java.util.Optional;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
-import org.springframework.context.annotation.PropertySource;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
 
@@ -36,7 +35,6 @@ import org.springframework.stereotype.Service;
  * @author amy
  */
 @Service
-@PropertySource("")
 @Slf4j
 public class DocumentConvertToPDFService {
 
@@ -45,7 +43,10 @@ public class DocumentConvertToPDFService {
 
     @Autowired
     private ReportTemplateRepository reportTemplateRepository;
-
+    
+    @Autowired
+    private PdfConvertService pdfConvertService;
+    
     @Autowired
     private ObjectMapper objectMapper;
 
@@ -95,11 +96,9 @@ public class DocumentConvertToPDFService {
 
     private void convertToPdf(ReportTemplate reportTemplate) throws DocumentException, FileNotFoundException, IOException {
         
-        PdfConvertService pdfaConvert = new PdfConvertService();
-  
         File inputFile = new File(BASE_UPLOAD_FOLDER + reportTemplate.getReportTemplateID() + FILE_RESULT_SUFFIX + ".rtf");
  
-         pdfaConvert.examine(inputFile,unoconvHome,outputDirFile);
+        pdfConvertService.examine(inputFile,unoconvHome,outputDirFile);
         inputFile.delete();
     }
 

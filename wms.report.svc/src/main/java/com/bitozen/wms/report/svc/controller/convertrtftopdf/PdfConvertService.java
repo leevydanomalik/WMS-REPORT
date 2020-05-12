@@ -6,11 +6,12 @@ import com.bitozen.wms.report.common.converterenggine.PdfaConverterOutput;
 import com.bitozen.wms.report.common.converterenggine.UnoconvTool;
 import com.bitozen.wms.report.common.exception.UnknownFileTypeException;
 import java.io.File;  
-import org.apache.logging.log4j.Logger; 
+import lombok.extern.slf4j.Slf4j;
+import org.springframework.stereotype.Component;
 
-
+@Component
+@Slf4j
 public class PdfConvertService {
-    private static Logger logger;
 
     private static final String DOC_TYPE = "doc";
     private static final String DOCM_TYPE = "docm";
@@ -26,7 +27,7 @@ public class PdfConvertService {
 
     public PdfaConverterOutput examine(File inputFile, boolean deleteConvertedFile , String unoconvHome,String outputDirFile) {
         if (inputFile == null) {
-            logger.warn("Invalid null file -- no-op");
+            log.error("Invalid null file -- no-op");
             throw new IllegalArgumentException("inputFile parameter is null.");
         }
 
