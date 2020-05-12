@@ -30,7 +30,7 @@ pipeline {
         stage('Docker Build - ${IMAGENAME}'){
             steps {
                 echo 'Building ${IMAGENAME} ...'
-                sh "cd wms.report.svc && mvn package docker:build -DskipTests"
+                sh "cd wms.report.svc && mvn clean package docker:build -DskipTests"
                 sh "docker tag leevy/${IMAGENAME}:latest leevy/${IMAGENAME}:dev-${IMAGETAG}"
             }
         }
