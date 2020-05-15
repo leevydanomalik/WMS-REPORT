@@ -21,7 +21,8 @@
 	mp.frstopdate,
 	mp.frreff,
 	CAST ( mp.frtype AS json ) ->> 'value' AS frtype,
-	CAST ( mp.frstatus AS json ) ->> 'value' AS frstatus
+	CAST ( mp.frstatus AS json ) ->> 'value' AS frstatus,
+	CAST ( mp.frgroupid AS json ) ->> 'value' AS frgroupid
 FROM
 	mst_pricing mp]]>
 	</queryString>
@@ -42,6 +43,7 @@ FROM
 	<field name="frreff" class="java.lang.String"/>
 	<field name="frtype" class="java.lang.String"/>
 	<field name="frstatus" class="java.lang.String"/>
+	<field name="frgroupid" class="java.lang.String"/>
 	<background>
 		<band splitType="Stretch"/>
 	</background>
@@ -297,6 +299,20 @@ FROM
 				</textElement>
 				<text><![CDATA[FR Status]]></text>
 			</staticText>
+			<staticText>
+				<reportElement uuid="41e4fc78-65f1-450d-be50-7d68cab3cb7b" x="3007" y="0" width="176" height="42"/>
+				<box>
+					<pen lineWidth="0.0"/>
+					<topPen lineWidth="0.0"/>
+					<leftPen lineWidth="0.0"/>
+					<bottomPen lineWidth="0.0"/>
+					<rightPen lineWidth="0.0"/>
+				</box>
+				<textElement verticalAlignment="Middle">
+					<paragraph leftIndent="2"/>
+				</textElement>
+				<text><![CDATA[FR Group ID]]></text>
+			</staticText>
 		</band>
 	</columnHeader>
 	<detail>
@@ -550,6 +566,20 @@ FROM
 					<paragraph leftIndent="2"/>
 				</textElement>
 				<textFieldExpression><![CDATA[$F{frstatus}]]></textFieldExpression>
+			</textField>
+			<textField pattern="">
+				<reportElement uuid="2e34f242-2599-4dc0-b10c-cc744b5aa0d1" x="3007" y="0" width="176" height="22"/>
+				<box>
+					<pen lineWidth="0.0"/>
+					<topPen lineWidth="0.0"/>
+					<leftPen lineWidth="0.0"/>
+					<bottomPen lineWidth="0.0"/>
+					<rightPen lineWidth="0.0"/>
+				</box>
+				<textElement textAlignment="Justified" verticalAlignment="Middle">
+					<paragraph leftIndent="2"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{frgroupid}]]></textFieldExpression>
 			</textField>
 		</band>
 	</detail>

@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="RPT_Outsource" language="groovy" pageWidth="3268" pageHeight="2794" orientation="Landscape" columnWidth="3228" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="14d625b1-ce14-4c92-9199-4cd7d3fd5389">
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="RPT_Outsource" language="groovy" pageWidth="3488" pageHeight="2794" orientation="Landscape" columnWidth="3448" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="14d625b1-ce14-4c92-9199-4cd7d3fd5389">
 	<property name="ireport.zoom" value="1.0"/>
-	<property name="ireport.x" value="2417"/>
+	<property name="ireport.x" value="2637"/>
 	<property name="ireport.y" value="0"/>
 	<queryString>
 		<![CDATA[SELECT
@@ -22,7 +22,8 @@
 	mc.custpicemail,
 	mc.custpicphone,
 	CAST ( mc.custtype AS json ) ->> 'value' AS custtype,
-	CAST ( mc.custstatus AS json ) ->> 'value' AS custstatus
+	CAST ( mc.custstatus AS json ) ->> 'value' AS custstatus,
+	CAST ( mc.custgroupid AS json ) ->> 'value' AS custgroupid
 FROM
 	mst_customer mc]]>
 	</queryString>
@@ -44,6 +45,7 @@ FROM
 	<field name="custpicphone" class="java.lang.String"/>
 	<field name="custtype" class="java.lang.String"/>
 	<field name="custstatus" class="java.lang.String"/>
+	<field name="custgroupid" class="java.lang.String"/>
 	<background>
 		<band splitType="Stretch"/>
 	</background>
@@ -313,6 +315,20 @@ FROM
 				</textElement>
 				<text><![CDATA[Customer PIC Status]]></text>
 			</staticText>
+			<staticText>
+				<reportElement uuid="3507beab-6738-45e6-ab44-cd072fb9337b" x="3183" y="0" width="176" height="42"/>
+				<box>
+					<pen lineWidth="0.0"/>
+					<topPen lineWidth="0.0"/>
+					<leftPen lineWidth="0.0"/>
+					<bottomPen lineWidth="0.0"/>
+					<rightPen lineWidth="0.0"/>
+				</box>
+				<textElement verticalAlignment="Middle">
+					<paragraph leftIndent="2"/>
+				</textElement>
+				<text><![CDATA[Customer Group ID]]></text>
+			</staticText>
 		</band>
 	</columnHeader>
 	<detail>
@@ -580,6 +596,20 @@ FROM
 					<paragraph leftIndent="2"/>
 				</textElement>
 				<textFieldExpression><![CDATA[$F{custstatus}]]></textFieldExpression>
+			</textField>
+			<textField pattern="">
+				<reportElement uuid="f25df2e9-abe7-491e-91ff-46b9d986ce3f" x="3183" y="0" width="176" height="22"/>
+				<box>
+					<pen lineWidth="0.0"/>
+					<topPen lineWidth="0.0"/>
+					<leftPen lineWidth="0.0"/>
+					<bottomPen lineWidth="0.0"/>
+					<rightPen lineWidth="0.0"/>
+				</box>
+				<textElement textAlignment="Justified" verticalAlignment="Middle">
+					<paragraph leftIndent="2"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{custgroupid}]]></textFieldExpression>
 			</textField>
 		</band>
 	</detail>
