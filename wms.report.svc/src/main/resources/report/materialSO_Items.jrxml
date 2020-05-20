@@ -1,0 +1,586 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="RPT_Outsource" language="groovy" pageWidth="3000" pageHeight="2794" orientation="Landscape" columnWidth="2960" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="14d625b1-ce14-4c92-9199-4cd7d3fd5389">
+	<property name="ireport.zoom" value="1.1"/>
+	<property name="ireport.x" value="1880"/>
+	<property name="ireport.y" value="0"/>
+	<queryString>
+		<![CDATA[select
+mso.msoid,
+mso.msostockopnameid,
+mso.msoqtyphysic,
+mso.msoqtysap,
+mso.msoqtywms,
+mso.msonote,
+mso.msotag,
+CAST (mso.msouom AS json) :: json ->> 'value' AS uom,
+CAST (mso.msolocation AS json) :: json ->> 'cesClientID' AS clientid,
+CAST (mso.msolocation AS json) :: json ->> 'cesCompanyID' AS compid,
+CAST (mso.msomaterial AS json) :: json -> 'material' ->> 'materialID' AS materialid,
+CAST (mso.msomaterial AS json) :: json -> 'material' ->> 'materialName' AS materialname,
+CAST (mso.msomaterial AS json) :: json -> 'materialCategory' ->> 'mcID' AS mcid,
+CAST (mso.msomaterial AS json) :: json -> 'materialCategory' ->> 'mcID' AS mcname,
+CAST (mso.msomaterial AS json) :: json -> 'materialGroup' ->> 'mgID' AS mgid,
+CAST (mso.msomaterial AS json) :: json -> 'materialGroup' ->> 'mgName' AS mgname,
+CAST (mso.msomaterial AS json) :: json -> 'materialSegment' ->> 'msID' AS msid,
+CAST (mso.msomaterial AS json) :: json -> 'materialSegment' ->> 'msName' AS msname,
+CAST (mso.msomaterial AS json) :: json -> 'materialSeries' ->> 'msrID' AS msrid,
+CAST (mso.msomaterial AS json) :: json -> 'materialSeries' ->> 'msrName' AS msrname,
+CAST (mso.msomaterial AS json) :: json -> 'materialType' ->> 'mtID' AS mtid,
+CAST (mso.msomaterial AS json) :: json -> 'materialType' ->> 'mtName' AS mtname
+from mst_materialso mso;]]>
+	</queryString>
+	<field name="msoid" class="java.lang.String"/>
+	<field name="msostockopnameid" class="java.lang.String"/>
+	<field name="msoqtyphysic" class="java.lang.Long"/>
+	<field name="msoqtysap" class="java.lang.Long"/>
+	<field name="msoqtywms" class="java.lang.Long"/>
+	<field name="msonote" class="java.lang.String"/>
+	<field name="msotag" class="java.lang.String"/>
+	<field name="uom" class="java.lang.String"/>
+	<field name="clientid" class="java.lang.String"/>
+	<field name="compid" class="java.lang.String"/>
+	<field name="materialid" class="java.lang.String"/>
+	<field name="materialname" class="java.lang.String"/>
+	<field name="mcid" class="java.lang.String"/>
+	<field name="mcname" class="java.lang.String"/>
+	<field name="mgid" class="java.lang.String"/>
+	<field name="mgname" class="java.lang.String"/>
+	<field name="msid" class="java.lang.String"/>
+	<field name="msname" class="java.lang.String"/>
+	<field name="msrid" class="java.lang.String"/>
+	<field name="msrname" class="java.lang.String"/>
+	<field name="mtid" class="java.lang.String"/>
+	<field name="mtname" class="java.lang.String"/>
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<columnHeader>
+		<band height="42" splitType="Stretch">
+			<staticText>
+				<reportElement x="0" y="0" width="19" height="42" uuid="950d0d75-da80-46b0-87a1-94057d03b591"/>
+				<box>
+					<pen lineWidth="0.0"/>
+					<topPen lineWidth="0.0"/>
+					<leftPen lineWidth="0.0"/>
+					<bottomPen lineWidth="0.0"/>
+					<rightPen lineWidth="0.0"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle"/>
+				<text><![CDATA[No.]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="266" y="0" width="138" height="42" uuid="ec33b7a2-7323-48b6-a5dc-26b025d6c178"/>
+				<box>
+					<pen lineWidth="0.0"/>
+					<topPen lineWidth="0.0"/>
+					<leftPen lineWidth="0.0"/>
+					<bottomPen lineWidth="0.0"/>
+					<rightPen lineWidth="0.0"/>
+				</box>
+				<textElement verticalAlignment="Middle">
+					<paragraph leftIndent="2"/>
+				</textElement>
+				<text><![CDATA[Client ID]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="144" y="0" width="122" height="42" uuid="c70410f5-c06a-4bd2-beb5-2074df89bfb9"/>
+				<box>
+					<pen lineWidth="0.0"/>
+					<topPen lineWidth="0.0"/>
+					<leftPen lineWidth="0.0"/>
+					<bottomPen lineWidth="0.0"/>
+					<rightPen lineWidth="0.0"/>
+				</box>
+				<textElement verticalAlignment="Middle">
+					<paragraph leftIndent="2"/>
+				</textElement>
+				<text><![CDATA[Stock Opname ID]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="404" y="0" width="125" height="42" uuid="d86a14be-a9a2-44b4-b985-3f4cbd778955"/>
+				<box>
+					<pen lineWidth="0.0"/>
+					<topPen lineWidth="0.0"/>
+					<leftPen lineWidth="0.0"/>
+					<bottomPen lineWidth="0.0"/>
+					<rightPen lineWidth="0.0"/>
+				</box>
+				<textElement verticalAlignment="Middle">
+					<paragraph leftIndent="2"/>
+				</textElement>
+				<text><![CDATA[Company ID]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="529" y="0" width="123" height="42" uuid="40d41b55-0831-4f5e-adcc-95a547f62423"/>
+				<box>
+					<pen lineWidth="0.0"/>
+					<topPen lineWidth="0.0"/>
+					<leftPen lineWidth="0.0"/>
+					<bottomPen lineWidth="0.0"/>
+					<rightPen lineWidth="0.0"/>
+				</box>
+				<textElement verticalAlignment="Middle">
+					<paragraph leftIndent="2"/>
+				</textElement>
+				<text><![CDATA[Material ID]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="652" y="0" width="136" height="42" uuid="e6c356c3-c2a7-4e62-ab99-941cdab6334e"/>
+				<textElement verticalAlignment="Middle">
+					<paragraph leftIndent="2"/>
+				</textElement>
+				<text><![CDATA[Material Name]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="19" y="0" width="125" height="42" uuid="5713d354-1137-4e7b-8fd8-62de3f0e52c4"/>
+				<box>
+					<pen lineWidth="0.0"/>
+					<topPen lineWidth="0.0"/>
+					<leftPen lineWidth="0.0"/>
+					<bottomPen lineWidth="0.0"/>
+					<rightPen lineWidth="0.0"/>
+				</box>
+				<textElement verticalAlignment="Middle">
+					<paragraph leftIndent="2"/>
+				</textElement>
+				<text><![CDATA[Material SO ID]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="788" y="0" width="110" height="42" uuid="f6ed7d19-2180-4bbb-9c56-39805fde7bb9"/>
+				<textElement verticalAlignment="Middle">
+					<paragraph leftIndent="2"/>
+				</textElement>
+				<text><![CDATA[Material Category ID]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="898" y="0" width="125" height="42" uuid="3eee55bb-85a1-464c-9873-4f7302cc218b"/>
+				<textElement textAlignment="Justified" verticalAlignment="Middle">
+					<paragraph leftIndent="2"/>
+				</textElement>
+				<text><![CDATA[Material Category Name]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="1023" y="0" width="110" height="42" uuid="67d7c016-4910-4ff7-baa5-6caf316191e6"/>
+				<textElement textAlignment="Justified" verticalAlignment="Middle">
+					<paragraph leftIndent="2"/>
+				</textElement>
+				<text><![CDATA[Material Group ID]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="1133" y="0" width="126" height="42" uuid="ec8b7656-d5af-42f9-987e-23650c5ac729"/>
+				<textElement textAlignment="Justified" verticalAlignment="Middle">
+					<paragraph leftIndent="2"/>
+				</textElement>
+				<text><![CDATA[Material Group Name]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="1259" y="0" width="110" height="42" uuid="36ff56c1-6e80-433c-8141-6dce8ae8656d"/>
+				<textElement textAlignment="Justified" verticalAlignment="Middle">
+					<paragraph leftIndent="2"/>
+				</textElement>
+				<text><![CDATA[Material Segment ID]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="1369" y="0" width="126" height="42" uuid="ef90cd0c-0fe0-4d6f-8231-bd98ad86ab68"/>
+				<textElement textAlignment="Justified" verticalAlignment="Middle">
+					<paragraph leftIndent="2"/>
+				</textElement>
+				<text><![CDATA[Material Segment Name]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="1495" y="0" width="110" height="42" uuid="fb99cb22-976a-4feb-92f0-4a36198d56a1"/>
+				<textElement textAlignment="Justified" verticalAlignment="Middle">
+					<paragraph leftIndent="2"/>
+				</textElement>
+				<text><![CDATA[Material Series ID]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="1605" y="0" width="120" height="42" uuid="360e8031-307d-48c0-836b-873bcef4c333"/>
+				<textElement textAlignment="Justified" verticalAlignment="Middle">
+					<paragraph leftIndent="2"/>
+				</textElement>
+				<text><![CDATA[Material Series Name]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="1725" y="0" width="110" height="42" uuid="5901f325-1d13-4ef3-953a-62fb7db06341"/>
+				<textElement textAlignment="Justified" verticalAlignment="Middle">
+					<paragraph leftIndent="2"/>
+				</textElement>
+				<text><![CDATA[Material Type ID]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="1835" y="0" width="110" height="42" uuid="ecaf900d-4e3b-43a3-ab17-8775f4e38061"/>
+				<textElement textAlignment="Justified" verticalAlignment="Middle">
+					<paragraph leftIndent="2"/>
+				</textElement>
+				<text><![CDATA[Material Type Name]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="1945" y="0" width="84" height="42" uuid="fceec532-c80f-4285-9320-e2fb76a6db43"/>
+				<textElement textAlignment="Justified" verticalAlignment="Middle">
+					<paragraph leftIndent="2"/>
+				</textElement>
+				<text><![CDATA[Qty Physic]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="2029" y="0" width="84" height="42" uuid="cd14a2e8-c20a-4ef1-a928-5e09c9068d9e"/>
+				<textElement textAlignment="Justified" verticalAlignment="Middle">
+					<paragraph leftIndent="2"/>
+				</textElement>
+				<text><![CDATA[Qty Sap]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="2113" y="0" width="84" height="42" uuid="0ae7bc5a-139a-4e5d-8fb0-ecb96e32ce8b"/>
+				<textElement textAlignment="Justified" verticalAlignment="Middle">
+					<paragraph leftIndent="2"/>
+				</textElement>
+				<text><![CDATA[Qty Wms]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="2197" y="0" width="84" height="42" uuid="06eea2e7-07d0-4a15-833c-df9d3851e536"/>
+				<textElement textAlignment="Justified" verticalAlignment="Middle">
+					<paragraph leftIndent="2"/>
+				</textElement>
+				<text><![CDATA[Note]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="2281" y="0" width="84" height="42" uuid="e60f540e-bb47-4d7d-93d8-d4ccfebed3c3"/>
+				<textElement textAlignment="Justified" verticalAlignment="Middle">
+					<paragraph leftIndent="2"/>
+				</textElement>
+				<text><![CDATA[Tag]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="2365" y="0" width="84" height="42" uuid="947262ed-4bd5-4943-a845-f713f41081a1"/>
+				<textElement textAlignment="Justified" verticalAlignment="Middle">
+					<paragraph leftIndent="2"/>
+				</textElement>
+				<text><![CDATA[Uom]]></text>
+			</staticText>
+		</band>
+	</columnHeader>
+	<detail>
+		<band height="22" splitType="Stretch">
+			<textField>
+				<reportElement x="0" y="0" width="19" height="22" uuid="1a46217e-df95-4cf4-ba9d-2b0d3c4ee3b8"/>
+				<box>
+					<pen lineWidth="0.0"/>
+					<topPen lineWidth="0.0"/>
+					<leftPen lineWidth="0.0"/>
+					<bottomPen lineWidth="0.0"/>
+					<rightPen lineWidth="0.0"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle"/>
+				<textFieldExpression><![CDATA[$V{COLUMN_COUNT}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="19" y="0" width="125" height="22" uuid="91f65e01-e56d-4341-9ca3-2435dbbd5b4a"/>
+				<box>
+					<pen lineWidth="0.0"/>
+					<topPen lineWidth="0.0"/>
+					<leftPen lineWidth="0.0"/>
+					<bottomPen lineWidth="0.0"/>
+					<rightPen lineWidth="0.0"/>
+				</box>
+				<textElement textAlignment="Justified" verticalAlignment="Middle">
+					<paragraph leftIndent="2"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{msoid}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="144" y="0" width="122" height="22" uuid="a2b38061-d5f0-4c44-a2ea-6b4f3bd7b331"/>
+				<box>
+					<pen lineWidth="0.0"/>
+					<topPen lineWidth="0.0"/>
+					<leftPen lineWidth="0.0"/>
+					<bottomPen lineWidth="0.0"/>
+					<rightPen lineWidth="0.0"/>
+				</box>
+				<textElement textAlignment="Justified" verticalAlignment="Middle">
+					<paragraph leftIndent="2"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{msostockopnameid}]]></textFieldExpression>
+			</textField>
+			<textField pattern="" isBlankWhenNull="true">
+				<reportElement x="266" y="0" width="138" height="22" uuid="72d0a1f8-6a02-4589-a2ed-1ac1f7e652be"/>
+				<box>
+					<pen lineWidth="0.0"/>
+					<topPen lineWidth="0.0"/>
+					<leftPen lineWidth="0.0"/>
+					<bottomPen lineWidth="0.0"/>
+					<rightPen lineWidth="0.0"/>
+				</box>
+				<textElement textAlignment="Justified" verticalAlignment="Middle">
+					<paragraph leftIndent="2"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{clientid}]]></textFieldExpression>
+			</textField>
+			<textField pattern="" isBlankWhenNull="true">
+				<reportElement x="404" y="0" width="125" height="22" uuid="9158dd81-0282-44ea-b062-01ef670d08e2"/>
+				<box>
+					<pen lineWidth="0.0"/>
+					<topPen lineWidth="0.0"/>
+					<leftPen lineWidth="0.0"/>
+					<bottomPen lineWidth="0.0"/>
+					<rightPen lineWidth="0.0"/>
+				</box>
+				<textElement textAlignment="Justified" verticalAlignment="Middle">
+					<paragraph leftIndent="2"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{compid}]]></textFieldExpression>
+			</textField>
+			<textField isBlankWhenNull="true">
+				<reportElement x="529" y="0" width="123" height="22" uuid="cf221553-11c6-4bcf-9f65-9cab882d99eb"/>
+				<box>
+					<pen lineWidth="0.0"/>
+					<topPen lineWidth="0.0"/>
+					<leftPen lineWidth="0.0"/>
+					<bottomPen lineWidth="0.0"/>
+					<rightPen lineWidth="0.0"/>
+				</box>
+				<textElement textAlignment="Justified" verticalAlignment="Middle">
+					<paragraph leftIndent="2"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{materialid}]]></textFieldExpression>
+			</textField>
+			<textField isBlankWhenNull="true">
+				<reportElement x="652" y="0" width="136" height="22" uuid="ae196a0a-ca3d-46f6-a259-b5bb1cf98a39"/>
+				<box>
+					<pen lineWidth="0.0"/>
+					<topPen lineWidth="0.0"/>
+					<leftPen lineWidth="0.0"/>
+					<bottomPen lineWidth="0.0"/>
+					<rightPen lineWidth="0.0"/>
+				</box>
+				<textElement textAlignment="Justified" verticalAlignment="Middle">
+					<paragraph leftIndent="2"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{materialname}]]></textFieldExpression>
+			</textField>
+			<textField isBlankWhenNull="true">
+				<reportElement x="788" y="0" width="110" height="22" uuid="7f939da1-5054-445a-b016-7417f1eee688"/>
+				<box>
+					<pen lineWidth="0.0"/>
+					<topPen lineWidth="0.0"/>
+					<leftPen lineWidth="0.0"/>
+					<bottomPen lineWidth="0.0"/>
+					<rightPen lineWidth="0.0"/>
+				</box>
+				<textElement textAlignment="Justified" verticalAlignment="Middle">
+					<paragraph leftIndent="2"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{mcid}]]></textFieldExpression>
+			</textField>
+			<textField isBlankWhenNull="true">
+				<reportElement x="898" y="0" width="125" height="22" uuid="4a5a2acb-20cc-44b3-8fb1-187dcdb7a7e3"/>
+				<box>
+					<pen lineWidth="0.0"/>
+					<topPen lineWidth="0.0"/>
+					<leftPen lineWidth="0.0"/>
+					<bottomPen lineWidth="0.0"/>
+					<rightPen lineWidth="0.0"/>
+				</box>
+				<textElement textAlignment="Justified" verticalAlignment="Middle">
+					<paragraph leftIndent="2"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{mcname}]]></textFieldExpression>
+			</textField>
+			<textField isBlankWhenNull="true">
+				<reportElement x="1023" y="0" width="110" height="22" uuid="4941be99-291c-4e87-b5d9-2f021e940a70"/>
+				<box>
+					<pen lineWidth="0.0"/>
+					<topPen lineWidth="0.0"/>
+					<leftPen lineWidth="0.0"/>
+					<bottomPen lineWidth="0.0"/>
+					<rightPen lineWidth="0.0"/>
+				</box>
+				<textElement textAlignment="Justified" verticalAlignment="Middle">
+					<paragraph leftIndent="2"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{mgid}]]></textFieldExpression>
+			</textField>
+			<textField isBlankWhenNull="true">
+				<reportElement x="1133" y="0" width="126" height="22" uuid="3ce7499e-f34a-4c04-8049-56bf47963df8"/>
+				<box>
+					<pen lineWidth="0.0"/>
+					<topPen lineWidth="0.0"/>
+					<leftPen lineWidth="0.0"/>
+					<bottomPen lineWidth="0.0"/>
+					<rightPen lineWidth="0.0"/>
+				</box>
+				<textElement textAlignment="Justified" verticalAlignment="Middle">
+					<paragraph leftIndent="2"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{mgname}]]></textFieldExpression>
+			</textField>
+			<textField isBlankWhenNull="true">
+				<reportElement x="1259" y="0" width="110" height="22" uuid="6bf1024e-a9bf-465f-87ff-9f2207e3cd97"/>
+				<box>
+					<pen lineWidth="0.0"/>
+					<topPen lineWidth="0.0"/>
+					<leftPen lineWidth="0.0"/>
+					<bottomPen lineWidth="0.0"/>
+					<rightPen lineWidth="0.0"/>
+				</box>
+				<textElement textAlignment="Justified" verticalAlignment="Middle">
+					<paragraph leftIndent="2"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{msid}]]></textFieldExpression>
+			</textField>
+			<textField isBlankWhenNull="true">
+				<reportElement x="1369" y="0" width="126" height="22" uuid="bdcb6bf4-81d5-412a-b9e2-d8a5d0477c18"/>
+				<box>
+					<pen lineWidth="0.0"/>
+					<topPen lineWidth="0.0"/>
+					<leftPen lineWidth="0.0"/>
+					<bottomPen lineWidth="0.0"/>
+					<rightPen lineWidth="0.0"/>
+				</box>
+				<textElement textAlignment="Justified" verticalAlignment="Middle">
+					<paragraph leftIndent="2"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{msname}]]></textFieldExpression>
+			</textField>
+			<textField isBlankWhenNull="true">
+				<reportElement x="1495" y="0" width="110" height="22" uuid="70d0cc7f-df4e-4b9c-99c4-7dc770103ef7"/>
+				<box>
+					<pen lineWidth="0.0"/>
+					<topPen lineWidth="0.0"/>
+					<leftPen lineWidth="0.0"/>
+					<bottomPen lineWidth="0.0"/>
+					<rightPen lineWidth="0.0"/>
+				</box>
+				<textElement textAlignment="Justified" verticalAlignment="Middle">
+					<paragraph leftIndent="2"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{msrid}]]></textFieldExpression>
+			</textField>
+			<textField isBlankWhenNull="true">
+				<reportElement x="1605" y="0" width="120" height="22" uuid="429211f9-828a-4fcc-8105-58d32f6ce5ad"/>
+				<box>
+					<pen lineWidth="0.0"/>
+					<topPen lineWidth="0.0"/>
+					<leftPen lineWidth="0.0"/>
+					<bottomPen lineWidth="0.0"/>
+					<rightPen lineWidth="0.0"/>
+				</box>
+				<textElement textAlignment="Justified" verticalAlignment="Middle">
+					<paragraph leftIndent="2"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{msrname}]]></textFieldExpression>
+			</textField>
+			<textField isBlankWhenNull="true">
+				<reportElement x="1725" y="0" width="110" height="22" uuid="9fc1387a-bb49-4ad8-9854-487f30197c20"/>
+				<box>
+					<pen lineWidth="0.0"/>
+					<topPen lineWidth="0.0"/>
+					<leftPen lineWidth="0.0"/>
+					<bottomPen lineWidth="0.0"/>
+					<rightPen lineWidth="0.0"/>
+				</box>
+				<textElement textAlignment="Justified" verticalAlignment="Middle">
+					<paragraph leftIndent="2"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{mtid}]]></textFieldExpression>
+			</textField>
+			<textField isBlankWhenNull="true">
+				<reportElement x="1835" y="0" width="110" height="22" uuid="09854fb0-477f-40d1-9dac-5b6c5421ecc1"/>
+				<box>
+					<pen lineWidth="0.0"/>
+					<topPen lineWidth="0.0"/>
+					<leftPen lineWidth="0.0"/>
+					<bottomPen lineWidth="0.0"/>
+					<rightPen lineWidth="0.0"/>
+				</box>
+				<textElement textAlignment="Justified" verticalAlignment="Middle">
+					<paragraph leftIndent="2"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{mtname}]]></textFieldExpression>
+			</textField>
+			<textField isBlankWhenNull="true">
+				<reportElement x="1945" y="0" width="84" height="22" uuid="c80a0bb8-8445-456b-a907-308ad0096d66"/>
+				<box>
+					<pen lineWidth="0.0"/>
+					<topPen lineWidth="0.0"/>
+					<leftPen lineWidth="0.0"/>
+					<bottomPen lineWidth="0.0"/>
+					<rightPen lineWidth="0.0"/>
+				</box>
+				<textElement textAlignment="Justified" verticalAlignment="Middle">
+					<paragraph leftIndent="2"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{msoqtyphysic}]]></textFieldExpression>
+			</textField>
+			<textField isBlankWhenNull="true">
+				<reportElement x="2029" y="0" width="84" height="22" uuid="7783e286-8b11-4ec1-9edd-46af22c7f073"/>
+				<box>
+					<pen lineWidth="0.0"/>
+					<topPen lineWidth="0.0"/>
+					<leftPen lineWidth="0.0"/>
+					<bottomPen lineWidth="0.0"/>
+					<rightPen lineWidth="0.0"/>
+				</box>
+				<textElement textAlignment="Justified" verticalAlignment="Middle">
+					<paragraph leftIndent="2"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{msoqtysap}]]></textFieldExpression>
+			</textField>
+			<textField isBlankWhenNull="true">
+				<reportElement x="2113" y="0" width="84" height="22" uuid="1c2f3ade-4107-4352-8a49-5531528ef671"/>
+				<box>
+					<pen lineWidth="0.0"/>
+					<topPen lineWidth="0.0"/>
+					<leftPen lineWidth="0.0"/>
+					<bottomPen lineWidth="0.0"/>
+					<rightPen lineWidth="0.0"/>
+				</box>
+				<textElement textAlignment="Justified" verticalAlignment="Middle">
+					<paragraph leftIndent="2"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{msoqtywms}]]></textFieldExpression>
+			</textField>
+			<textField isBlankWhenNull="true">
+				<reportElement x="2197" y="0" width="84" height="22" uuid="6a938ab8-0f67-409e-8b7c-bc5ce50a2914"/>
+				<box>
+					<pen lineWidth="0.0"/>
+					<topPen lineWidth="0.0"/>
+					<leftPen lineWidth="0.0"/>
+					<bottomPen lineWidth="0.0"/>
+					<rightPen lineWidth="0.0"/>
+				</box>
+				<textElement textAlignment="Justified" verticalAlignment="Middle">
+					<paragraph leftIndent="2"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{msonote}]]></textFieldExpression>
+			</textField>
+			<textField isBlankWhenNull="true">
+				<reportElement x="2281" y="0" width="84" height="22" uuid="40dd3718-bd1a-4c1c-a6f8-9a8509627780"/>
+				<box>
+					<pen lineWidth="0.0"/>
+					<topPen lineWidth="0.0"/>
+					<leftPen lineWidth="0.0"/>
+					<bottomPen lineWidth="0.0"/>
+					<rightPen lineWidth="0.0"/>
+				</box>
+				<textElement textAlignment="Justified" verticalAlignment="Middle">
+					<paragraph leftIndent="2"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{msotag}]]></textFieldExpression>
+			</textField>
+			<textField isBlankWhenNull="true">
+				<reportElement x="2365" y="0" width="84" height="22" uuid="cdaa25ba-66f7-4371-be0b-a57ba31b3a39"/>
+				<box>
+					<pen lineWidth="0.0"/>
+					<topPen lineWidth="0.0"/>
+					<leftPen lineWidth="0.0"/>
+					<bottomPen lineWidth="0.0"/>
+					<rightPen lineWidth="0.0"/>
+				</box>
+				<textElement textAlignment="Justified" verticalAlignment="Middle">
+					<paragraph leftIndent="2"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{uom}]]></textFieldExpression>
+			</textField>
+		</band>
+	</detail>
+</jasperReport>
