@@ -1,0 +1,307 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="Talent Employee_List" language="groovy" pageWidth="555" pageHeight="802" whenNoDataType="NoDataSection" columnWidth="555" leftMargin="0" rightMargin="0" topMargin="0" bottomMargin="0" uuid="cc0f3af2-3346-40f1-b0d4-654e38f1ecbd">
+	<property name="ireport.zoom" value="1.9487171000000019"/>
+	<property name="ireport.x" value="0"/>
+	<property name="ireport.y" value="0"/>
+	<parameter name="ptNumber" class="java.lang.String">
+		<defaultValueExpression><![CDATA[]]></defaultValueExpression>
+	</parameter>
+	<queryString>
+		<![CDATA[SELECT
+	producttransfer.ptNumber,
+	producttransfer.materialID,
+	producttransfer.materialKimap,
+	producttransfer.materialName,
+	producttransfer.qtyUoM,
+	producttransfer.UoM
+FROM
+	(
+	SELECT
+		pt.objectid AS objectID,
+		CAST ( pt.ptdata AS json ) ->> 'ptNumber' AS ptNumber,
+		json_array_elements ( CAST ( CAST ( pt.ptdata AS json ) :: json -> 'orderItems' AS json ) :: json ) -> 'material' -> 'material' ->> 'materialID' AS materialID,
+		json_array_elements ( CAST ( CAST ( pt.ptdata AS json ) :: json -> 'orderItems' AS json ) :: json ) -> 'material' -> 'material' ->> 'materialKimap' AS materialKimap,
+		json_array_elements ( CAST ( CAST ( pt.ptdata AS json ) :: json -> 'orderItems' AS json ) :: json ) -> 'material' -> 'material' ->> 'materialName' AS materialName,
+		json_array_elements ( CAST ( CAST ( pt.ptdata AS json ) :: json -> 'orderItems' AS json ) :: json ) ->> 'qtyUoM' AS qtyUoM,
+		json_array_elements ( CAST ( CAST ( pt.ptdata AS json ) :: json -> 'orderItems' AS json ) :: json ) -> 'material' -> 'material' -> 'materialUoM' ->> 'value' AS UoM
+	FROM
+		trx_ptentryprojection pt
+	) producttransfer
+WHERE
+	producttransfer.ptNumber = $P{ptNumber}]]>
+	</queryString>
+	<field name="ptnumber" class="java.lang.String"/>
+	<field name="materialid" class="java.lang.String"/>
+	<field name="materialkimap" class="java.lang.String"/>
+	<field name="materialname" class="java.lang.String"/>
+	<field name="qtyuom" class="java.lang.String"/>
+	<field name="uom" class="java.lang.String"/>
+	<columnHeader>
+		<band height="30" splitType="Stretch">
+			<staticText>
+				<reportElement uuid="89293865-1766-4db1-86ab-9d5d7927b35e" x="3" y="10" width="100" height="20"/>
+				<textElement/>
+				<text><![CDATA[Material Items]]></text>
+			</staticText>
+		</band>
+	</columnHeader>
+	<detail>
+		<band height="85" splitType="Stretch">
+			<textField isStretchWithOverflow="true">
+				<reportElement uuid="1f29a50b-a9bd-41bb-ac88-e22aac36069a" stretchType="RelativeToTallestObject" x="3" y="24" width="25" height="20"/>
+				<box>
+					<pen lineWidth="1.0"/>
+					<topPen lineWidth="1.0"/>
+					<leftPen lineWidth="1.0"/>
+					<bottomPen lineWidth="1.0"/>
+					<rightPen lineWidth="1.0"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle"/>
+				<textFieldExpression><![CDATA[$V{COLUMN_COUNT}]]></textFieldExpression>
+			</textField>
+			<textField isStretchWithOverflow="true" isBlankWhenNull="true">
+				<reportElement uuid="312b04a2-6b91-4fe0-9aac-e69a0ec5c98b" stretchType="RelativeToTallestObject" x="473" y="24" width="41" height="20"/>
+				<box>
+					<pen lineWidth="1.0"/>
+					<topPen lineWidth="1.0"/>
+					<leftPen lineWidth="1.0"/>
+					<bottomPen lineWidth="1.0"/>
+					<rightPen lineWidth="1.0"/>
+				</box>
+				<textElement verticalAlignment="Middle">
+					<paragraph leftIndent="5"/>
+				</textElement>
+			</textField>
+			<textField isStretchWithOverflow="true" isBlankWhenNull="true">
+				<reportElement uuid="0fbcd7aa-5914-40e3-8579-bab2c1319390" stretchType="RelativeToTallestObject" x="514" y="24" width="41" height="20"/>
+				<box>
+					<pen lineWidth="1.0"/>
+					<topPen lineWidth="1.0"/>
+					<leftPen lineWidth="1.0"/>
+					<bottomPen lineWidth="1.0"/>
+					<rightPen lineWidth="1.0"/>
+				</box>
+				<textElement verticalAlignment="Middle">
+					<paragraph leftIndent="5"/>
+				</textElement>
+			</textField>
+			<textField isStretchWithOverflow="true" isBlankWhenNull="true">
+				<reportElement uuid="5ae0d91c-e488-4cf0-a7cd-291809e361e9" stretchType="RelativeToTallestObject" x="296" y="24" width="55" height="20"/>
+				<box>
+					<pen lineWidth="1.0"/>
+					<topPen lineWidth="1.0"/>
+					<leftPen lineWidth="1.0"/>
+					<bottomPen lineWidth="1.0"/>
+					<rightPen lineWidth="1.0"/>
+				</box>
+				<textElement verticalAlignment="Middle">
+					<paragraph leftIndent="5"/>
+				</textElement>
+			</textField>
+			<textField isStretchWithOverflow="true" isBlankWhenNull="true">
+				<reportElement uuid="17fbcf5c-17a7-43db-88ec-ac48c70e9439" stretchType="RelativeToTallestObject" x="118" y="24" width="123" height="20"/>
+				<box>
+					<pen lineWidth="1.0"/>
+					<topPen lineWidth="1.0"/>
+					<leftPen lineWidth="1.0"/>
+					<bottomPen lineWidth="1.0"/>
+					<rightPen lineWidth="1.0"/>
+				</box>
+				<textElement verticalAlignment="Middle">
+					<paragraph leftIndent="5"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{materialname}]]></textFieldExpression>
+			</textField>
+			<textField isStretchWithOverflow="true" pattern="" isBlankWhenNull="true">
+				<reportElement uuid="bc947e8c-b22e-4775-b798-c84b01317130" stretchType="RelativeToTallestObject" x="241" y="24" width="55" height="20"/>
+				<box>
+					<pen lineWidth="1.0"/>
+					<topPen lineWidth="1.0"/>
+					<leftPen lineWidth="1.0"/>
+					<bottomPen lineWidth="1.0"/>
+					<rightPen lineWidth="1.0"/>
+				</box>
+				<textElement verticalAlignment="Middle">
+					<paragraph leftIndent="5"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{uom}]]></textFieldExpression>
+			</textField>
+			<textField isStretchWithOverflow="true" isBlankWhenNull="true">
+				<reportElement uuid="d816e5d8-0cf7-4063-8f14-140b665ebdf4" stretchType="RelativeToTallestObject" x="420" y="24" width="53" height="20"/>
+				<box>
+					<pen lineWidth="1.0"/>
+					<topPen lineWidth="1.0"/>
+					<leftPen lineWidth="1.0"/>
+					<bottomPen lineWidth="1.0"/>
+					<rightPen lineWidth="1.0"/>
+				</box>
+				<textElement verticalAlignment="Middle">
+					<paragraph leftIndent="5"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{qtyuom}]]></textFieldExpression>
+			</textField>
+			<textField isStretchWithOverflow="true" isBlankWhenNull="true">
+				<reportElement uuid="5d2223c3-e4d4-4006-aa54-a86f47d2b6c2" stretchType="RelativeToTallestObject" x="351" y="24" width="69" height="20"/>
+				<box>
+					<pen lineWidth="1.0"/>
+					<topPen lineWidth="1.0"/>
+					<leftPen lineWidth="1.0"/>
+					<bottomPen lineWidth="1.0"/>
+					<rightPen lineWidth="1.0"/>
+				</box>
+				<textElement verticalAlignment="Middle">
+					<paragraph leftIndent="5"/>
+				</textElement>
+			</textField>
+			<textField isStretchWithOverflow="true" isBlankWhenNull="true">
+				<reportElement uuid="0e99530e-907c-4210-9977-03dc6b5efdc6" stretchType="RelativeToTallestObject" x="28" y="24" width="90" height="20"/>
+				<box>
+					<pen lineWidth="1.0"/>
+					<topPen lineWidth="1.0"/>
+					<leftPen lineWidth="1.0"/>
+					<bottomPen lineWidth="1.0"/>
+					<rightPen lineWidth="1.0"/>
+				</box>
+				<textElement verticalAlignment="Middle">
+					<paragraph leftIndent="5"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{materialkimap}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement uuid="5f63e046-6ca5-49ab-a3d6-8f81a423a3c2" mode="Opaque" x="473" y="9" width="41" height="15" backcolor="#FFFFFF"/>
+				<box>
+					<pen lineWidth="1.0"/>
+					<topPen lineWidth="1.0"/>
+					<leftPen lineWidth="1.0"/>
+					<bottomPen lineWidth="1.0"/>
+					<rightPen lineWidth="1.0"/>
+				</box>
+				<textElement verticalAlignment="Middle">
+					<font size="10" isBold="true"/>
+					<paragraph leftIndent="2"/>
+				</textElement>
+				<text><![CDATA[NOTE]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="c037f849-db54-45b5-ae5c-528c820df2d1" mode="Opaque" x="420" y="9" width="53" height="15" backcolor="#FFFFFF"/>
+				<box>
+					<pen lineWidth="1.0"/>
+					<topPen lineWidth="1.0"/>
+					<leftPen lineWidth="1.0"/>
+					<bottomPen lineWidth="1.0"/>
+					<rightPen lineWidth="1.0"/>
+				</box>
+				<textElement verticalAlignment="Middle">
+					<font size="10" isBold="true"/>
+					<paragraph leftIndent="2"/>
+				</textElement>
+				<text><![CDATA[QTY]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="4c933799-9ea2-4cd6-b04c-529b2eeaf52a" mode="Opaque" x="296" y="9" width="55" height="15" backcolor="#FFFFFF"/>
+				<box>
+					<pen lineWidth="1.0"/>
+					<topPen lineWidth="1.0"/>
+					<leftPen lineWidth="1.0"/>
+					<bottomPen lineWidth="1.0"/>
+					<rightPen lineWidth="1.0"/>
+				</box>
+				<textElement verticalAlignment="Middle">
+					<font size="10" isBold="true"/>
+					<paragraph leftIndent="3"/>
+				</textElement>
+				<text><![CDATA[LOBS/KG]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="cfe1839e-baaf-4340-aba6-19bd2b07836b" mode="Opaque" x="351" y="9" width="69" height="15" backcolor="#FFFFFF"/>
+				<box>
+					<pen lineWidth="1.0"/>
+					<topPen lineWidth="1.0"/>
+					<leftPen lineWidth="1.0"/>
+					<bottomPen lineWidth="1.0"/>
+					<rightPen lineWidth="1.0"/>
+				</box>
+				<textElement verticalAlignment="Middle">
+					<font size="10" isBold="true"/>
+					<paragraph leftIndent="3"/>
+				</textElement>
+				<text><![CDATA[WEIGHT/KG]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="0535d156-a486-4822-9e0c-04240bbbbe76" mode="Opaque" x="514" y="9" width="41" height="15" backcolor="#FFFFFF"/>
+				<box>
+					<pen lineWidth="1.0"/>
+					<topPen lineWidth="1.0"/>
+					<leftPen lineWidth="1.0"/>
+					<bottomPen lineWidth="1.0"/>
+					<rightPen lineWidth="1.0"/>
+				</box>
+				<textElement verticalAlignment="Middle">
+					<font size="10" isBold="true"/>
+					<paragraph leftIndent="2"/>
+				</textElement>
+				<text><![CDATA[BATCH]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="bcf3d8ec-c650-4a80-8743-f8e3b5fc664b" mode="Opaque" x="117" y="9" width="124" height="15" backcolor="#FFFFFF"/>
+				<box>
+					<pen lineWidth="1.0"/>
+					<topPen lineWidth="1.0"/>
+					<leftPen lineWidth="1.0"/>
+					<bottomPen lineWidth="1.0"/>
+					<rightPen lineWidth="1.0"/>
+				</box>
+				<textElement verticalAlignment="Middle">
+					<font size="10" isBold="true"/>
+					<paragraph leftIndent="3"/>
+				</textElement>
+				<text><![CDATA[NAME]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="0f01e0c4-255d-4fe2-ad0d-bb11f4e794d2" mode="Opaque" x="241" y="9" width="55" height="15" backcolor="#FFFFFF"/>
+				<box>
+					<pen lineWidth="1.0"/>
+					<topPen lineWidth="1.0"/>
+					<leftPen lineWidth="1.0"/>
+					<bottomPen lineWidth="1.0"/>
+					<rightPen lineWidth="1.0"/>
+				</box>
+				<textElement verticalAlignment="Middle">
+					<font size="10" isBold="true"/>
+					<paragraph leftIndent="2"/>
+				</textElement>
+				<text><![CDATA[UOM]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="2daad83e-8e68-44a5-83ad-fb12781b208e" mode="Opaque" x="3" y="9" width="25" height="15" backcolor="#FFFFFF"/>
+				<box>
+					<pen lineWidth="1.0"/>
+					<topPen lineWidth="1.0"/>
+					<leftPen lineWidth="1.0"/>
+					<bottomPen lineWidth="1.0"/>
+					<rightPen lineWidth="1.0"/>
+				</box>
+				<textElement verticalAlignment="Middle">
+					<font size="10" isBold="true"/>
+					<paragraph leftIndent="3"/>
+				</textElement>
+				<text><![CDATA[NO]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="e96dae35-b840-44fe-a1a9-6b1dd8f563c9" mode="Opaque" x="28" y="9" width="90" height="15" backcolor="#FFFFFF"/>
+				<box>
+					<pen lineWidth="1.0"/>
+					<topPen lineWidth="1.0"/>
+					<leftPen lineWidth="1.0"/>
+					<bottomPen lineWidth="1.0"/>
+					<rightPen lineWidth="1.0"/>
+				</box>
+				<textElement verticalAlignment="Middle">
+					<font size="10" isBold="true"/>
+					<paragraph leftIndent="3"/>
+				</textElement>
+				<text><![CDATA[KIMAP]]></text>
+			</staticText>
+		</band>
+	</detail>
+</jasperReport>
