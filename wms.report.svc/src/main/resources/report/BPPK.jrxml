@@ -2,7 +2,7 @@
 <jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="BPPK" language="groovy" pageWidth="595" pageHeight="842" columnWidth="555" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="27da7baa-c5e1-4c28-adcd-3aa014d3e0b2">
 	<property name="ireport.zoom" value="1.610510000000003"/>
 	<property name="ireport.x" value="0"/>
-	<property name="ireport.y" value="240"/>
+	<property name="ireport.y" value="0"/>
 	<parameter name="SUBREPORT_DIR" class="java.lang.String" isForPrompting="false">
 		<defaultValueExpression><![CDATA[""]]></defaultValueExpression>
 	</parameter>
@@ -91,7 +91,7 @@ WHERE
     ))]]></imageExpression>
 			</image>
 			<staticText>
-				<reportElement uuid="6468549a-dc1d-4f95-b53e-096af97cd488" x="46" y="23" width="146" height="17"/>
+				<reportElement uuid="6468549a-dc1d-4f95-b53e-096af97cd488" x="40" y="23" width="146" height="17"/>
 				<textElement textAlignment="Center" verticalAlignment="Top">
 					<font fontName="SansSerif" size="12" isBold="true"/>
 				</textElement>
@@ -257,7 +257,7 @@ Tracking]]></text>
 		<band height="62" splitType="Stretch">
 			<image>
 				<reportElement uuid="7439e378-bd84-4722-a3d3-6f8bef744e38" x="0" y="-283" width="134" height="45"/>
-				<imageExpression><![CDATA["pertamina.jpeg"]]></imageExpression>
+				<imageExpression><![CDATA[this.getClass().getResourceAsStream("/report/pertamina.jpeg")]]></imageExpression>
 			</image>
 			<subreport>
 				<reportElement uuid="23e55bfc-7dd3-4570-afb0-6015c8992ef9" x="3" y="0" width="551" height="62"/>
