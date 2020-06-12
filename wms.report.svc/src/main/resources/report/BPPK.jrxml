@@ -91,14 +91,14 @@ WHERE
     ))]]></imageExpression>
 			</image>
 			<staticText>
-				<reportElement uuid="6468549a-dc1d-4f95-b53e-096af97cd488" x="40" y="23" width="146" height="17"/>
+				<reportElement uuid="6468549a-dc1d-4f95-b53e-096af97cd488" x="41" y="28" width="146" height="17"/>
 				<textElement textAlignment="Center" verticalAlignment="Top">
-					<font fontName="SansSerif" size="12" isBold="true"/>
+					<font fontName="SansSerif" size="10" isBold="true"/>
 				</textElement>
 				<text><![CDATA[PT. Pertamina Lubricant Tbk]]></text>
 			</staticText>
 			<staticText>
-				<reportElement uuid="4c1276ea-80ef-43de-b876-5fd04482fed4" x="47" y="39" width="158" height="39"/>
+				<reportElement uuid="4c1276ea-80ef-43de-b876-5fd04482fed4" x="47" y="40" width="158" height="39"/>
 				<textElement textAlignment="Justified" verticalAlignment="Top">
 					<font fontName="SansSerif"/>
 				</textElement>
@@ -110,7 +110,7 @@ www.pertamina.com]]></text>
 			<staticText>
 				<reportElement uuid="fd2f483b-1e30-41ef-9484-d015e2a2f167" x="297" y="0" width="247" height="17"/>
 				<textElement textAlignment="Center" verticalAlignment="Top">
-					<font fontName="SansSerif" size="12" isBold="true"/>
+					<font fontName="SansSerif" size="10" isBold="true"/>
 				</textElement>
 				<text><![CDATA[BUKTI PENGIRIMAN PRODUK KEMASAN]]></text>
 			</staticText>
