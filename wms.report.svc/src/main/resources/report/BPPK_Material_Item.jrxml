@@ -40,7 +40,9 @@ WHERE
 		<band height="30" splitType="Stretch">
 			<staticText>
 				<reportElement uuid="89293865-1766-4db1-86ab-9d5d7927b35e" x="3" y="10" width="100" height="20"/>
-				<textElement/>
+				<textElement>
+					<font isBold="true"/>
+				</textElement>
 				<text><![CDATA[Material Items]]></text>
 			</staticText>
 		</band>
