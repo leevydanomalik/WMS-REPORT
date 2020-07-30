@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="RPT_Outsource" language="groovy" pageWidth="3000" pageHeight="2794" orientation="Landscape" columnWidth="2960" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="14d625b1-ce14-4c92-9199-4cd7d3fd5389">
 	<property name="ireport.zoom" value="1.1"/>
-	<property name="ireport.x" value="1431"/>
+	<property name="ireport.x" value="0"/>
 	<property name="ireport.y" value="0"/>
 	<queryString>
 		<![CDATA[select
@@ -9,10 +9,10 @@ mii.mimaterialinvetoryid as inventoryid,
 mii.mimaterialitemid as itemid,
 mii.miqty,
 mii.milastupdatedate,
-CAST (mii.mibinquant AS json) :: json ->> 'cesClientID' AS clientid,
-CAST (mii.mibinquant AS json) :: json ->> 'cesCompanyID' AS compid,
-CAST (mii.mimaterial AS json) :: json -> 'material' ->> 'materialID' AS materialid,
-CAST (mii.mimaterial AS json) :: json -> 'material' ->> 'materialName' AS materialname,
+CAST(mi.es AS json)  -> 'client' ->> 'clientID' AS clientid,
+CAST(mi.es AS json)  -> 'company' ->> 'compID' AS compid,
+CAST (mii.mimaterial AS json) -> 'material' ->> 'materialID' AS materialid,
+CAST (mii.mimaterial AS json) -> 'material' ->> 'materialName' AS materialname,
 CAST (mii.mimaterial AS json) :: json -> 'materialCategory' ->> 'mcID' AS mcid,
 CAST (mii.mimaterial AS json) :: json -> 'materialCategory' ->> 'mcID' AS mcname,
 CAST (mii.mimaterial AS json) :: json -> 'materialGroup' ->> 'mgID' AS mgid,
@@ -23,7 +23,8 @@ CAST (mii.mimaterial AS json) :: json -> 'materialSeries' ->> 'msrID' AS msrid,
 CAST (mii.mimaterial AS json) :: json -> 'materialSeries' ->> 'msrName' AS msrname,
 CAST (mii.mimaterial AS json) :: json -> 'materialType' ->> 'mtID' AS mtid,
 CAST (mii.mimaterial AS json) :: json -> 'materialType' ->> 'mtName' AS mtname
-from mst_materialinventoryitem mii;]]>
+from mst_materialinventoryitem mii
+LEFT JOIN mst_materialinventory mi ON mii.mimaterialinvetoryid = mi.miid;]]>
 	</queryString>
 	<field name="inventoryid" class="java.lang.String"/>
 	<field name="itemid" class="java.lang.String"/>
