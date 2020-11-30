@@ -10,16 +10,16 @@ CAST (mv.type AS json) :: json ->>'value' AS mvtype,
 CAST (mv.mvstatus AS json) :: json ->> 'value' AS mvstatus,
 CAST ( mv.es AS json) :: json -> 'client' ->> 'clientID' AS clientid,
 CAST ( mv.es AS json) :: json -> 'company' ->> 'compID' AS compid,
-CAST ( mv.mvdata AS json) :: json ->> 'mvAccountingPeriode' AS accperiode,
-CAST ( mv.mvdata AS json) :: json -> 'mvCurrecy' ->> 'value' AS mvcurrecy,
-CAST ( mv.mvdata AS json) :: json ->> 'mvDocDate' AS docdate,
-CAST ( mv.mvdata AS json) :: json -> 'mvEvaluationLevel' ->> 'cesClientID' AS cesclientid,
-CAST ( mv.mvdata AS json) :: json -> 'mvEvaluationLevel' ->> 'cesCompanyID' AS cescompanyid,
-CAST ( mv.mvdata AS json) :: json -> 'mvEvaluationLevel' ->> 'cesPlantID' AS cesplantid,
-CAST ( mv.mvdata AS json) :: json ->> 'mvNote' AS mvnote,
-CAST ( mv.mvdata AS json) :: json -> 'mvPeriodType' ->> 'value' AS mvperiodtype,
-CAST ( mv.mvdata AS json) :: json ->> 'mvPriceList' AS mvpricelist,
-CAST ( mv.mvdata AS json) :: json -> 'mvUom' ->> 'value' AS mvuom
+mv.mvaccountingperiode AS accperiode,
+CAST ( mv.mvcurrecy AS json) :: json ->> 'value' AS mvcurrecy,
+mv.mvdocdate AS docdate,
+CAST ( mv.mvevaluationlevel AS json) :: json ->> 'cesClientID' AS cesclientid,
+CAST ( mv.mvevaluationlevel AS json) :: json ->> 'cesCompanyID' AS cescompanyid,
+CAST ( mv.mvevaluationlevel AS json) :: json ->> 'cesPlantID' AS cesplantid,
+mv.mvnote AS mvnote,
+CAST ( mv.mvperiodtype AS json) :: json ->> 'value' AS mvperiodtype,
+CAST ( mv.mvpricelist AS json) :: json ->> 'mvPriceList' AS mvpricelist,
+CAST ( mv.mvuom AS json) :: json ->> 'value' AS mvuom
 
 from mst_materialvaluation mv]]>
 	</queryString>
@@ -45,7 +45,7 @@ from mst_materialvaluation mv]]>
 	<columnHeader>
 		<band height="42" splitType="Stretch">
 			<staticText>
-				<reportElement x="0" y="0" width="19" height="42" uuid="950d0d75-da80-46b0-87a1-94057d03b591"/>
+				<reportElement uuid="950d0d75-da80-46b0-87a1-94057d03b591" x="0" y="0" width="19" height="42"/>
 				<box>
 					<pen lineWidth="0.0"/>
 					<topPen lineWidth="0.0"/>
@@ -57,7 +57,7 @@ from mst_materialvaluation mv]]>
 				<text><![CDATA[No.]]></text>
 			</staticText>
 			<staticText>
-				<reportElement x="320" y="0" width="138" height="42" uuid="ec33b7a2-7323-48b6-a5dc-26b025d6c178"/>
+				<reportElement uuid="ec33b7a2-7323-48b6-a5dc-26b025d6c178" x="320" y="0" width="138" height="42"/>
 				<box>
 					<pen lineWidth="0.0"/>
 					<topPen lineWidth="0.0"/>
@@ -71,7 +71,7 @@ from mst_materialvaluation mv]]>
 				<text><![CDATA[Material Valuation Type]]></text>
 			</staticText>
 			<staticText>
-				<reportElement x="144" y="0" width="176" height="42" uuid="c70410f5-c06a-4bd2-beb5-2074df89bfb9"/>
+				<reportElement uuid="c70410f5-c06a-4bd2-beb5-2074df89bfb9" x="144" y="0" width="176" height="42"/>
 				<box>
 					<pen lineWidth="0.0"/>
 					<topPen lineWidth="0.0"/>
@@ -85,7 +85,7 @@ from mst_materialvaluation mv]]>
 				<text><![CDATA[Material Valuation Tag]]></text>
 			</staticText>
 			<staticText>
-				<reportElement x="458" y="0" width="125" height="42" uuid="d86a14be-a9a2-44b4-b985-3f4cbd778955"/>
+				<reportElement uuid="d86a14be-a9a2-44b4-b985-3f4cbd778955" x="458" y="0" width="125" height="42"/>
 				<box>
 					<pen lineWidth="0.0"/>
 					<topPen lineWidth="0.0"/>
@@ -99,7 +99,7 @@ from mst_materialvaluation mv]]>
 				<text><![CDATA[Material Valuation Status]]></text>
 			</staticText>
 			<staticText>
-				<reportElement x="583" y="0" width="123" height="42" uuid="40d41b55-0831-4f5e-adcc-95a547f62423"/>
+				<reportElement uuid="40d41b55-0831-4f5e-adcc-95a547f62423" x="583" y="0" width="123" height="42"/>
 				<box>
 					<pen lineWidth="0.0"/>
 					<topPen lineWidth="0.0"/>
@@ -113,14 +113,14 @@ from mst_materialvaluation mv]]>
 				<text><![CDATA[Client ID]]></text>
 			</staticText>
 			<staticText>
-				<reportElement x="706" y="0" width="136" height="42" uuid="e6c356c3-c2a7-4e62-ab99-941cdab6334e"/>
+				<reportElement uuid="e6c356c3-c2a7-4e62-ab99-941cdab6334e" x="706" y="0" width="136" height="42"/>
 				<textElement verticalAlignment="Middle">
 					<paragraph leftIndent="2"/>
 				</textElement>
 				<text><![CDATA[Company ID]]></text>
 			</staticText>
 			<staticText>
-				<reportElement x="19" y="0" width="125" height="42" uuid="5713d354-1137-4e7b-8fd8-62de3f0e52c4"/>
+				<reportElement uuid="5713d354-1137-4e7b-8fd8-62de3f0e52c4" x="19" y="0" width="125" height="42"/>
 				<box>
 					<pen lineWidth="0.0"/>
 					<topPen lineWidth="0.0"/>
@@ -134,70 +134,70 @@ from mst_materialvaluation mv]]>
 				<text><![CDATA[Material Valuation ID]]></text>
 			</staticText>
 			<staticText>
-				<reportElement x="842" y="0" width="164" height="42" uuid="7e2d6b33-1565-4729-91e2-a559cb488d15"/>
+				<reportElement uuid="7e2d6b33-1565-4729-91e2-a559cb488d15" x="842" y="0" width="164" height="42"/>
 				<textElement verticalAlignment="Middle">
 					<paragraph leftIndent="2"/>
 				</textElement>
 				<text><![CDATA[Account Periode]]></text>
 			</staticText>
 			<staticText>
-				<reportElement x="1006" y="0" width="164" height="42" uuid="fb967296-e91e-4c28-a408-711c6dd99b5a"/>
+				<reportElement uuid="fb967296-e91e-4c28-a408-711c6dd99b5a" x="1006" y="0" width="164" height="42"/>
 				<textElement verticalAlignment="Middle">
 					<paragraph leftIndent="2"/>
 				</textElement>
 				<text><![CDATA[Currecy]]></text>
 			</staticText>
 			<staticText>
-				<reportElement x="1170" y="0" width="164" height="42" uuid="13a5191c-bd6b-4a44-bbdd-2d6fd52a69dd"/>
+				<reportElement uuid="13a5191c-bd6b-4a44-bbdd-2d6fd52a69dd" x="1170" y="0" width="164" height="42"/>
 				<textElement verticalAlignment="Middle">
 					<paragraph leftIndent="2"/>
 				</textElement>
 				<text><![CDATA[Doc Date]]></text>
 			</staticText>
 			<staticText>
-				<reportElement x="1582" y="0" width="114" height="42" uuid="59bc95df-8ef0-42ec-af40-b8dc0f82191f"/>
+				<reportElement uuid="59bc95df-8ef0-42ec-af40-b8dc0f82191f" x="1582" y="0" width="114" height="42"/>
 				<textElement verticalAlignment="Middle">
 					<paragraph leftIndent="2"/>
 				</textElement>
 				<text><![CDATA[Ces Plant ID]]></text>
 			</staticText>
 			<staticText>
-				<reportElement x="1965" y="0" width="164" height="42" uuid="5fee0f19-1a1b-4594-8811-266a784ff0fc"/>
+				<reportElement uuid="5fee0f19-1a1b-4594-8811-266a784ff0fc" x="1965" y="0" width="164" height="42"/>
 				<textElement verticalAlignment="Middle">
 					<paragraph leftIndent="2"/>
 				</textElement>
 				<text><![CDATA[Price List]]></text>
 			</staticText>
 			<staticText>
-				<reportElement x="1334" y="0" width="117" height="42" uuid="5ef899b6-4c87-4216-aee4-416b8846b50d"/>
+				<reportElement uuid="5ef899b6-4c87-4216-aee4-416b8846b50d" x="1334" y="0" width="117" height="42"/>
 				<textElement verticalAlignment="Middle">
 					<paragraph leftIndent="2"/>
 				</textElement>
 				<text><![CDATA[Ces Client ID]]></text>
 			</staticText>
 			<staticText>
-				<reportElement x="1451" y="0" width="131" height="42" uuid="7a37c919-9976-49d2-bec9-c122c48e2042"/>
+				<reportElement uuid="7a37c919-9976-49d2-bec9-c122c48e2042" x="1451" y="0" width="131" height="42"/>
 				<textElement verticalAlignment="Middle">
 					<paragraph leftIndent="2"/>
 				</textElement>
 				<text><![CDATA[Ces Company ID]]></text>
 			</staticText>
 			<staticText>
-				<reportElement x="2129" y="0" width="164" height="42" uuid="4dd9fc6c-eb14-4e0e-abe5-8895720be884"/>
+				<reportElement uuid="4dd9fc6c-eb14-4e0e-abe5-8895720be884" x="2129" y="0" width="164" height="42"/>
 				<textElement verticalAlignment="Middle">
 					<paragraph leftIndent="2"/>
 				</textElement>
 				<text><![CDATA[Material Valuation Uom]]></text>
 			</staticText>
 			<staticText>
-				<reportElement x="1696" y="0" width="164" height="42" uuid="030f5e80-a2f6-4701-b6cf-0a3accd2b693"/>
+				<reportElement uuid="030f5e80-a2f6-4701-b6cf-0a3accd2b693" x="1696" y="0" width="164" height="42"/>
 				<textElement verticalAlignment="Middle">
 					<paragraph leftIndent="2"/>
 				</textElement>
 				<text><![CDATA[Note]]></text>
 			</staticText>
 			<staticText>
-				<reportElement x="1860" y="0" width="105" height="42" uuid="bb0cee1c-9c64-40c7-aff1-f8e1928c17d8"/>
+				<reportElement uuid="bb0cee1c-9c64-40c7-aff1-f8e1928c17d8" x="1860" y="0" width="105" height="42"/>
 				<textElement verticalAlignment="Middle">
 					<paragraph leftIndent="2"/>
 				</textElement>
@@ -208,7 +208,7 @@ from mst_materialvaluation mv]]>
 	<detail>
 		<band height="22" splitType="Stretch">
 			<textField>
-				<reportElement x="0" y="0" width="19" height="22" uuid="1a46217e-df95-4cf4-ba9d-2b0d3c4ee3b8"/>
+				<reportElement uuid="1a46217e-df95-4cf4-ba9d-2b0d3c4ee3b8" x="0" y="0" width="19" height="22"/>
 				<box>
 					<pen lineWidth="0.0"/>
 					<topPen lineWidth="0.0"/>
@@ -220,7 +220,7 @@ from mst_materialvaluation mv]]>
 				<textFieldExpression><![CDATA[$V{COLUMN_COUNT}]]></textFieldExpression>
 			</textField>
 			<textField>
-				<reportElement x="19" y="0" width="125" height="22" uuid="91f65e01-e56d-4341-9ca3-2435dbbd5b4a"/>
+				<reportElement uuid="91f65e01-e56d-4341-9ca3-2435dbbd5b4a" x="19" y="0" width="125" height="22"/>
 				<box>
 					<pen lineWidth="0.0"/>
 					<topPen lineWidth="0.0"/>
@@ -234,7 +234,7 @@ from mst_materialvaluation mv]]>
 				<textFieldExpression><![CDATA[$F{objectid}]]></textFieldExpression>
 			</textField>
 			<textField>
-				<reportElement x="144" y="0" width="176" height="22" uuid="a2b38061-d5f0-4c44-a2ea-6b4f3bd7b331"/>
+				<reportElement uuid="a2b38061-d5f0-4c44-a2ea-6b4f3bd7b331" x="144" y="0" width="176" height="22"/>
 				<box>
 					<pen lineWidth="0.0"/>
 					<topPen lineWidth="0.0"/>
@@ -248,7 +248,7 @@ from mst_materialvaluation mv]]>
 				<textFieldExpression><![CDATA[$F{tag}]]></textFieldExpression>
 			</textField>
 			<textField pattern="">
-				<reportElement x="320" y="0" width="138" height="22" uuid="72d0a1f8-6a02-4589-a2ed-1ac1f7e652be"/>
+				<reportElement uuid="72d0a1f8-6a02-4589-a2ed-1ac1f7e652be" x="320" y="0" width="138" height="22"/>
 				<box>
 					<pen lineWidth="0.0"/>
 					<topPen lineWidth="0.0"/>
@@ -262,7 +262,7 @@ from mst_materialvaluation mv]]>
 				<textFieldExpression><![CDATA[$F{mvtype}]]></textFieldExpression>
 			</textField>
 			<textField pattern="">
-				<reportElement x="458" y="0" width="125" height="22" uuid="9158dd81-0282-44ea-b062-01ef670d08e2"/>
+				<reportElement uuid="9158dd81-0282-44ea-b062-01ef670d08e2" x="458" y="0" width="125" height="22"/>
 				<box>
 					<pen lineWidth="0.0"/>
 					<topPen lineWidth="0.0"/>
@@ -276,7 +276,7 @@ from mst_materialvaluation mv]]>
 				<textFieldExpression><![CDATA[$F{mvstatus}]]></textFieldExpression>
 			</textField>
 			<textField isBlankWhenNull="true">
-				<reportElement x="583" y="0" width="123" height="22" uuid="cf221553-11c6-4bcf-9f65-9cab882d99eb"/>
+				<reportElement uuid="cf221553-11c6-4bcf-9f65-9cab882d99eb" x="583" y="0" width="123" height="22"/>
 				<box>
 					<pen lineWidth="0.0"/>
 					<topPen lineWidth="0.0"/>
@@ -290,7 +290,7 @@ from mst_materialvaluation mv]]>
 				<textFieldExpression><![CDATA[$F{clientid}]]></textFieldExpression>
 			</textField>
 			<textField isBlankWhenNull="true">
-				<reportElement x="706" y="0" width="136" height="22" uuid="ae196a0a-ca3d-46f6-a259-b5bb1cf98a39"/>
+				<reportElement uuid="ae196a0a-ca3d-46f6-a259-b5bb1cf98a39" x="706" y="0" width="136" height="22"/>
 				<box>
 					<pen lineWidth="0.0"/>
 					<topPen lineWidth="0.0"/>
@@ -304,7 +304,7 @@ from mst_materialvaluation mv]]>
 				<textFieldExpression><![CDATA[$F{compid}]]></textFieldExpression>
 			</textField>
 			<textField>
-				<reportElement x="842" y="0" width="164" height="22" uuid="dcf68497-1ac9-4ad6-a5b5-79775425ca7a"/>
+				<reportElement uuid="dcf68497-1ac9-4ad6-a5b5-79775425ca7a" x="842" y="0" width="164" height="22"/>
 				<box>
 					<pen lineWidth="0.0"/>
 					<topPen lineWidth="0.0"/>
@@ -318,7 +318,7 @@ from mst_materialvaluation mv]]>
 				<textFieldExpression><![CDATA[$F{accperiode}]]></textFieldExpression>
 			</textField>
 			<textField>
-				<reportElement x="1006" y="0" width="164" height="22" uuid="ffd40ec2-2dcd-4622-a361-f57a51717e7b"/>
+				<reportElement uuid="ffd40ec2-2dcd-4622-a361-f57a51717e7b" x="1006" y="0" width="164" height="22"/>
 				<box>
 					<pen lineWidth="0.0"/>
 					<topPen lineWidth="0.0"/>
@@ -332,7 +332,7 @@ from mst_materialvaluation mv]]>
 				<textFieldExpression><![CDATA[$F{mvcurrecy}]]></textFieldExpression>
 			</textField>
 			<textField pattern="dd/MM/yyyy">
-				<reportElement x="1170" y="0" width="164" height="22" uuid="1fdb7281-9420-409c-a508-1c87bcf6dfc5"/>
+				<reportElement uuid="1fdb7281-9420-409c-a508-1c87bcf6dfc5" x="1170" y="0" width="164" height="22"/>
 				<box>
 					<pen lineWidth="0.0"/>
 					<topPen lineWidth="0.0"/>
@@ -346,7 +346,7 @@ from mst_materialvaluation mv]]>
 				<textFieldExpression><![CDATA[$F{docdate}]]></textFieldExpression>
 			</textField>
 			<textField isBlankWhenNull="true">
-				<reportElement x="1334" y="0" width="117" height="22" uuid="bbce78ba-4434-42f6-ae94-9154ffebece0"/>
+				<reportElement uuid="bbce78ba-4434-42f6-ae94-9154ffebece0" x="1334" y="0" width="117" height="22"/>
 				<box>
 					<pen lineWidth="0.0"/>
 					<topPen lineWidth="0.0"/>
@@ -360,7 +360,7 @@ from mst_materialvaluation mv]]>
 				<textFieldExpression><![CDATA[$F{cesclientid}]]></textFieldExpression>
 			</textField>
 			<textField isBlankWhenNull="true">
-				<reportElement x="1451" y="0" width="131" height="22" uuid="94e04a45-0486-4431-a9c6-204c20ed676b"/>
+				<reportElement uuid="94e04a45-0486-4431-a9c6-204c20ed676b" x="1451" y="0" width="131" height="22"/>
 				<box>
 					<pen lineWidth="0.0"/>
 					<topPen lineWidth="0.0"/>
@@ -374,7 +374,7 @@ from mst_materialvaluation mv]]>
 				<textFieldExpression><![CDATA[$F{cescompanyid}]]></textFieldExpression>
 			</textField>
 			<textField>
-				<reportElement x="1582" y="0" width="114" height="22" uuid="df7e7926-56a0-4ac1-898c-084814ed5f0d"/>
+				<reportElement uuid="df7e7926-56a0-4ac1-898c-084814ed5f0d" x="1582" y="0" width="114" height="22"/>
 				<box>
 					<pen lineWidth="0.0"/>
 					<topPen lineWidth="0.0"/>
@@ -388,7 +388,7 @@ from mst_materialvaluation mv]]>
 				<textFieldExpression><![CDATA[$F{cesplantid}]]></textFieldExpression>
 			</textField>
 			<textField>
-				<reportElement x="1696" y="0" width="164" height="22" uuid="8002075a-b227-4caf-9a96-a1c5150dd5cb"/>
+				<reportElement uuid="8002075a-b227-4caf-9a96-a1c5150dd5cb" x="1696" y="0" width="164" height="22"/>
 				<box>
 					<pen lineWidth="0.0"/>
 					<topPen lineWidth="0.0"/>
@@ -402,7 +402,7 @@ from mst_materialvaluation mv]]>
 				<textFieldExpression><![CDATA[$F{mvnote}]]></textFieldExpression>
 			</textField>
 			<textField>
-				<reportElement x="1860" y="0" width="105" height="22" uuid="9b84d153-55d7-4cc6-a799-45860ae71a2b"/>
+				<reportElement uuid="9b84d153-55d7-4cc6-a799-45860ae71a2b" x="1860" y="0" width="105" height="22"/>
 				<box>
 					<pen lineWidth="0.0"/>
 					<topPen lineWidth="0.0"/>
@@ -416,7 +416,7 @@ from mst_materialvaluation mv]]>
 				<textFieldExpression><![CDATA[$F{mvperiodtype}]]></textFieldExpression>
 			</textField>
 			<textField>
-				<reportElement x="1965" y="0" width="164" height="22" uuid="d1385625-4992-42bd-902a-80761b51e43c"/>
+				<reportElement uuid="d1385625-4992-42bd-902a-80761b51e43c" x="1965" y="0" width="164" height="22"/>
 				<box>
 					<pen lineWidth="0.0"/>
 					<topPen lineWidth="0.0"/>
@@ -430,7 +430,7 @@ from mst_materialvaluation mv]]>
 				<textFieldExpression><![CDATA[$F{mvpricelist}]]></textFieldExpression>
 			</textField>
 			<textField>
-				<reportElement x="2129" y="0" width="164" height="22" uuid="0af6f005-3699-47fe-8f01-7f0481100893"/>
+				<reportElement uuid="0af6f005-3699-47fe-8f01-7f0481100893" x="2129" y="0" width="164" height="22"/>
 				<box>
 					<pen lineWidth="0.0"/>
 					<topPen lineWidth="0.0"/>
