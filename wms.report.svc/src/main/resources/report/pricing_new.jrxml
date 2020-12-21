@@ -1,0 +1,592 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="RPT_Outsource" language="groovy" pageWidth="3268" pageHeight="2794" orientation="Landscape" columnWidth="3228" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="14d625b1-ce14-4c92-9199-4cd7d3fd5389">
+	<property name="ireport.zoom" value="1.0"/>
+	<property name="ireport.x" value="2194"/>
+	<property name="ireport.y" value="0"/>
+	<parameter name="clientid" class="java.lang.String"/>
+	<parameter name="companyid" class="java.lang.String"/>
+	<queryString>
+		<![CDATA[SELECT
+	mp.objectid,
+	mp.tag,
+	mp.VERSION,
+	CAST ( mp.TYPE AS json ) ->> 'value' AS TYPE,
+	CAST ( mp.es AS json ) -> 'company' ->> 'compID' AS compID,
+	CAST ( mp.es AS json ) -> 'client' ->> 'clientID' AS clientID,
+	mp.frid,
+	mp.frname,
+	mp.frnote,
+	mp.frdesc,
+	mp.frdocdate,
+	mp.freffdate,
+	mp.frstartdate,
+	mp.frstopdate,
+	mp.frreff,
+	CAST ( mp.frtype AS json ) ->> 'value' AS frtype,
+	CAST ( mp.frstatus AS json ) ->> 'value' AS frstatus,
+	CAST ( mp.frgroupid AS json ) ->> 'value' AS frgroupid
+FROM
+	mst_pricing mp
+	where
+	CAST ( mp.es AS json ) -> 'client' ->> 'clientID' = $P{clientid}
+	AND
+	CAST ( mp.es AS json ) -> 'company' ->> 'compID' = $P{companyid}]]>
+	</queryString>
+	<field name="objectid" class="java.lang.String"/>
+	<field name="tag" class="java.lang.String"/>
+	<field name="version" class="java.lang.String"/>
+	<field name="type" class="java.lang.String"/>
+	<field name="compid" class="java.lang.String"/>
+	<field name="clientid" class="java.lang.String"/>
+	<field name="frid" class="java.lang.String"/>
+	<field name="frname" class="java.lang.String"/>
+	<field name="frnote" class="java.lang.String"/>
+	<field name="frdesc" class="java.lang.String"/>
+	<field name="frdocdate" class="java.sql.Date"/>
+	<field name="freffdate" class="java.sql.Date"/>
+	<field name="frstartdate" class="java.sql.Date"/>
+	<field name="frstopdate" class="java.sql.Date"/>
+	<field name="frreff" class="java.lang.String"/>
+	<field name="frtype" class="java.lang.String"/>
+	<field name="frstatus" class="java.lang.String"/>
+	<field name="frgroupid" class="java.lang.String"/>
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<columnHeader>
+		<band height="42" splitType="Stretch">
+			<staticText>
+				<reportElement x="0" y="0" width="19" height="42" uuid="950d0d75-da80-46b0-87a1-94057d03b591"/>
+				<box>
+					<pen lineWidth="0.0"/>
+					<topPen lineWidth="0.0"/>
+					<leftPen lineWidth="0.0"/>
+					<bottomPen lineWidth="0.0"/>
+					<rightPen lineWidth="0.0"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle"/>
+				<text><![CDATA[No.]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="369" y="0" width="176" height="42" uuid="ec33b7a2-7323-48b6-a5dc-26b025d6c178"/>
+				<box>
+					<pen lineWidth="0.0"/>
+					<topPen lineWidth="0.0"/>
+					<leftPen lineWidth="0.0"/>
+					<bottomPen lineWidth="0.0"/>
+					<rightPen lineWidth="0.0"/>
+				</box>
+				<textElement verticalAlignment="Middle">
+					<paragraph leftIndent="2"/>
+				</textElement>
+				<text><![CDATA[Client ID]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="193" y="0" width="176" height="42" uuid="c70410f5-c06a-4bd2-beb5-2074df89bfb9"/>
+				<box>
+					<pen lineWidth="0.0"/>
+					<topPen lineWidth="0.0"/>
+					<leftPen lineWidth="0.0"/>
+					<bottomPen lineWidth="0.0"/>
+					<rightPen lineWidth="0.0"/>
+				</box>
+				<textElement verticalAlignment="Middle">
+					<paragraph leftIndent="2"/>
+				</textElement>
+				<text><![CDATA[Company ID]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="19" y="0" width="174" height="42" uuid="5713d354-1137-4e7b-8fd8-62de3f0e52c4"/>
+				<box>
+					<pen lineWidth="0.0"/>
+					<topPen lineWidth="0.0"/>
+					<leftPen lineWidth="0.0"/>
+					<bottomPen lineWidth="0.0"/>
+					<rightPen lineWidth="0.0"/>
+				</box>
+				<textElement verticalAlignment="Middle">
+					<paragraph leftIndent="2"/>
+				</textElement>
+				<text><![CDATA[Object ID]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="1951" y="0" width="176" height="42" uuid="bb6959cc-f051-425a-adfb-9e630c229e8c"/>
+				<box>
+					<pen lineWidth="0.0"/>
+					<topPen lineWidth="0.0"/>
+					<leftPen lineWidth="0.0"/>
+					<bottomPen lineWidth="0.0"/>
+					<rightPen lineWidth="0.0"/>
+				</box>
+				<textElement verticalAlignment="Middle">
+					<paragraph leftIndent="2"/>
+				</textElement>
+				<text><![CDATA[FR Eff Date]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="544" y="0" width="176" height="42" uuid="bae8adce-cef5-4bc7-b2d8-11d320f77755"/>
+				<box>
+					<pen lineWidth="0.0"/>
+					<topPen lineWidth="0.0"/>
+					<leftPen lineWidth="0.0"/>
+					<bottomPen lineWidth="0.0"/>
+					<rightPen lineWidth="0.0"/>
+				</box>
+				<textElement verticalAlignment="Middle">
+					<paragraph leftIndent="2"/>
+				</textElement>
+				<text><![CDATA[Tag]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="1775" y="0" width="176" height="42" uuid="247fcdee-42b9-445b-be5d-2e730a91678d"/>
+				<box>
+					<pen lineWidth="0.0"/>
+					<topPen lineWidth="0.0"/>
+					<leftPen lineWidth="0.0"/>
+					<bottomPen lineWidth="0.0"/>
+					<rightPen lineWidth="0.0"/>
+				</box>
+				<textElement verticalAlignment="Middle">
+					<paragraph leftIndent="2"/>
+				</textElement>
+				<text><![CDATA[FR Doc Date]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="2127" y="0" width="176" height="42" uuid="5daa6da5-49bb-4bc6-9884-e330fbde5341"/>
+				<box>
+					<pen lineWidth="0.0"/>
+					<topPen lineWidth="0.0"/>
+					<leftPen lineWidth="0.0"/>
+					<bottomPen lineWidth="0.0"/>
+					<rightPen lineWidth="0.0"/>
+				</box>
+				<textElement verticalAlignment="Middle">
+					<paragraph leftIndent="2"/>
+				</textElement>
+				<text><![CDATA[FR Eff]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="2655" y="0" width="176" height="42" uuid="184b34f2-8eaf-4ce8-bf90-0f6f50f5db0e"/>
+				<box>
+					<pen lineWidth="0.0"/>
+					<topPen lineWidth="0.0"/>
+					<leftPen lineWidth="0.0"/>
+					<bottomPen lineWidth="0.0"/>
+					<rightPen lineWidth="0.0"/>
+				</box>
+				<textElement verticalAlignment="Middle">
+					<paragraph leftIndent="2"/>
+				</textElement>
+				<text><![CDATA[FR Type]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="1599" y="0" width="176" height="42" uuid="8a756d73-422e-4b96-80dc-6a618cf7ad36"/>
+				<box>
+					<pen lineWidth="0.0"/>
+					<topPen lineWidth="0.0"/>
+					<leftPen lineWidth="0.0"/>
+					<bottomPen lineWidth="0.0"/>
+					<rightPen lineWidth="0.0"/>
+				</box>
+				<textElement verticalAlignment="Middle">
+					<paragraph leftIndent="2"/>
+				</textElement>
+				<text><![CDATA[FR Note]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="1423" y="0" width="176" height="42" uuid="948e2acc-145e-42ff-8685-042b347061a3"/>
+				<box>
+					<pen lineWidth="0.0"/>
+					<topPen lineWidth="0.0"/>
+					<leftPen lineWidth="0.0"/>
+					<bottomPen lineWidth="0.0"/>
+					<rightPen lineWidth="0.0"/>
+				</box>
+				<textElement verticalAlignment="Middle">
+					<paragraph leftIndent="2"/>
+				</textElement>
+				<text><![CDATA[FR Desc]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="719" y="0" width="176" height="42" uuid="ddef273f-edad-4fb1-b486-29431a697a9e"/>
+				<box>
+					<pen lineWidth="0.0"/>
+					<topPen lineWidth="0.0"/>
+					<leftPen lineWidth="0.0"/>
+					<bottomPen lineWidth="0.0"/>
+					<rightPen lineWidth="0.0"/>
+				</box>
+				<textElement verticalAlignment="Middle">
+					<paragraph leftIndent="2"/>
+				</textElement>
+				<text><![CDATA[Version]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="895" y="0" width="176" height="42" uuid="92808c20-a241-4a05-87d9-addae2d230e0"/>
+				<box>
+					<pen lineWidth="0.0"/>
+					<topPen lineWidth="0.0"/>
+					<leftPen lineWidth="0.0"/>
+					<bottomPen lineWidth="0.0"/>
+					<rightPen lineWidth="0.0"/>
+				</box>
+				<textElement verticalAlignment="Middle">
+					<paragraph leftIndent="2"/>
+				</textElement>
+				<text><![CDATA[Type]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="1071" y="0" width="176" height="42" uuid="23e662b8-1a35-4f43-825c-5fe3edc0db3e"/>
+				<box>
+					<pen lineWidth="0.0"/>
+					<topPen lineWidth="0.0"/>
+					<leftPen lineWidth="0.0"/>
+					<bottomPen lineWidth="0.0"/>
+					<rightPen lineWidth="0.0"/>
+				</box>
+				<textElement verticalAlignment="Middle">
+					<paragraph leftIndent="2"/>
+				</textElement>
+				<text><![CDATA[FR ID]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="1247" y="0" width="176" height="42" uuid="250c3a64-e7a7-479a-b635-a5f942bf73de"/>
+				<box>
+					<pen lineWidth="0.0"/>
+					<topPen lineWidth="0.0"/>
+					<leftPen lineWidth="0.0"/>
+					<bottomPen lineWidth="0.0"/>
+					<rightPen lineWidth="0.0"/>
+				</box>
+				<textElement verticalAlignment="Middle">
+					<paragraph leftIndent="2"/>
+				</textElement>
+				<text><![CDATA[FR Name]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="2303" y="0" width="176" height="42" uuid="e0eeb2d9-5005-49d9-bc52-62dcb6c896ff"/>
+				<box>
+					<pen lineWidth="0.0"/>
+					<topPen lineWidth="0.0"/>
+					<leftPen lineWidth="0.0"/>
+					<bottomPen lineWidth="0.0"/>
+					<rightPen lineWidth="0.0"/>
+				</box>
+				<textElement verticalAlignment="Middle">
+					<paragraph leftIndent="2"/>
+				</textElement>
+				<text><![CDATA[FR Start Date]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="2479" y="0" width="176" height="42" uuid="f20f563b-d421-4064-97c9-855a3c2a35fd"/>
+				<box>
+					<pen lineWidth="0.0"/>
+					<topPen lineWidth="0.0"/>
+					<leftPen lineWidth="0.0"/>
+					<bottomPen lineWidth="0.0"/>
+					<rightPen lineWidth="0.0"/>
+				</box>
+				<textElement verticalAlignment="Middle">
+					<paragraph leftIndent="2"/>
+				</textElement>
+				<text><![CDATA[FR Stop Date]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="2831" y="0" width="176" height="42" uuid="afb4d5ab-4cb1-4511-96de-0da53a509be2"/>
+				<box>
+					<pen lineWidth="0.0"/>
+					<topPen lineWidth="0.0"/>
+					<leftPen lineWidth="0.0"/>
+					<bottomPen lineWidth="0.0"/>
+					<rightPen lineWidth="0.0"/>
+				</box>
+				<textElement verticalAlignment="Middle">
+					<paragraph leftIndent="2"/>
+				</textElement>
+				<text><![CDATA[FR Status]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="3007" y="0" width="176" height="42" uuid="41e4fc78-65f1-450d-be50-7d68cab3cb7b"/>
+				<box>
+					<pen lineWidth="0.0"/>
+					<topPen lineWidth="0.0"/>
+					<leftPen lineWidth="0.0"/>
+					<bottomPen lineWidth="0.0"/>
+					<rightPen lineWidth="0.0"/>
+				</box>
+				<textElement verticalAlignment="Middle">
+					<paragraph leftIndent="2"/>
+				</textElement>
+				<text><![CDATA[FR Group ID]]></text>
+			</staticText>
+		</band>
+	</columnHeader>
+	<detail>
+		<band height="22" splitType="Stretch">
+			<textField>
+				<reportElement x="0" y="0" width="19" height="22" uuid="1a46217e-df95-4cf4-ba9d-2b0d3c4ee3b8"/>
+				<box>
+					<pen lineWidth="0.0"/>
+					<topPen lineWidth="0.0"/>
+					<leftPen lineWidth="0.0"/>
+					<bottomPen lineWidth="0.0"/>
+					<rightPen lineWidth="0.0"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle"/>
+				<textFieldExpression><![CDATA[$V{COLUMN_COUNT}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="19" y="0" width="174" height="22" uuid="91f65e01-e56d-4341-9ca3-2435dbbd5b4a"/>
+				<box>
+					<pen lineWidth="0.0"/>
+					<topPen lineWidth="0.0"/>
+					<leftPen lineWidth="0.0"/>
+					<bottomPen lineWidth="0.0"/>
+					<rightPen lineWidth="0.0"/>
+				</box>
+				<textElement textAlignment="Justified" verticalAlignment="Middle">
+					<paragraph leftIndent="2"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{objectid}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="193" y="0" width="176" height="22" uuid="a2b38061-d5f0-4c44-a2ea-6b4f3bd7b331"/>
+				<box>
+					<pen lineWidth="0.0"/>
+					<topPen lineWidth="0.0"/>
+					<leftPen lineWidth="0.0"/>
+					<bottomPen lineWidth="0.0"/>
+					<rightPen lineWidth="0.0"/>
+				</box>
+				<textElement textAlignment="Justified" verticalAlignment="Middle">
+					<paragraph leftIndent="2"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{compid}]]></textFieldExpression>
+			</textField>
+			<textField pattern="">
+				<reportElement x="369" y="0" width="176" height="22" uuid="72d0a1f8-6a02-4589-a2ed-1ac1f7e652be"/>
+				<box>
+					<pen lineWidth="0.0"/>
+					<topPen lineWidth="0.0"/>
+					<leftPen lineWidth="0.0"/>
+					<bottomPen lineWidth="0.0"/>
+					<rightPen lineWidth="0.0"/>
+				</box>
+				<textElement textAlignment="Justified" verticalAlignment="Middle">
+					<paragraph leftIndent="2"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{clientid}]]></textFieldExpression>
+			</textField>
+			<textField pattern="dd MMMMM yyyy">
+				<reportElement x="1951" y="0" width="176" height="22" uuid="de42cfb9-56e7-4bd3-9971-5308d5e5cb47"/>
+				<box>
+					<pen lineWidth="0.0"/>
+					<topPen lineWidth="0.0"/>
+					<leftPen lineWidth="0.0"/>
+					<bottomPen lineWidth="0.0"/>
+					<rightPen lineWidth="0.0"/>
+				</box>
+				<textElement textAlignment="Justified" verticalAlignment="Middle">
+					<paragraph leftIndent="2"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{freffdate}]]></textFieldExpression>
+			</textField>
+			<textField pattern="">
+				<reportElement x="544" y="0" width="176" height="22" uuid="b7c6f7d2-50f5-417b-bd87-bfe0ffc5d32b"/>
+				<box>
+					<pen lineWidth="0.0"/>
+					<topPen lineWidth="0.0"/>
+					<leftPen lineWidth="0.0"/>
+					<bottomPen lineWidth="0.0"/>
+					<rightPen lineWidth="0.0"/>
+				</box>
+				<textElement textAlignment="Justified" verticalAlignment="Middle">
+					<paragraph leftIndent="2"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{tag}]]></textFieldExpression>
+			</textField>
+			<textField pattern="dd MMMMM yyyy">
+				<reportElement x="1775" y="0" width="176" height="22" uuid="b65db2f0-5080-41fc-81da-a3ea3394ef91"/>
+				<box>
+					<pen lineWidth="0.0"/>
+					<topPen lineWidth="0.0"/>
+					<leftPen lineWidth="0.0"/>
+					<bottomPen lineWidth="0.0"/>
+					<rightPen lineWidth="0.0"/>
+				</box>
+				<textElement textAlignment="Justified" verticalAlignment="Middle">
+					<paragraph leftIndent="2"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{frdocdate}]]></textFieldExpression>
+			</textField>
+			<textField pattern="">
+				<reportElement x="2127" y="0" width="176" height="22" uuid="cc2d63d9-9abe-467f-9c1e-1e62e8d113a0"/>
+				<box>
+					<pen lineWidth="0.0"/>
+					<topPen lineWidth="0.0"/>
+					<leftPen lineWidth="0.0"/>
+					<bottomPen lineWidth="0.0"/>
+					<rightPen lineWidth="0.0"/>
+				</box>
+				<textElement textAlignment="Justified" verticalAlignment="Middle">
+					<paragraph leftIndent="2"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{frreff}]]></textFieldExpression>
+			</textField>
+			<textField pattern="">
+				<reportElement x="2655" y="0" width="176" height="22" uuid="82d2c90c-2e08-4a68-9349-05549330319b"/>
+				<box>
+					<pen lineWidth="0.0"/>
+					<topPen lineWidth="0.0"/>
+					<leftPen lineWidth="0.0"/>
+					<bottomPen lineWidth="0.0"/>
+					<rightPen lineWidth="0.0"/>
+				</box>
+				<textElement textAlignment="Justified" verticalAlignment="Middle">
+					<paragraph leftIndent="2"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{frtype}]]></textFieldExpression>
+			</textField>
+			<textField pattern="">
+				<reportElement x="1599" y="0" width="176" height="22" uuid="88088c4f-3f8c-4d6b-94dd-e59f11020f3c"/>
+				<box>
+					<pen lineWidth="0.0"/>
+					<topPen lineWidth="0.0"/>
+					<leftPen lineWidth="0.0"/>
+					<bottomPen lineWidth="0.0"/>
+					<rightPen lineWidth="0.0"/>
+				</box>
+				<textElement textAlignment="Justified" verticalAlignment="Middle">
+					<paragraph leftIndent="2"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{frnote}]]></textFieldExpression>
+			</textField>
+			<textField pattern="">
+				<reportElement x="1423" y="0" width="176" height="22" uuid="dd57364d-a7b2-4c74-904f-6b76dc745bcc"/>
+				<box>
+					<pen lineWidth="0.0"/>
+					<topPen lineWidth="0.0"/>
+					<leftPen lineWidth="0.0"/>
+					<bottomPen lineWidth="0.0"/>
+					<rightPen lineWidth="0.0"/>
+				</box>
+				<textElement textAlignment="Justified" verticalAlignment="Middle">
+					<paragraph leftIndent="2"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{frdesc}]]></textFieldExpression>
+			</textField>
+			<textField pattern="">
+				<reportElement x="719" y="0" width="176" height="22" uuid="45fb7895-576d-4f45-bbb4-2d8531a2b37c"/>
+				<box>
+					<pen lineWidth="0.0"/>
+					<topPen lineWidth="0.0"/>
+					<leftPen lineWidth="0.0"/>
+					<bottomPen lineWidth="0.0"/>
+					<rightPen lineWidth="0.0"/>
+				</box>
+				<textElement textAlignment="Justified" verticalAlignment="Middle">
+					<paragraph leftIndent="2"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{version}]]></textFieldExpression>
+			</textField>
+			<textField pattern="">
+				<reportElement x="895" y="0" width="176" height="22" uuid="530e2f7d-ffbf-4b68-acd0-d2b7d6b81cad"/>
+				<box>
+					<pen lineWidth="0.0"/>
+					<topPen lineWidth="0.0"/>
+					<leftPen lineWidth="0.0"/>
+					<bottomPen lineWidth="0.0"/>
+					<rightPen lineWidth="0.0"/>
+				</box>
+				<textElement textAlignment="Justified" verticalAlignment="Middle">
+					<paragraph leftIndent="2"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{type}]]></textFieldExpression>
+			</textField>
+			<textField pattern="">
+				<reportElement x="1071" y="0" width="176" height="22" uuid="778e12a9-1b06-47b0-8bd0-9983972d3b21"/>
+				<box>
+					<pen lineWidth="0.0"/>
+					<topPen lineWidth="0.0"/>
+					<leftPen lineWidth="0.0"/>
+					<bottomPen lineWidth="0.0"/>
+					<rightPen lineWidth="0.0"/>
+				</box>
+				<textElement textAlignment="Justified" verticalAlignment="Middle">
+					<paragraph leftIndent="2"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{frid}]]></textFieldExpression>
+			</textField>
+			<textField pattern="">
+				<reportElement x="1247" y="0" width="176" height="22" uuid="0b8d1463-78ad-479f-9657-ffc97bbacfca"/>
+				<box>
+					<pen lineWidth="0.0"/>
+					<topPen lineWidth="0.0"/>
+					<leftPen lineWidth="0.0"/>
+					<bottomPen lineWidth="0.0"/>
+					<rightPen lineWidth="0.0"/>
+				</box>
+				<textElement textAlignment="Justified" verticalAlignment="Middle">
+					<paragraph leftIndent="2"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{frname}]]></textFieldExpression>
+			</textField>
+			<textField pattern="dd MMMMM yyyy">
+				<reportElement x="2303" y="0" width="176" height="22" uuid="333fd054-cc57-4093-be9b-f3397cfa4756"/>
+				<box>
+					<pen lineWidth="0.0"/>
+					<topPen lineWidth="0.0"/>
+					<leftPen lineWidth="0.0"/>
+					<bottomPen lineWidth="0.0"/>
+					<rightPen lineWidth="0.0"/>
+				</box>
+				<textElement textAlignment="Justified" verticalAlignment="Middle">
+					<paragraph leftIndent="2"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{frstartdate}]]></textFieldExpression>
+			</textField>
+			<textField pattern="dd MMMMM yyyy">
+				<reportElement x="2479" y="0" width="176" height="22" uuid="36c9cfcc-1e40-43e2-a7b4-c216cdf7e166"/>
+				<box>
+					<pen lineWidth="0.0"/>
+					<topPen lineWidth="0.0"/>
+					<leftPen lineWidth="0.0"/>
+					<bottomPen lineWidth="0.0"/>
+					<rightPen lineWidth="0.0"/>
+				</box>
+				<textElement textAlignment="Justified" verticalAlignment="Middle">
+					<paragraph leftIndent="2"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{frstopdate}]]></textFieldExpression>
+			</textField>
+			<textField pattern="">
+				<reportElement x="2831" y="0" width="176" height="22" uuid="7a249f86-3718-44ed-a675-b2d12c558edf"/>
+				<box>
+					<pen lineWidth="0.0"/>
+					<topPen lineWidth="0.0"/>
+					<leftPen lineWidth="0.0"/>
+					<bottomPen lineWidth="0.0"/>
+					<rightPen lineWidth="0.0"/>
+				</box>
+				<textElement textAlignment="Justified" verticalAlignment="Middle">
+					<paragraph leftIndent="2"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{frstatus}]]></textFieldExpression>
+			</textField>
+			<textField pattern="">
+				<reportElement x="3007" y="0" width="176" height="22" uuid="2e34f242-2599-4dc0-b10c-cc744b5aa0d1"/>
+				<box>
+					<pen lineWidth="0.0"/>
+					<topPen lineWidth="0.0"/>
+					<leftPen lineWidth="0.0"/>
+					<bottomPen lineWidth="0.0"/>
+					<rightPen lineWidth="0.0"/>
+				</box>
+				<textElement textAlignment="Justified" verticalAlignment="Middle">
+					<paragraph leftIndent="2"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{frgroupid}]]></textFieldExpression>
+			</textField>
+		</band>
+	</detail>
+</jasperReport>
