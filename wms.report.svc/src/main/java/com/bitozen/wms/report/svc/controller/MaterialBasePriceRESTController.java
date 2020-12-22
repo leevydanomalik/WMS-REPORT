@@ -50,7 +50,7 @@ public class MaterialBasePriceRESTController {
     }
     
     @ResponseBody
-    @RequestMapping(value = "data.material.base.price.item.csv", method = RequestMethod.GET,
+    @RequestMapping(value = "data.material.base.price.item.csv/", method = RequestMethod.GET,
             produces = "text/csv")
     public byte[] generateMaterialBasePriceItemReportCSV(@RequestParam(value = "reportFormat", required = false) FileExtention reportFormat ) throws GenericException {
         Map<String, Object> params = new HashMap<>();

@@ -1,26 +1,37 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="RPT_Outsource" language="groovy" pageWidth="3600" pageHeight="792" columnWidth="3560" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="14d625b1-ce14-4c92-9199-4cd7d3fd5389">
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="RPT_Outsource" language="groovy" pageWidth="3600" pageHeight="792" columnWidth="3560" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" isIgnorePagination="true" uuid="14d625b1-ce14-4c92-9199-4cd7d3fd5389">
 	<property name="ireport.zoom" value="1.0"/>
-	<property name="ireport.x" value="123"/>
+	<property name="ireport.x" value="0"/>
 	<property name="ireport.y" value="0"/>
 	<queryString>
-		<![CDATA[select *
-from mst_material]]>
+		<![CDATA[select *,
+cast (materialtype as json) ->> 'value' AS typemat,
+cast (materialuom as json) ->> 'value' AS uom
+from mst_material
+where materialstatus = 'ACTIVE']]>
 	</queryString>
-	<field name="id" class="java.lang.String"/>
+	<field name="id" class="java.lang.Long"/>
 	<field name="createdby" class="java.lang.String"/>
-	<field name="createddate" class="java.lang.String"/>
+	<field name="createddate" class="java.sql.Timestamp"/>
 	<field name="modifiedby" class="java.lang.String"/>
-	<field name="modifieddate" class="java.lang.String"/>
+	<field name="modifieddate" class="java.sql.Timestamp"/>
 	<field name="materialdescription" class="java.lang.String"/>
+	<field name="materialgrossweigth" class="java.lang.Double"/>
+	<field name="materialgrossweigthuom" class="java.lang.Double"/>
 	<field name="materialid" class="java.lang.String"/>
 	<field name="materialimagepath" class="java.lang.String"/>
 	<field name="materialkimap" class="java.lang.String"/>
 	<field name="materialname" class="java.lang.String"/>
 	<field name="materialstatus" class="java.lang.String"/>
-	<field name="materialtotalliterconst" class="java.lang.String"/>
+	<field name="materialtotalliterconst" class="java.lang.Double"/>
 	<field name="materialtype" class="java.lang.String"/>
+	<field name="materialtypeid" class="java.lang.String"/>
 	<field name="materialuom" class="java.lang.String"/>
+	<field name="mttypebox" class="java.lang.String"/>
+	<field name="recordid" class="java.lang.String"/>
+	<field name="materiallobsconst" class="java.lang.Double"/>
+	<field name="typemat" class="java.lang.String"/>
+	<field name="uom" class="java.lang.String"/>
 	<background>
 		<band splitType="Stretch"/>
 	</background>
@@ -102,7 +113,7 @@ from mst_material]]>
 			<textField>
 				<reportElement x="609" y="0" width="125" height="22" uuid="d28cc9f1-e174-4a9d-9503-cfd0e6770eb4"/>
 				<textElement textAlignment="Center"/>
-				<textFieldExpression><![CDATA[$F{materialuom}]]></textFieldExpression>
+				<textFieldExpression><![CDATA[$F{uom}]]></textFieldExpression>
 			</textField>
 			<textField>
 				<reportElement x="734" y="0" width="125" height="22" uuid="f39ffc87-66a4-4c37-bfc9-562734dbf460"/>
@@ -112,7 +123,7 @@ from mst_material]]>
 			<textField>
 				<reportElement x="859" y="0" width="125" height="22" uuid="893df8c7-91d5-4d74-9aef-f8997a2e6056"/>
 				<textElement textAlignment="Center"/>
-				<textFieldExpression><![CDATA[$F{materialtype}]]></textFieldExpression>
+				<textFieldExpression><![CDATA[$F{typemat}]]></textFieldExpression>
 			</textField>
 			<textField>
 				<reportElement x="984" y="0" width="125" height="22" uuid="6ba30868-560c-4b9e-be0e-cd3534ebfcd8"/>
