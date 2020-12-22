@@ -3,11 +3,15 @@
 	<property name="ireport.zoom" value="1.1"/>
 	<property name="ireport.x" value="0"/>
 	<property name="ireport.y" value="0"/>
+	<parameter name="basepriceid" class="java.lang.String"/>
 	<queryString>
 		<![CDATA[select mbpid, mbpitemid,price,mbpidesc,note,
 CAST(uom as json) ->> 'value' as uom,
 CAST(material as json) -> 'material' ->>'materialID' as materialid
-from mst_materialbasepriceitem ]]>
+
+from mst_materialbasepriceitem
+
+where mbpid = $P{basepriceid}]]>
 	</queryString>
 	<field name="mbpid" class="java.lang.String"/>
 	<field name="mbpitemid" class="java.lang.String"/>

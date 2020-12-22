@@ -6,8 +6,11 @@ import com.bitozen.wms.report.svc.ReportService;
 import java.io.ByteArrayOutputStream;
 import java.util.HashMap;
 import java.util.Map;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import org.apache.commons.lang3.Validate;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -50,14 +53,18 @@ public class MaterialBasePriceRESTController {
     }
     
     @ResponseBody
-    @RequestMapping(value = "data.material.base.price.item.csv/", method = RequestMethod.GET,
+    @RequestMapping(value = "/material.base.price.item/{basepriceID}", method = RequestMethod.GET,
             produces = "text/csv")
-    public byte[] generateMaterialBasePriceItemReportCSV(@RequestParam(value = "reportFormat", required = false) FileExtention reportFormat ) throws GenericException {
+    public byte[] generateMaterialBasePriceItemReportCSV(@PathVariable("basepriceID") String basepriceID) {
         Map<String, Object> params = new HashMap<>();
-        ByteArrayOutputStream os;
+        params.put("basepriceid", basepriceID);
+        ByteArrayOutputStream os = new ByteArrayOutputStream();
         reportService.setRptResourcePrefix("/report/");
-        os = (ByteArrayOutputStream) reportService.showReportJdbcDataSourceExportToPdfTxtCsvXls(FileExtention.CSV, MATERIAL_BASEPRICE_ITEM_CSV,params);
-
+        try {
+            os = (ByteArrayOutputStream) reportService.showReportJdbcDataSourceExportToPdfTxtCsvXls(FileExtention.CSV, MATERIAL_BASEPRICE_ITEM_CSV, params);
+        } catch (GenericException ex) {
+            Logger.getLogger(MaterialBasePriceRESTController.class.getName()).log(Level.SEVERE, null, ex);
+        }
         /*validate object*/
         Validate.notNull(os);
 
