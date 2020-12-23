@@ -1,0 +1,263 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="cost_component" language="groovy" pageWidth="2000" pageHeight="595" orientation="Landscape" columnWidth="1960" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="14d625b1-ce14-4c92-9199-4cd7d3fd5389">
+	<property name="ireport.zoom" value="1.1"/>
+	<property name="ireport.x" value="0"/>
+	<property name="ireport.y" value="0"/>
+	<parameter name="cgid" class="java.lang.String"/>
+	<queryString>
+		<![CDATA[select
+	cc.*,
+	cast (cc.ccgroupid as json) :: json ->> 'cgID' as cgid,
+	cast (cc.ccgroupid as json) :: json ->> 'cgName' as cgname,
+	cast (cc.cctype as json) :: json ->> 'value' as ccvaluetype
+from
+	mst_costcomponent cc
+where
+cast (cc.ccgroupid as json) ->> 'cgID' = $P{cgid}]]>
+	</queryString>
+	<field name="id" class="java.lang.Long"/>
+	<field name="cccode" class="java.lang.String"/>
+	<field name="createdby" class="java.lang.String"/>
+	<field name="createddate" class="java.sql.Timestamp"/>
+	<field name="modifiedby" class="java.lang.String"/>
+	<field name="modifieddate" class="java.sql.Timestamp"/>
+	<field name="ccgroupid" class="java.lang.String"/>
+	<field name="ccid" class="java.lang.String"/>
+	<field name="ccname" class="java.lang.String"/>
+	<field name="ccstatus" class="java.lang.String"/>
+	<field name="cctype" class="java.lang.String"/>
+	<field name="cgid" class="java.lang.String"/>
+	<field name="cgname" class="java.lang.String"/>
+	<field name="ccvaluetype" class="java.lang.String"/>
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<columnHeader>
+		<band height="42" splitType="Stretch">
+			<staticText>
+				<reportElement x="0" y="0" width="19" height="42" uuid="b5e1c14c-9b97-482b-aade-485d1f9b752d"/>
+				<box>
+					<pen lineWidth="0.0"/>
+					<topPen lineWidth="0.0"/>
+					<leftPen lineWidth="0.0"/>
+					<bottomPen lineWidth="0.0"/>
+					<rightPen lineWidth="0.0"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle"/>
+				<text><![CDATA[No.]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="19" y="0" width="125" height="42" uuid="24c5557b-f883-4204-9b75-5af2f2cf7631"/>
+				<box>
+					<pen lineWidth="0.0"/>
+					<topPen lineWidth="0.0"/>
+					<leftPen lineWidth="0.0"/>
+					<bottomPen lineWidth="0.0"/>
+					<rightPen lineWidth="0.0"/>
+				</box>
+				<textElement verticalAlignment="Middle">
+					<paragraph leftIndent="2"/>
+				</textElement>
+				<text><![CDATA[Cost Component Code]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="144" y="0" width="125" height="42" uuid="d150cc77-625a-4c20-8f97-9fda504e767d"/>
+				<box>
+					<pen lineWidth="0.0"/>
+					<topPen lineWidth="0.0"/>
+					<leftPen lineWidth="0.0"/>
+					<bottomPen lineWidth="0.0"/>
+					<rightPen lineWidth="0.0"/>
+				</box>
+				<textElement verticalAlignment="Middle">
+					<paragraph leftIndent="2"/>
+				</textElement>
+				<text><![CDATA[Cost Component Group ID]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="269" y="0" width="125" height="42" uuid="ff66bcf5-9b22-447e-a77e-2c437f1a3c69"/>
+				<box>
+					<pen lineWidth="0.0"/>
+					<topPen lineWidth="0.0"/>
+					<leftPen lineWidth="0.0"/>
+					<bottomPen lineWidth="0.0"/>
+					<rightPen lineWidth="0.0"/>
+				</box>
+				<textElement verticalAlignment="Middle">
+					<paragraph leftIndent="2"/>
+				</textElement>
+				<text><![CDATA[Cost Component Group Name]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="394" y="0" width="125" height="42" uuid="b1826932-c996-4d82-a420-4b81a9eb5397"/>
+				<box>
+					<pen lineWidth="0.0"/>
+					<topPen lineWidth="0.0"/>
+					<leftPen lineWidth="0.0"/>
+					<bottomPen lineWidth="0.0"/>
+					<rightPen lineWidth="0.0"/>
+				</box>
+				<textElement verticalAlignment="Middle">
+					<paragraph leftIndent="2"/>
+				</textElement>
+				<text><![CDATA[Cost Component ID]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="519" y="0" width="125" height="42" uuid="337c6f94-3f47-4931-b918-6e9e3e619520"/>
+				<box>
+					<pen lineWidth="0.0"/>
+					<topPen lineWidth="0.0"/>
+					<leftPen lineWidth="0.0"/>
+					<bottomPen lineWidth="0.0"/>
+					<rightPen lineWidth="0.0"/>
+				</box>
+				<textElement verticalAlignment="Middle">
+					<paragraph leftIndent="2"/>
+				</textElement>
+				<text><![CDATA[Cost Component Name]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="644" y="0" width="125" height="42" uuid="7e075f66-aace-450b-a9cd-9fc29c65fb79"/>
+				<box>
+					<pen lineWidth="0.0"/>
+					<topPen lineWidth="0.0"/>
+					<leftPen lineWidth="0.0"/>
+					<bottomPen lineWidth="0.0"/>
+					<rightPen lineWidth="0.0"/>
+				</box>
+				<textElement verticalAlignment="Middle">
+					<paragraph leftIndent="2"/>
+				</textElement>
+				<text><![CDATA[Cost Component Type]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="769" y="0" width="155" height="42" uuid="98570ed3-44f3-430b-acb2-ee674045a171"/>
+				<box>
+					<pen lineWidth="0.0"/>
+					<topPen lineWidth="0.0"/>
+					<leftPen lineWidth="0.0"/>
+					<bottomPen lineWidth="0.0"/>
+					<rightPen lineWidth="0.0"/>
+				</box>
+				<textElement verticalAlignment="Middle">
+					<paragraph leftIndent="2"/>
+				</textElement>
+				<text><![CDATA[Cost Component Status]]></text>
+			</staticText>
+		</band>
+	</columnHeader>
+	<detail>
+		<band height="22" splitType="Stretch">
+			<textField>
+				<reportElement x="0" y="0" width="19" height="22" uuid="276f69c6-cba9-4bcf-9d39-162ce69514b8"/>
+				<box>
+					<pen lineWidth="0.0"/>
+					<topPen lineWidth="0.0"/>
+					<leftPen lineWidth="0.0"/>
+					<bottomPen lineWidth="0.0"/>
+					<rightPen lineWidth="0.0"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle"/>
+				<textFieldExpression><![CDATA[$V{COLUMN_COUNT}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="19" y="0" width="125" height="22" uuid="5df4d546-b2e0-4702-8c9e-1982bd3d2643"/>
+				<box>
+					<pen lineWidth="0.0"/>
+					<topPen lineWidth="0.0"/>
+					<leftPen lineWidth="0.0"/>
+					<bottomPen lineWidth="0.0"/>
+					<rightPen lineWidth="0.0"/>
+				</box>
+				<textElement textAlignment="Justified" verticalAlignment="Middle">
+					<paragraph leftIndent="2"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{cccode}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="144" y="0" width="125" height="22" uuid="782fe0c8-5e59-4fc3-af4f-f420be1826a1"/>
+				<box>
+					<pen lineWidth="0.0"/>
+					<topPen lineWidth="0.0"/>
+					<leftPen lineWidth="0.0"/>
+					<bottomPen lineWidth="0.0"/>
+					<rightPen lineWidth="0.0"/>
+				</box>
+				<textElement textAlignment="Justified" verticalAlignment="Middle">
+					<paragraph leftIndent="2"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{cgid}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="269" y="0" width="125" height="22" uuid="57fa8fa1-a8f6-42c0-ae19-2d76d875b451"/>
+				<box>
+					<pen lineWidth="0.0"/>
+					<topPen lineWidth="0.0"/>
+					<leftPen lineWidth="0.0"/>
+					<bottomPen lineWidth="0.0"/>
+					<rightPen lineWidth="0.0"/>
+				</box>
+				<textElement textAlignment="Justified" verticalAlignment="Middle">
+					<paragraph leftIndent="2"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{cgname}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="394" y="0" width="125" height="22" uuid="6907fbac-0257-4edf-bb93-5956bd48e081"/>
+				<box>
+					<pen lineWidth="0.0"/>
+					<topPen lineWidth="0.0"/>
+					<leftPen lineWidth="0.0"/>
+					<bottomPen lineWidth="0.0"/>
+					<rightPen lineWidth="0.0"/>
+				</box>
+				<textElement textAlignment="Justified" verticalAlignment="Middle">
+					<paragraph leftIndent="2"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{ccid}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="519" y="0" width="125" height="22" uuid="9ba36ecb-f941-42b2-8fc6-83238c72e458"/>
+				<box>
+					<pen lineWidth="0.0"/>
+					<topPen lineWidth="0.0"/>
+					<leftPen lineWidth="0.0"/>
+					<bottomPen lineWidth="0.0"/>
+					<rightPen lineWidth="0.0"/>
+				</box>
+				<textElement textAlignment="Justified" verticalAlignment="Middle">
+					<paragraph leftIndent="2"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{ccname}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="644" y="0" width="125" height="22" uuid="b44397fc-06ac-4714-885d-2841f0ac6c38"/>
+				<box>
+					<pen lineWidth="0.0"/>
+					<topPen lineWidth="0.0"/>
+					<leftPen lineWidth="0.0"/>
+					<bottomPen lineWidth="0.0"/>
+					<rightPen lineWidth="0.0"/>
+				</box>
+				<textElement textAlignment="Justified" verticalAlignment="Middle">
+					<paragraph leftIndent="2"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{ccvaluetype}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="769" y="0" width="155" height="22" uuid="c0d2f0e8-3ad7-45c3-a439-ef3419cbf60b"/>
+				<box>
+					<pen lineWidth="0.0"/>
+					<topPen lineWidth="0.0"/>
+					<leftPen lineWidth="0.0"/>
+					<bottomPen lineWidth="0.0"/>
+					<rightPen lineWidth="0.0"/>
+				</box>
+				<textElement textAlignment="Justified" verticalAlignment="Middle">
+					<paragraph leftIndent="2"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{ccstatus}]]></textFieldExpression>
+			</textField>
+		</band>
+	</detail>
+</jasperReport>
