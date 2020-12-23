@@ -38,17 +38,17 @@ where materialstatus = 'ACTIVE']]>
 	<columnHeader>
 		<band height="42" splitType="Stretch">
 			<staticText>
-				<reportElement x="0" y="0" width="19" height="42" uuid="950d0d75-da80-46b0-87a1-94057d03b591"/>
-				<textElement textAlignment="Center" verticalAlignment="Middle"/>
+				<reportElement x="0" y="0" width="40" height="42" uuid="950d0d75-da80-46b0-87a1-94057d03b591"/>
+				<textElement verticalAlignment="Middle"/>
 				<text><![CDATA[No.]]></text>
 			</staticText>
 			<staticText>
-				<reportElement x="164" y="0" width="195" height="42" uuid="e0917d71-3454-48f0-916f-d877348a1118"/>
+				<reportElement x="185" y="0" width="174" height="42" uuid="e0917d71-3454-48f0-916f-d877348a1118"/>
 				<textElement textAlignment="Center" verticalAlignment="Middle"/>
 				<text><![CDATA[KIMAP]]></text>
 			</staticText>
 			<staticText>
-				<reportElement x="19" y="0" width="145" height="42" uuid="ec33b7a2-7323-48b6-a5dc-26b025d6c178"/>
+				<reportElement x="40" y="0" width="145" height="42" uuid="ec33b7a2-7323-48b6-a5dc-26b025d6c178"/>
 				<textElement textAlignment="Center" verticalAlignment="Middle"/>
 				<text><![CDATA[Material Desc]]></text>
 			</staticText>
@@ -87,16 +87,16 @@ where materialstatus = 'ACTIVE']]>
 	<detail>
 		<band height="22" splitType="Stretch">
 			<textField>
-				<reportElement x="0" y="0" width="19" height="22" uuid="1a46217e-df95-4cf4-ba9d-2b0d3c4ee3b8"/>
+				<reportElement x="0" y="0" width="40" height="22" uuid="1a46217e-df95-4cf4-ba9d-2b0d3c4ee3b8"/>
 				<textFieldExpression><![CDATA[$V{COLUMN_COUNT}]]></textFieldExpression>
 			</textField>
 			<textField>
-				<reportElement x="19" y="0" width="145" height="22" uuid="c8373c28-c73f-42a9-b04d-4bdea1bd78a8"/>
+				<reportElement x="40" y="0" width="145" height="22" uuid="c8373c28-c73f-42a9-b04d-4bdea1bd78a8"/>
 				<textElement textAlignment="Center"/>
 				<textFieldExpression><![CDATA[$F{materialdescription}]]></textFieldExpression>
 			</textField>
 			<textField>
-				<reportElement x="164" y="0" width="195" height="22" uuid="f2521cd2-80c4-4495-bf4d-57791f581049"/>
+				<reportElement x="185" y="0" width="174" height="22" uuid="f2521cd2-80c4-4495-bf4d-57791f581049"/>
 				<textElement textAlignment="Center"/>
 				<textFieldExpression><![CDATA[$F{materialkimap}]]></textFieldExpression>
 			</textField>
