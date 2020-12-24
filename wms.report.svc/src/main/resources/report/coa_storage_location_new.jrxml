@@ -63,7 +63,7 @@ where
 				<textElement verticalAlignment="Middle">
 					<paragraph leftIndent="2"/>
 				</textElement>
-				<text><![CDATA[Cost Component Code]]></text>
+				<text><![CDATA[Cost Sloc Code]]></text>
 			</staticText>
 			<staticText>
 				<reportElement x="144" y="0" width="144" height="42" uuid="fb2a8575-f937-4b52-82e9-306c2e317d12"/>
@@ -77,7 +77,7 @@ where
 				<textElement verticalAlignment="Middle">
 					<paragraph leftIndent="2"/>
 				</textElement>
-				<text><![CDATA[Cost Component Group ID]]></text>
+				<text><![CDATA[Cost Sloc Group ID]]></text>
 			</staticText>
 			<staticText>
 				<reportElement x="288" y="0" width="144" height="42" uuid="0641e0f9-caa4-48a8-81d5-686310aa7c7d"/>
@@ -91,7 +91,7 @@ where
 				<textElement verticalAlignment="Middle">
 					<paragraph leftIndent="2"/>
 				</textElement>
-				<text><![CDATA[Cost Component Group Name]]></text>
+				<text><![CDATA[Cost Sloc Group Name]]></text>
 			</staticText>
 			<staticText>
 				<reportElement x="432" y="0" width="144" height="42" uuid="b2d52074-4638-44f1-911e-6276b5f765eb"/>
@@ -105,7 +105,7 @@ where
 				<textElement verticalAlignment="Middle">
 					<paragraph leftIndent="2"/>
 				</textElement>
-				<text><![CDATA[Cost Component ID]]></text>
+				<text><![CDATA[Cost Sloc ID]]></text>
 			</staticText>
 			<staticText>
 				<reportElement x="576" y="0" width="144" height="42" uuid="77d05945-1b72-4fea-a3f1-36b01af1f21f"/>
@@ -119,7 +119,7 @@ where
 				<textElement verticalAlignment="Middle">
 					<paragraph leftIndent="2"/>
 				</textElement>
-				<text><![CDATA[Cost Component Name]]></text>
+				<text><![CDATA[Cost Sloc Name]]></text>
 			</staticText>
 			<staticText>
 				<reportElement x="720" y="0" width="144" height="42" uuid="8997635e-f3fa-469c-876a-f99f21a4c520"/>
@@ -133,7 +133,7 @@ where
 				<textElement verticalAlignment="Middle">
 					<paragraph leftIndent="2"/>
 				</textElement>
-				<text><![CDATA[Cost Component Client ID]]></text>
+				<text><![CDATA[Cost Sloc Client ID]]></text>
 			</staticText>
 			<staticText>
 				<reportElement x="864" y="0" width="167" height="42" uuid="757e847b-ad0d-4628-b638-7a243623abbd"/>
@@ -147,7 +147,7 @@ where
 				<textElement verticalAlignment="Middle">
 					<paragraph leftIndent="2"/>
 				</textElement>
-				<text><![CDATA[Cost Component Company ID]]></text>
+				<text><![CDATA[Cost Sloc Company ID]]></text>
 			</staticText>
 			<staticText>
 				<reportElement x="1031" y="0" width="125" height="42" uuid="1f84486e-2af7-41c3-a9c4-6bc9788a91ee"/>
@@ -161,7 +161,7 @@ where
 				<textElement verticalAlignment="Middle">
 					<paragraph leftIndent="2"/>
 				</textElement>
-				<text><![CDATA[Cost Component Type]]></text>
+				<text><![CDATA[Cost Sloc Type]]></text>
 			</staticText>
 			<staticText>
 				<reportElement x="1156" y="0" width="125" height="42" uuid="dbf3978d-3582-445c-a623-572f4deb7a78"/>
@@ -175,7 +175,7 @@ where
 				<textElement verticalAlignment="Middle">
 					<paragraph leftIndent="2"/>
 				</textElement>
-				<text><![CDATA[Cost Component Status]]></text>
+				<text><![CDATA[Cost Sloc Status]]></text>
 			</staticText>
 		</band>
 	</columnHeader>
