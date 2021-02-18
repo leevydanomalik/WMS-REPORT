@@ -18,29 +18,30 @@ import org.springframework.web.bind.annotation.RestController;
  *
  * @author HP
  */
+
 @RestController
 @RequestMapping("report")
-public class POPR {
-    private final String POPR_CSV = "asset.jasper";
+public class POPRSTOAdjustmentRESTController {
+    private final String POPRSTOADJ_CSV = "asset.jasper";
     
     @Autowired
     ReportService reportService;
     
     @ResponseBody
-    @RequestMapping(value = "po.pr.csv/", method = RequestMethod.GET,
+    @RequestMapping(value = "po.pr.sto.adj.csv/", method = RequestMethod.GET,
             produces = "text/csv")
     
-   public byte[] generateReportCSV(@RequestParam(value = "reportFormat", required = false) FileExtention reportFormat) throws GenericException{
+   public byte[] generatePOPRSTOAdjustmentReportCSV(@RequestParam(value = "reportFormat", required = false) FileExtention reportFormat) throws GenericException{
        Map <String, Object> params = new HashMap<>();
-       ByteArrayOutputStream rp;
+       ByteArrayOutputStream poPrStoAdj;
        reportService.setRptResourcePrefix("/report/");
-       rp = (ByteArrayOutputStream) reportService.showReportJdbcDataSourceExportToPdfTxtCsvXls(FileExtention.CSV, POPR_CSV, params);
+       poPrStoAdj = (ByteArrayOutputStream) reportService.showReportJdbcDataSourceExportToPdfTxtCsvXls(FileExtention.CSV, POPRSTOADJ_CSV, params);
        
     /*validate object*/
-    Validate.notNull(rp);
+    Validate.notNull(poPrStoAdj);
     
     /*get the byte*/
-    byte[] dataStream = rp.toByteArray();
+    byte[] dataStream = poPrStoAdj.toByteArray();
     
     /*validate object*/
     Validate.notNull(dataStream);
