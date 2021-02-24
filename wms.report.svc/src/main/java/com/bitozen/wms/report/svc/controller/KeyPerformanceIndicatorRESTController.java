@@ -46,10 +46,10 @@ public class KeyPerformanceIndicatorRESTController {
     @Autowired
     private ObjectMapper objectMapper; 
 
-    @Value("${hcis.elastic.url}")    
+    @Value("${wms.elastic.url}")    
     private String ELASTIC_URL;   
     
-    private final String KPI = "KEYPERFORMANCE.jasper";
+    private final String KPI = "kpi.jasper";
      
     @Autowired 
     ReportService reportService;
