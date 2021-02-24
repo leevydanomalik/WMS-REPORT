@@ -29,6 +29,7 @@ import org.springframework.web.client.RestTemplate;
 public class WMSReportApplication {
     
     public static void main(String[] args) {
+        System.setProperty("java.awt.headless", "true");
         SpringApplication.run(WMSReportApplication.class, args);
     }
     
