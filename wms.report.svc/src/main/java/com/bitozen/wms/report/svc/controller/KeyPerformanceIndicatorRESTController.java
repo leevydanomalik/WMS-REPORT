@@ -2,8 +2,8 @@ package com.bitozen.wms.report.svc.controller;
 
 import com.bitozen.wms.common.dto.GenericResponseDTO;
 import com.bitozen.wms.common.status.ResponseStatus;
-import com.bitozen.wms.elasticsearch.dto.trx.dsh.KPIRangePeriodGetDTO;
-import com.bitozen.wms.elasticsearch.dto.trx.dsh.KPIRangePeriodRequestDTO;
+//import com.bitozen.wms.elasticsearch.dto.trx.dsh.KPIRangePeriodGetDTO;
+//import com.bitozen.wms.elasticsearch.dto.trx.dsh.KPIRangePeriodRequestDTO;
 import com.bitozen.wms.report.common.exception.GenericException;
 import com.bitozen.wms.report.common.type.FileExtention;
 import com.bitozen.wms.report.common.util.RequestUtil;
@@ -51,41 +51,41 @@ public class KeyPerformanceIndicatorRESTController {
     
     private final String KPI = "kpi.jasper";
      
-    @Autowired 
-    ReportService reportService;
-    
-    @ResponseBody
-    @RequestMapping(value = "/key.performance.indicator", method = RequestMethod.POST, produces = "text/csv")
-    public byte[] generateKPICSV(@RequestParam(value = "reportFormat", required = false) FileExtention reportFormat, @RequestBody KPIRangePeriodRequestDTO dto) throws GenericException {
-        List<KPIRangePeriodGetDTO> data = findKpi(dto);
-        Map<String, Object> params = new HashMap<>();
-        ByteArrayOutputStream os;
-        reportService.setRptResourcePrefix("/report/");
-        os = (ByteArrayOutputStream) reportService.showReportBeanDataSourceExportToPdfTxtCsvXls(FileExtention.CSV, KPI, params, data);
-
-        /*validate object*/
-        Validate.notNull(os);
-
-        /*get the byte*/
-        byte[] datastream = os.toByteArray();
-
-        /*validate object*/
-        Validate.notNull(datastream);
-
-        return datastream;
-    }   
-    
-    public List<KPIRangePeriodGetDTO> findKpi(KPIRangePeriodRequestDTO dto) {
-        ResponseEntity<GenericResponseDTO<List<KPIRangePeriodGetDTO>>> data = restClientUtil.restServiceExchange(
-                ELASTIC_URL,
-                "/getAllOptimizedOperationKPIValuesInRangeOfTime",
-                HttpMethod.POST,
-                new HttpEntity<>(dto, requestUtil.getPreFormattedRequestWithToken().getHeaders()),
-                GenericResponseDTO.class);
-        if (data.getBody().getStatus().equals(ResponseStatus.S)) {
-            return data.getBody().getData();
-        }
-        return new ArrayList<>();
-    }
+//    @Autowired 
+//    ReportService reportService;
+//    
+//    @ResponseBody
+//    @RequestMapping(value = "/key.performance.indicator", method = RequestMethod.POST, produces = "text/csv")
+//    public byte[] generateKPICSV(@RequestParam(value = "reportFormat", required = false) FileExtention reportFormat, @RequestBody KPIRangePeriodRequestDTO dto) throws GenericException {
+//        List<KPIRangePeriodGetDTO> data = findKpi(dto);
+//        Map<String, Object> params = new HashMap<>();
+//        ByteArrayOutputStream os;
+//        reportService.setRptResourcePrefix("/report/");
+//        os = (ByteArrayOutputStream) reportService.showReportBeanDataSourceExportToPdfTxtCsvXls(FileExtention.CSV, KPI, params, data);
+//
+//        /*validate object*/
+//        Validate.notNull(os);
+//
+//        /*get the byte*/
+//        byte[] datastream = os.toByteArray();
+//
+//        /*validate object*/
+//        Validate.notNull(datastream);
+//
+//        return datastream;
+//    }   
+//    
+//    public List<KPIRangePeriodGetDTO> findKpi(KPIRangePeriodRequestDTO dto) {
+//        ResponseEntity<GenericResponseDTO<List<KPIRangePeriodGetDTO>>> data = restClientUtil.restServiceExchange(
+//                ELASTIC_URL,
+//                "/getAllOptimizedOperationKPIValuesInRangeOfTime",
+//                HttpMethod.POST,
+//                new HttpEntity<>(dto, requestUtil.getPreFormattedRequestWithToken().getHeaders()),
+//                GenericResponseDTO.class);
+//        if (data.getBody().getStatus().equals(ResponseStatus.S)) {
+//            return data.getBody().getData();
+//        }
+//        return new ArrayList<>();
+//    }
     
 }
