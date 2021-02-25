@@ -32,6 +32,10 @@ public class WMSReportApplication {
         SpringApplication.run(WMSReportApplication.class, args);
     }
     
+    static {
+        System.setProperty("java.awt.headless", "true");
+    }
+    
     @Bean
     public RestTemplate restTemplate() throws KeyStoreException, NoSuchAlgorithmException, KeyManagementException {
         TrustStrategy acceptingTrustStrategy = new TrustStrategy() {
