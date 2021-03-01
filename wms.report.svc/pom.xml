@@ -107,7 +107,7 @@
                 <configuration>
                     <imageName>leevy/wms-report</imageName>
                     <baseImage>openjdk:10</baseImage>
-                    <entryPoint>["java", "-jar", "-Dspring.profiles.active=dev", "/${project.build.finalName}.jar"]
+                    <entryPoint>["java", "-jar", "-Dspring.profiles.active=dev", "-Djava.awt.headless=true ", "/${project.build.finalName}.jar"]
                     </entryPoint>
                     <resources>
                         <resource>
