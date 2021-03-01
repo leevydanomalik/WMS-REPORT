@@ -3,6 +3,9 @@
 	<property name="ireport.zoom" value="1.1"/>
 	<property name="ireport.x" value="0"/>
 	<property name="ireport.y" value="0"/>
+	<parameter name="stockopnameid" class="java.lang.String">
+		<defaultValueExpression><![CDATA[]]></defaultValueExpression>
+	</parameter>
 	<queryString>
 		<![CDATA[select
 mso.msoid,
@@ -27,7 +30,8 @@ CAST (mso.msomaterial AS json) :: json -> 'materialSeries' ->> 'msrID' AS msrid,
 CAST (mso.msomaterial AS json) :: json -> 'materialSeries' ->> 'msrName' AS msrname,
 CAST (mso.msomaterial AS json) :: json -> 'materialType' ->> 'mtID' AS mtid,
 CAST (mso.msomaterial AS json) :: json -> 'materialType' ->> 'mtName' AS mtname
-from mst_materialso mso;]]>
+from mst_materialso mso
+where mso.msostockopnameid = $P{stockopnameid}]]>
 	</queryString>
 	<field name="msoid" class="java.lang.String"/>
 	<field name="msostockopnameid" class="java.lang.String"/>
