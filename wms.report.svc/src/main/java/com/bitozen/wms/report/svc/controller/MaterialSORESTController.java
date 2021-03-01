@@ -63,7 +63,7 @@ public class MaterialSORESTController {
         try {
             os = (ByteArrayOutputStream) reportService.showReportJdbcDataSourceExportToPdfTxtCsvXls(FileExtention.CSV, MATERIAL_SO_BY_STOCKOPNAME_ID_SVC, params);
         } catch (GenericException ex) {
-            Logger.getLogger(CostComponentRESTController.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(MaterialSORESTController.class.getName()).log(Level.SEVERE, null, ex);
         }
         /*validate object*/
         Validate.notNull(os);
