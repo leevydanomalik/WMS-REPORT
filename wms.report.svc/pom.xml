@@ -255,12 +255,12 @@
             <artifactId>poi</artifactId>
             <version>4.1.0</version>
         </dependency>
-<!--        <dependency>
+        <dependency>
             <groupId>com.bitozen.wms</groupId>
             <artifactId>wms.elasticsearch.dto</artifactId>
             <version>1.0-SNAPSHOT</version>
             <type>jar</type>
-        </dependency>-->
+        </dependency>
     </dependencies>
     <name>wms.report.svc</name>
 </project>

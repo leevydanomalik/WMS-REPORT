@@ -396,6 +396,69 @@ public class ReportService extends AbstractReportService<JasperReport> {
         return os;
     }
 
+    @Override
+    public OutputStream showReportBeanDataSourceExportToPdfTxtCsvXls(FileExtention format, String jasperFile, Map<String, Object> params, Collection<? extends Object> data) throws GenericException {
+
+        InputStream in = null;
+        ByteArrayOutputStream os = new ByteArrayOutputStream();
+        try {
+            /*solve Docker deployement 20-04-2018*/
+//            in = classLoader.getResourceAsStream(this.rptResourcePrefix + jasperFile);
+            try {
+                in = new ClassPathResource(this.rptResourcePrefix + jasperFile).getInputStream();
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+            if (data != null) {
+                if (params == null) {
+                    params = new HashMap<>();
+                }
+                params.put("REPORT_FILE_RESOLVER", this.FILE_RESOLVER);
+                try {
+                    params.put("SUBREPORT_DIR", new ClassPathResource(rptResourcePrefix).getPath());
+                } catch (Exception ex) {
+                    ex.printStackTrace();
+                }
+
+                JRExporter exporter = new JRPdfExporter();
+                if (format != null) {
+                    switch (format) {
+                        case XLS:
+                            exporter = new JRXlsExporter();
+                            break;
+                        case CSV:
+                            exporter = new JRCsvExporter();
+                            exporter.setParameter(JRCsvExporterParameter.FIELD_DELIMITER, ";");
+                            break;
+                        case TXT:
+                            exporter = new JRTextExporter();
+                            exporter.setParameter(JRTextExporterParameter.PAGE_WIDTH, 80);
+                            exporter.setParameter(JRTextExporterParameter.PAGE_HEIGHT, 40);
+                            break;
+                        default:
+                            break;
+                    }
+                }
+                JRBeanCollectionDataSource beanColDataSource = new JRBeanCollectionDataSource(data);
+                JasperPrint jasperPrint = JasperFillManager.fillReport(in, params, beanColDataSource);
+                exporter.setParameter(JRExporterParameter.JASPER_PRINT, jasperPrint);
+                exporter.setParameter(JRExporterParameter.OUTPUT_STREAM, os);
+                exporter.exportReport();
+            }
+        } catch (JRException e) {
+            logger.error("Failure", e);
+            throw new GenericException(MessageCode.get(IReportService.class, "showReportJdbcDataSource", true), e);
+        } finally {
+            if (in != null) {
+                try {
+                    in.close();
+                } catch (Exception e) {
+                    //ignore
+                }
+            }
+        }
+        return os;
+    }
 
 }
 

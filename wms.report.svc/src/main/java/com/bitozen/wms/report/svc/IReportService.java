@@ -65,6 +65,8 @@ public interface IReportService {
     
     public abstract OutputStream showReportJdbcDataSourceExportToPdfTxtCsvXls(FileExtention format, String jasperFile, Map<String, Object> params, JREmptyDataSource jremptyDataSource, Connection connection) throws GenericException;
        
+    public abstract OutputStream showReportBeanDataSourceExportToPdfTxtCsvXls(FileExtention format, String jasperFile, Map<String, Object> params, Collection<? extends Object> data) throws GenericException;
+    
     void flushTemplateCache();
 
 }
