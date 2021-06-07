@@ -1,11 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="PO VS PR" language="groovy" pageWidth="1190" pageHeight="842" orientation="Landscape" columnWidth="1132" leftMargin="29" rightMargin="29" topMargin="20" bottomMargin="20" isFloatColumnFooter="true" uuid="58bcfdfb-6b5f-4899-9b31-8cce51833648">
 	<property name="ireport.zoom" value="1.1269722013523846"/>
-	<property name="ireport.x" value="600"/>
+	<property name="ireport.x" value="25"/>
 	<property name="ireport.y" value="0"/>
-	<parameter name="SUBREPORT_DIR" class="java.lang.String" isForPrompting="false">
-		<defaultValueExpression><![CDATA["C:\\Users\\Lenovo\\Documents\\WMS 2021\\JASPER REPORT\\"]]></defaultValueExpression>
-	</parameter>
 	<queryString>
 		<![CDATA[SELECT
     notif3PR.plantID,
