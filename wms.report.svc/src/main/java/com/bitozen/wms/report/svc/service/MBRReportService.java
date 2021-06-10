@@ -85,7 +85,7 @@ public class MBRReportService {
     @HystrixCommand(fallbackMethod = "defaultGetGRVSPRFallback")
     public GenericResponseDTO<List<GRVSPRDTO>> getGRVSPR() throws ParseException, JsonProcessingException {
         try {
-            List<Object[]> grvspr = repository.findPOvsPR();
+            List<Object[]> grvspr = repository.findGRvsPR();
 
             List<GRVSPRDTO> grvsprDTOs = new ArrayList<>();
             grvspr.stream().map((Object[] temp) -> {
