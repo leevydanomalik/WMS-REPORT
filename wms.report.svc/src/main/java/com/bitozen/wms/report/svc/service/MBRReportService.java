@@ -5,6 +5,7 @@ import com.bitozen.wms.common.type.ProjectType;
 import com.bitozen.wms.common.util.LogOpsUtil;
 import com.bitozen.wms.report.domain.repository.MBRRepository;
 import com.bitozen.wms.report.dto.GRVSPRDTO;
+import com.bitozen.wms.report.dto.PDTDTO;
 import com.bitozen.wms.report.dto.POVSPRDTO;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
@@ -89,7 +90,7 @@ public class MBRReportService {
 
             List<GRVSPRDTO> grvsprDTOs = new ArrayList<>();
             grvspr.stream().map((Object[] temp) -> {
-                GRVSPRDTO dto = new GRVSPRDTO();
+                GRVSPRDTO dto = new GRVSPRDTO();                
                 dto.setPlantname(temp[0] != null ? String.valueOf(temp[0]) : "");
                 dto.setPlantid(temp[1] != null ?  String.valueOf(temp[1]) : "");
                 dto.setPrdrum(temp[2] != null ?  Double.valueOf(String.valueOf(temp[2])) : 0d);
@@ -126,6 +127,50 @@ public class MBRReportService {
     
     private GenericResponseDTO<List<GRVSPRDTO>> defaultGetGRVSPRFallback(Throwable e) throws IOException {
         return new GenericResponseDTO<List<GRVSPRDTO>>().errorResponse(String.valueOf(HttpStatus.INTERNAL_SERVER_ERROR.value()),
+                e instanceof HystrixTimeoutException ? "Connection Timeout. Please Try Again Later"
+                        : e instanceof HystrixBadRequestException ? "Bad Request. Please recheck submitted data" : e.getLocalizedMessage());
+    }
+    
+    @HystrixCommand(fallbackMethod = "defaultGetPDTFallback")
+    public GenericResponseDTO<List<PDTDTO>> getPDT() throws ParseException, JsonProcessingException {
+        try {
+            List<Object[]> pdt = repository.findPDT();
+
+            List<PDTDTO> pdtDTOs = new ArrayList<>();
+            pdt.stream().map((Object[] temp) -> {
+                PDTDTO dto = new PDTDTO();                
+                dto.setPlantname(temp[0] != null ? String.valueOf(temp[0]) : "");
+                dto.setPlantid(temp[1] != null ?  String.valueOf(temp[1]) : "");
+                dto.setGrtotallate(temp[2] != null ?  Double.valueOf(String.valueOf(temp[2])) : 0d);
+                dto.setGrtotalontime(temp[3] != null ?  Double.valueOf(String.valueOf(temp[3])) : 0d);
+                return dto;
+            }).forEachOrdered((dto) -> {
+                pdtDTOs.add(dto);
+            });
+            if (pdtDTOs.isEmpty()) {
+                log.info(objectMapper.writeValueAsString(
+                        LogOpsUtil.getErrorResponse(ProjectType.CQRS, "PDT", new java.util.Date(), "Query", "204", "No Data Found")));
+                return new GenericResponseDTO().noDataFoundResponse();
+            }
+            log.info(objectMapper.writeValueAsString(LogOpsUtil.getLogResponse(
+                    ProjectType.CQRS, "PDT", new java.util.Date(), "Query", new GenericResponseDTO().successResponse().getCode(),
+                    new GenericResponseDTO().successResponse().getMessage())));
+            return new GenericResponseDTO().successResponse(pdtDTOs);
+        } catch (Exception e) {
+            log.info(e.getMessage());
+            try {
+                log.info(objectMapper.writeValueAsString(
+                        LogOpsUtil.getErrorResponse(ProjectType.CQRS, "PDT", new java.util.Date(), "Query", String.valueOf(HttpStatus.INTERNAL_SERVER_ERROR.value()), e.getStackTrace())));
+            } catch (JsonProcessingException ex) {
+                log.info(ex.getMessage());
+            }
+            return new GenericResponseDTO().errorResponse(String.valueOf(HttpStatus.INTERNAL_SERVER_ERROR.value()), e.getLocalizedMessage());
+        }
+
+    }
+    
+    private GenericResponseDTO<List<PDTDTO>> defaultGetPDTFallback(Throwable e) throws IOException {
+        return new GenericResponseDTO<List<PDTDTO>>().errorResponse(String.valueOf(HttpStatus.INTERNAL_SERVER_ERROR.value()),
                 e instanceof HystrixTimeoutException ? "Connection Timeout. Please Try Again Later"
                         : e instanceof HystrixBadRequestException ? "Bad Request. Please recheck submitted data" : e.getLocalizedMessage());
     }

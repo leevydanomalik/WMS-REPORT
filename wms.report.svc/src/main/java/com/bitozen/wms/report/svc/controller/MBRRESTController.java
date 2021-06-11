@@ -6,6 +6,7 @@ import com.bitozen.wms.common.util.LogOpsUtil;
 import com.bitozen.wms.report.common.exception.GenericException;
 import com.bitozen.wms.report.common.type.FileExtention;
 import com.bitozen.wms.report.dto.GRVSPRDTO;
+import com.bitozen.wms.report.dto.PDTDTO;
 import com.bitozen.wms.report.dto.POVSPRDTO;
 import com.bitozen.wms.report.svc.ReportService;
 import com.bitozen.wms.report.svc.service.MBRReportService;
@@ -42,6 +43,7 @@ public class MBRRESTController {
     
     private final String POvsPR = "PO VS PR.jasper";
     private final String GRvsPR = "GR VS PR.jasper";
+    private final String PDT = "PDT.jasper";
      
     @Autowired 
     ReportService reportService;
@@ -97,6 +99,27 @@ public class MBRRESTController {
         return datastream;
     }
     
+    @ResponseBody
+    @RequestMapping(value = "data.pdt.csv/", method = RequestMethod.GET,
+            produces = "text/csv")
+    public byte[] generatePDTCSV(@RequestParam(value = "reportFormat", required = false) FileExtention reportFormat ) throws GenericException {
+        Map<String, Object> params = new HashMap<>();
+        ByteArrayOutputStream os;
+        reportService.setRptResourcePrefix("/report/");
+        os = (ByteArrayOutputStream) reportService.showReportJdbcDataSourceExportToPdfTxtCsvXls(FileExtention.CSV, PDT,params);
+
+        /*validate object*/
+        Validate.notNull(os);
+
+        /*get the byte*/
+        byte[] datastream = os.toByteArray();
+
+        /*validate object*/
+        Validate.notNull(datastream);
+
+        return datastream;
+    }
+    
     @GetMapping(value = "/get.po.vs.pr")
     public ResponseEntity<GenericResponseDTO<List<POVSPRDTO>>> getPOVSPR() throws ParseException, JsonProcessingException {
         try {
@@ -126,6 +149,22 @@ public class MBRRESTController {
             log.info(ex.getMessage());
         }
         GenericResponseDTO<List<GRVSPRDTO>> response = mbr.getGRVSPR();
+        return ResponseEntity.status(HttpStatus.OK).body(response);
+    }
+    
+    @GetMapping(value = "/get.pdt")
+    public ResponseEntity<GenericResponseDTO<List<PDTDTO>>> getPDT() throws ParseException, JsonProcessingException {
+        try {
+            log.info(objectMapper.writeValueAsString(
+                    LogOpsUtil.getLogOps(ProjectType.CQRS, "MBR", MBRRESTController.class.getName(),
+                            httpRequest.getRequestURL().toString(),
+                            new Date(), "Query", "getPDT",
+                            "SYSTEM",
+                            "")));
+        } catch (JsonProcessingException ex) {
+            log.info(ex.getMessage());
+        }
+        GenericResponseDTO<List<PDTDTO>> response = mbr.getPDT();
         return ResponseEntity.status(HttpStatus.OK).body(response);
     }
     

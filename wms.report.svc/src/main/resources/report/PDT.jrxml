@@ -1,0 +1,516 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="PO VS PR" language="groovy" pageWidth="720" pageHeight="842" columnWidth="680" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="58bcfdfb-6b5f-4899-9b31-8cce51833648">
+	<property name="ireport.zoom" value="1.4641000000000304"/>
+	<property name="ireport.x" value="206"/>
+	<property name="ireport.y" value="0"/>
+	<parameter name="SUBREPORT_DIR" class="java.lang.String" isForPrompting="false">
+		<defaultValueExpression><![CDATA["C:\\Users\\Lenovo\\Documents\\WMS 2021\\JASPER REPORT\\"]]></defaultValueExpression>
+	</parameter>
+	<queryString>
+		<![CDATA[SELECT
+	gr6.plantname,
+  gr6.plantid,
+	gr6.GRTotalLate,
+	gr6.GRTotalOnTime,
+	((gr6.GRTotalLate + gr6.GRTotalOnTime) / NULLIF(gr6.GRTotalLate,0)) as TotalLate,
+	((gr6.GRTotalLate + gr6.GRTotalOnTime) / NULLIF(gr6.GRTotalOnTime,0)) as TotalOntime
+FROM
+(
+SELECT
+	gr5.plantid,
+	gr5.plantname,
+	CASE
+			WHEN ( ( gr5.GRTotalLate ) :: numeric ) IS NULL THEN
+			'0'
+			ELSE ( ( gr5.GRTotalLate ) :: numeric )
+	END AS GRTotalLate,
+	CASE
+			WHEN ( ( gr5.GRTotalOnTime ) :: numeric ) IS NULL THEN
+			'0'
+			ELSE ( ( gr5.GRTotalOnTime ) :: numeric )
+	END AS GRTotalOnTime
+FROM
+(
+SELECT
+	gr4.plantid,
+	gr4.plantname,
+	SUM ( gr4.GR_DRUM :: DECIMAL + gr4.GR_BOX :: DECIMAL + gr4.GR_PAIL :: DECIMAL ) FILTER ( WHERE gr4.eta::date < gr4.ata::date ) AS GRTotalLate,
+	SUM ( gr4.GR_DRUM :: DECIMAL + gr4.GR_BOX :: DECIMAL + gr4.GR_PAIL :: DECIMAL ) FILTER ( WHERE gr4.eta::date >= gr4.ata::date ) AS GRTotalOnTime
+FROM
+	(
+	SELECT
+		gr3.plantid,
+		gr3.plantname,
+	CASE
+			WHEN ( ( gr3.GR_DRUM ) :: VARCHAR ) IS NULL THEN
+			'0'
+			WHEN ( ( gr3.GR_DRUM ) :: VARCHAR ) = '' THEN
+			'0' ELSE ( ( gr3.GR_DRUM ) :: VARCHAR )
+		END AS GR_DRUM,
+	CASE
+
+			WHEN ( ( gr3.GR_BOX ) :: VARCHAR ) IS NULL THEN
+			'0'
+			WHEN ( ( gr3.GR_BOX ) :: VARCHAR ) = '' THEN
+			'0' ELSE ( ( gr3.GR_BOX ) :: VARCHAR )
+		END AS GR_BOX,
+	CASE
+
+			WHEN ( ( gr3.GR_PAIL ) :: VARCHAR ) IS NULL THEN
+			'0'
+			WHEN ( ( gr3.GR_PAIL ) :: VARCHAR ) = '' THEN
+			'0' ELSE ( ( gr3.GR_PAIL ) :: VARCHAR )
+		END AS GR_PAIL,
+		gr3.eta,
+					gr3.ata
+	FROM
+		(
+		SELECT
+			gr2.plantid,
+			pl.plantname,
+			( gr2.qtyUomDrumGood + gr2.qtyUomDrumNotGood ) AS GR_DRUM,
+			( gr2.qtyUomBoxGood + gr2.qtyUomBoxNotGood ) AS GR_BOX,
+			( gr2.qtyUomPailGood + gr2.qtyUomPailNotGood ) AS GR_PAIL,
+			gr2.eta,
+			gr2.ata
+		FROM
+			(
+			SELECT
+				gr1.plantID AS plantid,
+				gr1.status,
+				SUM (
+					CAST (
+					CASE
+
+							WHEN ( ( gr1.qtyPhysic ) :: VARCHAR ) IS NULL THEN
+							'0'
+							WHEN ( ( gr1.qtyPhysic ) :: VARCHAR ) = '' THEN
+							'0' ELSE ( ( gr1.qtyPhysic ) :: VARCHAR )
+					END AS FLOAT
+					)
+				) FILTER ( WHERE ma2.uom = 'DRUM' ) AS qtyUomDrumGood,
+				SUM (
+					CAST (
+					CASE
+
+							WHEN ( ( gr1.qtyPhysic ) :: VARCHAR ) IS NULL THEN
+							'0'
+							WHEN ( ( gr1.qtyPhysic ) :: VARCHAR ) = '' THEN
+							'0' ELSE ( ( gr1.qtyPhysic ) :: VARCHAR )
+					END AS FLOAT
+					)
+				) FILTER ( WHERE ma2.uom = 'BOX' ) AS qtyUomBoxGood,
+				SUM (
+					CAST (
+					CASE
+
+							WHEN ( ( gr1.qtyPhysic ) :: VARCHAR ) IS NULL THEN
+							'0'
+							WHEN ( ( gr1.qtyPhysic ) :: VARCHAR ) = '' THEN
+							'0' ELSE ( ( gr1.qtyPhysic ) :: VARCHAR )
+					END AS FLOAT
+					)
+				) FILTER ( WHERE ma2.uom = 'PL' ) AS qtyUomPailGood,
+				SUM (
+					CAST (
+					CASE
+
+							WHEN ( ( gr1.wrongQty ) :: VARCHAR ) IS NULL THEN
+							'0'
+							WHEN ( ( gr1.wrongQty ) :: VARCHAR ) = '' THEN
+							'0' ELSE ( ( gr1.wrongQty ) :: VARCHAR )
+					END AS FLOAT
+					)
+				) FILTER ( WHERE ma2.uom = 'DRUM' ) AS qtyUomDrumNotGood,
+				SUM (
+					CAST (
+					CASE
+
+							WHEN ( ( gr1.wrongQty ) :: VARCHAR ) IS NULL THEN
+							'0'
+							WHEN ( ( gr1.wrongQty ) :: VARCHAR ) = '' THEN
+							'0' ELSE ( ( gr1.wrongQty ) :: VARCHAR )
+					END AS FLOAT
+					)
+				) FILTER ( WHERE ma2.uom = 'BOX' ) AS qtyUomBoxNotGood,
+				SUM (
+					CAST (
+					CASE
+
+							WHEN ( ( gr1.wrongQty ) :: VARCHAR ) IS NULL THEN
+							'0'
+							WHEN ( ( gr1.wrongQty ) :: VARCHAR ) = '' THEN
+							'0' ELSE ( ( gr1.wrongQty ) :: VARCHAR )
+					END AS FLOAT
+					)
+				) FILTER ( WHERE ma2.uom = 'PL' ) AS qtyUomPailNotGood,
+					gr1.eta,
+					gr1.ata
+			FROM
+				(
+				SELECT
+					gr.objectid,
+					CAST ( gr.es AS json ) -> 'plant' ->> 'plantID' AS plantID,
+					json_array_elements ( CAST ( gr.grreceiptmaterials AS json ) :: json ) -> 'material' ->> 'material' AS materialid,
+					json_array_elements ( CAST ( gr.grreceiptmaterials AS json ) :: json ) ->> 'qtyPhysic' AS qtyPhysic,
+					json_array_elements ( CAST ( gr.grreceiptmaterials AS json ) :: json ) ->> 'wrongQty' AS wrongQty,
+					CAST ( gr.grstatus AS json ) ->> 'value' AS status,
+					gr.eta,
+					gr.ata
+-- 					AND gr.eta < gr.ata
+				FROM
+					trx_materialgrentryprojection gr
+				WHERE
+					gr.grreceiptmaterials IS NOT NULL
+				) gr1
+				LEFT JOIN ( SELECT ma.materialid, CAST ( ma.materialuom AS json ) ->> 'value' AS uom FROM mst_material ma ) ma2 ON ma2.materialid = gr1.materialid
+			WHERE
+				gr1.status = 'INACTIVE'
+			GROUP BY
+				gr1.plantID,
+				gr1.status,
+				gr1.eta,
+				gr1.ata
+			) gr2
+			LEFT JOIN mst_plant pl ON gr2.plantid = pl.plantid
+		) gr3
+	) gr4
+	GROUP BY
+	gr4.plantid,
+	gr4.plantname
+	) gr5
+	) gr6]]>
+	</queryString>
+	<field name="plantname" class="java.lang.String"/>
+	<field name="plantid" class="java.lang.String"/>
+	<field name="grtotallate" class="java.math.BigDecimal"/>
+	<field name="grtotalontime" class="java.math.BigDecimal"/>
+	<field name="totallate" class="java.math.BigDecimal"/>
+	<field name="totalontime" class="java.math.BigDecimal"/>
+	<variable name="sumgtlate" class="java.lang.Double" calculation="Sum">
+		<variableExpression><![CDATA[$F{grtotallate}==null?0:$F{grtotallate}]]></variableExpression>
+	</variable>
+	<variable name="sumgtontime" class="java.lang.Double" calculation="Sum">
+		<variableExpression><![CDATA[$F{grtotalontime}==null?0:$F{grtotalontime}]]></variableExpression>
+	</variable>
+	<variable name="sumgttotaldelivery" class="java.lang.Double" calculation="Sum">
+		<variableExpression><![CDATA[($F{grtotallate}==null?0:$F{grtotallate}) + ($F{grtotalontime}==null?0:$F{grtotalontime})]]></variableExpression>
+	</variable>
+	<variable name="sumgttotallatepercentage" class="java.lang.Double" calculation="Average">
+		<variableExpression><![CDATA[$F{totallate}==null?0:$F{totallate}]]></variableExpression>
+	</variable>
+	<variable name="sumgttotalontimepercentage" class="java.lang.Double" calculation="Average">
+		<variableExpression><![CDATA[$F{totalontime}==null?0:$F{totalontime}]]></variableExpression>
+	</variable>
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<title>
+		<band height="44" splitType="Stretch">
+			<staticText>
+				<reportElement uuid="37acc8f3-5d99-4e7f-9397-9c60b945574f" mode="Opaque" x="4" y="3" width="269" height="17" forecolor="#000000" backcolor="#FFFFFF"/>
+				<textElement textAlignment="Center" verticalAlignment="Top">
+					<font fontName="SansSerif" size="10" isBold="true"/>
+				</textElement>
+				<text><![CDATA[PDT]]></text>
+			</staticText>
+		</band>
+	</title>
+	<columnHeader>
+		<band height="41" splitType="Stretch">
+			<rectangle>
+				<reportElement uuid="7f5091b1-12aa-4d41-87e8-5b5cbc88fac1" x="0" y="0" width="154" height="40"/>
+			</rectangle>
+			<rectangle>
+				<reportElement uuid="3d41a51f-fda6-4b8e-86c8-5864e84110ff" x="154" y="0" width="30" height="40"/>
+			</rectangle>
+			<staticText>
+				<reportElement uuid="bda9a77d-8b77-4b74-bcb6-21b2165dc7ad" mode="Opaque" x="0" y="0" width="184" height="41" forecolor="#000000" backcolor="#FFFFFF"/>
+				<box>
+					<pen lineWidth="0.5"/>
+					<topPen lineWidth="0.5"/>
+					<leftPen lineWidth="0.5"/>
+					<bottomPen lineWidth="0.5"/>
+					<rightPen lineWidth="0.5"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle" markup="none">
+					<font fontName="SansSerif" size="10" isBold="true"/>
+					<paragraph lineSpacing="Single"/>
+				</textElement>
+				<text><![CDATA[NAME OF DSP]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="8b6c8f28-0187-4ef6-aacc-2cbde2264ccf" mode="Opaque" x="184" y="0" width="117" height="41" forecolor="#000000" backcolor="#FFFFFF"/>
+				<box>
+					<pen lineWidth="0.5"/>
+					<topPen lineWidth="0.5"/>
+					<leftPen lineWidth="0.5"/>
+					<bottomPen lineWidth="0.5"/>
+					<rightPen lineWidth="0.5"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="SansSerif" size="10" isBold="true"/>
+				</textElement>
+				<text><![CDATA[PLANT]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="d605dbda-29b5-4712-b98d-49ab237b4a9d" mode="Opaque" x="301" y="0" width="156" height="20" forecolor="#000000" backcolor="#FFFFFF"/>
+				<box>
+					<pen lineWidth="0.5"/>
+					<topPen lineWidth="0.5"/>
+					<leftPen lineWidth="0.5"/>
+					<bottomPen lineWidth="0.5"/>
+					<rightPen lineWidth="0.5"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="SansSerif" size="10" isBold="true"/>
+				</textElement>
+				<text><![CDATA[]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="8bc6bf6f-69d6-47e4-8f6e-af386d07f26e" mode="Opaque" x="301" y="20" width="80" height="21" forecolor="#000000" backcolor="#FFFFFF"/>
+				<box>
+					<pen lineWidth="0.5"/>
+					<topPen lineWidth="0.5"/>
+					<leftPen lineWidth="0.5"/>
+					<bottomPen lineWidth="0.5"/>
+					<rightPen lineWidth="0.5"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="SansSerif" size="10" isBold="true"/>
+				</textElement>
+				<text><![CDATA[LATE]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="7bd58016-10bb-49ef-8c3f-b24d414e0d82" mode="Opaque" x="381" y="20" width="76" height="21" forecolor="#000000" backcolor="#FFFFFF"/>
+				<box>
+					<pen lineWidth="0.5"/>
+					<topPen lineWidth="0.5"/>
+					<leftPen lineWidth="0.5"/>
+					<bottomPen lineWidth="0.5"/>
+					<rightPen lineWidth="0.5"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="SansSerif" size="10" isBold="true"/>
+				</textElement>
+				<text><![CDATA[ONTIME]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="e48dfb4e-237d-463e-bff8-995eed05e512" mode="Opaque" x="623" y="0" width="57" height="41" forecolor="#000000" backcolor="#FFFFFF"/>
+				<box>
+					<pen lineWidth="0.5"/>
+					<topPen lineWidth="0.5"/>
+					<leftPen lineWidth="0.5"/>
+					<bottomPen lineWidth="0.5"/>
+					<rightPen lineWidth="0.5"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="SansSerif" size="10" isBold="true"/>
+				</textElement>
+				<text><![CDATA[% ONTIME]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="d13e3b32-8433-4042-8115-2b37b524c55f" mode="Opaque" x="457" y="0" width="109" height="41" forecolor="#000000" backcolor="#FFFFFF"/>
+				<box>
+					<pen lineWidth="0.5"/>
+					<topPen lineWidth="0.5"/>
+					<leftPen lineWidth="0.5"/>
+					<bottomPen lineWidth="0.5"/>
+					<rightPen lineWidth="0.5"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="SansSerif" isBold="true"/>
+				</textElement>
+				<text><![CDATA[TOTAL DELIVERY]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="80705475-248f-45c6-a108-64de94774706" mode="Opaque" x="566" y="0" width="57" height="41" forecolor="#000000" backcolor="#FFFFFF"/>
+				<box>
+					<pen lineWidth="0.5"/>
+					<topPen lineWidth="0.5"/>
+					<leftPen lineWidth="0.5"/>
+					<bottomPen lineWidth="0.5"/>
+					<rightPen lineWidth="0.5"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="SansSerif" size="10" isBold="true"/>
+				</textElement>
+				<text><![CDATA[% LATE]]></text>
+			</staticText>
+		</band>
+	</columnHeader>
+	<detail>
+		<band height="20" splitType="Stretch">
+			<textField>
+				<reportElement uuid="d5451b15-ded2-4ecc-a18c-3976425ca656" x="0" y="0" width="184" height="20"/>
+				<box>
+					<pen lineWidth="0.5"/>
+					<topPen lineWidth="0.5"/>
+					<leftPen lineWidth="0.5"/>
+					<bottomPen lineWidth="0.5"/>
+					<rightPen lineWidth="0.5"/>
+				</box>
+				<textElement verticalAlignment="Middle">
+					<font size="9"/>
+					<paragraph leftIndent="2"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{plantname}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement uuid="f27452e2-6065-4e36-99e5-394b833b5ee4" x="184" y="0" width="117" height="20"/>
+				<box>
+					<pen lineWidth="0.5"/>
+					<topPen lineWidth="0.5"/>
+					<leftPen lineWidth="0.5"/>
+					<bottomPen lineWidth="0.5"/>
+					<rightPen lineWidth="0.5"/>
+				</box>
+				<textElement verticalAlignment="Middle">
+					<paragraph leftIndent="2"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{plantid}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement uuid="fcf0ba0b-1ab3-4928-9030-8b3cda6ecbef" x="301" y="0" width="80" height="20"/>
+				<box>
+					<pen lineWidth="0.5"/>
+					<topPen lineWidth="0.5"/>
+					<leftPen lineWidth="0.5"/>
+					<bottomPen lineWidth="0.5"/>
+					<rightPen lineWidth="0.5"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle"/>
+				<textFieldExpression><![CDATA[$F{grtotallate}==null?0:$F{grtotallate}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement uuid="e85ac0ee-38e3-4cd8-ba26-1ffec272a6bc" x="381" y="0" width="76" height="20"/>
+				<box>
+					<pen lineWidth="0.5"/>
+					<topPen lineWidth="0.5"/>
+					<leftPen lineWidth="0.5"/>
+					<bottomPen lineWidth="0.5"/>
+					<rightPen lineWidth="0.5"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle"/>
+				<textFieldExpression><![CDATA[$F{grtotalontime}==null?0:$F{grtotalontime}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement uuid="6bbea08d-1604-45ac-8b38-a7047d628d07" x="457" y="0" width="109" height="20"/>
+				<box>
+					<pen lineWidth="0.5"/>
+					<topPen lineWidth="0.5"/>
+					<leftPen lineWidth="0.5"/>
+					<bottomPen lineWidth="0.5"/>
+					<rightPen lineWidth="0.5"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle"/>
+				<textFieldExpression><![CDATA[($F{grtotallate}==null?0:$F{grtotallate}) + ($F{grtotalontime}==null?0:$F{grtotalontime})]]></textFieldExpression>
+			</textField>
+			<textField pattern="###0 %">
+				<reportElement uuid="39bbfab0-be48-4867-8e8f-6f4fd0ce677f" x="623" y="0" width="57" height="20"/>
+				<box>
+					<pen lineWidth="0.5"/>
+					<topPen lineWidth="0.5"/>
+					<leftPen lineWidth="0.5"/>
+					<bottomPen lineWidth="0.5"/>
+					<rightPen lineWidth="0.5"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle"/>
+				<textFieldExpression><![CDATA[$F{totalontime}==null?0:$F{totalontime}]]></textFieldExpression>
+			</textField>
+			<textField pattern="###0 %">
+				<reportElement uuid="9c976e4d-b405-4a1e-88a2-8af95d57baad" x="566" y="0" width="57" height="20"/>
+				<box>
+					<pen lineWidth="0.5"/>
+					<topPen lineWidth="0.5"/>
+					<leftPen lineWidth="0.5"/>
+					<bottomPen lineWidth="0.5"/>
+					<rightPen lineWidth="0.5"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle"/>
+				<textFieldExpression><![CDATA[$F{totallate}==null?0:$F{totallate}]]></textFieldExpression>
+			</textField>
+		</band>
+	</detail>
+	<pageFooter>
+		<band splitType="Stretch"/>
+	</pageFooter>
+	<summary>
+		<band height="20" splitType="Stretch">
+			<textField>
+				<reportElement uuid="86bc1825-6160-400f-856a-8248c5268879" x="301" y="0" width="80" height="20"/>
+				<box>
+					<pen lineWidth="0.5"/>
+					<topPen lineWidth="0.5"/>
+					<leftPen lineWidth="0.5"/>
+					<bottomPen lineWidth="0.5"/>
+					<rightPen lineWidth="0.5"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle"/>
+				<textFieldExpression><![CDATA[$V{sumgtlate}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement uuid="b9c7c5e2-fd6b-4998-b58a-6a6df08a719a" x="381" y="0" width="76" height="20"/>
+				<box>
+					<pen lineWidth="0.5"/>
+					<topPen lineWidth="0.5"/>
+					<leftPen lineWidth="0.5"/>
+					<bottomPen lineWidth="0.5"/>
+					<rightPen lineWidth="0.5"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle"/>
+				<textFieldExpression><![CDATA[$V{sumgtontime}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement uuid="2fbf126f-f0e4-4528-9295-4f5dcbcab662" x="457" y="0" width="109" height="20"/>
+				<box>
+					<pen lineWidth="0.5"/>
+					<topPen lineWidth="0.5"/>
+					<leftPen lineWidth="0.5"/>
+					<bottomPen lineWidth="0.5"/>
+					<rightPen lineWidth="0.5"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle"/>
+				<textFieldExpression><![CDATA[$V{sumgttotaldelivery}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement uuid="d9766ee3-6712-434a-b172-2941b4e23426" x="0" y="0" width="301" height="20"/>
+				<box>
+					<pen lineWidth="0.5"/>
+					<topPen lineWidth="0.5"/>
+					<leftPen lineWidth="0.5"/>
+					<bottomPen lineWidth="0.5"/>
+					<rightPen lineWidth="0.5"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="12" isBold="true"/>
+				</textElement>
+				<text><![CDATA[GRAND TOTAL]]></text>
+			</staticText>
+			<textField pattern="###0 %">
+				<reportElement uuid="3be9a214-d42f-4a71-973e-dbf550b730cd" x="566" y="0" width="57" height="20"/>
+				<box>
+					<pen lineWidth="0.5"/>
+					<topPen lineWidth="0.5"/>
+					<leftPen lineWidth="0.5"/>
+					<bottomPen lineWidth="0.5"/>
+					<rightPen lineWidth="0.5"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle"/>
+				<textFieldExpression><![CDATA[$V{sumgttotallatepercentage}]]></textFieldExpression>
+			</textField>
+			<textField pattern="###0 %">
+				<reportElement uuid="4c7db637-7659-41f1-8d76-35e319e5ff1f" x="623" y="0" width="57" height="20"/>
+				<box>
+					<pen lineWidth="0.5"/>
+					<topPen lineWidth="0.5"/>
+					<leftPen lineWidth="0.5"/>
+					<bottomPen lineWidth="0.5"/>
+					<rightPen lineWidth="0.5"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle"/>
+				<textFieldExpression><![CDATA[$V{sumgttotalontimepercentage}]]></textFieldExpression>
+			</textField>
+		</band>
+	</summary>
+</jasperReport>

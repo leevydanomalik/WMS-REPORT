@@ -17,4 +17,7 @@ public interface MBRRepository extends PagingAndSortingRepository<ReportTemplate
     @Query(value = "select * from grvspr()", nativeQuery = true)
     List<Object[]> findGRvsPR();
     
+    @Query(value = "select * from pdt()", nativeQuery = true)
+    List<Object[]> findPDT();
+    
 }
