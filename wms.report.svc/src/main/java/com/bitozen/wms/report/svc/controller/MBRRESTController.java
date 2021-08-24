@@ -18,14 +18,16 @@ import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.servlet.http.HttpServletRequest;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.lang3.Validate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
+import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -166,6 +168,58 @@ public class MBRRESTController {
         }
         GenericResponseDTO<List<PDTDTO>> response = mbr.getPDT();
         return ResponseEntity.status(HttpStatus.OK).body(response);
+    }
+    
+    
+    //PDF
+    @RequestMapping(value = "data.po.pr.pdf/",
+            method = RequestMethod.GET,
+            produces = MediaType.APPLICATION_PDF_VALUE)
+    public ResponseEntity<?> generatePOvsPRPDF() {
+        Map<String, Object> params = new HashMap<>();
+        ByteArrayOutputStream os = new ByteArrayOutputStream();
+        reportService.setRptResourcePrefix("/report/");
+        try {
+            os = (ByteArrayOutputStream) reportService.showReportJdbcDataSourceExportToPdfTxtCsvXls(null, POvsPR, params);
+        } catch (GenericException ex) {
+            Logger.getLogger(ProductTransferRESTController.class.getName()).log(Level.SEVERE, null, ex);
+        }
+
+        /*validate object*/
+        Validate.notNull(os);
+
+        /*get the byte*/
+        byte[] datastream = os.toByteArray();
+
+        /*validate object*/
+        Validate.notNull(datastream);
+
+        return ResponseEntity.status(HttpStatus.OK).body(datastream);
+    }
+    
+    @RequestMapping(value = "data.gr.pr.pdf/",
+            method = RequestMethod.GET,
+            produces = MediaType.APPLICATION_PDF_VALUE)
+    public ResponseEntity<?> generateGRvsPRPDF() {
+        Map<String, Object> params = new HashMap<>();
+        ByteArrayOutputStream os = new ByteArrayOutputStream();
+        reportService.setRptResourcePrefix("/report/");
+        try {
+            os = (ByteArrayOutputStream) reportService.showReportJdbcDataSourceExportToPdfTxtCsvXls(null, GRvsPR, params);
+        } catch (GenericException ex) {
+            Logger.getLogger(ProductTransferRESTController.class.getName()).log(Level.SEVERE, null, ex);
+        }
+
+        /*validate object*/
+        Validate.notNull(os);
+
+        /*get the byte*/
+        byte[] datastream = os.toByteArray();
+
+        /*validate object*/
+        Validate.notNull(datastream);
+
+        return ResponseEntity.status(HttpStatus.OK).body(datastream);
     }
     
 }
