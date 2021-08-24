@@ -1,20 +1,21 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="PO VS PR" language="groovy" pageWidth="1190" pageHeight="842" orientation="Landscape" columnWidth="1132" leftMargin="29" rightMargin="29" topMargin="20" bottomMargin="20" isFloatColumnFooter="true" uuid="58bcfdfb-6b5f-4899-9b31-8cce51833648">
 	<property name="ireport.zoom" value="1.1269722013523846"/>
-	<property name="ireport.x" value="583"/>
+	<property name="ireport.x" value="0"/>
 	<property name="ireport.y" value="0"/>
 	<queryString>
 		<![CDATA[SELECT
-    gr3.plantID,
-		gr3.plantName,
-		pr3.qtyUomDrum AS PR_DRUM,
-	  pr3.qtyUomBox AS PR_BOX,
-	  pr3.qtyUomPail AS PR_PAIL,
-		gr3.gr_drum AS GR_DRUM,
-		gr3.gr_box AS GR_BOX,
-		gr3.gr_pail AS GR_PAIL
+	gr3.plantID,
+	gr3.plantName,
+	gr3.plantdesc,
+	pr3.qtyUomDrum AS PR_DRUM,
+	pr3.qtyUomBox AS PR_BOX,
+	pr3.qtyUomPail AS PR_PAIL,
+	gr3.gr_drum AS GR_DRUM,
+	gr3.gr_box AS GR_BOX,
+	gr3.gr_pail AS GR_PAIL
 FROM
-(
+	(
 	SELECT
 		pr2.plantid,
 		pr2.qtyUomDrum,
@@ -72,110 +73,111 @@ FROM
 			pr1.plantID
 		) pr2
 	) pr3
-LEFT JOIN (
-SELECT
-	gr2.plantid,
-	pl.plantname,
-	( gr2.qtyUomDrumGood + gr2.qtyUomDrumNotGood ) AS GR_DRUM,
-	( gr2.qtyUomBoxGood + gr2.qtyUomBoxNotGood ) AS GR_BOX,
-	( gr2.qtyUomPailGood + gr2.qtyUomPailNotGood ) AS GR_PAIL
-FROM
-	(
+	INNER JOIN (
 	SELECT
-		gr1.plantID AS plantid,
-		gr1.status,
-		SUM (
-			CAST (
-			CASE
-
-					WHEN ( ( gr1.qtyPhysic ) :: VARCHAR ) IS NULL THEN
-					'0'
-					WHEN ( ( gr1.qtyPhysic ) :: VARCHAR ) = '' THEN
-					'0' ELSE ( ( gr1.qtyPhysic ) :: VARCHAR )
-			END AS FLOAT
-			)
-		) FILTER ( WHERE ma2.uom = 'DRUM' ) AS qtyUomDrumGood,
-		SUM (
-			CAST (
-			CASE
-
-					WHEN ( ( gr1.qtyPhysic ) :: VARCHAR ) IS NULL THEN
-					'0'
-					WHEN ( ( gr1.qtyPhysic ) :: VARCHAR ) = '' THEN
-					'0' ELSE ( ( gr1.qtyPhysic ) :: VARCHAR )
-			END AS FLOAT
-			)
-		) FILTER ( WHERE ma2.uom = 'BOX' ) AS qtyUomBoxGood,
-		SUM (
-			CAST (
-			CASE
-
-					WHEN ( ( gr1.qtyPhysic ) :: VARCHAR ) IS NULL THEN
-					'0'
-					WHEN ( ( gr1.qtyPhysic ) :: VARCHAR ) = '' THEN
-					'0' ELSE ( ( gr1.qtyPhysic ) :: VARCHAR )
-			END AS FLOAT
-			)
-		) FILTER ( WHERE ma2.uom = 'PL' ) AS qtyUomPailGood,
-		SUM (
-			CAST (
-			CASE
-
-					WHEN ( ( gr1.wrongQty ) :: VARCHAR ) IS NULL THEN
-					'0'
-					WHEN ( ( gr1.wrongQty ) :: VARCHAR ) = '' THEN
-					'0' ELSE ( ( gr1.wrongQty ) :: VARCHAR )
-			END AS FLOAT
-			)
-		) FILTER ( WHERE ma2.uom = 'DRUM' ) AS qtyUomDrumNotGood,
-		SUM (
-			CAST (
-			CASE
-
-					WHEN ( ( gr1.wrongQty ) :: VARCHAR ) IS NULL THEN
-					'0'
-					WHEN ( ( gr1.wrongQty ) :: VARCHAR ) = '' THEN
-					'0' ELSE ( ( gr1.wrongQty ) :: VARCHAR )
-			END AS FLOAT
-			)
-		) FILTER ( WHERE ma2.uom = 'BOX' ) AS qtyUomBoxNotGood,
-		SUM (
-			CAST (
-			CASE
-
-					WHEN ( ( gr1.wrongQty ) :: VARCHAR ) IS NULL THEN
-					'0'
-					WHEN ( ( gr1.wrongQty ) :: VARCHAR ) = '' THEN
-					'0' ELSE ( ( gr1.wrongQty ) :: VARCHAR )
-			END AS FLOAT
-			)
-		) FILTER ( WHERE ma2.uom = 'PL' ) AS qtyUomPailNotGood
+		gr2.plantid,
+		pl.plantname,
+		pl.plantdesc,
+		( gr2.qtyUomDrumGood + gr2.qtyUomDrumNotGood ) AS GR_DRUM,
+		( gr2.qtyUomBoxGood + gr2.qtyUomBoxNotGood ) AS GR_BOX,
+		( gr2.qtyUomPailGood + gr2.qtyUomPailNotGood ) AS GR_PAIL
 	FROM
 		(
 		SELECT
-			gr.objectid,
-			CAST ( gr.es AS json ) -> 'plant' ->> 'plantID' AS plantID,
-			json_array_elements ( CAST ( gr.grreceiptmaterials AS json ) :: json ) -> 'material' ->> 'material' AS materialid,
-			json_array_elements ( CAST ( gr.grreceiptmaterials AS json ) :: json ) ->> 'qtyPhysic' AS qtyPhysic,
-			json_array_elements ( CAST ( gr.grreceiptmaterials AS json ) :: json ) ->> 'wrongQty' AS wrongQty,
-			CAST ( gr.grstatus AS json ) ->> 'value' AS status
+			gr1.plantID AS plantid,
+			gr1.status,
+			SUM (
+				CAST (
+				CASE
+
+						WHEN ( ( gr1.qtyPhysic ) :: VARCHAR ) IS NULL THEN
+						'0'
+						WHEN ( ( gr1.qtyPhysic ) :: VARCHAR ) = '' THEN
+						'0' ELSE ( ( gr1.qtyPhysic ) :: VARCHAR )
+				END AS FLOAT
+				)
+			) FILTER ( WHERE ma2.uom = 'DRUM' ) AS qtyUomDrumGood,
+			SUM (
+				CAST (
+				CASE
+
+						WHEN ( ( gr1.qtyPhysic ) :: VARCHAR ) IS NULL THEN
+						'0'
+						WHEN ( ( gr1.qtyPhysic ) :: VARCHAR ) = '' THEN
+						'0' ELSE ( ( gr1.qtyPhysic ) :: VARCHAR )
+				END AS FLOAT
+				)
+			) FILTER ( WHERE ma2.uom = 'BOX' ) AS qtyUomBoxGood,
+			SUM (
+				CAST (
+				CASE
+
+						WHEN ( ( gr1.qtyPhysic ) :: VARCHAR ) IS NULL THEN
+						'0'
+						WHEN ( ( gr1.qtyPhysic ) :: VARCHAR ) = '' THEN
+						'0' ELSE ( ( gr1.qtyPhysic ) :: VARCHAR )
+				END AS FLOAT
+				)
+			) FILTER ( WHERE ma2.uom = 'PL' ) AS qtyUomPailGood,
+			SUM (
+				CAST (
+				CASE
+
+						WHEN ( ( gr1.wrongQty ) :: VARCHAR ) IS NULL THEN
+						'0'
+						WHEN ( ( gr1.wrongQty ) :: VARCHAR ) = '' THEN
+						'0' ELSE ( ( gr1.wrongQty ) :: VARCHAR )
+				END AS FLOAT
+				)
+			) FILTER ( WHERE ma2.uom = 'DRUM' ) AS qtyUomDrumNotGood,
+			SUM (
+				CAST (
+				CASE
+
+						WHEN ( ( gr1.wrongQty ) :: VARCHAR ) IS NULL THEN
+						'0'
+						WHEN ( ( gr1.wrongQty ) :: VARCHAR ) = '' THEN
+						'0' ELSE ( ( gr1.wrongQty ) :: VARCHAR )
+				END AS FLOAT
+				)
+			) FILTER ( WHERE ma2.uom = 'BOX' ) AS qtyUomBoxNotGood,
+			SUM (
+				CAST (
+				CASE
+
+						WHEN ( ( gr1.wrongQty ) :: VARCHAR ) IS NULL THEN
+						'0'
+						WHEN ( ( gr1.wrongQty ) :: VARCHAR ) = '' THEN
+						'0' ELSE ( ( gr1.wrongQty ) :: VARCHAR )
+				END AS FLOAT
+				)
+			) FILTER ( WHERE ma2.uom = 'PL' ) AS qtyUomPailNotGood
 		FROM
-			trx_materialgrentryprojection gr
-		WHERE
-			gr.grreceiptmaterials IS NOT NULL
-		) gr1
-		LEFT JOIN ( SELECT ma.materialid, CAST ( ma.materialuom AS json ) ->> 'value' AS uom FROM mst_material ma ) ma2 ON ma2.materialid = gr1.materialid
-	WHERE
-		gr1.status = 'INACTIVE'
-	GROUP BY
-		gr1.plantID,
-	gr1.status
-	) gr2
-LEFT JOIN mst_plant pl ON gr2.plantid = pl.plantid
-) gr3 ON gr3.plantID = pr3.plantID]]>
+			(
+			SELECT
+				gr.objectid,
+				CAST ( gr.es AS json ) -> 'plant' ->> 'plantID' AS plantID,
+				json_array_elements ( CAST ( gr.grreceiptmaterials AS json ) :: json ) -> 'material' ->> 'material' AS materialid,
+				json_array_elements ( CAST ( gr.grreceiptmaterials AS json ) :: json ) ->> 'qtyPhysic' AS qtyPhysic,
+				json_array_elements ( CAST ( gr.grreceiptmaterials AS json ) :: json ) ->> 'wrongQty' AS wrongQty,
+				CAST ( gr.grstatus AS json ) ->> 'value' AS status
+			FROM
+				trx_materialgrentryprojection gr
+			WHERE
+				gr.grreceiptmaterials IS NOT NULL
+			) gr1
+			LEFT JOIN ( SELECT ma.materialid, CAST ( ma.materialuom AS json ) ->> 'value' AS uom FROM mst_material ma ) ma2 ON ma2.materialid = gr1.materialid
+		GROUP BY
+			gr1.plantID,
+			gr1.status
+		) gr2
+	INNER JOIN ( SELECT plantid,
+	plantname, CAST (plantjson AS json ) ->> 'plantDesc' as plantdesc FROM mst_plant WHERE CAST ( plantjson AS json ) -> 'plantCompanyBox' -> 'company' ->> 'companyID' IN ( '1593965093192' ) ) pl ON gr2.plantid = pl.plantid
+	) gr3 ON gr3.plantID = pr3.plantID]]>
 	</queryString>
 	<field name="plantid" class="java.lang.String"/>
 	<field name="plantname" class="java.lang.String"/>
+	<field name="plantdesc" class="java.lang.String"/>
 	<field name="pr_drum" class="java.lang.Double"/>
 	<field name="pr_box" class="java.lang.Double"/>
 	<field name="pr_pail" class="java.lang.Double"/>
@@ -597,7 +599,7 @@ LEFT JOIN mst_plant pl ON gr2.plantid = pl.plantid
 			<textField>
 				<reportElement uuid="de249d6e-f6b0-42ee-b270-ac02b3734625" x="235" y="0" width="87" height="19"/>
 				<textElement textAlignment="Center" verticalAlignment="Middle"/>
-				<textFieldExpression><![CDATA[$F{plantid}]]></textFieldExpression>
+				<textFieldExpression><![CDATA[$F{plantdesc}]]></textFieldExpression>
 			</textField>
 			<textField pattern="###0 %">
 				<reportElement uuid="f233c535-950c-420d-a2d2-5544d19180d0" x="839" y="0" width="57" height="19"/>

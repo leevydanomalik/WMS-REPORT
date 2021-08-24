@@ -1,12 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="PO VS PR" language="groovy" pageWidth="1190" pageHeight="842" orientation="Landscape" columnWidth="1132" leftMargin="29" rightMargin="29" topMargin="20" bottomMargin="20" isFloatColumnFooter="true" uuid="58bcfdfb-6b5f-4899-9b31-8cce51833648">
 	<property name="ireport.zoom" value="1.1269722013523837"/>
-	<property name="ireport.x" value="551"/>
+	<property name="ireport.x" value="25"/>
 	<property name="ireport.y" value="0"/>
 	<queryString>
 		<![CDATA[SELECT
 	pl.plantname,
-	pl.plantid,
+	pl.plantdesc,
 	pr3.qtyUomDrum AS PR_DRUM,
 	pr3.qtyUomBox AS PR_BOX,
 	pr3.qtyUomPail AS PR_PAIL,
@@ -72,7 +72,7 @@ FROM
 			pr1.plantID
 		) pr2
 	) pr3
-	LEFT JOIN (
+	INNER JOIN (
 	SELECT
 		tp2.plantid,
 		tp2.qtyUomDrum,
@@ -130,10 +130,14 @@ FROM
 			tp1.cesPlantID
 		) tp2
 	) tp3 ON tp3.plantID = pr3.plantID
-	LEFT JOIN mst_plant pl ON tp3.plantid = pl.plantid]]>
+	INNER JOIN (
+	SELECT plantid,
+	plantname, CAST (plantjson AS json ) ->> 'plantDesc' as plantdesc FROM mst_plant
+	WHERE
+	CAST ( plantjson AS json ) -> 'plantCompanyBox' -> 'company' ->> 'companyID' in ('1593965093192') ) pl ON tp3.plantid = pl.plantid]]>
 	</queryString>
 	<field name="plantname" class="java.lang.String"/>
-	<field name="plantid" class="java.lang.String"/>
+	<field name="plantdesc" class="java.lang.String"/>
 	<field name="pr_drum" class="java.lang.Double"/>
 	<field name="pr_box" class="java.lang.Double"/>
 	<field name="pr_pail" class="java.lang.Double"/>
@@ -554,7 +558,7 @@ FROM
 			<textField>
 				<reportElement uuid="de249d6e-f6b0-42ee-b270-ac02b3734625" x="235" y="0" width="87" height="19"/>
 				<textElement textAlignment="Center" verticalAlignment="Middle"/>
-				<textFieldExpression><![CDATA[$F{plantid}]]></textFieldExpression>
+				<textFieldExpression><![CDATA[$F{plantdesc}]]></textFieldExpression>
 			</textField>
 			<textField pattern="###0 %">
 				<reportElement uuid="f233c535-950c-420d-a2d2-5544d19180d0" x="839" y="0" width="56" height="19"/>
